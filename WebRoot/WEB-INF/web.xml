@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="2.5" xmlns="http://java.sun.com/xml/ns/javaee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee 
+	http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
+
+	<context-param>      
+       <param-name>proxoolConfigLocation</param-name>      
+       <param-value>/WEB-INF/conf/proxool.xml</param-value>  
+     </context-param> 
+
+
+     <listener>      
+        <listener-class>com.jw.baseframe.listener.ListenerProxoolConfigurator</listener-class> 
+     </listener>
+     
+     <servlet>  
+        <servlet-name>proxool</servlet-name>  
+        <servlet-class>  
+           org.logicalcobwebs.proxool.admin.servlet.AdminServlet  
+        </servlet-class>  
+     </servlet>  
+     <servlet-mapping>  
+         <servlet-name>proxool</servlet-name>  
+         <url-pattern>/proxool</url-pattern>  
+     </servlet-mapping> 
+	
+	<!-- HTTP请求编码设置过滤器 -->
+	<!-- 编码名称      -->
+	<filter>
+		<filter-name>encoding</filter-name>
+		<filter-class>com.jw.baseframe.interceptor.EncodingFilter</filter-class>
+		<init-param>
+			<param-name>encoding</param-name>
+			<param-value>GBK</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>encoding</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+
+	<filter>
+		<!-- 配置Struts2核心Filter的名字 -->
+		<filter-name>struts2</filter-name>
+		<!-- 配置Struts2核心Filter的实现类 -->
+		<filter-class>org.apache.struts2.dispatcher.ng.filter.StrutsPrepareAndExecuteFilter</filter-class>
+		<init-param>
+			<!-- 配置Struts2框架默认加载的Action包结构，可以没有。 -->
+			<param-name>actionPackages</param-name>
+			<param-value>org.apache.struts2.showcase.person</param-value>
+		</init-param>
+		<init-param>
+			<!-- 编码名称 -->
+			<param-name>encoding</param-name>
+			<param-value>GBK</param-value>
+		</init-param>
+	</filter>
+
+	<!-- 配置Filter拦截的URL -->
+	<filter-mapping>
+		<!-- 配置Struts2的核心FilterDispatcher拦截所有用户请求 -->
+		<filter-name>struts2</filter-name>
+		<url-pattern>*.action</url-pattern>
+	</filter-mapping>
+
+	<!-- jsp Filter -->
+	<filter>
+		<filter-name>sessionFilter</filter-name>
+		<filter-class>com.jw.baseframe.filters.ServletFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>sessionFilter</filter-name>
+		<url-pattern>*.jsp</url-pattern>
+	</filter-mapping>
+
+	<!-- 在线用户监听 -->
+	<listener>
+		<listener-class>com.jw.baseframe.listener.OnlineUser</listener-class>
+	</listener>
+
+	<!-- 配置spring的监听器 -->
+	<!-- 指明spring配置文件的位置 -->
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>classpath:applicationContext.xml</param-value>
+	</context-param>
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+
+	<session-config>
+		<session-timeout>-1</session-timeout>
+	</session-config>
+
+	<!-- 日志文件存储路径初始化-->
+	<servlet>
+		<servlet-name>LogFileSavePathServlet</servlet-name>
+		<display-name>LogFileSavePathServlet</display-name>
+		<description></description>
+		<servlet-class>com.jw.baseframe.common.log.LogFileSavePathServlet</servlet-class>
+		<load-on-startup>0</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>LogFileSavePathServlet</servlet-name>
+		<url-pattern>/LogFileSavePathServlet</url-pattern>
+	</servlet-mapping>
+
+	<!-- FreeMarker中使用自定义标签 -->
+	<servlet>
+		<servlet-name>JspSupportServlet</servlet-name>
+		<servlet-class>org.apache.struts2.views.JspSupportServlet</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	
+	<welcome-file-list>
+		<welcome-file>/web/login.jsp</welcome-file>
+	</welcome-file-list>
+
+</web-app>

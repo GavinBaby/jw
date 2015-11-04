@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="GBK"?>
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+        "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<!-- 指定全局国际化资源文件base名 -->
+	<constant name="struts.custom.i18n.resources" value="messageResource">
+	</constant>
+	<!-- 指定国际化编码所使用的字符集 -->
+	<constant name="struts.i18n.encoding" value="GBK"></constant>
+	<constant name="struts.objectFactory.spring.autoWire.alwaysRespect" value="true" /> 
+	<include file="struts-default.xml"></include>
+	
+	<package namespace="/web/workflowengine" name="workflowengineajax" extends="strutsjson">
+
+		<action name="*_*_ajax" class="com.jw.baseframe.action.workflowengine.{1}Action"
+			method="{2}">
+			<result type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+
+		<action name="*_*_grid" class="com.jw.baseframe.action.workflowengine.{1}Action"
+			method="{2}">
+			<result type="json">
+				<param name="ignoreHierarchy">false</param>
+				<param name="root">
+					result
+				</param>
+			</result>
+		</action>
+		
+		<action name="*_*_treegrid" class="com.jw.baseframe.action.workflowengine.{1}Action"
+			method="{2}">
+			<result type="json">
+				<param name="ignoreHierarchy">false</param>
+				<param name="root">
+					list{1}{2}
+				</param>
+			</result>
+		</action>
+		
+		
+		        <!-- 流程信息保存 -->
+       <action name="FlowAllInfoUptata" class="com.jw.baseframe.action.workflowengine.TacheInforAction"
+            method="flowAllInfoUptata">
+            	<result type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+        </action>
+		
+		
+	</package>
+	
+	<package namespace="/web/workflowengine" name="workflowengine" extends="strutsaction">
+
+        <!-- 环节设置 -->
+        <action name="GetStepDialogInfo"
+            class="com.jw.baseframe.action.workflowengine.TacheInforAction" method="GetStepDialogInfo">
+            <result name="success">/web/workflowengine/StepDialog.jsp</result>
+        </action>
+		
+		<!-- 下一步画面初期化 -->
+        <action name="NextLoad" class="com.jw.baseframe.action.workflowengine.NextAction"
+            method="detailsLoad">
+            <result name="success">/web/workflowengine/Next.jsp</result>
+            <result name="flowend">/web/workflowengine/FlowEnd.jsp</result>
+             <result name="Multi">/web/workflowengine/Multi.jsp</result>
+        </action>
+        
+        <!-- 退回页面初期化 -->
+        <action name="WithdramalLoad" class="com.jw.baseframe.action.workflowengine.WithdramalAction"
+            method="detailsLoad">
+            <result name="success">/web/workflowengine/Withdramal.jsp</result>
+        </action>
+        
+        <!-- 环节信息显示画面初期化 -->
+        <action name="FlowTacheShow" class="com.jw.baseframe.action.workflowengine.TacheInforAction"
+            method="FlowTacheInfoShow">
+            <result name="success">/web/workflowengine/WebFlowShow.jsp</result>
+        </action>
+        
+        
+       <action name="StepDialogInfoUptata" class="com.jw.baseframe.action.workflowengine.TacheInforAction"
+            method="StepDialogInfoUptata">
+        </action>
+        
+ 
+        
+		<action name="*_*" class="com.jw.baseframe.action.workflowengine.{1}Action"
+			method="{2}">
+			<result name="success">/web/workflowengine/{1}{2}.jsp</result>
+		</action>
+	</package>
+
+</struts>

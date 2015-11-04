@@ -1,0 +1,28 @@
+body {
+	margin: 0px auto;
+    text-align:center;
+	font-family: "宋体";
+	font-size: 12px;
+	background:url(bg.gif) top repeat-x #FFF;
+	}
+.content {font-size:12px; text-decoration:none; line-height:24px;}
+A:link {color: #000000; text-decoration: none}
+A:visited {color: #000000; text-decoration: none}
+A:active {color: #ff6600; text-decoration: none}
+A:hover {color: #ff6600; text-decoration: none}
+
+.white_14_cu,.white_14_cu A:link,.white_14_cu A:visited,.white_14_cu A:active,.white_14_cu A:hover {color:#FFF; font-size:14px; font-weight:bold;}
+.blue_14_cu,.blue_14_cu A:link,.blue_14_cu A:visited,.blue_14_cu A:active,.blue_14_cu A:hover {
+	color:#3771ab;
+	font-size:14px;
+	font-weight:bold;
+}
+.red_12,.red_12 A:link,.red_12 A:visited,.red_12 A:active,.red_12 A:hover {
+	font-size: 12px;
+	color: #F00;
+}
+.white_12,.white_12 A:link,.white_12 A:visited,.white_12 A:active,.white_12 A:hover {
+	font-size: 12px;
+	color: #FFF;
+	line-height:18px;
+}

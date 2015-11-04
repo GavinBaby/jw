@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="GBK"?>
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+        "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<!-- 指定全局国际化资源文件base名 -->
+	<constant name="struts.custom.i18n.resources" value="messageResource">
+	</constant>
+	<!-- 指定国际化编码所使用的字符集 -->
+	<constant name="struts.i18n.encoding" value="GBK"></constant>
+	<constant name="struts.objectFactory.spring.autoWire.alwaysRespect" value="true" /> 
+	<include file="struts-default.xml"></include>
+
+	<package namespace="/web" name="loginajax" extends="strutsjson">
+		<!-- session是否失效action -->
+		<action name="sessionInfo" class="com.jw.baseframe.listener.OnlineUser"
+			method="sessionInfo">
+			<result type="json">
+				jsonResult
+			</result>
+		</action>
+
+		<!-- 锁屏后用户登入 -->
+		<action name="resetSessionInfomation" class="com.jw.baseframe.action.common.LoginAction"
+			method="resetSessionInfomation">
+			<result type="json">
+				jsonResult
+			</result>
+		</action>
+		<!-- 用户退出系统 -->
+		<action name="logoutInvalidate" class="com.jw.baseframe.action.common.LoginAction"
+			method="logoutInvalidate">
+			<result type="json">
+			</result>
+		</action>
+
+
+	</package>
+
+	<package namespace="/web" name="login" extends="strutsaction">
+		
+		<!--
+			**************************Login画面Action***************************
+		-->
+		<!-- 用户登入 -->
+		<action name="login" class="com.jw.baseframe.action.common.LoginAction"
+			method="login">
+			<result name="success" type="redirect">/web/indexpage.action</result>
+			<result name="error">/web/login.jsp</result>
+			<result name="newurl" type="redirect">${redir}</result>
+		</action>
+
+		<!-- 用户退出 -->
+		<action name="logout"
+			class="com.jw.baseframe.action.common.LogoutAction">
+			<result name="success" type="redirect">/web/startpage.action</result> 
+		</action>
+
+		<!-- 左边导航栏数据显示 -->
+		<action name="LeftmainLoad" class="com.jw.baseframe.action.common.MenuAction"
+			method="leftMenuLoad">
+			<result name="success">/web/leftmain.jsp</result>
+		</action>
+		
+		<!-- 左边导航栏数据显示 -->
+		<action name="IFrame" class="com.jw.baseframe.action.common.IFrameAction"
+			method="iFrameInit">
+			<result name="success">/web/iframe.jsp</result>
+		</action>
+
+		<!-- 头部导航栏数据显示 -->
+		<action name="TopMenuLoad" class="com.jw.baseframe.action.common.MenuAction"
+			method="topMenuLoad">
+			<result name="success">/web/top.jsp</result>
+		</action>
+
+		<!-- 验证码 -->
+		<action name="rand" class="com.jw.baseframe.action.common.RandomAction">
+			<result type="stream">
+				<param name="contentType">images/jpeg</param>
+				<param name="inputName">inputStream</param>
+			</result>
+		</action>
+
+		<!-- 登陆页面 -->
+		<action name="startpage" class="com.jw.baseframe.action.common.LoginAction"
+			method="startpage">
+			<result name="success">/web/login.jsp</result>
+			<result name="error">/web/login.jsp</result>
+		</action>
+
+		<!-- 首页面 -->
+		<action name="indexpage" class="com.jw.baseframe.action.common.IndexPageAction"
+			method="listLoad">
+			<result name="success">/web/index.jsp</result>		
+			<result name="error">/web/login.jsp</result>	
+		</action>		
+	</package>
+
+
+</struts>

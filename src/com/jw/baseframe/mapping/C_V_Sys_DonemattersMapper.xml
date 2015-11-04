@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jw.baseframe.dao.C_V_Sys_DonemattersMapper" >
+  <resultMap id="BaseResultMap" type="com.jw.baseframe.model.C_V_Sys_Donematters" >
+    <result column="UUID" property="uuid" jdbcType="VARCHAR" />
+    <result column="UNITID" property="unitid" jdbcType="VARCHAR" />
+    <result column="RECEIVE_USER" property="receiveUser" jdbcType="VARCHAR" />
+    <result column="CREATE_TIME" property="createTime" jdbcType="VARCHAR" />
+    <result column="MODULE_NAME" property="moduleName" jdbcType="NVARCHAR" />
+    <result column="TITLE" property="title" jdbcType="NVARCHAR" />
+    <result column="URL" property="url" jdbcType="VARCHAR" />
+    <result column="PRIORITIES" property="priorities" jdbcType="VARCHAR" />
+    <result column="USER_NAME" property="userName" jdbcType="NVARCHAR" />
+    <result column="PROPERTY" property="property" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    UUID, UNITID, RECEIVE_USER, CREATE_TIME, MODULE_NAME, TITLE, URL, PRIORITIES, USER_NAME, 
+    PROPERTY
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.jw.baseframe.model.C_V_Sys_DonemattersExample" >
+    <foreach collection="example.oredCriteria" item="criteria" separator="or" />
+    <if test="criteria.valid" >
+      <foreach collection="criteria.criteria" item="criterion" >
+        <if test="criterion.limitValue" >
+          SELECT 
+          <include refid="Base_Column_List" />
+           FROM ( SELECT A.
+          <include refid="Base_Column_List" />
+           , ROWNUM AS con FROM ( 
+        </if>
+      </foreach>
+    </if>
+    select
+    <if test="example.distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from C_V_SYS_DONEMATTERS
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="example.orderByClause != null" >
+      order by ${example.orderByClause}
+    </if>
+    <if test="criteria.valid" >
+      <foreach collection="criteria.criteria" item="criterion" >
+        <if test="criterion.limitValue" >
+           ) A  <![CDATA[WHERE ROWNUM <= ${criterion.secondValue}]]> ) B <![CDATA[WHERE B.con >= ${criterion.value} ]]>
+        </if>
+      </foreach>
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.jw.baseframe.model.C_V_Sys_DonemattersExample" >
+    delete from C_V_SYS_DONEMATTERS
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.jw.baseframe.model.C_V_Sys_Donematters" >
+    insert into C_V_SYS_DONEMATTERS (UUID, UNITID, RECEIVE_USER, 
+      CREATE_TIME, MODULE_NAME, 
+      TITLE, URL, PRIORITIES, 
+      USER_NAME, PROPERTY)
+    values (#{record.uuid,jdbcType=VARCHAR}, #{record.unitid,jdbcType=VARCHAR}, #{record.receiveUser,jdbcType=VARCHAR}, 
+      #{record.createTime,jdbcType=VARCHAR}, #{record.moduleName,jdbcType=NVARCHAR}, 
+      #{record.title,jdbcType=NVARCHAR}, #{record.url,jdbcType=VARCHAR}, #{record.priorities,jdbcType=VARCHAR}, 
+      #{record.userName,jdbcType=NVARCHAR}, #{record.property,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.jw.baseframe.model.C_V_Sys_Donematters" >
+    insert into C_V_SYS_DONEMATTERS
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="record.uuid != null" >
+        UUID,
+      </if>
+      <if test="record.unitid != null" >
+        UNITID,
+      </if>
+      <if test="record.receiveUser != null" >
+        RECEIVE_USER,
+      </if>
+      <if test="record.createTime != null" >
+        CREATE_TIME,
+      </if>
+      <if test="record.moduleName != null" >
+        MODULE_NAME,
+      </if>
+      <if test="record.title != null" >
+        TITLE,
+      </if>
+      <if test="record.url != null" >
+        URL,
+      </if>
+      <if test="record.priorities != null" >
+        PRIORITIES,
+      </if>
+      <if test="record.userName != null" >
+        USER_NAME,
+      </if>
+      <if test="record.property != null" >
+        PROPERTY,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="record.uuid != null" >
+        #{record.uuid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.unitid != null" >
+        #{record.unitid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.receiveUser != null" >
+        #{record.receiveUser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null" >
+        #{record.createTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.moduleName != null" >
+        #{record.moduleName,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.title != null" >
+        #{record.title,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.url != null" >
+        #{record.url,jdbcType=VARCHAR},
+      </if>
+      <if test="record.priorities != null" >
+        #{record.priorities,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userName != null" >
+        #{record.userName,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.property != null" >
+        #{record.property,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.jw.baseframe.model.C_V_Sys_DonemattersExample" resultType="java.lang.Integer" >
+    select count(*) from C_V_SYS_DONEMATTERS
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update C_V_SYS_DONEMATTERS
+    <set >
+      <if test="record.uuid != null" >
+        UUID = #{record.uuid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.unitid != null" >
+        UNITID = #{record.unitid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.receiveUser != null" >
+        RECEIVE_USER = #{record.receiveUser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null" >
+        CREATE_TIME = #{record.createTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.moduleName != null" >
+        MODULE_NAME = #{record.moduleName,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.title != null" >
+        TITLE = #{record.title,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.url != null" >
+        URL = #{record.url,jdbcType=VARCHAR},
+      </if>
+      <if test="record.priorities != null" >
+        PRIORITIES = #{record.priorities,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userName != null" >
+        USER_NAME = #{record.userName,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.property != null" >
+        PROPERTY = #{record.property,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update C_V_SYS_DONEMATTERS
+    set UUID = #{record.uuid,jdbcType=VARCHAR},
+      UNITID = #{record.unitid,jdbcType=VARCHAR},
+      RECEIVE_USER = #{record.receiveUser,jdbcType=VARCHAR},
+      CREATE_TIME = #{record.createTime,jdbcType=VARCHAR},
+      MODULE_NAME = #{record.moduleName,jdbcType=NVARCHAR},
+      TITLE = #{record.title,jdbcType=NVARCHAR},
+      URL = #{record.url,jdbcType=VARCHAR},
+      PRIORITIES = #{record.priorities,jdbcType=VARCHAR},
+      USER_NAME = #{record.userName,jdbcType=NVARCHAR},
+      PROPERTY = #{record.property,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

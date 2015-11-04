@@ -1,0 +1,437 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jw.magicbpm.dao.publicinformation.B_T_Ufp_MemosMapper" >
+  <resultMap id="BaseResultMap" type="com.jw.magicbpm.model.publicinformation.B_T_Ufp_Memos" >
+    <id column="UUID" property="uuid" jdbcType="VARCHAR" />
+    <result column="REGISTERED_TIME" property="registeredTime" jdbcType="VARCHAR" />
+    <result column="REGISTERED_USER" property="registeredUser" jdbcType="NVARCHAR" />
+    <result column="ARRANGE_TIME" property="arrangeTime" jdbcType="VARCHAR" />
+    <result column="HOUR" property="hour" jdbcType="VARCHAR" />
+    <result column="MINUTE" property="minute" jdbcType="VARCHAR" />
+    <result column="MEMOS" property="memos" jdbcType="NVARCHAR" />
+    <result column="REMARKS" property="remarks" jdbcType="NVARCHAR" />
+    <result column="REMIND_TYPE" property="remindType" jdbcType="VARCHAR" />
+    <result column="REMIND_TIME" property="remindTime" jdbcType="VARCHAR" />
+    <result column="SORT" property="sort" jdbcType="DECIMAL" />
+    <result column="EXPAND_XML" property="expandXml" jdbcType="VARCHAR" />
+    <result column="UNITID" property="unitid" jdbcType="VARCHAR" />
+    <result column="IS_DELETE" property="isDelete" jdbcType="DECIMAL" />
+    <result column="CREATE_USER" property="createUser" jdbcType="VARCHAR" />
+    <result column="CREATE_TIME" property="createTime" jdbcType="VARCHAR" />
+    <result column="UPDATE_USER" property="updateUser" jdbcType="VARCHAR" />
+    <result column="UPDATE_TIME" property="updateTime" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    UUID, REGISTERED_TIME, REGISTERED_USER, ARRANGE_TIME, HOUR, MINUTE, MEMOS, REMARKS, 
+    REMIND_TYPE, REMIND_TIME, SORT, EXPAND_XML, UNITID, IS_DELETE, CREATE_USER, CREATE_TIME, 
+    UPDATE_USER, UPDATE_TIME
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.jw.magicbpm.model.publicinformation.B_T_Ufp_MemosExample" >
+    <foreach collection="example.oredCriteria" item="criteria" separator="or" />
+    <if test="criteria.valid" >
+      <foreach collection="criteria.criteria" item="criterion" >
+        <if test="criterion.limitValue" >
+          SELECT 
+          <include refid="Base_Column_List" />
+           FROM ( SELECT A.
+          <include refid="Base_Column_List" />
+           , ROWNUM AS con FROM ( 
+        </if>
+      </foreach>
+    </if>
+    select
+    <if test="example.distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from B_T_UFP_MEMOS
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="example.orderByClause != null" >
+      order by ${example.orderByClause}
+    </if>
+    <if test="criteria.valid" >
+      <foreach collection="criteria.criteria" item="criterion" >
+        <if test="criterion.limitValue" >
+           ) A  <![CDATA[WHERE ROWNUM <= ${criterion.secondValue}]]> ) B <![CDATA[WHERE B.con >= ${criterion.value} ]]>
+        </if>
+      </foreach>
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from B_T_UFP_MEMOS
+    where UUID = #{uuid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from B_T_UFP_MEMOS
+    where UUID = #{uuid,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.jw.magicbpm.model.publicinformation.B_T_Ufp_MemosExample" >
+    delete from B_T_UFP_MEMOS
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.jw.magicbpm.model.publicinformation.B_T_Ufp_Memos" >
+    insert into B_T_UFP_MEMOS (UUID, REGISTERED_TIME, 
+      REGISTERED_USER, ARRANGE_TIME, 
+      HOUR, MINUTE, MEMOS, 
+      REMARKS, REMIND_TYPE, REMIND_TIME, 
+      SORT, EXPAND_XML, UNITID, 
+      IS_DELETE, CREATE_USER, CREATE_TIME, 
+      UPDATE_USER, UPDATE_TIME)
+    values (#{record.uuid,jdbcType=VARCHAR}, #{record.registeredTime,jdbcType=VARCHAR}, 
+      #{record.registeredUser,jdbcType=NVARCHAR}, #{record.arrangeTime,jdbcType=VARCHAR}, 
+      #{record.hour,jdbcType=VARCHAR}, #{record.minute,jdbcType=VARCHAR}, #{record.memos,jdbcType=NVARCHAR}, 
+      #{record.remarks,jdbcType=NVARCHAR}, #{record.remindType,jdbcType=VARCHAR}, #{record.remindTime,jdbcType=VARCHAR}, 
+      #{record.sort,jdbcType=DECIMAL}, #{record.expandXml,jdbcType=VARCHAR}, #{record.unitid,jdbcType=VARCHAR}, 
+      #{record.isDelete,jdbcType=DECIMAL}, #{record.createUser,jdbcType=VARCHAR}, #{record.createTime,jdbcType=VARCHAR}, 
+      #{record.updateUser,jdbcType=VARCHAR}, #{record.updateTime,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.jw.magicbpm.model.publicinformation.B_T_Ufp_Memos" >
+    insert into B_T_UFP_MEMOS
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="record.uuid != null" >
+        UUID,
+      </if>
+      <if test="record.registeredTime != null" >
+        REGISTERED_TIME,
+      </if>
+      <if test="record.registeredUser != null" >
+        REGISTERED_USER,
+      </if>
+      <if test="record.arrangeTime != null" >
+        ARRANGE_TIME,
+      </if>
+      <if test="record.hour != null" >
+        HOUR,
+      </if>
+      <if test="record.minute != null" >
+        MINUTE,
+      </if>
+      <if test="record.memos != null" >
+        MEMOS,
+      </if>
+      <if test="record.remarks != null" >
+        REMARKS,
+      </if>
+      <if test="record.remindType != null" >
+        REMIND_TYPE,
+      </if>
+      <if test="record.remindTime != null" >
+        REMIND_TIME,
+      </if>
+      <if test="record.sort != null" >
+        SORT,
+      </if>
+      <if test="record.expandXml != null" >
+        EXPAND_XML,
+      </if>
+      <if test="record.unitid != null" >
+        UNITID,
+      </if>
+      <if test="record.isDelete != null" >
+        IS_DELETE,
+      </if>
+      <if test="record.createUser != null" >
+        CREATE_USER,
+      </if>
+      <if test="record.createTime != null" >
+        CREATE_TIME,
+      </if>
+      <if test="record.updateUser != null" >
+        UPDATE_USER,
+      </if>
+      <if test="record.updateTime != null" >
+        UPDATE_TIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="record.uuid != null" >
+        #{record.uuid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.registeredTime != null" >
+        #{record.registeredTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.registeredUser != null" >
+        #{record.registeredUser,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.arrangeTime != null" >
+        #{record.arrangeTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.hour != null" >
+        #{record.hour,jdbcType=VARCHAR},
+      </if>
+      <if test="record.minute != null" >
+        #{record.minute,jdbcType=VARCHAR},
+      </if>
+      <if test="record.memos != null" >
+        #{record.memos,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.remarks != null" >
+        #{record.remarks,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.remindType != null" >
+        #{record.remindType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.remindTime != null" >
+        #{record.remindTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sort != null" >
+        #{record.sort,jdbcType=DECIMAL},
+      </if>
+      <if test="record.expandXml != null" >
+        #{record.expandXml,jdbcType=VARCHAR},
+      </if>
+      <if test="record.unitid != null" >
+        #{record.unitid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isDelete != null" >
+        #{record.isDelete,jdbcType=DECIMAL},
+      </if>
+      <if test="record.createUser != null" >
+        #{record.createUser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null" >
+        #{record.createTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateUser != null" >
+        #{record.updateUser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateTime != null" >
+        #{record.updateTime,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.jw.magicbpm.model.publicinformation.B_T_Ufp_MemosExample" resultType="java.lang.Integer" >
+    select count(*) from B_T_UFP_MEMOS
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update B_T_UFP_MEMOS
+    <set >
+      <if test="record.uuid != null" >
+        UUID = #{record.uuid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.registeredTime != null" >
+        REGISTERED_TIME = #{record.registeredTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.registeredUser != null" >
+        REGISTERED_USER = #{record.registeredUser,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.arrangeTime != null" >
+        ARRANGE_TIME = #{record.arrangeTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.hour != null" >
+        HOUR = #{record.hour,jdbcType=VARCHAR},
+      </if>
+      <if test="record.minute != null" >
+        MINUTE = #{record.minute,jdbcType=VARCHAR},
+      </if>
+      <if test="record.memos != null" >
+        MEMOS = #{record.memos,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.remarks != null" >
+        REMARKS = #{record.remarks,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.remindType != null" >
+        REMIND_TYPE = #{record.remindType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.remindTime != null" >
+        REMIND_TIME = #{record.remindTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sort != null" >
+        SORT = #{record.sort,jdbcType=DECIMAL},
+      </if>
+      <if test="record.expandXml != null" >
+        EXPAND_XML = #{record.expandXml,jdbcType=VARCHAR},
+      </if>
+      <if test="record.unitid != null" >
+        UNITID = #{record.unitid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isDelete != null" >
+        IS_DELETE = #{record.isDelete,jdbcType=DECIMAL},
+      </if>
+      <if test="record.createUser != null" >
+        CREATE_USER = #{record.createUser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null" >
+        CREATE_TIME = #{record.createTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateUser != null" >
+        UPDATE_USER = #{record.updateUser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateTime != null" >
+        UPDATE_TIME = #{record.updateTime,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update B_T_UFP_MEMOS
+    set UUID = #{record.uuid,jdbcType=VARCHAR},
+      REGISTERED_TIME = #{record.registeredTime,jdbcType=VARCHAR},
+      REGISTERED_USER = #{record.registeredUser,jdbcType=NVARCHAR},
+      ARRANGE_TIME = #{record.arrangeTime,jdbcType=VARCHAR},
+      HOUR = #{record.hour,jdbcType=VARCHAR},
+      MINUTE = #{record.minute,jdbcType=VARCHAR},
+      MEMOS = #{record.memos,jdbcType=NVARCHAR},
+      REMARKS = #{record.remarks,jdbcType=NVARCHAR},
+      REMIND_TYPE = #{record.remindType,jdbcType=VARCHAR},
+      REMIND_TIME = #{record.remindTime,jdbcType=VARCHAR},
+      SORT = #{record.sort,jdbcType=DECIMAL},
+      EXPAND_XML = #{record.expandXml,jdbcType=VARCHAR},
+      UNITID = #{record.unitid,jdbcType=VARCHAR},
+      IS_DELETE = #{record.isDelete,jdbcType=DECIMAL},
+      CREATE_USER = #{record.createUser,jdbcType=VARCHAR},
+      CREATE_TIME = #{record.createTime,jdbcType=VARCHAR},
+      UPDATE_USER = #{record.updateUser,jdbcType=VARCHAR},
+      UPDATE_TIME = #{record.updateTime,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jw.magicbpm.model.publicinformation.B_T_Ufp_Memos" >
+    update B_T_UFP_MEMOS
+    <set >
+      <if test="record.registeredTime != null" >
+        REGISTERED_TIME = #{record.registeredTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.registeredUser != null" >
+        REGISTERED_USER = #{record.registeredUser,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.arrangeTime != null" >
+        ARRANGE_TIME = #{record.arrangeTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.hour != null" >
+        HOUR = #{record.hour,jdbcType=VARCHAR},
+      </if>
+      <if test="record.minute != null" >
+        MINUTE = #{record.minute,jdbcType=VARCHAR},
+      </if>
+      <if test="record.memos != null" >
+        MEMOS = #{record.memos,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.remarks != null" >
+        REMARKS = #{record.remarks,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.remindType != null" >
+        REMIND_TYPE = #{record.remindType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.remindTime != null" >
+        REMIND_TIME = #{record.remindTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sort != null" >
+        SORT = #{record.sort,jdbcType=DECIMAL},
+      </if>
+      <if test="record.expandXml != null" >
+        EXPAND_XML = #{record.expandXml,jdbcType=VARCHAR},
+      </if>
+      <if test="record.unitid != null" >
+        UNITID = #{record.unitid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isDelete != null" >
+        IS_DELETE = #{record.isDelete,jdbcType=DECIMAL},
+      </if>
+      <if test="record.createUser != null" >
+        CREATE_USER = #{record.createUser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null" >
+        CREATE_TIME = #{record.createTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateUser != null" >
+        UPDATE_USER = #{record.updateUser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateTime != null" >
+        UPDATE_TIME = #{record.updateTime,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where UUID = #{record.uuid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jw.magicbpm.model.publicinformation.B_T_Ufp_Memos" >
+    update B_T_UFP_MEMOS
+    set REGISTERED_TIME = #{record.registeredTime,jdbcType=VARCHAR},
+      REGISTERED_USER = #{record.registeredUser,jdbcType=NVARCHAR},
+      ARRANGE_TIME = #{record.arrangeTime,jdbcType=VARCHAR},
+      HOUR = #{record.hour,jdbcType=VARCHAR},
+      MINUTE = #{record.minute,jdbcType=VARCHAR},
+      MEMOS = #{record.memos,jdbcType=NVARCHAR},
+      REMARKS = #{record.remarks,jdbcType=NVARCHAR},
+      REMIND_TYPE = #{record.remindType,jdbcType=VARCHAR},
+      REMIND_TIME = #{record.remindTime,jdbcType=VARCHAR},
+      SORT = #{record.sort,jdbcType=DECIMAL},
+      EXPAND_XML = #{record.expandXml,jdbcType=VARCHAR},
+      UNITID = #{record.unitid,jdbcType=VARCHAR},
+      IS_DELETE = #{record.isDelete,jdbcType=DECIMAL},
+      CREATE_USER = #{record.createUser,jdbcType=VARCHAR},
+      CREATE_TIME = #{record.createTime,jdbcType=VARCHAR},
+      UPDATE_USER = #{record.updateUser,jdbcType=VARCHAR},
+      UPDATE_TIME = #{record.updateTime,jdbcType=VARCHAR}
+    where UUID = #{record.uuid,jdbcType=VARCHAR}
+  </update>
+</mapper>

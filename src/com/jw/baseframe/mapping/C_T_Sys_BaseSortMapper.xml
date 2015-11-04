@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<!DOCTYPE mapper      
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"      
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
+   
+ <mapper namespace="com.jw.baseframe.dao.C_T_Sys_BaseSortMapper"> 
+ <parameterMap type="map" id="parameterMap">
+    <parameter property="strTableName" jdbcType="VARCHAR" mode="IN"/>
+    <parameter property="strWhere" jdbcType="NVARCHAR" mode="IN"/>
+    <parameter property="strUuid" jdbcType="VARCHAR" mode="IN"/>
+    <parameter property="intUpOrDown" jdbcType="VARCHAR" mode="IN"/>
+  </parameterMap>
+<update id="SortAdjustment" parameterMap="parameterMap" statementType="CALLABLE">
+    {call SORTADJUSTMENT(?,?,?,?)}
+  </update>
+       
+ </mapper>

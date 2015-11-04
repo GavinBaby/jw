@@ -1,0 +1,351 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jw.baseframe.dao.C_V_Sys_Sy_Module_UsertreeMapper" >
+  <resultMap id="BaseResultMap" type="com.jw.baseframe.model.C_V_Sys_Sy_Module_Usertree" >
+    <result column="ID" property="id" jdbcType="VARCHAR" />
+    <result column="NAME" property="name" jdbcType="VARCHAR" />
+    <result column="PID" property="pid" jdbcType="VARCHAR" />
+    <result column="SORT" property="sort" jdbcType="DECIMAL" />
+    <result column="MODULE_TYPE" property="moduleType" jdbcType="VARCHAR" />
+    <result column="USER_SYS_NAME" property="userSysName" jdbcType="VARCHAR" />
+    <result column="MODULE_ID" property="moduleId" jdbcType="VARCHAR" />
+    <result column="MODULE_TITLE" property="moduleTitle" jdbcType="VARCHAR" />
+    <result column="MODULE_MORE_LINK" property="moduleMoreLink" jdbcType="VARCHAR" />
+    <result column="MODULE_CONTENT_LINK" property="moduleContentLink" jdbcType="VARCHAR" />
+    <result column="MODULE_ICON_IMG" property="moduleIconImg" jdbcType="VARCHAR" />
+    <result column="MODULE_ICON_CSS" property="moduleIconCss" jdbcType="VARCHAR" />
+    <result column="MODULE_TITLE_CSS" property="moduleTitleCss" jdbcType="VARCHAR" />
+    <result column="MODULE_HEADER_CSS" property="moduleHeaderCss" jdbcType="VARCHAR" />
+    <result column="MODULE_BODY_CSS" property="moduleBodyCss" jdbcType="VARCHAR" />
+    <result column="MODULE_WIDTH" property="moduleWidth" jdbcType="VARCHAR" />
+    <result column="MODULE_HEIGHT" property="moduleHeight" jdbcType="VARCHAR" />
+    <result column="MODULE_CONTENT_LINKTYPE" property="moduleContentLinktype" jdbcType="DECIMAL" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ID, NAME, PID, SORT, MODULE_TYPE, USER_SYS_NAME, MODULE_ID, MODULE_TITLE, MODULE_MORE_LINK, 
+    MODULE_CONTENT_LINK, MODULE_ICON_IMG, MODULE_ICON_CSS, MODULE_TITLE_CSS, MODULE_HEADER_CSS, 
+    MODULE_BODY_CSS, MODULE_WIDTH, MODULE_HEIGHT, MODULE_CONTENT_LINKTYPE
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.jw.baseframe.model.C_V_Sys_Sy_Module_UsertreeExample" >
+    <foreach collection="example.oredCriteria" item="criteria" separator="or" />
+    <if test="criteria.valid" >
+      <foreach collection="criteria.criteria" item="criterion" >
+        <if test="criterion.limitValue" >
+          SELECT 
+          <include refid="Base_Column_List" />
+           FROM ( SELECT A.
+          <include refid="Base_Column_List" />
+           , ROWNUM AS con FROM ( 
+        </if>
+      </foreach>
+    </if>
+    select
+    <if test="example.distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from C_V_SYS_SY_MODULE_USERTREE
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="example.orderByClause != null" >
+      order by ${example.orderByClause}
+    </if>
+    <if test="criteria.valid" >
+      <foreach collection="criteria.criteria" item="criterion" >
+        <if test="criterion.limitValue" >
+           ) A  <![CDATA[WHERE ROWNUM <= ${criterion.secondValue}]]> ) B <![CDATA[WHERE B.con >= ${criterion.value} ]]>
+        </if>
+      </foreach>
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.jw.baseframe.model.C_V_Sys_Sy_Module_UsertreeExample" >
+    delete from C_V_SYS_SY_MODULE_USERTREE
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.jw.baseframe.model.C_V_Sys_Sy_Module_Usertree" >
+    insert into C_V_SYS_SY_MODULE_USERTREE (ID, NAME, PID, 
+      SORT, MODULE_TYPE, USER_SYS_NAME, 
+      MODULE_ID, MODULE_TITLE, MODULE_MORE_LINK, 
+      MODULE_CONTENT_LINK, MODULE_ICON_IMG, 
+      MODULE_ICON_CSS, MODULE_TITLE_CSS, 
+      MODULE_HEADER_CSS, MODULE_BODY_CSS, 
+      MODULE_WIDTH, MODULE_HEIGHT, 
+      MODULE_CONTENT_LINKTYPE)
+    values (#{record.id,jdbcType=VARCHAR}, #{record.name,jdbcType=VARCHAR}, #{record.pid,jdbcType=VARCHAR}, 
+      #{record.sort,jdbcType=DECIMAL}, #{record.moduleType,jdbcType=VARCHAR}, #{record.userSysName,jdbcType=VARCHAR}, 
+      #{record.moduleId,jdbcType=VARCHAR}, #{record.moduleTitle,jdbcType=VARCHAR}, #{record.moduleMoreLink,jdbcType=VARCHAR}, 
+      #{record.moduleContentLink,jdbcType=VARCHAR}, #{record.moduleIconImg,jdbcType=VARCHAR}, 
+      #{record.moduleIconCss,jdbcType=VARCHAR}, #{record.moduleTitleCss,jdbcType=VARCHAR}, 
+      #{record.moduleHeaderCss,jdbcType=VARCHAR}, #{record.moduleBodyCss,jdbcType=VARCHAR}, 
+      #{record.moduleWidth,jdbcType=VARCHAR}, #{record.moduleHeight,jdbcType=VARCHAR}, 
+      #{record.moduleContentLinktype,jdbcType=DECIMAL})
+  </insert>
+  <insert id="insertSelective" parameterType="com.jw.baseframe.model.C_V_Sys_Sy_Module_Usertree" >
+    insert into C_V_SYS_SY_MODULE_USERTREE
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="record.id != null" >
+        ID,
+      </if>
+      <if test="record.name != null" >
+        NAME,
+      </if>
+      <if test="record.pid != null" >
+        PID,
+      </if>
+      <if test="record.sort != null" >
+        SORT,
+      </if>
+      <if test="record.moduleType != null" >
+        MODULE_TYPE,
+      </if>
+      <if test="record.userSysName != null" >
+        USER_SYS_NAME,
+      </if>
+      <if test="record.moduleId != null" >
+        MODULE_ID,
+      </if>
+      <if test="record.moduleTitle != null" >
+        MODULE_TITLE,
+      </if>
+      <if test="record.moduleMoreLink != null" >
+        MODULE_MORE_LINK,
+      </if>
+      <if test="record.moduleContentLink != null" >
+        MODULE_CONTENT_LINK,
+      </if>
+      <if test="record.moduleIconImg != null" >
+        MODULE_ICON_IMG,
+      </if>
+      <if test="record.moduleIconCss != null" >
+        MODULE_ICON_CSS,
+      </if>
+      <if test="record.moduleTitleCss != null" >
+        MODULE_TITLE_CSS,
+      </if>
+      <if test="record.moduleHeaderCss != null" >
+        MODULE_HEADER_CSS,
+      </if>
+      <if test="record.moduleBodyCss != null" >
+        MODULE_BODY_CSS,
+      </if>
+      <if test="record.moduleWidth != null" >
+        MODULE_WIDTH,
+      </if>
+      <if test="record.moduleHeight != null" >
+        MODULE_HEIGHT,
+      </if>
+      <if test="record.moduleContentLinktype != null" >
+        MODULE_CONTENT_LINKTYPE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="record.id != null" >
+        #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.name != null" >
+        #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pid != null" >
+        #{record.pid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sort != null" >
+        #{record.sort,jdbcType=DECIMAL},
+      </if>
+      <if test="record.moduleType != null" >
+        #{record.moduleType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userSysName != null" >
+        #{record.userSysName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.moduleId != null" >
+        #{record.moduleId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.moduleTitle != null" >
+        #{record.moduleTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="record.moduleMoreLink != null" >
+        #{record.moduleMoreLink,jdbcType=VARCHAR},
+      </if>
+      <if test="record.moduleContentLink != null" >
+        #{record.moduleContentLink,jdbcType=VARCHAR},
+      </if>
+      <if test="record.moduleIconImg != null" >
+        #{record.moduleIconImg,jdbcType=VARCHAR},
+      </if>
+      <if test="record.moduleIconCss != null" >
+        #{record.moduleIconCss,jdbcType=VARCHAR},
+      </if>
+      <if test="record.moduleTitleCss != null" >
+        #{record.moduleTitleCss,jdbcType=VARCHAR},
+      </if>
+      <if test="record.moduleHeaderCss != null" >
+        #{record.moduleHeaderCss,jdbcType=VARCHAR},
+      </if>
+      <if test="record.moduleBodyCss != null" >
+        #{record.moduleBodyCss,jdbcType=VARCHAR},
+      </if>
+      <if test="record.moduleWidth != null" >
+        #{record.moduleWidth,jdbcType=VARCHAR},
+      </if>
+      <if test="record.moduleHeight != null" >
+        #{record.moduleHeight,jdbcType=VARCHAR},
+      </if>
+      <if test="record.moduleContentLinktype != null" >
+        #{record.moduleContentLinktype,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.jw.baseframe.model.C_V_Sys_Sy_Module_UsertreeExample" resultType="java.lang.Integer" >
+    select count(*) from C_V_SYS_SY_MODULE_USERTREE
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update C_V_SYS_SY_MODULE_USERTREE
+    <set >
+      <if test="record.id != null" >
+        ID = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.name != null" >
+        NAME = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pid != null" >
+        PID = #{record.pid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sort != null" >
+        SORT = #{record.sort,jdbcType=DECIMAL},
+      </if>
+      <if test="record.moduleType != null" >
+        MODULE_TYPE = #{record.moduleType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userSysName != null" >
+        USER_SYS_NAME = #{record.userSysName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.moduleId != null" >
+        MODULE_ID = #{record.moduleId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.moduleTitle != null" >
+        MODULE_TITLE = #{record.moduleTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="record.moduleMoreLink != null" >
+        MODULE_MORE_LINK = #{record.moduleMoreLink,jdbcType=VARCHAR},
+      </if>
+      <if test="record.moduleContentLink != null" >
+        MODULE_CONTENT_LINK = #{record.moduleContentLink,jdbcType=VARCHAR},
+      </if>
+      <if test="record.moduleIconImg != null" >
+        MODULE_ICON_IMG = #{record.moduleIconImg,jdbcType=VARCHAR},
+      </if>
+      <if test="record.moduleIconCss != null" >
+        MODULE_ICON_CSS = #{record.moduleIconCss,jdbcType=VARCHAR},
+      </if>
+      <if test="record.moduleTitleCss != null" >
+        MODULE_TITLE_CSS = #{record.moduleTitleCss,jdbcType=VARCHAR},
+      </if>
+      <if test="record.moduleHeaderCss != null" >
+        MODULE_HEADER_CSS = #{record.moduleHeaderCss,jdbcType=VARCHAR},
+      </if>
+      <if test="record.moduleBodyCss != null" >
+        MODULE_BODY_CSS = #{record.moduleBodyCss,jdbcType=VARCHAR},
+      </if>
+      <if test="record.moduleWidth != null" >
+        MODULE_WIDTH = #{record.moduleWidth,jdbcType=VARCHAR},
+      </if>
+      <if test="record.moduleHeight != null" >
+        MODULE_HEIGHT = #{record.moduleHeight,jdbcType=VARCHAR},
+      </if>
+      <if test="record.moduleContentLinktype != null" >
+        MODULE_CONTENT_LINKTYPE = #{record.moduleContentLinktype,jdbcType=DECIMAL},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update C_V_SYS_SY_MODULE_USERTREE
+    set ID = #{record.id,jdbcType=VARCHAR},
+      NAME = #{record.name,jdbcType=VARCHAR},
+      PID = #{record.pid,jdbcType=VARCHAR},
+      SORT = #{record.sort,jdbcType=DECIMAL},
+      MODULE_TYPE = #{record.moduleType,jdbcType=VARCHAR},
+      USER_SYS_NAME = #{record.userSysName,jdbcType=VARCHAR},
+      MODULE_ID = #{record.moduleId,jdbcType=VARCHAR},
+      MODULE_TITLE = #{record.moduleTitle,jdbcType=VARCHAR},
+      MODULE_MORE_LINK = #{record.moduleMoreLink,jdbcType=VARCHAR},
+      MODULE_CONTENT_LINK = #{record.moduleContentLink,jdbcType=VARCHAR},
+      MODULE_ICON_IMG = #{record.moduleIconImg,jdbcType=VARCHAR},
+      MODULE_ICON_CSS = #{record.moduleIconCss,jdbcType=VARCHAR},
+      MODULE_TITLE_CSS = #{record.moduleTitleCss,jdbcType=VARCHAR},
+      MODULE_HEADER_CSS = #{record.moduleHeaderCss,jdbcType=VARCHAR},
+      MODULE_BODY_CSS = #{record.moduleBodyCss,jdbcType=VARCHAR},
+      MODULE_WIDTH = #{record.moduleWidth,jdbcType=VARCHAR},
+      MODULE_HEIGHT = #{record.moduleHeight,jdbcType=VARCHAR},
+      MODULE_CONTENT_LINKTYPE = #{record.moduleContentLinktype,jdbcType=DECIMAL}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

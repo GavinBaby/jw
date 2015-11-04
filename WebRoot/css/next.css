@@ -1,0 +1,36 @@
+.Tdcellleft {
+	FONT-SIZE:9pt;  
+	FONT-FAMILY:宋体;  
+	BACKGROUND-COLOR: #f8fbfc;  
+	vertical-align:left;
+}
+.Tdcellright {
+	FONT-SIZE:9pt;  
+	FONT-FAMILY:宋体;  
+	BACKGROUND-COLOR: #FFFFFF;  
+	vertical-align:middle;
+}
+.TdcellHead {
+	font-size: 12px;
+	color: #013799;
+	font-family: "宋体";
+}
+/* 查询按钮 */
+.btn1_mouseout {
+BORDER: #6599cb 1px solid; PADDING-RIGHT: 5px; PADDING-LEFT: 5px; FONT-SIZE: 12px; FILTER: progid:DXImageTransform.Microsoft.Gradient(GradientType=0, StartColorStr=#ffffff, EndColorStr=#C3DAF5); COLOR: black; PADDING-TOP: 2px; 
+}
+.btn1_mouseover {
+BORDER: #b37300 1px solid; PADDING-RIGHT: 5px; PADDING-LEFT: 5px; FONT-SIZE: 12px; FILTER: progid:DXImageTransform.Microsoft.Gradient(GradientType=0, StartColorStr=#ffffff, EndColorStr=#fafad7); CURSOR: hand; COLOR: #cc0000; PADDING-TOP: 2px;
+}
+.btn1_mousedown
+{
+BORDER: #6599cb 1px solid; PADDING-RIGHT: 5px; PADDING-LEFT: 5px; FONT-SIZE: 12px; FILTER: progid:DXImageTransform.Microsoft.Gradient(GradientType=0, StartColorStr=#ffffff, EndColorStr=#C3DAF5); CURSOR: hand; COLOR: black; PADDING-TOP: 2px;
+}
+.btn1_mouseup {
+BORDER: #6599cb 1px solid; PADDING-RIGHT: 5px; PADDING-LEFT: 5px; FONT-SIZE: 12px; FILTER: progid:DXImageTransform.Microsoft.Gradient(GradientType=0, StartColorStr=#ffffff, EndColorStr=#C3DAF5); CURSOR: hand; COLOR: black; PADDING-TOP: 2px;
+}
+
+.yeqianl{border-right: #9fcaf5 1px solid; cursor: pointer;}
+.yeqianr{border-bottom: #9fcaf5 1px solid; cursor: pointer;}
+.cyhj{background: #e1ecf3; color: #000066; font-weight: bold; height: 25px; text-align: center; line-height: 25px; border: #9fcaf5 1px solid; border-top: none; cursor: pointer;}
+.cyhjbd{border-right: #9fcaf5 1px solid; border-bottom: #9fcaf5 1px solid;}

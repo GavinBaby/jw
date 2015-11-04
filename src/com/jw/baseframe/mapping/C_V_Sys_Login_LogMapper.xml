@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jw.baseframe.dao.C_V_Sys_Login_LogMapper" >
+  <resultMap id="BaseResultMap" type="com.jw.baseframe.model.C_V_Sys_Login_Log" >
+    <result column="LOGIN_USER_NAME" property="loginUserName" jdbcType="NVARCHAR" />
+    <result column="LOGIN_TIME" property="loginTime" jdbcType="VARCHAR" />
+    <result column="LOGIN_IP" property="loginIp" jdbcType="VARCHAR" />
+    <result column="LOGIN_MACADDRESS" property="loginMacaddress" jdbcType="VARCHAR" />
+    <result column="DEPT_NAME" property="deptName" jdbcType="NVARCHAR" />
+    <result column="UNITID" property="unitid" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    LOGIN_USER_NAME, LOGIN_TIME, LOGIN_IP, LOGIN_MACADDRESS, DEPT_NAME, UNITID
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.jw.baseframe.model.C_V_Sys_Login_LogExample" >
+    <foreach collection="example.oredCriteria" item="criteria" separator="or" />
+    <if test="criteria.valid" >
+      <foreach collection="criteria.criteria" item="criterion" >
+        <if test="criterion.limitValue" >
+          SELECT 
+          <include refid="Base_Column_List" />
+           FROM ( SELECT A.
+          <include refid="Base_Column_List" />
+           , ROWNUM AS con FROM ( 
+        </if>
+      </foreach>
+    </if>
+    select
+    <if test="example.distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from C_V_SYS_LOGIN_LOG
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="example.orderByClause != null" >
+      order by ${example.orderByClause}
+    </if>
+    <if test="criteria.valid" >
+      <foreach collection="criteria.criteria" item="criterion" >
+        <if test="criterion.limitValue" >
+           ) A  <![CDATA[WHERE ROWNUM <= ${criterion.secondValue}]]> ) B <![CDATA[WHERE B.con >= ${criterion.value} ]]>
+        </if>
+      </foreach>
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.jw.baseframe.model.C_V_Sys_Login_LogExample" >
+    delete from C_V_SYS_LOGIN_LOG
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.jw.baseframe.model.C_V_Sys_Login_Log" >
+    insert into C_V_SYS_LOGIN_LOG (LOGIN_USER_NAME, LOGIN_TIME, 
+      LOGIN_IP, LOGIN_MACADDRESS, 
+      DEPT_NAME, UNITID)
+    values (#{record.loginUserName,jdbcType=NVARCHAR}, #{record.loginTime,jdbcType=VARCHAR}, 
+      #{record.loginIp,jdbcType=VARCHAR}, #{record.loginMacaddress,jdbcType=VARCHAR}, 
+      #{record.deptName,jdbcType=NVARCHAR}, #{record.unitid,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.jw.baseframe.model.C_V_Sys_Login_Log" >
+    insert into C_V_SYS_LOGIN_LOG
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="record.loginUserName != null" >
+        LOGIN_USER_NAME,
+      </if>
+      <if test="record.loginTime != null" >
+        LOGIN_TIME,
+      </if>
+      <if test="record.loginIp != null" >
+        LOGIN_IP,
+      </if>
+      <if test="record.loginMacaddress != null" >
+        LOGIN_MACADDRESS,
+      </if>
+      <if test="record.deptName != null" >
+        DEPT_NAME,
+      </if>
+      <if test="record.unitid != null" >
+        UNITID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="record.loginUserName != null" >
+        #{record.loginUserName,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.loginTime != null" >
+        #{record.loginTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.loginIp != null" >
+        #{record.loginIp,jdbcType=VARCHAR},
+      </if>
+      <if test="record.loginMacaddress != null" >
+        #{record.loginMacaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.deptName != null" >
+        #{record.deptName,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.unitid != null" >
+        #{record.unitid,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.jw.baseframe.model.C_V_Sys_Login_LogExample" resultType="java.lang.Integer" >
+    select count(*) from C_V_SYS_LOGIN_LOG
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update C_V_SYS_LOGIN_LOG
+    <set >
+      <if test="record.loginUserName != null" >
+        LOGIN_USER_NAME = #{record.loginUserName,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.loginTime != null" >
+        LOGIN_TIME = #{record.loginTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.loginIp != null" >
+        LOGIN_IP = #{record.loginIp,jdbcType=VARCHAR},
+      </if>
+      <if test="record.loginMacaddress != null" >
+        LOGIN_MACADDRESS = #{record.loginMacaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.deptName != null" >
+        DEPT_NAME = #{record.deptName,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.unitid != null" >
+        UNITID = #{record.unitid,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update C_V_SYS_LOGIN_LOG
+    set LOGIN_USER_NAME = #{record.loginUserName,jdbcType=NVARCHAR},
+      LOGIN_TIME = #{record.loginTime,jdbcType=VARCHAR},
+      LOGIN_IP = #{record.loginIp,jdbcType=VARCHAR},
+      LOGIN_MACADDRESS = #{record.loginMacaddress,jdbcType=VARCHAR},
+      DEPT_NAME = #{record.deptName,jdbcType=NVARCHAR},
+      UNITID = #{record.unitid,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

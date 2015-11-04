@@ -1,0 +1,596 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jw.magicbpm.dao.documentmanagement.B_T_Flow_FileInMapper" >
+  <resultMap id="BaseResultMap" type="com.jw.magicbpm.model.documentmanagement.B_T_Flow_FileIn" >
+    <id column="UUID" property="uuid" jdbcType="VARCHAR" />
+    <result column="REGISTERED_USER" property="registeredUser" jdbcType="NVARCHAR" />
+    <result column="REGISTERED_TIME" property="registeredTime" jdbcType="VARCHAR" />
+    <result column="FILEIN_TYPEID" property="fileinTypeid" jdbcType="VARCHAR" />
+    <result column="FILEIN_YEAR" property="fileinYear" jdbcType="VARCHAR" />
+    <result column="FILEIN_SERIAL" property="fileinSerial" jdbcType="VARCHAR" />
+    <result column="FILEIN_TIME" property="fileinTime" jdbcType="VARCHAR" />
+    <result column="URGENCY" property="urgency" jdbcType="VARCHAR" />
+    <result column="FILEIN_TITLE" property="fileinTitle" jdbcType="NVARCHAR" />
+    <result column="SYMBOL" property="symbol" jdbcType="NVARCHAR" />
+    <result column="SYMBOL_YEAR" property="symbolYear" jdbcType="VARCHAR" />
+    <result column="SYMBOL_NO" property="symbolNo" jdbcType="NVARCHAR" />
+    <result column="AUTHORITIES" property="authorities" jdbcType="NVARCHAR" />
+    <result column="DEADLINE" property="deadline" jdbcType="VARCHAR" />
+    <result column="PAGES" property="pages" jdbcType="NVARCHAR" />
+    <result column="REMARKS" property="remarks" jdbcType="NVARCHAR" />
+    <result column="COPIES" property="copies" jdbcType="NVARCHAR" />
+    <result column="VIEW_NAME" property="viewName" jdbcType="VARCHAR" />
+    <result column="UNVIEW_NAME" property="unviewName" jdbcType="VARCHAR" />
+    <result column="IS_RELEASE" property="isRelease" jdbcType="DECIMAL" />
+    <result column="IS_FILE" property="isFile" jdbcType="DECIMAL" />
+    <result column="EXPAND_XML" property="expandXml" jdbcType="NVARCHAR" />
+    <result column="UNITID" property="unitid" jdbcType="VARCHAR" />
+    <result column="IS_DELETE" property="isDelete" jdbcType="DECIMAL" />
+    <result column="CREATE_USER" property="createUser" jdbcType="VARCHAR" />
+    <result column="CREATE_TIME" property="createTime" jdbcType="VARCHAR" />
+    <result column="UPDATE_USER" property="updateUser" jdbcType="VARCHAR" />
+    <result column="UPDATE_TIME" property="updateTime" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    UUID, REGISTERED_USER, REGISTERED_TIME, FILEIN_TYPEID, FILEIN_YEAR, FILEIN_SERIAL, 
+    FILEIN_TIME, URGENCY, FILEIN_TITLE, SYMBOL, SYMBOL_YEAR, SYMBOL_NO, AUTHORITIES, 
+    DEADLINE, PAGES, REMARKS, COPIES, VIEW_NAME, UNVIEW_NAME, IS_RELEASE, IS_FILE, EXPAND_XML, 
+    UNITID, IS_DELETE, CREATE_USER, CREATE_TIME, UPDATE_USER, UPDATE_TIME
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.jw.magicbpm.model.documentmanagement.B_T_Flow_FileInExample" >
+    <foreach collection="example.oredCriteria" item="criteria" separator="or" />
+    <if test="criteria.valid" >
+      <foreach collection="criteria.criteria" item="criterion" >
+        <if test="criterion.limitValue" >
+          SELECT 
+          <include refid="Base_Column_List" />
+           FROM ( SELECT A.
+          <include refid="Base_Column_List" />
+           , ROWNUM AS con FROM ( 
+        </if>
+      </foreach>
+    </if>
+    select
+    <if test="example.distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from B_T_FLOW_FILEIN
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="example.orderByClause != null" >
+      order by ${example.orderByClause}
+    </if>
+    <if test="criteria.valid" >
+      <foreach collection="criteria.criteria" item="criterion" >
+        <if test="criterion.limitValue" >
+           ) A  <![CDATA[WHERE ROWNUM <= ${criterion.secondValue}]]> ) B <![CDATA[WHERE B.con >= ${criterion.value} ]]>
+        </if>
+      </foreach>
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from B_T_FLOW_FILEIN
+    where UUID = #{uuid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from B_T_FLOW_FILEIN
+    where UUID = #{uuid,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.jw.magicbpm.model.documentmanagement.B_T_Flow_FileInExample" >
+    delete from B_T_FLOW_FILEIN
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.jw.magicbpm.model.documentmanagement.B_T_Flow_FileIn" >
+    insert into B_T_FLOW_FILEIN (UUID, REGISTERED_USER, 
+      REGISTERED_TIME, FILEIN_TYPEID, 
+      FILEIN_YEAR, FILEIN_SERIAL, 
+      FILEIN_TIME, URGENCY, FILEIN_TITLE, 
+      SYMBOL, SYMBOL_YEAR, SYMBOL_NO, 
+      AUTHORITIES, DEADLINE, PAGES, 
+      REMARKS, COPIES, VIEW_NAME, 
+      UNVIEW_NAME, IS_RELEASE, IS_FILE, 
+      EXPAND_XML, UNITID, IS_DELETE, 
+      CREATE_USER, CREATE_TIME, UPDATE_USER, 
+      UPDATE_TIME)
+    values (#{record.uuid,jdbcType=VARCHAR}, #{record.registeredUser,jdbcType=NVARCHAR}, 
+      #{record.registeredTime,jdbcType=VARCHAR}, #{record.fileinTypeid,jdbcType=VARCHAR}, 
+      #{record.fileinYear,jdbcType=VARCHAR}, #{record.fileinSerial,jdbcType=VARCHAR}, 
+      #{record.fileinTime,jdbcType=VARCHAR}, #{record.urgency,jdbcType=VARCHAR}, #{record.fileinTitle,jdbcType=NVARCHAR}, 
+      #{record.symbol,jdbcType=NVARCHAR}, #{record.symbolYear,jdbcType=VARCHAR}, #{record.symbolNo,jdbcType=NVARCHAR}, 
+      #{record.authorities,jdbcType=NVARCHAR}, #{record.deadline,jdbcType=VARCHAR}, #{record.pages,jdbcType=NVARCHAR}, 
+      #{record.remarks,jdbcType=NVARCHAR}, #{record.copies,jdbcType=NVARCHAR}, #{record.viewName,jdbcType=VARCHAR}, 
+      #{record.unviewName,jdbcType=VARCHAR}, #{record.isRelease,jdbcType=DECIMAL}, #{record.isFile,jdbcType=DECIMAL}, 
+      #{record.expandXml,jdbcType=NVARCHAR}, #{record.unitid,jdbcType=VARCHAR}, #{record.isDelete,jdbcType=DECIMAL}, 
+      #{record.createUser,jdbcType=VARCHAR}, #{record.createTime,jdbcType=VARCHAR}, #{record.updateUser,jdbcType=VARCHAR}, 
+      #{record.updateTime,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.jw.magicbpm.model.documentmanagement.B_T_Flow_FileIn" >
+    insert into B_T_FLOW_FILEIN
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="record.uuid != null" >
+        UUID,
+      </if>
+      <if test="record.registeredUser != null" >
+        REGISTERED_USER,
+      </if>
+      <if test="record.registeredTime != null" >
+        REGISTERED_TIME,
+      </if>
+      <if test="record.fileinTypeid != null" >
+        FILEIN_TYPEID,
+      </if>
+      <if test="record.fileinYear != null" >
+        FILEIN_YEAR,
+      </if>
+      <if test="record.fileinSerial != null" >
+        FILEIN_SERIAL,
+      </if>
+      <if test="record.fileinTime != null" >
+        FILEIN_TIME,
+      </if>
+      <if test="record.urgency != null" >
+        URGENCY,
+      </if>
+      <if test="record.fileinTitle != null" >
+        FILEIN_TITLE,
+      </if>
+      <if test="record.symbol != null" >
+        SYMBOL,
+      </if>
+      <if test="record.symbolYear != null" >
+        SYMBOL_YEAR,
+      </if>
+      <if test="record.symbolNo != null" >
+        SYMBOL_NO,
+      </if>
+      <if test="record.authorities != null" >
+        AUTHORITIES,
+      </if>
+      <if test="record.deadline != null" >
+        DEADLINE,
+      </if>
+      <if test="record.pages != null" >
+        PAGES,
+      </if>
+      <if test="record.remarks != null" >
+        REMARKS,
+      </if>
+      <if test="record.copies != null" >
+        COPIES,
+      </if>
+      <if test="record.viewName != null" >
+        VIEW_NAME,
+      </if>
+      <if test="record.unviewName != null" >
+        UNVIEW_NAME,
+      </if>
+      <if test="record.isRelease != null" >
+        IS_RELEASE,
+      </if>
+      <if test="record.isFile != null" >
+        IS_FILE,
+      </if>
+      <if test="record.expandXml != null" >
+        EXPAND_XML,
+      </if>
+      <if test="record.unitid != null" >
+        UNITID,
+      </if>
+      <if test="record.isDelete != null" >
+        IS_DELETE,
+      </if>
+      <if test="record.createUser != null" >
+        CREATE_USER,
+      </if>
+      <if test="record.createTime != null" >
+        CREATE_TIME,
+      </if>
+      <if test="record.updateUser != null" >
+        UPDATE_USER,
+      </if>
+      <if test="record.updateTime != null" >
+        UPDATE_TIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="record.uuid != null" >
+        #{record.uuid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.registeredUser != null" >
+        #{record.registeredUser,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.registeredTime != null" >
+        #{record.registeredTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fileinTypeid != null" >
+        #{record.fileinTypeid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fileinYear != null" >
+        #{record.fileinYear,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fileinSerial != null" >
+        #{record.fileinSerial,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fileinTime != null" >
+        #{record.fileinTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.urgency != null" >
+        #{record.urgency,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fileinTitle != null" >
+        #{record.fileinTitle,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.symbol != null" >
+        #{record.symbol,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.symbolYear != null" >
+        #{record.symbolYear,jdbcType=VARCHAR},
+      </if>
+      <if test="record.symbolNo != null" >
+        #{record.symbolNo,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.authorities != null" >
+        #{record.authorities,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.deadline != null" >
+        #{record.deadline,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pages != null" >
+        #{record.pages,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.remarks != null" >
+        #{record.remarks,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.copies != null" >
+        #{record.copies,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.viewName != null" >
+        #{record.viewName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.unviewName != null" >
+        #{record.unviewName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isRelease != null" >
+        #{record.isRelease,jdbcType=DECIMAL},
+      </if>
+      <if test="record.isFile != null" >
+        #{record.isFile,jdbcType=DECIMAL},
+      </if>
+      <if test="record.expandXml != null" >
+        #{record.expandXml,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.unitid != null" >
+        #{record.unitid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isDelete != null" >
+        #{record.isDelete,jdbcType=DECIMAL},
+      </if>
+      <if test="record.createUser != null" >
+        #{record.createUser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null" >
+        #{record.createTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateUser != null" >
+        #{record.updateUser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateTime != null" >
+        #{record.updateTime,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.jw.magicbpm.model.documentmanagement.B_T_Flow_FileInExample" resultType="java.lang.Integer" >
+    select count(*) from B_T_FLOW_FILEIN
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update B_T_FLOW_FILEIN
+    <set >
+      <if test="record.uuid != null" >
+        UUID = #{record.uuid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.registeredUser != null" >
+        REGISTERED_USER = #{record.registeredUser,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.registeredTime != null" >
+        REGISTERED_TIME = #{record.registeredTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fileinTypeid != null" >
+        FILEIN_TYPEID = #{record.fileinTypeid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fileinYear != null" >
+        FILEIN_YEAR = #{record.fileinYear,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fileinSerial != null" >
+        FILEIN_SERIAL = #{record.fileinSerial,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fileinTime != null" >
+        FILEIN_TIME = #{record.fileinTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.urgency != null" >
+        URGENCY = #{record.urgency,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fileinTitle != null" >
+        FILEIN_TITLE = #{record.fileinTitle,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.symbol != null" >
+        SYMBOL = #{record.symbol,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.symbolYear != null" >
+        SYMBOL_YEAR = #{record.symbolYear,jdbcType=VARCHAR},
+      </if>
+      <if test="record.symbolNo != null" >
+        SYMBOL_NO = #{record.symbolNo,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.authorities != null" >
+        AUTHORITIES = #{record.authorities,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.deadline != null" >
+        DEADLINE = #{record.deadline,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pages != null" >
+        PAGES = #{record.pages,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.remarks != null" >
+        REMARKS = #{record.remarks,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.copies != null" >
+        COPIES = #{record.copies,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.viewName != null" >
+        VIEW_NAME = #{record.viewName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.unviewName != null" >
+        UNVIEW_NAME = #{record.unviewName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isRelease != null" >
+        IS_RELEASE = #{record.isRelease,jdbcType=DECIMAL},
+      </if>
+      <if test="record.isFile != null" >
+        IS_FILE = #{record.isFile,jdbcType=DECIMAL},
+      </if>
+      <if test="record.expandXml != null" >
+        EXPAND_XML = #{record.expandXml,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.unitid != null" >
+        UNITID = #{record.unitid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isDelete != null" >
+        IS_DELETE = #{record.isDelete,jdbcType=DECIMAL},
+      </if>
+      <if test="record.createUser != null" >
+        CREATE_USER = #{record.createUser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null" >
+        CREATE_TIME = #{record.createTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateUser != null" >
+        UPDATE_USER = #{record.updateUser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateTime != null" >
+        UPDATE_TIME = #{record.updateTime,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update B_T_FLOW_FILEIN
+    set UUID = #{record.uuid,jdbcType=VARCHAR},
+      REGISTERED_USER = #{record.registeredUser,jdbcType=NVARCHAR},
+      REGISTERED_TIME = #{record.registeredTime,jdbcType=VARCHAR},
+      FILEIN_TYPEID = #{record.fileinTypeid,jdbcType=VARCHAR},
+      FILEIN_YEAR = #{record.fileinYear,jdbcType=VARCHAR},
+      FILEIN_SERIAL = #{record.fileinSerial,jdbcType=VARCHAR},
+      FILEIN_TIME = #{record.fileinTime,jdbcType=VARCHAR},
+      URGENCY = #{record.urgency,jdbcType=VARCHAR},
+      FILEIN_TITLE = #{record.fileinTitle,jdbcType=NVARCHAR},
+      SYMBOL = #{record.symbol,jdbcType=NVARCHAR},
+      SYMBOL_YEAR = #{record.symbolYear,jdbcType=VARCHAR},
+      SYMBOL_NO = #{record.symbolNo,jdbcType=NVARCHAR},
+      AUTHORITIES = #{record.authorities,jdbcType=NVARCHAR},
+      DEADLINE = #{record.deadline,jdbcType=VARCHAR},
+      PAGES = #{record.pages,jdbcType=NVARCHAR},
+      REMARKS = #{record.remarks,jdbcType=NVARCHAR},
+      COPIES = #{record.copies,jdbcType=NVARCHAR},
+      VIEW_NAME = #{record.viewName,jdbcType=VARCHAR},
+      UNVIEW_NAME = #{record.unviewName,jdbcType=VARCHAR},
+      IS_RELEASE = #{record.isRelease,jdbcType=DECIMAL},
+      IS_FILE = #{record.isFile,jdbcType=DECIMAL},
+      EXPAND_XML = #{record.expandXml,jdbcType=NVARCHAR},
+      UNITID = #{record.unitid,jdbcType=VARCHAR},
+      IS_DELETE = #{record.isDelete,jdbcType=DECIMAL},
+      CREATE_USER = #{record.createUser,jdbcType=VARCHAR},
+      CREATE_TIME = #{record.createTime,jdbcType=VARCHAR},
+      UPDATE_USER = #{record.updateUser,jdbcType=VARCHAR},
+      UPDATE_TIME = #{record.updateTime,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jw.magicbpm.model.documentmanagement.B_T_Flow_FileIn" >
+    update B_T_FLOW_FILEIN
+    <set >
+      <if test="record.registeredUser != null" >
+        REGISTERED_USER = #{record.registeredUser,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.registeredTime != null" >
+        REGISTERED_TIME = #{record.registeredTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fileinTypeid != null" >
+        FILEIN_TYPEID = #{record.fileinTypeid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fileinYear != null" >
+        FILEIN_YEAR = #{record.fileinYear,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fileinSerial != null" >
+        FILEIN_SERIAL = #{record.fileinSerial,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fileinTime != null" >
+        FILEIN_TIME = #{record.fileinTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.urgency != null" >
+        URGENCY = #{record.urgency,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fileinTitle != null" >
+        FILEIN_TITLE = #{record.fileinTitle,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.symbol != null" >
+        SYMBOL = #{record.symbol,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.symbolYear != null" >
+        SYMBOL_YEAR = #{record.symbolYear,jdbcType=VARCHAR},
+      </if>
+      <if test="record.symbolNo != null" >
+        SYMBOL_NO = #{record.symbolNo,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.authorities != null" >
+        AUTHORITIES = #{record.authorities,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.deadline != null" >
+        DEADLINE = #{record.deadline,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pages != null" >
+        PAGES = #{record.pages,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.remarks != null" >
+        REMARKS = #{record.remarks,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.copies != null" >
+        COPIES = #{record.copies,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.viewName != null" >
+        VIEW_NAME = #{record.viewName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.unviewName != null" >
+        UNVIEW_NAME = #{record.unviewName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isRelease != null" >
+        IS_RELEASE = #{record.isRelease,jdbcType=DECIMAL},
+      </if>
+      <if test="record.isFile != null" >
+        IS_FILE = #{record.isFile,jdbcType=DECIMAL},
+      </if>
+      <if test="record.expandXml != null" >
+        EXPAND_XML = #{record.expandXml,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.unitid != null" >
+        UNITID = #{record.unitid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isDelete != null" >
+        IS_DELETE = #{record.isDelete,jdbcType=DECIMAL},
+      </if>
+      <if test="record.createUser != null" >
+        CREATE_USER = #{record.createUser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null" >
+        CREATE_TIME = #{record.createTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateUser != null" >
+        UPDATE_USER = #{record.updateUser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateTime != null" >
+        UPDATE_TIME = #{record.updateTime,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where UUID = #{record.uuid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jw.magicbpm.model.documentmanagement.B_T_Flow_FileIn" >
+    update B_T_FLOW_FILEIN
+    set REGISTERED_USER = #{record.registeredUser,jdbcType=NVARCHAR},
+      REGISTERED_TIME = #{record.registeredTime,jdbcType=VARCHAR},
+      FILEIN_TYPEID = #{record.fileinTypeid,jdbcType=VARCHAR},
+      FILEIN_YEAR = #{record.fileinYear,jdbcType=VARCHAR},
+      FILEIN_SERIAL = #{record.fileinSerial,jdbcType=VARCHAR},
+      FILEIN_TIME = #{record.fileinTime,jdbcType=VARCHAR},
+      URGENCY = #{record.urgency,jdbcType=VARCHAR},
+      FILEIN_TITLE = #{record.fileinTitle,jdbcType=NVARCHAR},
+      SYMBOL = #{record.symbol,jdbcType=NVARCHAR},
+      SYMBOL_YEAR = #{record.symbolYear,jdbcType=VARCHAR},
+      SYMBOL_NO = #{record.symbolNo,jdbcType=NVARCHAR},
+      AUTHORITIES = #{record.authorities,jdbcType=NVARCHAR},
+      DEADLINE = #{record.deadline,jdbcType=VARCHAR},
+      PAGES = #{record.pages,jdbcType=NVARCHAR},
+      REMARKS = #{record.remarks,jdbcType=NVARCHAR},
+      COPIES = #{record.copies,jdbcType=NVARCHAR},
+      VIEW_NAME = #{record.viewName,jdbcType=VARCHAR},
+      UNVIEW_NAME = #{record.unviewName,jdbcType=VARCHAR},
+      IS_RELEASE = #{record.isRelease,jdbcType=DECIMAL},
+      IS_FILE = #{record.isFile,jdbcType=DECIMAL},
+      EXPAND_XML = #{record.expandXml,jdbcType=NVARCHAR},
+      UNITID = #{record.unitid,jdbcType=VARCHAR},
+      IS_DELETE = #{record.isDelete,jdbcType=DECIMAL},
+      CREATE_USER = #{record.createUser,jdbcType=VARCHAR},
+      CREATE_TIME = #{record.createTime,jdbcType=VARCHAR},
+      UPDATE_USER = #{record.updateUser,jdbcType=VARCHAR},
+      UPDATE_TIME = #{record.updateTime,jdbcType=VARCHAR}
+    where UUID = #{record.uuid,jdbcType=VARCHAR}
+  </update>
+</mapper>

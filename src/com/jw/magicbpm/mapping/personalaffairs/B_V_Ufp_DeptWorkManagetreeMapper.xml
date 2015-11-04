@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jw.magicbpm.dao.personalaffairs.B_V_Ufp_DeptWorkManagetreeMapper" >
+  <resultMap id="BaseResultMap" type="com.jw.magicbpm.model.personalaffairs.B_V_Ufp_DeptWorkManagetree" >
+    <result column="ID" property="id" jdbcType="VARCHAR" />
+    <result column="P_ID" property="pId" jdbcType="VARCHAR" />
+    <result column="NAME" property="name" jdbcType="NVARCHAR" />
+    <result column="UNITID" property="unitid" jdbcType="VARCHAR" />
+    <result column="ROLE_USER_ID" property="roleUserId" jdbcType="VARCHAR" />
+    <result column="SORT" property="sort" jdbcType="DECIMAL" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ID, P_ID, NAME, UNITID, ROLE_USER_ID, SORT
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.jw.magicbpm.model.personalaffairs.B_V_Ufp_DeptWorkManagetreeExample" >
+    <foreach collection="example.oredCriteria" item="criteria" separator="or" />
+    <if test="criteria.valid" >
+      <foreach collection="criteria.criteria" item="criterion" >
+        <if test="criterion.limitValue" >
+          SELECT 
+          <include refid="Base_Column_List" />
+           FROM ( SELECT A.
+          <include refid="Base_Column_List" />
+           , ROWNUM AS con FROM ( 
+        </if>
+      </foreach>
+    </if>
+    select
+    <if test="example.distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from B_V_UFP_DEPTWORKMANAGETREE
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="example.orderByClause != null" >
+      order by ${example.orderByClause}
+    </if>
+    <if test="criteria.valid" >
+      <foreach collection="criteria.criteria" item="criterion" >
+        <if test="criterion.limitValue" >
+           ) A  <![CDATA[WHERE ROWNUM <= ${criterion.secondValue}]]> ) B <![CDATA[WHERE B.con >= ${criterion.value} ]]>
+        </if>
+      </foreach>
+    </if>
+  </select>
+  <select id="selectdeptworkmanagetreeByMap" resultMap="BaseResultMap" parameterType="map">
+    <![CDATA[ 
+    select distinct * from (
+	SELECT * FROM B_V_UFP_DEPTWORKMANAGETREE START WITH ID in 
+	(
+	select p_id from B_V_UFP_DEPTWORKMANAGETREE 
+    ]]>
+    <if test="deptid != null">
+        where ROLE_USER_ID='${deptid}'
+    </if>
+     <![CDATA[
+     )
+    CONNECT BY PRIOR  P_id = id order by sort desc)
+     ]]>
+     <![CDATA[ 
+    union all
+    select * 
+    from B_V_UFP_DEPTWORKMANAGETREE 
+    ]]>
+    <if test="deptid != null">
+        where ROLE_USER_ID='${deptid}'
+    </if>     
+  </select>
+  
+  <delete id="deleteByExample" parameterType="com.jw.magicbpm.model.personalaffairs.B_V_Ufp_DeptWorkManagetreeExample" >
+    delete from B_V_UFP_DEPTWORKMANAGETREE
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.jw.magicbpm.model.personalaffairs.B_V_Ufp_DeptWorkManagetree" >
+    insert into B_V_UFP_DEPTWORKMANAGETREE (ID, P_ID, NAME, 
+      UNITID, ROLE_USER_ID, SORT
+      )
+    values (#{record.id,jdbcType=VARCHAR}, #{record.pId,jdbcType=VARCHAR}, #{record.name,jdbcType=NVARCHAR}, 
+      #{record.unitid,jdbcType=VARCHAR}, #{record.roleUserId,jdbcType=VARCHAR}, #{record.sort,jdbcType=DECIMAL}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.jw.magicbpm.model.personalaffairs.B_V_Ufp_DeptWorkManagetree" >
+    insert into B_V_UFP_DEPTWORKMANAGETREE
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="record.id != null" >
+        ID,
+      </if>
+      <if test="record.pId != null" >
+        P_ID,
+      </if>
+      <if test="record.name != null" >
+        NAME,
+      </if>
+      <if test="record.unitid != null" >
+        UNITID,
+      </if>
+      <if test="record.roleUserId != null" >
+        ROLE_USER_ID,
+      </if>
+      <if test="record.sort != null" >
+        SORT,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="record.id != null" >
+        #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pId != null" >
+        #{record.pId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.name != null" >
+        #{record.name,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.unitid != null" >
+        #{record.unitid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.roleUserId != null" >
+        #{record.roleUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sort != null" >
+        #{record.sort,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.jw.magicbpm.model.personalaffairs.B_V_Ufp_DeptWorkManagetreeExample" resultType="java.lang.Integer" >
+    select count(*) from B_V_UFP_DEPTWORKMANAGETREE
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update B_V_UFP_DEPTWORKMANAGETREE
+    <set >
+      <if test="record.id != null" >
+        ID = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pId != null" >
+        P_ID = #{record.pId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.name != null" >
+        NAME = #{record.name,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.unitid != null" >
+        UNITID = #{record.unitid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.roleUserId != null" >
+        ROLE_USER_ID = #{record.roleUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sort != null" >
+        SORT = #{record.sort,jdbcType=DECIMAL},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update B_V_UFP_DEPTWORKMANAGETREE
+    set ID = #{record.id,jdbcType=VARCHAR},
+      P_ID = #{record.pId,jdbcType=VARCHAR},
+      NAME = #{record.name,jdbcType=NVARCHAR},
+      UNITID = #{record.unitid,jdbcType=VARCHAR},
+      ROLE_USER_ID = #{record.roleUserId,jdbcType=VARCHAR},
+      SORT = #{record.sort,jdbcType=DECIMAL}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

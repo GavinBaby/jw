@@ -1,0 +1,302 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jw.baseframe.dao.C_V_Sys_LimitUserTreeMapper" >
+  <resultMap id="BaseResultMap" type="com.jw.baseframe.model.C_V_Sys_LimitUserTree" >
+    <result column="UUID" property="uuid" jdbcType="VARCHAR" />
+    <result column="ID" property="id" jdbcType="VARCHAR" />
+    <result column="NAME" property="name" jdbcType="NVARCHAR" />
+    <result column="P_ID" property="pId" jdbcType="VARCHAR" />
+    <result column="DEPT_ID" property="deptId" jdbcType="VARCHAR" />
+    <result column="UNIT_ID" property="unitId" jdbcType="VARCHAR" />
+    <result column="FLA" property="fla" jdbcType="CHAR" />
+    <result column="ROWSORT" property="rowsort" jdbcType="DECIMAL" />
+    <result column="IS_PARENT" property="isParent" jdbcType="VARCHAR" />
+    <result column="IS_FILEIN" property="isFilein" jdbcType="DECIMAL" />
+    <result column="IS_FILEOUT" property="isFileout" jdbcType="DECIMAL" />
+    <result column="IS_SENDMESSAGE" property="isSendmessage" jdbcType="DECIMAL" />
+    <result column="IS_RECEIVEMESSAGE" property="isReceivemessage" jdbcType="DECIMAL" />
+    <result column="IS_MESSAGEIMPORT" property="isMessageimport" jdbcType="DECIMAL" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    UUID, ID, NAME, P_ID, DEPT_ID, UNIT_ID, FLA, ROWSORT, IS_PARENT, IS_FILEIN, IS_FILEOUT, 
+    IS_SENDMESSAGE, IS_RECEIVEMESSAGE, IS_MESSAGEIMPORT
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.jw.baseframe.model.C_V_Sys_LimitUserTreeExample" >
+    <foreach collection="example.oredCriteria" item="criteria" separator="or" />
+    <if test="criteria.valid" >
+      <foreach collection="criteria.criteria" item="criterion" >
+        <if test="criterion.limitValue" >
+          SELECT 
+          <include refid="Base_Column_List" />
+           FROM ( SELECT A.
+          <include refid="Base_Column_List" />
+           , ROWNUM AS con FROM ( 
+        </if>
+      </foreach>
+    </if>
+    select
+    <if test="example.distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from C_V_SYS_LIMITUSERTREE
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="example.orderByClause != null" >
+      order by ${example.orderByClause}
+    </if>
+    <if test="criteria.valid" >
+      <foreach collection="criteria.criteria" item="criterion" >
+        <if test="criterion.limitValue" >
+           ) A  <![CDATA[WHERE ROWNUM <= ${criterion.secondValue}]]> ) B <![CDATA[WHERE B.con >= ${criterion.value} ]]>
+        </if>
+      </foreach>
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.jw.baseframe.model.C_V_Sys_LimitUserTreeExample" >
+    delete from C_V_SYS_LIMITUSERTREE
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.jw.baseframe.model.C_V_Sys_LimitUserTree" >
+    insert into C_V_SYS_LIMITUSERTREE (UUID, ID, NAME, 
+      P_ID, DEPT_ID, UNIT_ID, 
+      FLA, ROWSORT, IS_PARENT, 
+      IS_FILEIN, IS_FILEOUT, IS_SENDMESSAGE, 
+      IS_RECEIVEMESSAGE, IS_MESSAGEIMPORT
+      )
+    values (#{record.uuid,jdbcType=VARCHAR}, #{record.id,jdbcType=VARCHAR}, #{record.name,jdbcType=NVARCHAR}, 
+      #{record.pId,jdbcType=VARCHAR}, #{record.deptId,jdbcType=VARCHAR}, #{record.unitId,jdbcType=VARCHAR}, 
+      #{record.fla,jdbcType=CHAR}, #{record.rowsort,jdbcType=DECIMAL}, #{record.isParent,jdbcType=VARCHAR}, 
+      #{record.isFilein,jdbcType=DECIMAL}, #{record.isFileout,jdbcType=DECIMAL}, #{record.isSendmessage,jdbcType=DECIMAL}, 
+      #{record.isReceivemessage,jdbcType=DECIMAL}, #{record.isMessageimport,jdbcType=DECIMAL}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.jw.baseframe.model.C_V_Sys_LimitUserTree" >
+    insert into C_V_SYS_LIMITUSERTREE
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="record.uuid != null" >
+        UUID,
+      </if>
+      <if test="record.id != null" >
+        ID,
+      </if>
+      <if test="record.name != null" >
+        NAME,
+      </if>
+      <if test="record.pId != null" >
+        P_ID,
+      </if>
+      <if test="record.deptId != null" >
+        DEPT_ID,
+      </if>
+      <if test="record.unitId != null" >
+        UNIT_ID,
+      </if>
+      <if test="record.fla != null" >
+        FLA,
+      </if>
+      <if test="record.rowsort != null" >
+        ROWSORT,
+      </if>
+      <if test="record.isParent != null" >
+        IS_PARENT,
+      </if>
+      <if test="record.isFilein != null" >
+        IS_FILEIN,
+      </if>
+      <if test="record.isFileout != null" >
+        IS_FILEOUT,
+      </if>
+      <if test="record.isSendmessage != null" >
+        IS_SENDMESSAGE,
+      </if>
+      <if test="record.isReceivemessage != null" >
+        IS_RECEIVEMESSAGE,
+      </if>
+      <if test="record.isMessageimport != null" >
+        IS_MESSAGEIMPORT,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="record.uuid != null" >
+        #{record.uuid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.id != null" >
+        #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.name != null" >
+        #{record.name,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.pId != null" >
+        #{record.pId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.deptId != null" >
+        #{record.deptId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.unitId != null" >
+        #{record.unitId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fla != null" >
+        #{record.fla,jdbcType=CHAR},
+      </if>
+      <if test="record.rowsort != null" >
+        #{record.rowsort,jdbcType=DECIMAL},
+      </if>
+      <if test="record.isParent != null" >
+        #{record.isParent,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isFilein != null" >
+        #{record.isFilein,jdbcType=DECIMAL},
+      </if>
+      <if test="record.isFileout != null" >
+        #{record.isFileout,jdbcType=DECIMAL},
+      </if>
+      <if test="record.isSendmessage != null" >
+        #{record.isSendmessage,jdbcType=DECIMAL},
+      </if>
+      <if test="record.isReceivemessage != null" >
+        #{record.isReceivemessage,jdbcType=DECIMAL},
+      </if>
+      <if test="record.isMessageimport != null" >
+        #{record.isMessageimport,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.jw.baseframe.model.C_V_Sys_LimitUserTreeExample" resultType="java.lang.Integer" >
+    select count(*) from C_V_SYS_LIMITUSERTREE
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update C_V_SYS_LIMITUSERTREE
+    <set >
+      <if test="record.uuid != null" >
+        UUID = #{record.uuid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.id != null" >
+        ID = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.name != null" >
+        NAME = #{record.name,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.pId != null" >
+        P_ID = #{record.pId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.deptId != null" >
+        DEPT_ID = #{record.deptId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.unitId != null" >
+        UNIT_ID = #{record.unitId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fla != null" >
+        FLA = #{record.fla,jdbcType=CHAR},
+      </if>
+      <if test="record.rowsort != null" >
+        ROWSORT = #{record.rowsort,jdbcType=DECIMAL},
+      </if>
+      <if test="record.isParent != null" >
+        IS_PARENT = #{record.isParent,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isFilein != null" >
+        IS_FILEIN = #{record.isFilein,jdbcType=DECIMAL},
+      </if>
+      <if test="record.isFileout != null" >
+        IS_FILEOUT = #{record.isFileout,jdbcType=DECIMAL},
+      </if>
+      <if test="record.isSendmessage != null" >
+        IS_SENDMESSAGE = #{record.isSendmessage,jdbcType=DECIMAL},
+      </if>
+      <if test="record.isReceivemessage != null" >
+        IS_RECEIVEMESSAGE = #{record.isReceivemessage,jdbcType=DECIMAL},
+      </if>
+      <if test="record.isMessageimport != null" >
+        IS_MESSAGEIMPORT = #{record.isMessageimport,jdbcType=DECIMAL},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update C_V_SYS_LIMITUSERTREE
+    set UUID = #{record.uuid,jdbcType=VARCHAR},
+      ID = #{record.id,jdbcType=VARCHAR},
+      NAME = #{record.name,jdbcType=NVARCHAR},
+      P_ID = #{record.pId,jdbcType=VARCHAR},
+      DEPT_ID = #{record.deptId,jdbcType=VARCHAR},
+      UNIT_ID = #{record.unitId,jdbcType=VARCHAR},
+      FLA = #{record.fla,jdbcType=CHAR},
+      ROWSORT = #{record.rowsort,jdbcType=DECIMAL},
+      IS_PARENT = #{record.isParent,jdbcType=VARCHAR},
+      IS_FILEIN = #{record.isFilein,jdbcType=DECIMAL},
+      IS_FILEOUT = #{record.isFileout,jdbcType=DECIMAL},
+      IS_SENDMESSAGE = #{record.isSendmessage,jdbcType=DECIMAL},
+      IS_RECEIVEMESSAGE = #{record.isReceivemessage,jdbcType=DECIMAL},
+      IS_MESSAGEIMPORT = #{record.isMessageimport,jdbcType=DECIMAL}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

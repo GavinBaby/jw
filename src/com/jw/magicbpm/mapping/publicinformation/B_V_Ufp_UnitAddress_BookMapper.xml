@@ -1,0 +1,351 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jw.magicbpm.dao.publicinformation.B_V_Ufp_UnitAddress_BookMapper" >
+  <resultMap id="BaseResultMap" type="com.jw.magicbpm.model.publicinformation.B_V_Ufp_UnitAddress_Book" >
+    <result column="USER_SYS_NAME" property="userSysName" jdbcType="VARCHAR" />
+    <result column="USER_NAME" property="userName" jdbcType="NVARCHAR" />
+    <result column="SORT" property="sort" jdbcType="DECIMAL" />
+    <result column="DEPT_SORT" property="deptSort" jdbcType="DECIMAL" />
+    <result column="UNIT_ID" property="unitId" jdbcType="VARCHAR" />
+    <result column="UNIT_NAME" property="unitName" jdbcType="NVARCHAR" />
+    <result column="DEPT_ID" property="deptId" jdbcType="VARCHAR" />
+    <result column="POSITION_ID" property="positionId" jdbcType="VARCHAR" />
+    <result column="POSITION_NAME" property="positionName" jdbcType="NVARCHAR" />
+    <result column="DEPT_NAME" property="deptName" jdbcType="NVARCHAR" />
+    <result column="BIRTHDATE" property="birthdate" jdbcType="VARCHAR" />
+    <result column="HOMEPHONE" property="homephone" jdbcType="VARCHAR" />
+    <result column="MOBILEPHONE" property="mobilephone" jdbcType="VARCHAR" />
+    <result column="VIRTUALPHONE" property="virtualphone" jdbcType="VARCHAR" />
+    <result column="OFFICEPHONE" property="officephone" jdbcType="VARCHAR" />
+    <result column="EMAIL" property="email" jdbcType="VARCHAR" />
+    <result column="FAXPHONE" property="faxphone" jdbcType="VARCHAR" />
+    <result column="REMARK" property="remark" jdbcType="NVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    USER_SYS_NAME, USER_NAME, SORT, DEPT_SORT, UNIT_ID, UNIT_NAME, DEPT_ID, POSITION_ID, 
+    POSITION_NAME, DEPT_NAME, BIRTHDATE, HOMEPHONE, MOBILEPHONE, VIRTUALPHONE, OFFICEPHONE, 
+    EMAIL, FAXPHONE, REMARK
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.jw.magicbpm.model.publicinformation.B_V_Ufp_UnitAddress_BookExample" >
+    <foreach collection="example.oredCriteria" item="criteria" separator="or" />
+    <if test="criteria.valid" >
+      <foreach collection="criteria.criteria" item="criterion" >
+        <if test="criterion.limitValue" >
+          SELECT 
+          <include refid="Base_Column_List" />
+           FROM ( SELECT A.
+          <include refid="Base_Column_List" />
+           , ROWNUM AS con FROM ( 
+        </if>
+      </foreach>
+    </if>
+    select
+    <if test="example.distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from B_V_UFP_UNITADDRESS_BOOK
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="example.orderByClause != null" >
+      order by ${example.orderByClause}
+    </if>
+    <if test="criteria.valid" >
+      <foreach collection="criteria.criteria" item="criterion" >
+        <if test="criterion.limitValue" >
+           ) A  <![CDATA[WHERE ROWNUM <= ${criterion.secondValue}]]> ) B <![CDATA[WHERE B.con >= ${criterion.value} ]]>
+        </if>
+      </foreach>
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.jw.magicbpm.model.publicinformation.B_V_Ufp_UnitAddress_BookExample" >
+    delete from B_V_UFP_UNITADDRESS_BOOK
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.jw.magicbpm.model.publicinformation.B_V_Ufp_UnitAddress_Book" >
+    insert into B_V_UFP_UNITADDRESS_BOOK (USER_SYS_NAME, USER_NAME, 
+      SORT, DEPT_SORT, UNIT_ID, 
+      UNIT_NAME, DEPT_ID, POSITION_ID, 
+      POSITION_NAME, DEPT_NAME, 
+      BIRTHDATE, HOMEPHONE, MOBILEPHONE, 
+      VIRTUALPHONE, OFFICEPHONE, 
+      EMAIL, FAXPHONE, REMARK
+      )
+    values (#{record.userSysName,jdbcType=VARCHAR}, #{record.userName,jdbcType=NVARCHAR}, 
+      #{record.sort,jdbcType=DECIMAL}, #{record.deptSort,jdbcType=DECIMAL}, #{record.unitId,jdbcType=VARCHAR}, 
+      #{record.unitName,jdbcType=NVARCHAR}, #{record.deptId,jdbcType=VARCHAR}, #{record.positionId,jdbcType=VARCHAR}, 
+      #{record.positionName,jdbcType=NVARCHAR}, #{record.deptName,jdbcType=NVARCHAR}, 
+      #{record.birthdate,jdbcType=VARCHAR}, #{record.homephone,jdbcType=VARCHAR}, #{record.mobilephone,jdbcType=VARCHAR}, 
+      #{record.virtualphone,jdbcType=VARCHAR}, #{record.officephone,jdbcType=VARCHAR}, 
+      #{record.email,jdbcType=VARCHAR}, #{record.faxphone,jdbcType=VARCHAR}, #{record.remark,jdbcType=NVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.jw.magicbpm.model.publicinformation.B_V_Ufp_UnitAddress_Book" >
+    insert into B_V_UFP_UNITADDRESS_BOOK
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="record.userSysName != null" >
+        USER_SYS_NAME,
+      </if>
+      <if test="record.userName != null" >
+        USER_NAME,
+      </if>
+      <if test="record.sort != null" >
+        SORT,
+      </if>
+      <if test="record.deptSort != null" >
+        DEPT_SORT,
+      </if>
+      <if test="record.unitId != null" >
+        UNIT_ID,
+      </if>
+      <if test="record.unitName != null" >
+        UNIT_NAME,
+      </if>
+      <if test="record.deptId != null" >
+        DEPT_ID,
+      </if>
+      <if test="record.positionId != null" >
+        POSITION_ID,
+      </if>
+      <if test="record.positionName != null" >
+        POSITION_NAME,
+      </if>
+      <if test="record.deptName != null" >
+        DEPT_NAME,
+      </if>
+      <if test="record.birthdate != null" >
+        BIRTHDATE,
+      </if>
+      <if test="record.homephone != null" >
+        HOMEPHONE,
+      </if>
+      <if test="record.mobilephone != null" >
+        MOBILEPHONE,
+      </if>
+      <if test="record.virtualphone != null" >
+        VIRTUALPHONE,
+      </if>
+      <if test="record.officephone != null" >
+        OFFICEPHONE,
+      </if>
+      <if test="record.email != null" >
+        EMAIL,
+      </if>
+      <if test="record.faxphone != null" >
+        FAXPHONE,
+      </if>
+      <if test="record.remark != null" >
+        REMARK,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="record.userSysName != null" >
+        #{record.userSysName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userName != null" >
+        #{record.userName,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.sort != null" >
+        #{record.sort,jdbcType=DECIMAL},
+      </if>
+      <if test="record.deptSort != null" >
+        #{record.deptSort,jdbcType=DECIMAL},
+      </if>
+      <if test="record.unitId != null" >
+        #{record.unitId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.unitName != null" >
+        #{record.unitName,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.deptId != null" >
+        #{record.deptId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.positionId != null" >
+        #{record.positionId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.positionName != null" >
+        #{record.positionName,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.deptName != null" >
+        #{record.deptName,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.birthdate != null" >
+        #{record.birthdate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.homephone != null" >
+        #{record.homephone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mobilephone != null" >
+        #{record.mobilephone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.virtualphone != null" >
+        #{record.virtualphone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.officephone != null" >
+        #{record.officephone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.email != null" >
+        #{record.email,jdbcType=VARCHAR},
+      </if>
+      <if test="record.faxphone != null" >
+        #{record.faxphone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.remark != null" >
+        #{record.remark,jdbcType=NVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.jw.magicbpm.model.publicinformation.B_V_Ufp_UnitAddress_BookExample" resultType="java.lang.Integer" >
+    select count(*) from B_V_UFP_UNITADDRESS_BOOK
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update B_V_UFP_UNITADDRESS_BOOK
+    <set >
+      <if test="record.userSysName != null" >
+        USER_SYS_NAME = #{record.userSysName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userName != null" >
+        USER_NAME = #{record.userName,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.sort != null" >
+        SORT = #{record.sort,jdbcType=DECIMAL},
+      </if>
+      <if test="record.deptSort != null" >
+        DEPT_SORT = #{record.deptSort,jdbcType=DECIMAL},
+      </if>
+      <if test="record.unitId != null" >
+        UNIT_ID = #{record.unitId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.unitName != null" >
+        UNIT_NAME = #{record.unitName,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.deptId != null" >
+        DEPT_ID = #{record.deptId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.positionId != null" >
+        POSITION_ID = #{record.positionId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.positionName != null" >
+        POSITION_NAME = #{record.positionName,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.deptName != null" >
+        DEPT_NAME = #{record.deptName,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.birthdate != null" >
+        BIRTHDATE = #{record.birthdate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.homephone != null" >
+        HOMEPHONE = #{record.homephone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mobilephone != null" >
+        MOBILEPHONE = #{record.mobilephone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.virtualphone != null" >
+        VIRTUALPHONE = #{record.virtualphone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.officephone != null" >
+        OFFICEPHONE = #{record.officephone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.email != null" >
+        EMAIL = #{record.email,jdbcType=VARCHAR},
+      </if>
+      <if test="record.faxphone != null" >
+        FAXPHONE = #{record.faxphone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.remark != null" >
+        REMARK = #{record.remark,jdbcType=NVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update B_V_UFP_UNITADDRESS_BOOK
+    set USER_SYS_NAME = #{record.userSysName,jdbcType=VARCHAR},
+      USER_NAME = #{record.userName,jdbcType=NVARCHAR},
+      SORT = #{record.sort,jdbcType=DECIMAL},
+      DEPT_SORT = #{record.deptSort,jdbcType=DECIMAL},
+      UNIT_ID = #{record.unitId,jdbcType=VARCHAR},
+      UNIT_NAME = #{record.unitName,jdbcType=NVARCHAR},
+      DEPT_ID = #{record.deptId,jdbcType=VARCHAR},
+      POSITION_ID = #{record.positionId,jdbcType=VARCHAR},
+      POSITION_NAME = #{record.positionName,jdbcType=NVARCHAR},
+      DEPT_NAME = #{record.deptName,jdbcType=NVARCHAR},
+      BIRTHDATE = #{record.birthdate,jdbcType=VARCHAR},
+      HOMEPHONE = #{record.homephone,jdbcType=VARCHAR},
+      MOBILEPHONE = #{record.mobilephone,jdbcType=VARCHAR},
+      VIRTUALPHONE = #{record.virtualphone,jdbcType=VARCHAR},
+      OFFICEPHONE = #{record.officephone,jdbcType=VARCHAR},
+      EMAIL = #{record.email,jdbcType=VARCHAR},
+      FAXPHONE = #{record.faxphone,jdbcType=VARCHAR},
+      REMARK = #{record.remark,jdbcType=NVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

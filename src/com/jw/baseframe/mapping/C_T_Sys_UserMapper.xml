@@ -1,0 +1,643 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jw.baseframe.dao.C_T_Sys_UserMapper" >
+  <resultMap id="BaseResultMap" type="com.jw.baseframe.model.C_T_Sys_User" >
+    <id column="UUID" property="uuid" jdbcType="VARCHAR" />
+    <result column="USER_SYS_NAME" property="userSysName" jdbcType="VARCHAR" />
+    <result column="USER_NAME" property="userName" jdbcType="NVARCHAR" />
+    <result column="USER_SHORT_NAME" property="userShortName" jdbcType="NVARCHAR" />
+    <result column="USER_PWD" property="userPwd" jdbcType="VARCHAR" />
+    <result column="UNIT_ID" property="unitId" jdbcType="VARCHAR" />
+    <result column="DEPT_ID" property="deptId" jdbcType="VARCHAR" />
+    <result column="POSITION_ID" property="positionId" jdbcType="VARCHAR" />
+    <result column="POSITION_NAME" property="positionName" jdbcType="NVARCHAR" />
+    <result column="BIRTHDATE" property="birthdate" jdbcType="VARCHAR" />
+    <result column="HOMEPHONE" property="homephone" jdbcType="VARCHAR" />
+    <result column="MOBILEPHONE" property="mobilephone" jdbcType="VARCHAR" />
+    <result column="VIRTUALPHONE" property="virtualphone" jdbcType="VARCHAR" />
+    <result column="OFFICEPHONE" property="officephone" jdbcType="VARCHAR" />
+    <result column="FAXPHONE" property="faxphone" jdbcType="VARCHAR" />
+    <result column="IS_WORK" property="isWork" jdbcType="DECIMAL" />
+    <result column="SEND_SMS_COUNT" property="sendSmsCount" jdbcType="DECIMAL" />
+    <result column="MAIL_QUOTA" property="mailQuota" jdbcType="DECIMAL" />
+    <result column="STATE" property="state" jdbcType="DECIMAL" />
+    <result column="SORT" property="sort" jdbcType="DECIMAL" />
+    <result column="IS_UNIT" property="isUnit" jdbcType="DECIMAL" />
+    <result column="HOME_ADDESS" property="homeAddess" jdbcType="NVARCHAR" />
+    <result column="EMAIL" property="email" jdbcType="VARCHAR" />
+    <result column="REMARK" property="remark" jdbcType="NVARCHAR" />
+    <result column="IS_ADMIN" property="isAdmin" jdbcType="DECIMAL" />
+    <result column="EXPAND_XML" property="expandXml" jdbcType="NVARCHAR" />
+    <result column="IS_DELETE" property="isDelete" jdbcType="DECIMAL" />
+    <result column="CREATE_USER" property="createUser" jdbcType="VARCHAR" />
+    <result column="CREATE_TIME" property="createTime" jdbcType="VARCHAR" />
+    <result column="UPDATE_USER" property="updateUser" jdbcType="VARCHAR" />
+    <result column="UPDATE_TIME" property="updateTime" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    UUID, USER_SYS_NAME, USER_NAME, USER_SHORT_NAME, USER_PWD, UNIT_ID, DEPT_ID, POSITION_ID, 
+    POSITION_NAME, BIRTHDATE, HOMEPHONE, MOBILEPHONE, VIRTUALPHONE, OFFICEPHONE, FAXPHONE, 
+    IS_WORK, SEND_SMS_COUNT, MAIL_QUOTA, STATE, SORT, IS_UNIT, HOME_ADDESS, EMAIL, REMARK, 
+    IS_ADMIN, EXPAND_XML, IS_DELETE, CREATE_USER, CREATE_TIME, UPDATE_USER, UPDATE_TIME
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.jw.baseframe.model.C_T_Sys_UserExample" >
+    <foreach collection="example.oredCriteria" item="criteria" separator="or" />
+    <if test="criteria.valid" >
+      <foreach collection="criteria.criteria" item="criterion" >
+        <if test="criterion.limitValue" >
+          SELECT 
+          <include refid="Base_Column_List" />
+           FROM ( SELECT A.
+          <include refid="Base_Column_List" />
+           , ROWNUM AS con FROM ( 
+        </if>
+      </foreach>
+    </if>
+    select
+    <if test="example.distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from C_T_SYS_USER
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="example.orderByClause != null" >
+      order by ${example.orderByClause}
+    </if>
+    <if test="criteria.valid" >
+      <foreach collection="criteria.criteria" item="criterion" >
+        <if test="criterion.limitValue" >
+           ) A  <![CDATA[WHERE ROWNUM <= ${criterion.secondValue}]]> ) B <![CDATA[WHERE B.con >= ${criterion.value} ]]>
+        </if>
+      </foreach>
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from C_T_SYS_USER
+    where UUID = #{uuid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from C_T_SYS_USER
+    where UUID = #{uuid,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.jw.baseframe.model.C_T_Sys_UserExample" >
+    delete from C_T_SYS_USER
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.jw.baseframe.model.C_T_Sys_User" >
+    insert into C_T_SYS_USER (UUID, USER_SYS_NAME, 
+      USER_NAME, USER_SHORT_NAME, 
+      USER_PWD, UNIT_ID, DEPT_ID, 
+      POSITION_ID, POSITION_NAME, 
+      BIRTHDATE, HOMEPHONE, MOBILEPHONE, 
+      VIRTUALPHONE, OFFICEPHONE, 
+      FAXPHONE, IS_WORK, SEND_SMS_COUNT, 
+      MAIL_QUOTA, STATE, SORT, 
+      IS_UNIT, HOME_ADDESS, EMAIL, 
+      REMARK, IS_ADMIN, EXPAND_XML, 
+      IS_DELETE, CREATE_USER, CREATE_TIME, 
+      UPDATE_USER, UPDATE_TIME)
+    values (#{record.uuid,jdbcType=VARCHAR}, #{record.userSysName,jdbcType=VARCHAR}, 
+      #{record.userName,jdbcType=NVARCHAR}, #{record.userShortName,jdbcType=NVARCHAR}, 
+      #{record.userPwd,jdbcType=VARCHAR}, #{record.unitId,jdbcType=VARCHAR}, #{record.deptId,jdbcType=VARCHAR}, 
+      #{record.positionId,jdbcType=VARCHAR}, #{record.positionName,jdbcType=NVARCHAR}, 
+      #{record.birthdate,jdbcType=VARCHAR}, #{record.homephone,jdbcType=VARCHAR}, #{record.mobilephone,jdbcType=VARCHAR}, 
+      #{record.virtualphone,jdbcType=VARCHAR}, #{record.officephone,jdbcType=VARCHAR}, 
+      #{record.faxphone,jdbcType=VARCHAR}, #{record.isWork,jdbcType=DECIMAL}, #{record.sendSmsCount,jdbcType=DECIMAL}, 
+      #{record.mailQuota,jdbcType=DECIMAL}, #{record.state,jdbcType=DECIMAL}, #{record.sort,jdbcType=DECIMAL}, 
+      #{record.isUnit,jdbcType=DECIMAL}, #{record.homeAddess,jdbcType=NVARCHAR}, #{record.email,jdbcType=VARCHAR}, 
+      #{record.remark,jdbcType=NVARCHAR}, #{record.isAdmin,jdbcType=DECIMAL}, #{record.expandXml,jdbcType=NVARCHAR}, 
+      #{record.isDelete,jdbcType=DECIMAL}, #{record.createUser,jdbcType=VARCHAR}, #{record.createTime,jdbcType=VARCHAR}, 
+      #{record.updateUser,jdbcType=VARCHAR}, #{record.updateTime,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.jw.baseframe.model.C_T_Sys_User" >
+    insert into C_T_SYS_USER
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="record.uuid != null" >
+        UUID,
+      </if>
+      <if test="record.userSysName != null" >
+        USER_SYS_NAME,
+      </if>
+      <if test="record.userName != null" >
+        USER_NAME,
+      </if>
+      <if test="record.userShortName != null" >
+        USER_SHORT_NAME,
+      </if>
+      <if test="record.userPwd != null" >
+        USER_PWD,
+      </if>
+      <if test="record.unitId != null" >
+        UNIT_ID,
+      </if>
+      <if test="record.deptId != null" >
+        DEPT_ID,
+      </if>
+      <if test="record.positionId != null" >
+        POSITION_ID,
+      </if>
+      <if test="record.positionName != null" >
+        POSITION_NAME,
+      </if>
+      <if test="record.birthdate != null" >
+        BIRTHDATE,
+      </if>
+      <if test="record.homephone != null" >
+        HOMEPHONE,
+      </if>
+      <if test="record.mobilephone != null" >
+        MOBILEPHONE,
+      </if>
+      <if test="record.virtualphone != null" >
+        VIRTUALPHONE,
+      </if>
+      <if test="record.officephone != null" >
+        OFFICEPHONE,
+      </if>
+      <if test="record.faxphone != null" >
+        FAXPHONE,
+      </if>
+      <if test="record.isWork != null" >
+        IS_WORK,
+      </if>
+      <if test="record.sendSmsCount != null" >
+        SEND_SMS_COUNT,
+      </if>
+      <if test="record.mailQuota != null" >
+        MAIL_QUOTA,
+      </if>
+      <if test="record.state != null" >
+        STATE,
+      </if>
+      <if test="record.sort != null" >
+        SORT,
+      </if>
+      <if test="record.isUnit != null" >
+        IS_UNIT,
+      </if>
+      <if test="record.homeAddess != null" >
+        HOME_ADDESS,
+      </if>
+      <if test="record.email != null" >
+        EMAIL,
+      </if>
+      <if test="record.remark != null" >
+        REMARK,
+      </if>
+      <if test="record.isAdmin != null" >
+        IS_ADMIN,
+      </if>
+      <if test="record.expandXml != null" >
+        EXPAND_XML,
+      </if>
+      <if test="record.isDelete != null" >
+        IS_DELETE,
+      </if>
+      <if test="record.createUser != null" >
+        CREATE_USER,
+      </if>
+      <if test="record.createTime != null" >
+        CREATE_TIME,
+      </if>
+      <if test="record.updateUser != null" >
+        UPDATE_USER,
+      </if>
+      <if test="record.updateTime != null" >
+        UPDATE_TIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="record.uuid != null" >
+        #{record.uuid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userSysName != null" >
+        #{record.userSysName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userName != null" >
+        #{record.userName,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.userShortName != null" >
+        #{record.userShortName,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.userPwd != null" >
+        #{record.userPwd,jdbcType=VARCHAR},
+      </if>
+      <if test="record.unitId != null" >
+        #{record.unitId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.deptId != null" >
+        #{record.deptId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.positionId != null" >
+        #{record.positionId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.positionName != null" >
+        #{record.positionName,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.birthdate != null" >
+        #{record.birthdate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.homephone != null" >
+        #{record.homephone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mobilephone != null" >
+        #{record.mobilephone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.virtualphone != null" >
+        #{record.virtualphone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.officephone != null" >
+        #{record.officephone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.faxphone != null" >
+        #{record.faxphone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isWork != null" >
+        #{record.isWork,jdbcType=DECIMAL},
+      </if>
+      <if test="record.sendSmsCount != null" >
+        #{record.sendSmsCount,jdbcType=DECIMAL},
+      </if>
+      <if test="record.mailQuota != null" >
+        #{record.mailQuota,jdbcType=DECIMAL},
+      </if>
+      <if test="record.state != null" >
+        #{record.state,jdbcType=DECIMAL},
+      </if>
+      <if test="record.sort != null" >
+        #{record.sort,jdbcType=DECIMAL},
+      </if>
+      <if test="record.isUnit != null" >
+        #{record.isUnit,jdbcType=DECIMAL},
+      </if>
+      <if test="record.homeAddess != null" >
+        #{record.homeAddess,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.email != null" >
+        #{record.email,jdbcType=VARCHAR},
+      </if>
+      <if test="record.remark != null" >
+        #{record.remark,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.isAdmin != null" >
+        #{record.isAdmin,jdbcType=DECIMAL},
+      </if>
+      <if test="record.expandXml != null" >
+        #{record.expandXml,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.isDelete != null" >
+        #{record.isDelete,jdbcType=DECIMAL},
+      </if>
+      <if test="record.createUser != null" >
+        #{record.createUser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null" >
+        #{record.createTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateUser != null" >
+        #{record.updateUser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateTime != null" >
+        #{record.updateTime,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.jw.baseframe.model.C_T_Sys_UserExample" resultType="java.lang.Integer" >
+    select count(*) from C_T_SYS_USER
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update C_T_SYS_USER
+    <set >
+      <if test="record.uuid != null" >
+        UUID = #{record.uuid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userSysName != null" >
+        USER_SYS_NAME = #{record.userSysName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userName != null" >
+        USER_NAME = #{record.userName,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.userShortName != null" >
+        USER_SHORT_NAME = #{record.userShortName,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.userPwd != null" >
+        USER_PWD = #{record.userPwd,jdbcType=VARCHAR},
+      </if>
+      <if test="record.unitId != null" >
+        UNIT_ID = #{record.unitId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.deptId != null" >
+        DEPT_ID = #{record.deptId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.positionId != null" >
+        POSITION_ID = #{record.positionId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.positionName != null" >
+        POSITION_NAME = #{record.positionName,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.birthdate != null" >
+        BIRTHDATE = #{record.birthdate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.homephone != null" >
+        HOMEPHONE = #{record.homephone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mobilephone != null" >
+        MOBILEPHONE = #{record.mobilephone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.virtualphone != null" >
+        VIRTUALPHONE = #{record.virtualphone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.officephone != null" >
+        OFFICEPHONE = #{record.officephone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.faxphone != null" >
+        FAXPHONE = #{record.faxphone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isWork != null" >
+        IS_WORK = #{record.isWork,jdbcType=DECIMAL},
+      </if>
+      <if test="record.sendSmsCount != null" >
+        SEND_SMS_COUNT = #{record.sendSmsCount,jdbcType=DECIMAL},
+      </if>
+      <if test="record.mailQuota != null" >
+        MAIL_QUOTA = #{record.mailQuota,jdbcType=DECIMAL},
+      </if>
+      <if test="record.state != null" >
+        STATE = #{record.state,jdbcType=DECIMAL},
+      </if>
+      <if test="record.sort != null" >
+        SORT = #{record.sort,jdbcType=DECIMAL},
+      </if>
+      <if test="record.isUnit != null" >
+        IS_UNIT = #{record.isUnit,jdbcType=DECIMAL},
+      </if>
+      <if test="record.homeAddess != null" >
+        HOME_ADDESS = #{record.homeAddess,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.email != null" >
+        EMAIL = #{record.email,jdbcType=VARCHAR},
+      </if>
+      <if test="record.remark != null" >
+        REMARK = #{record.remark,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.isAdmin != null" >
+        IS_ADMIN = #{record.isAdmin,jdbcType=DECIMAL},
+      </if>
+      <if test="record.expandXml != null" >
+        EXPAND_XML = #{record.expandXml,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.isDelete != null" >
+        IS_DELETE = #{record.isDelete,jdbcType=DECIMAL},
+      </if>
+      <if test="record.createUser != null" >
+        CREATE_USER = #{record.createUser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null" >
+        CREATE_TIME = #{record.createTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateUser != null" >
+        UPDATE_USER = #{record.updateUser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateTime != null" >
+        UPDATE_TIME = #{record.updateTime,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update C_T_SYS_USER
+    set UUID = #{record.uuid,jdbcType=VARCHAR},
+      USER_SYS_NAME = #{record.userSysName,jdbcType=VARCHAR},
+      USER_NAME = #{record.userName,jdbcType=NVARCHAR},
+      USER_SHORT_NAME = #{record.userShortName,jdbcType=NVARCHAR},
+      USER_PWD = #{record.userPwd,jdbcType=VARCHAR},
+      UNIT_ID = #{record.unitId,jdbcType=VARCHAR},
+      DEPT_ID = #{record.deptId,jdbcType=VARCHAR},
+      POSITION_ID = #{record.positionId,jdbcType=VARCHAR},
+      POSITION_NAME = #{record.positionName,jdbcType=NVARCHAR},
+      BIRTHDATE = #{record.birthdate,jdbcType=VARCHAR},
+      HOMEPHONE = #{record.homephone,jdbcType=VARCHAR},
+      MOBILEPHONE = #{record.mobilephone,jdbcType=VARCHAR},
+      VIRTUALPHONE = #{record.virtualphone,jdbcType=VARCHAR},
+      OFFICEPHONE = #{record.officephone,jdbcType=VARCHAR},
+      FAXPHONE = #{record.faxphone,jdbcType=VARCHAR},
+      IS_WORK = #{record.isWork,jdbcType=DECIMAL},
+      SEND_SMS_COUNT = #{record.sendSmsCount,jdbcType=DECIMAL},
+      MAIL_QUOTA = #{record.mailQuota,jdbcType=DECIMAL},
+      STATE = #{record.state,jdbcType=DECIMAL},
+      SORT = #{record.sort,jdbcType=DECIMAL},
+      IS_UNIT = #{record.isUnit,jdbcType=DECIMAL},
+      HOME_ADDESS = #{record.homeAddess,jdbcType=NVARCHAR},
+      EMAIL = #{record.email,jdbcType=VARCHAR},
+      REMARK = #{record.remark,jdbcType=NVARCHAR},
+      IS_ADMIN = #{record.isAdmin,jdbcType=DECIMAL},
+      EXPAND_XML = #{record.expandXml,jdbcType=NVARCHAR},
+      IS_DELETE = #{record.isDelete,jdbcType=DECIMAL},
+      CREATE_USER = #{record.createUser,jdbcType=VARCHAR},
+      CREATE_TIME = #{record.createTime,jdbcType=VARCHAR},
+      UPDATE_USER = #{record.updateUser,jdbcType=VARCHAR},
+      UPDATE_TIME = #{record.updateTime,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jw.baseframe.model.C_T_Sys_User" >
+    update C_T_SYS_USER
+    <set >
+      <if test="record.userSysName != null" >
+        USER_SYS_NAME = #{record.userSysName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userName != null" >
+        USER_NAME = #{record.userName,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.userShortName != null" >
+        USER_SHORT_NAME = #{record.userShortName,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.userPwd != null" >
+        USER_PWD = #{record.userPwd,jdbcType=VARCHAR},
+      </if>
+      <if test="record.unitId != null" >
+        UNIT_ID = #{record.unitId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.deptId != null" >
+        DEPT_ID = #{record.deptId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.positionId != null" >
+        POSITION_ID = #{record.positionId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.positionName != null" >
+        POSITION_NAME = #{record.positionName,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.birthdate != null" >
+        BIRTHDATE = #{record.birthdate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.homephone != null" >
+        HOMEPHONE = #{record.homephone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mobilephone != null" >
+        MOBILEPHONE = #{record.mobilephone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.virtualphone != null" >
+        VIRTUALPHONE = #{record.virtualphone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.officephone != null" >
+        OFFICEPHONE = #{record.officephone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.faxphone != null" >
+        FAXPHONE = #{record.faxphone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isWork != null" >
+        IS_WORK = #{record.isWork,jdbcType=DECIMAL},
+      </if>
+      <if test="record.sendSmsCount != null" >
+        SEND_SMS_COUNT = #{record.sendSmsCount,jdbcType=DECIMAL},
+      </if>
+      <if test="record.mailQuota != null" >
+        MAIL_QUOTA = #{record.mailQuota,jdbcType=DECIMAL},
+      </if>
+      <if test="record.state != null" >
+        STATE = #{record.state,jdbcType=DECIMAL},
+      </if>
+      <if test="record.sort != null" >
+        SORT = #{record.sort,jdbcType=DECIMAL},
+      </if>
+      <if test="record.isUnit != null" >
+        IS_UNIT = #{record.isUnit,jdbcType=DECIMAL},
+      </if>
+      <if test="record.homeAddess != null" >
+        HOME_ADDESS = #{record.homeAddess,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.email != null" >
+        EMAIL = #{record.email,jdbcType=VARCHAR},
+      </if>
+      <if test="record.remark != null" >
+        REMARK = #{record.remark,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.isAdmin != null" >
+        IS_ADMIN = #{record.isAdmin,jdbcType=DECIMAL},
+      </if>
+      <if test="record.expandXml != null" >
+        EXPAND_XML = #{record.expandXml,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.isDelete != null" >
+        IS_DELETE = #{record.isDelete,jdbcType=DECIMAL},
+      </if>
+      <if test="record.createUser != null" >
+        CREATE_USER = #{record.createUser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null" >
+        CREATE_TIME = #{record.createTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateUser != null" >
+        UPDATE_USER = #{record.updateUser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateTime != null" >
+        UPDATE_TIME = #{record.updateTime,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where UUID = #{record.uuid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jw.baseframe.model.C_T_Sys_User" >
+    update C_T_SYS_USER
+    set USER_SYS_NAME = #{record.userSysName,jdbcType=VARCHAR},
+      USER_NAME = #{record.userName,jdbcType=NVARCHAR},
+      USER_SHORT_NAME = #{record.userShortName,jdbcType=NVARCHAR},
+      USER_PWD = #{record.userPwd,jdbcType=VARCHAR},
+      UNIT_ID = #{record.unitId,jdbcType=VARCHAR},
+      DEPT_ID = #{record.deptId,jdbcType=VARCHAR},
+      POSITION_ID = #{record.positionId,jdbcType=VARCHAR},
+      POSITION_NAME = #{record.positionName,jdbcType=NVARCHAR},
+      BIRTHDATE = #{record.birthdate,jdbcType=VARCHAR},
+      HOMEPHONE = #{record.homephone,jdbcType=VARCHAR},
+      MOBILEPHONE = #{record.mobilephone,jdbcType=VARCHAR},
+      VIRTUALPHONE = #{record.virtualphone,jdbcType=VARCHAR},
+      OFFICEPHONE = #{record.officephone,jdbcType=VARCHAR},
+      FAXPHONE = #{record.faxphone,jdbcType=VARCHAR},
+      IS_WORK = #{record.isWork,jdbcType=DECIMAL},
+      SEND_SMS_COUNT = #{record.sendSmsCount,jdbcType=DECIMAL},
+      MAIL_QUOTA = #{record.mailQuota,jdbcType=DECIMAL},
+      STATE = #{record.state,jdbcType=DECIMAL},
+      SORT = #{record.sort,jdbcType=DECIMAL},
+      IS_UNIT = #{record.isUnit,jdbcType=DECIMAL},
+      HOME_ADDESS = #{record.homeAddess,jdbcType=NVARCHAR},
+      EMAIL = #{record.email,jdbcType=VARCHAR},
+      REMARK = #{record.remark,jdbcType=NVARCHAR},
+      IS_ADMIN = #{record.isAdmin,jdbcType=DECIMAL},
+      EXPAND_XML = #{record.expandXml,jdbcType=NVARCHAR},
+      IS_DELETE = #{record.isDelete,jdbcType=DECIMAL},
+      CREATE_USER = #{record.createUser,jdbcType=VARCHAR},
+      CREATE_TIME = #{record.createTime,jdbcType=VARCHAR},
+      UPDATE_USER = #{record.updateUser,jdbcType=VARCHAR},
+      UPDATE_TIME = #{record.updateTime,jdbcType=VARCHAR}
+    where UUID = #{record.uuid,jdbcType=VARCHAR}
+  </update>
+</mapper>

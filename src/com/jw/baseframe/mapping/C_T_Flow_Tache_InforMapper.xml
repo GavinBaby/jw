@@ -1,0 +1,667 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jw.baseframe.dao.C_T_Flow_Tache_InforMapper" >
+  <resultMap id="BaseResultMap" type="com.jw.baseframe.model.C_T_Flow_Tache_Infor" >
+    <id column="UUID" property="uuid" jdbcType="VARCHAR" />
+    <result column="FLOW_ID" property="flowId" jdbcType="VARCHAR" />
+    <result column="TACHE_ID" property="tacheId" jdbcType="VARCHAR" />
+    <result column="TACHE_NAME" property="tacheName" jdbcType="NVARCHAR" />
+    <result column="SORT" property="sort" jdbcType="DECIMAL" />
+    <result column="TACHE_SMS_ID" property="tacheSmsId" jdbcType="VARCHAR" />
+    <result column="TACHE_IS_CONFIRMSUBMIT" property="tacheIsConfirmsubmit" jdbcType="DECIMAL" />
+    <result column="TACHE_IS_PERMITPASS" property="tacheIsPermitpass" jdbcType="DECIMAL" />
+    <result column="TACHE_IS_DRAWBACK" property="tacheIsDrawback" jdbcType="DECIMAL" />
+    <result column="TACHE_IS_WITHDRAMAL" property="tacheIsWithdramal" jdbcType="DECIMAL" />
+    <result column="TACHE_IS_HANDURGE" property="tacheIsHandurge" jdbcType="DECIMAL" />
+    <result column="TACHE_IS_AUTOURGE" property="tacheIsAutourge" jdbcType="DECIMAL" />
+    <result column="TACHE_DO_IS_SENT_SMS" property="tacheDoIsSentSms" jdbcType="DECIMAL" />
+    <result column="TACHE_PASS_IS_SENTSMS" property="tachePassIsSentsms" jdbcType="DECIMAL" />
+    <result column="TACHE_DO_IS_SENT_MSG" property="tacheDoIsSentMsg" jdbcType="DECIMAL" />
+    <result column="TACHE_PASS_IS_SENT_MSG" property="tachePassIsSentMsg" jdbcType="DECIMAL" />
+    <result column="TACHE_DO_FOR_CESENT_SMS" property="tacheDoForCesentSms" jdbcType="DECIMAL" />
+    <result column="TACHE_PASS_FOR_CESENT_SMS" property="tachePassForCesentSms" jdbcType="DECIMAL" />
+    <result column="TACHE_DO_FOR_CESENT_MSG" property="tacheDoForCesentMsg" jdbcType="DECIMAL" />
+    <result column="TACHE_PASS_FOR_CESENT_MSG" property="tachePassForCesentMsg" jdbcType="DECIMAL" />
+    <result column="TACHE_ONE_DIRECT_SUBMIT" property="tacheOneDirectSubmit" jdbcType="DECIMAL" />
+    <result column="TACHE_SHOW_MYDEP_PERSON" property="tacheShowMydepPerson" jdbcType="DECIMAL" />
+    <result column="TACHE_SHOW_ALL_PERSON" property="tacheShowAllPerson" jdbcType="DECIMAL" />
+    <result column="TACHE_IS_SINGLE_USER" property="tacheIsSingleUser" jdbcType="DECIMAL" />
+    <result column="TACHE_NEXT_SEVERAL_DONE" property="tacheNextSeveralDone" jdbcType="DECIMAL" />
+    <result column="EXPAND_XML" property="expandXml" jdbcType="NVARCHAR" />
+    <result column="UNITID" property="unitid" jdbcType="VARCHAR" />
+    <result column="IS_DELETE" property="isDelete" jdbcType="DECIMAL" />
+    <result column="CREATE_USER" property="createUser" jdbcType="VARCHAR" />
+    <result column="CREATE_TIME" property="createTime" jdbcType="VARCHAR" />
+    <result column="UPDATE_USER" property="updateUser" jdbcType="VARCHAR" />
+    <result column="UPDATE_TIME" property="updateTime" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    UUID, FLOW_ID, TACHE_ID, TACHE_NAME, SORT, TACHE_SMS_ID, TACHE_IS_CONFIRMSUBMIT, 
+    TACHE_IS_PERMITPASS, TACHE_IS_DRAWBACK, TACHE_IS_WITHDRAMAL, TACHE_IS_HANDURGE, TACHE_IS_AUTOURGE, 
+    TACHE_DO_IS_SENT_SMS, TACHE_PASS_IS_SENTSMS, TACHE_DO_IS_SENT_MSG, TACHE_PASS_IS_SENT_MSG, 
+    TACHE_DO_FOR_CESENT_SMS, TACHE_PASS_FOR_CESENT_SMS, TACHE_DO_FOR_CESENT_MSG, TACHE_PASS_FOR_CESENT_MSG, 
+    TACHE_ONE_DIRECT_SUBMIT, TACHE_SHOW_MYDEP_PERSON, TACHE_SHOW_ALL_PERSON, TACHE_IS_SINGLE_USER, 
+    TACHE_NEXT_SEVERAL_DONE, EXPAND_XML, UNITID, IS_DELETE, CREATE_USER, CREATE_TIME, 
+    UPDATE_USER, UPDATE_TIME
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.jw.baseframe.model.C_T_Flow_Tache_InforExample" >
+    <foreach collection="example.oredCriteria" item="criteria" separator="or" />
+    <if test="criteria.valid" >
+      <foreach collection="criteria.criteria" item="criterion" >
+        <if test="criterion.limitValue" >
+          SELECT 
+          <include refid="Base_Column_List" />
+           FROM ( SELECT A.
+          <include refid="Base_Column_List" />
+           , ROWNUM AS con FROM ( 
+        </if>
+      </foreach>
+    </if>
+    select
+    <if test="example.distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from C_T_FLOW_TACHE_INFOR
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="example.orderByClause != null" >
+      order by ${example.orderByClause}
+    </if>
+    <if test="criteria.valid" >
+      <foreach collection="criteria.criteria" item="criterion" >
+        <if test="criterion.limitValue" >
+           ) A  <![CDATA[WHERE ROWNUM <= ${criterion.secondValue}]]> ) B <![CDATA[WHERE B.con >= ${criterion.value} ]]>
+        </if>
+      </foreach>
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from C_T_FLOW_TACHE_INFOR
+    where UUID = #{uuid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from C_T_FLOW_TACHE_INFOR
+    where UUID = #{uuid,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.jw.baseframe.model.C_T_Flow_Tache_InforExample" >
+    delete from C_T_FLOW_TACHE_INFOR
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.jw.baseframe.model.C_T_Flow_Tache_Infor" >
+    insert into C_T_FLOW_TACHE_INFOR (UUID, FLOW_ID, TACHE_ID, 
+      TACHE_NAME, SORT, TACHE_SMS_ID, 
+      TACHE_IS_CONFIRMSUBMIT, TACHE_IS_PERMITPASS, 
+      TACHE_IS_DRAWBACK, TACHE_IS_WITHDRAMAL, 
+      TACHE_IS_HANDURGE, TACHE_IS_AUTOURGE, 
+      TACHE_DO_IS_SENT_SMS, TACHE_PASS_IS_SENTSMS, 
+      TACHE_DO_IS_SENT_MSG, TACHE_PASS_IS_SENT_MSG, 
+      TACHE_DO_FOR_CESENT_SMS, TACHE_PASS_FOR_CESENT_SMS, 
+      TACHE_DO_FOR_CESENT_MSG, TACHE_PASS_FOR_CESENT_MSG, 
+      TACHE_ONE_DIRECT_SUBMIT, TACHE_SHOW_MYDEP_PERSON, 
+      TACHE_SHOW_ALL_PERSON, TACHE_IS_SINGLE_USER, 
+      TACHE_NEXT_SEVERAL_DONE, EXPAND_XML, 
+      UNITID, IS_DELETE, CREATE_USER, 
+      CREATE_TIME, UPDATE_USER, UPDATE_TIME
+      )
+    values (#{record.uuid,jdbcType=VARCHAR}, #{record.flowId,jdbcType=VARCHAR}, #{record.tacheId,jdbcType=VARCHAR}, 
+      #{record.tacheName,jdbcType=NVARCHAR}, #{record.sort,jdbcType=DECIMAL}, #{record.tacheSmsId,jdbcType=VARCHAR}, 
+      #{record.tacheIsConfirmsubmit,jdbcType=DECIMAL}, #{record.tacheIsPermitpass,jdbcType=DECIMAL}, 
+      #{record.tacheIsDrawback,jdbcType=DECIMAL}, #{record.tacheIsWithdramal,jdbcType=DECIMAL}, 
+      #{record.tacheIsHandurge,jdbcType=DECIMAL}, #{record.tacheIsAutourge,jdbcType=DECIMAL}, 
+      #{record.tacheDoIsSentSms,jdbcType=DECIMAL}, #{record.tachePassIsSentsms,jdbcType=DECIMAL}, 
+      #{record.tacheDoIsSentMsg,jdbcType=DECIMAL}, #{record.tachePassIsSentMsg,jdbcType=DECIMAL}, 
+      #{record.tacheDoForCesentSms,jdbcType=DECIMAL}, #{record.tachePassForCesentSms,jdbcType=DECIMAL}, 
+      #{record.tacheDoForCesentMsg,jdbcType=DECIMAL}, #{record.tachePassForCesentMsg,jdbcType=DECIMAL}, 
+      #{record.tacheOneDirectSubmit,jdbcType=DECIMAL}, #{record.tacheShowMydepPerson,jdbcType=DECIMAL}, 
+      #{record.tacheShowAllPerson,jdbcType=DECIMAL}, #{record.tacheIsSingleUser,jdbcType=DECIMAL}, 
+      #{record.tacheNextSeveralDone,jdbcType=DECIMAL}, #{record.expandXml,jdbcType=NVARCHAR}, 
+      #{record.unitid,jdbcType=VARCHAR}, #{record.isDelete,jdbcType=DECIMAL}, #{record.createUser,jdbcType=VARCHAR}, 
+      #{record.createTime,jdbcType=VARCHAR}, #{record.updateUser,jdbcType=VARCHAR}, #{record.updateTime,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.jw.baseframe.model.C_T_Flow_Tache_Infor" >
+    insert into C_T_FLOW_TACHE_INFOR
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="record.uuid != null" >
+        UUID,
+      </if>
+      <if test="record.flowId != null" >
+        FLOW_ID,
+      </if>
+      <if test="record.tacheId != null" >
+        TACHE_ID,
+      </if>
+      <if test="record.tacheName != null" >
+        TACHE_NAME,
+      </if>
+      <if test="record.sort != null" >
+        SORT,
+      </if>
+      <if test="record.tacheSmsId != null" >
+        TACHE_SMS_ID,
+      </if>
+      <if test="record.tacheIsConfirmsubmit != null" >
+        TACHE_IS_CONFIRMSUBMIT,
+      </if>
+      <if test="record.tacheIsPermitpass != null" >
+        TACHE_IS_PERMITPASS,
+      </if>
+      <if test="record.tacheIsDrawback != null" >
+        TACHE_IS_DRAWBACK,
+      </if>
+      <if test="record.tacheIsWithdramal != null" >
+        TACHE_IS_WITHDRAMAL,
+      </if>
+      <if test="record.tacheIsHandurge != null" >
+        TACHE_IS_HANDURGE,
+      </if>
+      <if test="record.tacheIsAutourge != null" >
+        TACHE_IS_AUTOURGE,
+      </if>
+      <if test="record.tacheDoIsSentSms != null" >
+        TACHE_DO_IS_SENT_SMS,
+      </if>
+      <if test="record.tachePassIsSentsms != null" >
+        TACHE_PASS_IS_SENTSMS,
+      </if>
+      <if test="record.tacheDoIsSentMsg != null" >
+        TACHE_DO_IS_SENT_MSG,
+      </if>
+      <if test="record.tachePassIsSentMsg != null" >
+        TACHE_PASS_IS_SENT_MSG,
+      </if>
+      <if test="record.tacheDoForCesentSms != null" >
+        TACHE_DO_FOR_CESENT_SMS,
+      </if>
+      <if test="record.tachePassForCesentSms != null" >
+        TACHE_PASS_FOR_CESENT_SMS,
+      </if>
+      <if test="record.tacheDoForCesentMsg != null" >
+        TACHE_DO_FOR_CESENT_MSG,
+      </if>
+      <if test="record.tachePassForCesentMsg != null" >
+        TACHE_PASS_FOR_CESENT_MSG,
+      </if>
+      <if test="record.tacheOneDirectSubmit != null" >
+        TACHE_ONE_DIRECT_SUBMIT,
+      </if>
+      <if test="record.tacheShowMydepPerson != null" >
+        TACHE_SHOW_MYDEP_PERSON,
+      </if>
+      <if test="record.tacheShowAllPerson != null" >
+        TACHE_SHOW_ALL_PERSON,
+      </if>
+      <if test="record.tacheIsSingleUser != null" >
+        TACHE_IS_SINGLE_USER,
+      </if>
+      <if test="record.tacheNextSeveralDone != null" >
+        TACHE_NEXT_SEVERAL_DONE,
+      </if>
+      <if test="record.expandXml != null" >
+        EXPAND_XML,
+      </if>
+      <if test="record.unitid != null" >
+        UNITID,
+      </if>
+      <if test="record.isDelete != null" >
+        IS_DELETE,
+      </if>
+      <if test="record.createUser != null" >
+        CREATE_USER,
+      </if>
+      <if test="record.createTime != null" >
+        CREATE_TIME,
+      </if>
+      <if test="record.updateUser != null" >
+        UPDATE_USER,
+      </if>
+      <if test="record.updateTime != null" >
+        UPDATE_TIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="record.uuid != null" >
+        #{record.uuid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.flowId != null" >
+        #{record.flowId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tacheId != null" >
+        #{record.tacheId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tacheName != null" >
+        #{record.tacheName,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.sort != null" >
+        #{record.sort,jdbcType=DECIMAL},
+      </if>
+      <if test="record.tacheSmsId != null" >
+        #{record.tacheSmsId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tacheIsConfirmsubmit != null" >
+        #{record.tacheIsConfirmsubmit,jdbcType=DECIMAL},
+      </if>
+      <if test="record.tacheIsPermitpass != null" >
+        #{record.tacheIsPermitpass,jdbcType=DECIMAL},
+      </if>
+      <if test="record.tacheIsDrawback != null" >
+        #{record.tacheIsDrawback,jdbcType=DECIMAL},
+      </if>
+      <if test="record.tacheIsWithdramal != null" >
+        #{record.tacheIsWithdramal,jdbcType=DECIMAL},
+      </if>
+      <if test="record.tacheIsHandurge != null" >
+        #{record.tacheIsHandurge,jdbcType=DECIMAL},
+      </if>
+      <if test="record.tacheIsAutourge != null" >
+        #{record.tacheIsAutourge,jdbcType=DECIMAL},
+      </if>
+      <if test="record.tacheDoIsSentSms != null" >
+        #{record.tacheDoIsSentSms,jdbcType=DECIMAL},
+      </if>
+      <if test="record.tachePassIsSentsms != null" >
+        #{record.tachePassIsSentsms,jdbcType=DECIMAL},
+      </if>
+      <if test="record.tacheDoIsSentMsg != null" >
+        #{record.tacheDoIsSentMsg,jdbcType=DECIMAL},
+      </if>
+      <if test="record.tachePassIsSentMsg != null" >
+        #{record.tachePassIsSentMsg,jdbcType=DECIMAL},
+      </if>
+      <if test="record.tacheDoForCesentSms != null" >
+        #{record.tacheDoForCesentSms,jdbcType=DECIMAL},
+      </if>
+      <if test="record.tachePassForCesentSms != null" >
+        #{record.tachePassForCesentSms,jdbcType=DECIMAL},
+      </if>
+      <if test="record.tacheDoForCesentMsg != null" >
+        #{record.tacheDoForCesentMsg,jdbcType=DECIMAL},
+      </if>
+      <if test="record.tachePassForCesentMsg != null" >
+        #{record.tachePassForCesentMsg,jdbcType=DECIMAL},
+      </if>
+      <if test="record.tacheOneDirectSubmit != null" >
+        #{record.tacheOneDirectSubmit,jdbcType=DECIMAL},
+      </if>
+      <if test="record.tacheShowMydepPerson != null" >
+        #{record.tacheShowMydepPerson,jdbcType=DECIMAL},
+      </if>
+      <if test="record.tacheShowAllPerson != null" >
+        #{record.tacheShowAllPerson,jdbcType=DECIMAL},
+      </if>
+      <if test="record.tacheIsSingleUser != null" >
+        #{record.tacheIsSingleUser,jdbcType=DECIMAL},
+      </if>
+      <if test="record.tacheNextSeveralDone != null" >
+        #{record.tacheNextSeveralDone,jdbcType=DECIMAL},
+      </if>
+      <if test="record.expandXml != null" >
+        #{record.expandXml,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.unitid != null" >
+        #{record.unitid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isDelete != null" >
+        #{record.isDelete,jdbcType=DECIMAL},
+      </if>
+      <if test="record.createUser != null" >
+        #{record.createUser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null" >
+        #{record.createTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateUser != null" >
+        #{record.updateUser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateTime != null" >
+        #{record.updateTime,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.jw.baseframe.model.C_T_Flow_Tache_InforExample" resultType="java.lang.Integer" >
+    select count(*) from C_T_FLOW_TACHE_INFOR
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update C_T_FLOW_TACHE_INFOR
+    <set >
+      <if test="record.uuid != null" >
+        UUID = #{record.uuid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.flowId != null" >
+        FLOW_ID = #{record.flowId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tacheId != null" >
+        TACHE_ID = #{record.tacheId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tacheName != null" >
+        TACHE_NAME = #{record.tacheName,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.sort != null" >
+        SORT = #{record.sort,jdbcType=DECIMAL},
+      </if>
+      <if test="record.tacheSmsId != null" >
+        TACHE_SMS_ID = #{record.tacheSmsId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tacheIsConfirmsubmit != null" >
+        TACHE_IS_CONFIRMSUBMIT = #{record.tacheIsConfirmsubmit,jdbcType=DECIMAL},
+      </if>
+      <if test="record.tacheIsPermitpass != null" >
+        TACHE_IS_PERMITPASS = #{record.tacheIsPermitpass,jdbcType=DECIMAL},
+      </if>
+      <if test="record.tacheIsDrawback != null" >
+        TACHE_IS_DRAWBACK = #{record.tacheIsDrawback,jdbcType=DECIMAL},
+      </if>
+      <if test="record.tacheIsWithdramal != null" >
+        TACHE_IS_WITHDRAMAL = #{record.tacheIsWithdramal,jdbcType=DECIMAL},
+      </if>
+      <if test="record.tacheIsHandurge != null" >
+        TACHE_IS_HANDURGE = #{record.tacheIsHandurge,jdbcType=DECIMAL},
+      </if>
+      <if test="record.tacheIsAutourge != null" >
+        TACHE_IS_AUTOURGE = #{record.tacheIsAutourge,jdbcType=DECIMAL},
+      </if>
+      <if test="record.tacheDoIsSentSms != null" >
+        TACHE_DO_IS_SENT_SMS = #{record.tacheDoIsSentSms,jdbcType=DECIMAL},
+      </if>
+      <if test="record.tachePassIsSentsms != null" >
+        TACHE_PASS_IS_SENTSMS = #{record.tachePassIsSentsms,jdbcType=DECIMAL},
+      </if>
+      <if test="record.tacheDoIsSentMsg != null" >
+        TACHE_DO_IS_SENT_MSG = #{record.tacheDoIsSentMsg,jdbcType=DECIMAL},
+      </if>
+      <if test="record.tachePassIsSentMsg != null" >
+        TACHE_PASS_IS_SENT_MSG = #{record.tachePassIsSentMsg,jdbcType=DECIMAL},
+      </if>
+      <if test="record.tacheDoForCesentSms != null" >
+        TACHE_DO_FOR_CESENT_SMS = #{record.tacheDoForCesentSms,jdbcType=DECIMAL},
+      </if>
+      <if test="record.tachePassForCesentSms != null" >
+        TACHE_PASS_FOR_CESENT_SMS = #{record.tachePassForCesentSms,jdbcType=DECIMAL},
+      </if>
+      <if test="record.tacheDoForCesentMsg != null" >
+        TACHE_DO_FOR_CESENT_MSG = #{record.tacheDoForCesentMsg,jdbcType=DECIMAL},
+      </if>
+      <if test="record.tachePassForCesentMsg != null" >
+        TACHE_PASS_FOR_CESENT_MSG = #{record.tachePassForCesentMsg,jdbcType=DECIMAL},
+      </if>
+      <if test="record.tacheOneDirectSubmit != null" >
+        TACHE_ONE_DIRECT_SUBMIT = #{record.tacheOneDirectSubmit,jdbcType=DECIMAL},
+      </if>
+      <if test="record.tacheShowMydepPerson != null" >
+        TACHE_SHOW_MYDEP_PERSON = #{record.tacheShowMydepPerson,jdbcType=DECIMAL},
+      </if>
+      <if test="record.tacheShowAllPerson != null" >
+        TACHE_SHOW_ALL_PERSON = #{record.tacheShowAllPerson,jdbcType=DECIMAL},
+      </if>
+      <if test="record.tacheIsSingleUser != null" >
+        TACHE_IS_SINGLE_USER = #{record.tacheIsSingleUser,jdbcType=DECIMAL},
+      </if>
+      <if test="record.tacheNextSeveralDone != null" >
+        TACHE_NEXT_SEVERAL_DONE = #{record.tacheNextSeveralDone,jdbcType=DECIMAL},
+      </if>
+      <if test="record.expandXml != null" >
+        EXPAND_XML = #{record.expandXml,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.unitid != null" >
+        UNITID = #{record.unitid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isDelete != null" >
+        IS_DELETE = #{record.isDelete,jdbcType=DECIMAL},
+      </if>
+      <if test="record.createUser != null" >
+        CREATE_USER = #{record.createUser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null" >
+        CREATE_TIME = #{record.createTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateUser != null" >
+        UPDATE_USER = #{record.updateUser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateTime != null" >
+        UPDATE_TIME = #{record.updateTime,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update C_T_FLOW_TACHE_INFOR
+    set UUID = #{record.uuid,jdbcType=VARCHAR},
+      FLOW_ID = #{record.flowId,jdbcType=VARCHAR},
+      TACHE_ID = #{record.tacheId,jdbcType=VARCHAR},
+      TACHE_NAME = #{record.tacheName,jdbcType=NVARCHAR},
+      SORT = #{record.sort,jdbcType=DECIMAL},
+      TACHE_SMS_ID = #{record.tacheSmsId,jdbcType=VARCHAR},
+      TACHE_IS_CONFIRMSUBMIT = #{record.tacheIsConfirmsubmit,jdbcType=DECIMAL},
+      TACHE_IS_PERMITPASS = #{record.tacheIsPermitpass,jdbcType=DECIMAL},
+      TACHE_IS_DRAWBACK = #{record.tacheIsDrawback,jdbcType=DECIMAL},
+      TACHE_IS_WITHDRAMAL = #{record.tacheIsWithdramal,jdbcType=DECIMAL},
+      TACHE_IS_HANDURGE = #{record.tacheIsHandurge,jdbcType=DECIMAL},
+      TACHE_IS_AUTOURGE = #{record.tacheIsAutourge,jdbcType=DECIMAL},
+      TACHE_DO_IS_SENT_SMS = #{record.tacheDoIsSentSms,jdbcType=DECIMAL},
+      TACHE_PASS_IS_SENTSMS = #{record.tachePassIsSentsms,jdbcType=DECIMAL},
+      TACHE_DO_IS_SENT_MSG = #{record.tacheDoIsSentMsg,jdbcType=DECIMAL},
+      TACHE_PASS_IS_SENT_MSG = #{record.tachePassIsSentMsg,jdbcType=DECIMAL},
+      TACHE_DO_FOR_CESENT_SMS = #{record.tacheDoForCesentSms,jdbcType=DECIMAL},
+      TACHE_PASS_FOR_CESENT_SMS = #{record.tachePassForCesentSms,jdbcType=DECIMAL},
+      TACHE_DO_FOR_CESENT_MSG = #{record.tacheDoForCesentMsg,jdbcType=DECIMAL},
+      TACHE_PASS_FOR_CESENT_MSG = #{record.tachePassForCesentMsg,jdbcType=DECIMAL},
+      TACHE_ONE_DIRECT_SUBMIT = #{record.tacheOneDirectSubmit,jdbcType=DECIMAL},
+      TACHE_SHOW_MYDEP_PERSON = #{record.tacheShowMydepPerson,jdbcType=DECIMAL},
+      TACHE_SHOW_ALL_PERSON = #{record.tacheShowAllPerson,jdbcType=DECIMAL},
+      TACHE_IS_SINGLE_USER = #{record.tacheIsSingleUser,jdbcType=DECIMAL},
+      TACHE_NEXT_SEVERAL_DONE = #{record.tacheNextSeveralDone,jdbcType=DECIMAL},
+      EXPAND_XML = #{record.expandXml,jdbcType=NVARCHAR},
+      UNITID = #{record.unitid,jdbcType=VARCHAR},
+      IS_DELETE = #{record.isDelete,jdbcType=DECIMAL},
+      CREATE_USER = #{record.createUser,jdbcType=VARCHAR},
+      CREATE_TIME = #{record.createTime,jdbcType=VARCHAR},
+      UPDATE_USER = #{record.updateUser,jdbcType=VARCHAR},
+      UPDATE_TIME = #{record.updateTime,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jw.baseframe.model.C_T_Flow_Tache_Infor" >
+    update C_T_FLOW_TACHE_INFOR
+    <set >
+      <if test="record.flowId != null" >
+        FLOW_ID = #{record.flowId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tacheId != null" >
+        TACHE_ID = #{record.tacheId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tacheName != null" >
+        TACHE_NAME = #{record.tacheName,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.sort != null" >
+        SORT = #{record.sort,jdbcType=DECIMAL},
+      </if>
+      <if test="record.tacheSmsId != null" >
+        TACHE_SMS_ID = #{record.tacheSmsId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tacheIsConfirmsubmit != null" >
+        TACHE_IS_CONFIRMSUBMIT = #{record.tacheIsConfirmsubmit,jdbcType=DECIMAL},
+      </if>
+      <if test="record.tacheIsPermitpass != null" >
+        TACHE_IS_PERMITPASS = #{record.tacheIsPermitpass,jdbcType=DECIMAL},
+      </if>
+      <if test="record.tacheIsDrawback != null" >
+        TACHE_IS_DRAWBACK = #{record.tacheIsDrawback,jdbcType=DECIMAL},
+      </if>
+      <if test="record.tacheIsWithdramal != null" >
+        TACHE_IS_WITHDRAMAL = #{record.tacheIsWithdramal,jdbcType=DECIMAL},
+      </if>
+      <if test="record.tacheIsHandurge != null" >
+        TACHE_IS_HANDURGE = #{record.tacheIsHandurge,jdbcType=DECIMAL},
+      </if>
+      <if test="record.tacheIsAutourge != null" >
+        TACHE_IS_AUTOURGE = #{record.tacheIsAutourge,jdbcType=DECIMAL},
+      </if>
+      <if test="record.tacheDoIsSentSms != null" >
+        TACHE_DO_IS_SENT_SMS = #{record.tacheDoIsSentSms,jdbcType=DECIMAL},
+      </if>
+      <if test="record.tachePassIsSentsms != null" >
+        TACHE_PASS_IS_SENTSMS = #{record.tachePassIsSentsms,jdbcType=DECIMAL},
+      </if>
+      <if test="record.tacheDoIsSentMsg != null" >
+        TACHE_DO_IS_SENT_MSG = #{record.tacheDoIsSentMsg,jdbcType=DECIMAL},
+      </if>
+      <if test="record.tachePassIsSentMsg != null" >
+        TACHE_PASS_IS_SENT_MSG = #{record.tachePassIsSentMsg,jdbcType=DECIMAL},
+      </if>
+      <if test="record.tacheDoForCesentSms != null" >
+        TACHE_DO_FOR_CESENT_SMS = #{record.tacheDoForCesentSms,jdbcType=DECIMAL},
+      </if>
+      <if test="record.tachePassForCesentSms != null" >
+        TACHE_PASS_FOR_CESENT_SMS = #{record.tachePassForCesentSms,jdbcType=DECIMAL},
+      </if>
+      <if test="record.tacheDoForCesentMsg != null" >
+        TACHE_DO_FOR_CESENT_MSG = #{record.tacheDoForCesentMsg,jdbcType=DECIMAL},
+      </if>
+      <if test="record.tachePassForCesentMsg != null" >
+        TACHE_PASS_FOR_CESENT_MSG = #{record.tachePassForCesentMsg,jdbcType=DECIMAL},
+      </if>
+      <if test="record.tacheOneDirectSubmit != null" >
+        TACHE_ONE_DIRECT_SUBMIT = #{record.tacheOneDirectSubmit,jdbcType=DECIMAL},
+      </if>
+      <if test="record.tacheShowMydepPerson != null" >
+        TACHE_SHOW_MYDEP_PERSON = #{record.tacheShowMydepPerson,jdbcType=DECIMAL},
+      </if>
+      <if test="record.tacheShowAllPerson != null" >
+        TACHE_SHOW_ALL_PERSON = #{record.tacheShowAllPerson,jdbcType=DECIMAL},
+      </if>
+      <if test="record.tacheIsSingleUser != null" >
+        TACHE_IS_SINGLE_USER = #{record.tacheIsSingleUser,jdbcType=DECIMAL},
+      </if>
+      <if test="record.tacheNextSeveralDone != null" >
+        TACHE_NEXT_SEVERAL_DONE = #{record.tacheNextSeveralDone,jdbcType=DECIMAL},
+      </if>
+      <if test="record.expandXml != null" >
+        EXPAND_XML = #{record.expandXml,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.unitid != null" >
+        UNITID = #{record.unitid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isDelete != null" >
+        IS_DELETE = #{record.isDelete,jdbcType=DECIMAL},
+      </if>
+      <if test="record.createUser != null" >
+        CREATE_USER = #{record.createUser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null" >
+        CREATE_TIME = #{record.createTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateUser != null" >
+        UPDATE_USER = #{record.updateUser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateTime != null" >
+        UPDATE_TIME = #{record.updateTime,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where UUID = #{record.uuid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jw.baseframe.model.C_T_Flow_Tache_Infor" >
+    update C_T_FLOW_TACHE_INFOR
+    set FLOW_ID = #{record.flowId,jdbcType=VARCHAR},
+      TACHE_ID = #{record.tacheId,jdbcType=VARCHAR},
+      TACHE_NAME = #{record.tacheName,jdbcType=NVARCHAR},
+      SORT = #{record.sort,jdbcType=DECIMAL},
+      TACHE_SMS_ID = #{record.tacheSmsId,jdbcType=VARCHAR},
+      TACHE_IS_CONFIRMSUBMIT = #{record.tacheIsConfirmsubmit,jdbcType=DECIMAL},
+      TACHE_IS_PERMITPASS = #{record.tacheIsPermitpass,jdbcType=DECIMAL},
+      TACHE_IS_DRAWBACK = #{record.tacheIsDrawback,jdbcType=DECIMAL},
+      TACHE_IS_WITHDRAMAL = #{record.tacheIsWithdramal,jdbcType=DECIMAL},
+      TACHE_IS_HANDURGE = #{record.tacheIsHandurge,jdbcType=DECIMAL},
+      TACHE_IS_AUTOURGE = #{record.tacheIsAutourge,jdbcType=DECIMAL},
+      TACHE_DO_IS_SENT_SMS = #{record.tacheDoIsSentSms,jdbcType=DECIMAL},
+      TACHE_PASS_IS_SENTSMS = #{record.tachePassIsSentsms,jdbcType=DECIMAL},
+      TACHE_DO_IS_SENT_MSG = #{record.tacheDoIsSentMsg,jdbcType=DECIMAL},
+      TACHE_PASS_IS_SENT_MSG = #{record.tachePassIsSentMsg,jdbcType=DECIMAL},
+      TACHE_DO_FOR_CESENT_SMS = #{record.tacheDoForCesentSms,jdbcType=DECIMAL},
+      TACHE_PASS_FOR_CESENT_SMS = #{record.tachePassForCesentSms,jdbcType=DECIMAL},
+      TACHE_DO_FOR_CESENT_MSG = #{record.tacheDoForCesentMsg,jdbcType=DECIMAL},
+      TACHE_PASS_FOR_CESENT_MSG = #{record.tachePassForCesentMsg,jdbcType=DECIMAL},
+      TACHE_ONE_DIRECT_SUBMIT = #{record.tacheOneDirectSubmit,jdbcType=DECIMAL},
+      TACHE_SHOW_MYDEP_PERSON = #{record.tacheShowMydepPerson,jdbcType=DECIMAL},
+      TACHE_SHOW_ALL_PERSON = #{record.tacheShowAllPerson,jdbcType=DECIMAL},
+      TACHE_IS_SINGLE_USER = #{record.tacheIsSingleUser,jdbcType=DECIMAL},
+      TACHE_NEXT_SEVERAL_DONE = #{record.tacheNextSeveralDone,jdbcType=DECIMAL},
+      EXPAND_XML = #{record.expandXml,jdbcType=NVARCHAR},
+      UNITID = #{record.unitid,jdbcType=VARCHAR},
+      IS_DELETE = #{record.isDelete,jdbcType=DECIMAL},
+      CREATE_USER = #{record.createUser,jdbcType=VARCHAR},
+      CREATE_TIME = #{record.createTime,jdbcType=VARCHAR},
+      UPDATE_USER = #{record.updateUser,jdbcType=VARCHAR},
+      UPDATE_TIME = #{record.updateTime,jdbcType=VARCHAR}
+    where UUID = #{record.uuid,jdbcType=VARCHAR}
+  </update>
+</mapper>

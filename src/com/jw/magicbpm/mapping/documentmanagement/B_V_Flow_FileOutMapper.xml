@@ -1,0 +1,395 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jw.magicbpm.dao.documentmanagement.B_V_Flow_FileOutMapper" >
+  <resultMap id="BaseResultMap" type="com.jw.magicbpm.model.documentmanagement.B_V_Flow_FileOut" >
+    <result column="UUID" property="uuid" jdbcType="VARCHAR" />
+    <result column="MODULE_ID" property="moduleId" jdbcType="VARCHAR" />
+    <result column="CUR_TACHE_NAME" property="curTacheName" jdbcType="NVARCHAR" />
+    <result column="TACHE_TRANSACTOR_BACKUP" property="tacheTransactorBackup" jdbcType="VARCHAR" />
+    <result column="IS_FINISHED" property="isFinished" jdbcType="DECIMAL" />
+    <result column="FILEOUT_DRAFT_DATE" property="fileoutDraftDate" jdbcType="VARCHAR" />
+    <result column="FILEOUT_RECORDTYPEID" property="fileoutRecordtypeid" jdbcType="VARCHAR" />
+    <result column="FILEOUT_YEAR" property="fileoutYear" jdbcType="VARCHAR" />
+    <result column="FILEOUT_SERIAL" property="fileoutSerial" jdbcType="VARCHAR" />
+    <result column="FILEOUT_TITLE" property="fileoutTitle" jdbcType="NVARCHAR" />
+    <result column="FILEOUT_URGENCY" property="fileoutUrgency" jdbcType="NVARCHAR" />
+    <result column="TACHE_TRANSACTOR_BACKUP_SHOW" property="tacheTransactorBackupShow" jdbcType="NVARCHAR" />
+    <result column="CREATE_TIME" property="createTime" jdbcType="VARCHAR" />
+    <result column="RECORDTYPE_NAME" property="recordtypeName" jdbcType="NVARCHAR" />
+    <result column="UNITID" property="unitid" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.jw.magicbpm.model.documentmanagement.B_V_Flow_FileOutWithBLOBs" extends="BaseResultMap" >
+    <result column="PASSER_READED" property="passerReaded" jdbcType="CLOB" />
+    <result column="PASSER_UNREAD" property="passerUnread" jdbcType="CLOB" />
+    <result column="TACHEUSER" property="tacheuser" jdbcType="CLOB" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    UUID, MODULE_ID, CUR_TACHE_NAME, TACHE_TRANSACTOR_BACKUP, IS_FINISHED, FILEOUT_DRAFT_DATE, 
+    FILEOUT_RECORDTYPEID, FILEOUT_YEAR, FILEOUT_SERIAL, FILEOUT_TITLE, FILEOUT_URGENCY, 
+    TACHE_TRANSACTOR_BACKUP_SHOW, CREATE_TIME, RECORDTYPE_NAME, UNITID
+  </sql>
+  <sql id="Blob_Column_List" >
+    PASSER_READED, PASSER_UNREAD, TACHEUSER
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.jw.magicbpm.model.documentmanagement.B_V_Flow_FileOutExample" >
+    select
+    <if test="example.distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from B_V_FLOW_FILEOUT
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="example.orderByClause != null" >
+      order by ${example.orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.jw.magicbpm.model.documentmanagement.B_V_Flow_FileOutExample" >
+    <foreach collection="example.oredCriteria" item="criteria" separator="or" />
+    <if test="criteria.valid" >
+      <foreach collection="criteria.criteria" item="criterion" >
+        <if test="criterion.limitValue" >
+          SELECT 
+          <include refid="Base_Column_List" />
+           FROM ( SELECT A.
+          <include refid="Base_Column_List" />
+           , ROWNUM AS con FROM ( 
+        </if>
+      </foreach>
+    </if>
+    select
+    <if test="example.distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from B_V_FLOW_FILEOUT
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="example.orderByClause != null" >
+      order by ${example.orderByClause}
+    </if>
+    <if test="criteria.valid" >
+      <foreach collection="criteria.criteria" item="criterion" >
+        <if test="criterion.limitValue" >
+           ) A  <![CDATA[WHERE ROWNUM <= ${criterion.secondValue}]]> ) B <![CDATA[WHERE B.con >= ${criterion.value} ]]>
+        </if>
+      </foreach>
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.jw.magicbpm.model.documentmanagement.B_V_Flow_FileOutExample" >
+    delete from B_V_FLOW_FILEOUT
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.jw.magicbpm.model.documentmanagement.B_V_Flow_FileOutWithBLOBs" >
+    insert into B_V_FLOW_FILEOUT (UUID, MODULE_ID, CUR_TACHE_NAME, 
+      TACHE_TRANSACTOR_BACKUP, IS_FINISHED, 
+      FILEOUT_DRAFT_DATE, FILEOUT_RECORDTYPEID, 
+      FILEOUT_YEAR, FILEOUT_SERIAL, 
+      FILEOUT_TITLE, FILEOUT_URGENCY, 
+      TACHE_TRANSACTOR_BACKUP_SHOW, CREATE_TIME, 
+      RECORDTYPE_NAME, UNITID, 
+      PASSER_READED, PASSER_UNREAD, TACHEUSER
+      )
+    values (#{record.uuid,jdbcType=VARCHAR}, #{record.moduleId,jdbcType=VARCHAR}, #{record.curTacheName,jdbcType=NVARCHAR}, 
+      #{record.tacheTransactorBackup,jdbcType=VARCHAR}, #{record.isFinished,jdbcType=DECIMAL}, 
+      #{record.fileoutDraftDate,jdbcType=VARCHAR}, #{record.fileoutRecordtypeid,jdbcType=VARCHAR}, 
+      #{record.fileoutYear,jdbcType=VARCHAR}, #{record.fileoutSerial,jdbcType=VARCHAR}, 
+      #{record.fileoutTitle,jdbcType=NVARCHAR}, #{record.fileoutUrgency,jdbcType=NVARCHAR}, 
+      #{record.tacheTransactorBackupShow,jdbcType=NVARCHAR}, #{record.createTime,jdbcType=VARCHAR}, 
+      #{record.recordtypeName,jdbcType=NVARCHAR}, #{record.unitid,jdbcType=VARCHAR}, 
+      #{record.passerReaded,jdbcType=CLOB}, #{record.passerUnread,jdbcType=CLOB}, #{record.tacheuser,jdbcType=CLOB}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.jw.magicbpm.model.documentmanagement.B_V_Flow_FileOutWithBLOBs" >
+    insert into B_V_FLOW_FILEOUT
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="record.uuid != null" >
+        UUID,
+      </if>
+      <if test="record.moduleId != null" >
+        MODULE_ID,
+      </if>
+      <if test="record.curTacheName != null" >
+        CUR_TACHE_NAME,
+      </if>
+      <if test="record.tacheTransactorBackup != null" >
+        TACHE_TRANSACTOR_BACKUP,
+      </if>
+      <if test="record.isFinished != null" >
+        IS_FINISHED,
+      </if>
+      <if test="record.fileoutDraftDate != null" >
+        FILEOUT_DRAFT_DATE,
+      </if>
+      <if test="record.fileoutRecordtypeid != null" >
+        FILEOUT_RECORDTYPEID,
+      </if>
+      <if test="record.fileoutYear != null" >
+        FILEOUT_YEAR,
+      </if>
+      <if test="record.fileoutSerial != null" >
+        FILEOUT_SERIAL,
+      </if>
+      <if test="record.fileoutTitle != null" >
+        FILEOUT_TITLE,
+      </if>
+      <if test="record.fileoutUrgency != null" >
+        FILEOUT_URGENCY,
+      </if>
+      <if test="record.tacheTransactorBackupShow != null" >
+        TACHE_TRANSACTOR_BACKUP_SHOW,
+      </if>
+      <if test="record.createTime != null" >
+        CREATE_TIME,
+      </if>
+      <if test="record.recordtypeName != null" >
+        RECORDTYPE_NAME,
+      </if>
+      <if test="record.unitid != null" >
+        UNITID,
+      </if>
+      <if test="record.passerReaded != null" >
+        PASSER_READED,
+      </if>
+      <if test="record.passerUnread != null" >
+        PASSER_UNREAD,
+      </if>
+      <if test="record.tacheuser != null" >
+        TACHEUSER,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="record.uuid != null" >
+        #{record.uuid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.moduleId != null" >
+        #{record.moduleId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.curTacheName != null" >
+        #{record.curTacheName,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.tacheTransactorBackup != null" >
+        #{record.tacheTransactorBackup,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isFinished != null" >
+        #{record.isFinished,jdbcType=DECIMAL},
+      </if>
+      <if test="record.fileoutDraftDate != null" >
+        #{record.fileoutDraftDate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fileoutRecordtypeid != null" >
+        #{record.fileoutRecordtypeid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fileoutYear != null" >
+        #{record.fileoutYear,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fileoutSerial != null" >
+        #{record.fileoutSerial,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fileoutTitle != null" >
+        #{record.fileoutTitle,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.fileoutUrgency != null" >
+        #{record.fileoutUrgency,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.tacheTransactorBackupShow != null" >
+        #{record.tacheTransactorBackupShow,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.createTime != null" >
+        #{record.createTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.recordtypeName != null" >
+        #{record.recordtypeName,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.unitid != null" >
+        #{record.unitid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.passerReaded != null" >
+        #{record.passerReaded,jdbcType=CLOB},
+      </if>
+      <if test="record.passerUnread != null" >
+        #{record.passerUnread,jdbcType=CLOB},
+      </if>
+      <if test="record.tacheuser != null" >
+        #{record.tacheuser,jdbcType=CLOB},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.jw.magicbpm.model.documentmanagement.B_V_Flow_FileOutExample" resultType="java.lang.Integer" >
+    select count(*) from B_V_FLOW_FILEOUT
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update B_V_FLOW_FILEOUT
+    <set >
+      <if test="record.uuid != null" >
+        UUID = #{record.uuid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.moduleId != null" >
+        MODULE_ID = #{record.moduleId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.curTacheName != null" >
+        CUR_TACHE_NAME = #{record.curTacheName,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.tacheTransactorBackup != null" >
+        TACHE_TRANSACTOR_BACKUP = #{record.tacheTransactorBackup,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isFinished != null" >
+        IS_FINISHED = #{record.isFinished,jdbcType=DECIMAL},
+      </if>
+      <if test="record.fileoutDraftDate != null" >
+        FILEOUT_DRAFT_DATE = #{record.fileoutDraftDate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fileoutRecordtypeid != null" >
+        FILEOUT_RECORDTYPEID = #{record.fileoutRecordtypeid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fileoutYear != null" >
+        FILEOUT_YEAR = #{record.fileoutYear,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fileoutSerial != null" >
+        FILEOUT_SERIAL = #{record.fileoutSerial,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fileoutTitle != null" >
+        FILEOUT_TITLE = #{record.fileoutTitle,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.fileoutUrgency != null" >
+        FILEOUT_URGENCY = #{record.fileoutUrgency,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.tacheTransactorBackupShow != null" >
+        TACHE_TRANSACTOR_BACKUP_SHOW = #{record.tacheTransactorBackupShow,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.createTime != null" >
+        CREATE_TIME = #{record.createTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.recordtypeName != null" >
+        RECORDTYPE_NAME = #{record.recordtypeName,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.unitid != null" >
+        UNITID = #{record.unitid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.passerReaded != null" >
+        PASSER_READED = #{record.passerReaded,jdbcType=CLOB},
+      </if>
+      <if test="record.passerUnread != null" >
+        PASSER_UNREAD = #{record.passerUnread,jdbcType=CLOB},
+      </if>
+      <if test="record.tacheuser != null" >
+        TACHEUSER = #{record.tacheuser,jdbcType=CLOB},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update B_V_FLOW_FILEOUT
+    set UUID = #{record.uuid,jdbcType=VARCHAR},
+      MODULE_ID = #{record.moduleId,jdbcType=VARCHAR},
+      CUR_TACHE_NAME = #{record.curTacheName,jdbcType=NVARCHAR},
+      TACHE_TRANSACTOR_BACKUP = #{record.tacheTransactorBackup,jdbcType=VARCHAR},
+      IS_FINISHED = #{record.isFinished,jdbcType=DECIMAL},
+      FILEOUT_DRAFT_DATE = #{record.fileoutDraftDate,jdbcType=VARCHAR},
+      FILEOUT_RECORDTYPEID = #{record.fileoutRecordtypeid,jdbcType=VARCHAR},
+      FILEOUT_YEAR = #{record.fileoutYear,jdbcType=VARCHAR},
+      FILEOUT_SERIAL = #{record.fileoutSerial,jdbcType=VARCHAR},
+      FILEOUT_TITLE = #{record.fileoutTitle,jdbcType=NVARCHAR},
+      FILEOUT_URGENCY = #{record.fileoutUrgency,jdbcType=NVARCHAR},
+      TACHE_TRANSACTOR_BACKUP_SHOW = #{record.tacheTransactorBackupShow,jdbcType=NVARCHAR},
+      CREATE_TIME = #{record.createTime,jdbcType=VARCHAR},
+      RECORDTYPE_NAME = #{record.recordtypeName,jdbcType=NVARCHAR},
+      UNITID = #{record.unitid,jdbcType=VARCHAR},
+      PASSER_READED = #{record.passerReaded,jdbcType=CLOB},
+      PASSER_UNREAD = #{record.passerUnread,jdbcType=CLOB},
+      TACHEUSER = #{record.tacheuser,jdbcType=CLOB}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update B_V_FLOW_FILEOUT
+    set UUID = #{record.uuid,jdbcType=VARCHAR},
+      MODULE_ID = #{record.moduleId,jdbcType=VARCHAR},
+      CUR_TACHE_NAME = #{record.curTacheName,jdbcType=NVARCHAR},
+      TACHE_TRANSACTOR_BACKUP = #{record.tacheTransactorBackup,jdbcType=VARCHAR},
+      IS_FINISHED = #{record.isFinished,jdbcType=DECIMAL},
+      FILEOUT_DRAFT_DATE = #{record.fileoutDraftDate,jdbcType=VARCHAR},
+      FILEOUT_RECORDTYPEID = #{record.fileoutRecordtypeid,jdbcType=VARCHAR},
+      FILEOUT_YEAR = #{record.fileoutYear,jdbcType=VARCHAR},
+      FILEOUT_SERIAL = #{record.fileoutSerial,jdbcType=VARCHAR},
+      FILEOUT_TITLE = #{record.fileoutTitle,jdbcType=NVARCHAR},
+      FILEOUT_URGENCY = #{record.fileoutUrgency,jdbcType=NVARCHAR},
+      TACHE_TRANSACTOR_BACKUP_SHOW = #{record.tacheTransactorBackupShow,jdbcType=NVARCHAR},
+      CREATE_TIME = #{record.createTime,jdbcType=VARCHAR},
+      RECORDTYPE_NAME = #{record.recordtypeName,jdbcType=NVARCHAR},
+      UNITID = #{record.unitid,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

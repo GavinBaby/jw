@@ -1,0 +1,519 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jw.magicbpm.dao.publicinformation.B_T_Flow_MeetingserviceMapper" >
+  <resultMap id="BaseResultMap" type="com.jw.magicbpm.model.publicinformation.B_T_Flow_Meetingservice" >
+    <id column="UUID" property="uuid" jdbcType="VARCHAR" />
+    <result column="REGISTRANT" property="registrant" jdbcType="VARCHAR" />
+    <result column="APPLICANTPERSON" property="applicantperson" jdbcType="VARCHAR" />
+    <result column="APPLICANTTIME" property="applicanttime" jdbcType="VARCHAR" />
+    <result column="RESERVATIONNUM" property="reservationnum" jdbcType="DECIMAL" />
+    <result column="CONTACT" property="contact" jdbcType="VARCHAR" />
+    <result column="STARTTIME" property="starttime" jdbcType="VARCHAR" />
+    <result column="ENDTIME" property="endtime" jdbcType="VARCHAR" />
+    <result column="DEPTNAME" property="deptname" jdbcType="VARCHAR" />
+    <result column="MEETINGROOM_ID" property="meetingroomId" jdbcType="VARCHAR" />
+    <result column="MEETINGROOM_NAME" property="meetingroomName" jdbcType="VARCHAR" />
+    <result column="MEETINGTITLE" property="meetingtitle" jdbcType="VARCHAR" />
+    <result column="MEETINGDEMAND" property="meetingdemand" jdbcType="NVARCHAR" />
+    <result column="SPECIALREQUIRE" property="specialrequire" jdbcType="NVARCHAR" />
+    <result column="REMARK" property="remark" jdbcType="NVARCHAR" />
+    <result column="STATUS" property="status" jdbcType="VARCHAR" />
+    <result column="EXPAND_XML" property="expandXml" jdbcType="NVARCHAR" />
+    <result column="UNITID" property="unitid" jdbcType="VARCHAR" />
+    <result column="IS_DELETE" property="isDelete" jdbcType="DECIMAL" />
+    <result column="CREATE_USER" property="createUser" jdbcType="VARCHAR" />
+    <result column="CREATE_TIME" property="createTime" jdbcType="VARCHAR" />
+    <result column="UPDATE_USER" property="updateUser" jdbcType="VARCHAR" />
+    <result column="UPDATE_TIME" property="updateTime" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    UUID, REGISTRANT, APPLICANTPERSON, APPLICANTTIME, RESERVATIONNUM, CONTACT, STARTTIME, 
+    ENDTIME, DEPTNAME, MEETINGROOM_ID, MEETINGROOM_NAME, MEETINGTITLE, MEETINGDEMAND, 
+    SPECIALREQUIRE, REMARK, STATUS, EXPAND_XML, UNITID, IS_DELETE, CREATE_USER, CREATE_TIME, 
+    UPDATE_USER, UPDATE_TIME
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.jw.magicbpm.model.publicinformation.B_T_Flow_MeetingserviceExample" >
+    <foreach collection="example.oredCriteria" item="criteria" separator="or" />
+    <if test="criteria.valid" >
+      <foreach collection="criteria.criteria" item="criterion" >
+        <if test="criterion.limitValue" >
+          SELECT 
+          <include refid="Base_Column_List" />
+           FROM ( SELECT A.
+          <include refid="Base_Column_List" />
+           , ROWNUM AS con FROM ( 
+        </if>
+      </foreach>
+    </if>
+    select
+    <if test="example.distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from B_T_FLOW_MEETINGSERVICE
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="example.orderByClause != null" >
+      order by ${example.orderByClause}
+    </if>
+    <if test="criteria.valid" >
+      <foreach collection="criteria.criteria" item="criterion" >
+        <if test="criterion.limitValue" >
+           ) A  <![CDATA[WHERE ROWNUM <= ${criterion.secondValue}]]> ) B <![CDATA[WHERE B.con >= ${criterion.value} ]]>
+        </if>
+      </foreach>
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from B_T_FLOW_MEETINGSERVICE
+    where UUID = #{uuid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from B_T_FLOW_MEETINGSERVICE
+    where UUID = #{uuid,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.jw.magicbpm.model.publicinformation.B_T_Flow_MeetingserviceExample" >
+    delete from B_T_FLOW_MEETINGSERVICE
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.jw.magicbpm.model.publicinformation.B_T_Flow_Meetingservice" >
+    insert into B_T_FLOW_MEETINGSERVICE (UUID, REGISTRANT, APPLICANTPERSON, 
+      APPLICANTTIME, RESERVATIONNUM, 
+      CONTACT, STARTTIME, ENDTIME, 
+      DEPTNAME, MEETINGROOM_ID, 
+      MEETINGROOM_NAME, MEETINGTITLE, 
+      MEETINGDEMAND, SPECIALREQUIRE, 
+      REMARK, STATUS, EXPAND_XML, 
+      UNITID, IS_DELETE, CREATE_USER, 
+      CREATE_TIME, UPDATE_USER, UPDATE_TIME
+      )
+    values (#{record.uuid,jdbcType=VARCHAR}, #{record.registrant,jdbcType=VARCHAR}, #{record.applicantperson,jdbcType=VARCHAR}, 
+      #{record.applicanttime,jdbcType=VARCHAR}, #{record.reservationnum,jdbcType=DECIMAL}, 
+      #{record.contact,jdbcType=VARCHAR}, #{record.starttime,jdbcType=VARCHAR}, #{record.endtime,jdbcType=VARCHAR}, 
+      #{record.deptname,jdbcType=VARCHAR}, #{record.meetingroomId,jdbcType=VARCHAR}, 
+      #{record.meetingroomName,jdbcType=VARCHAR}, #{record.meetingtitle,jdbcType=VARCHAR}, 
+      #{record.meetingdemand,jdbcType=NVARCHAR}, #{record.specialrequire,jdbcType=NVARCHAR}, 
+      #{record.remark,jdbcType=NVARCHAR}, #{record.status,jdbcType=VARCHAR}, #{record.expandXml,jdbcType=NVARCHAR}, 
+      #{record.unitid,jdbcType=VARCHAR}, #{record.isDelete,jdbcType=DECIMAL}, #{record.createUser,jdbcType=VARCHAR}, 
+      #{record.createTime,jdbcType=VARCHAR}, #{record.updateUser,jdbcType=VARCHAR}, #{record.updateTime,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.jw.magicbpm.model.publicinformation.B_T_Flow_Meetingservice" >
+    insert into B_T_FLOW_MEETINGSERVICE
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="record.uuid != null" >
+        UUID,
+      </if>
+      <if test="record.registrant != null" >
+        REGISTRANT,
+      </if>
+      <if test="record.applicantperson != null" >
+        APPLICANTPERSON,
+      </if>
+      <if test="record.applicanttime != null" >
+        APPLICANTTIME,
+      </if>
+      <if test="record.reservationnum != null" >
+        RESERVATIONNUM,
+      </if>
+      <if test="record.contact != null" >
+        CONTACT,
+      </if>
+      <if test="record.starttime != null" >
+        STARTTIME,
+      </if>
+      <if test="record.endtime != null" >
+        ENDTIME,
+      </if>
+      <if test="record.deptname != null" >
+        DEPTNAME,
+      </if>
+      <if test="record.meetingroomId != null" >
+        MEETINGROOM_ID,
+      </if>
+      <if test="record.meetingroomName != null" >
+        MEETINGROOM_NAME,
+      </if>
+      <if test="record.meetingtitle != null" >
+        MEETINGTITLE,
+      </if>
+      <if test="record.meetingdemand != null" >
+        MEETINGDEMAND,
+      </if>
+      <if test="record.specialrequire != null" >
+        SPECIALREQUIRE,
+      </if>
+      <if test="record.remark != null" >
+        REMARK,
+      </if>
+      <if test="record.status != null" >
+        STATUS,
+      </if>
+      <if test="record.expandXml != null" >
+        EXPAND_XML,
+      </if>
+      <if test="record.unitid != null" >
+        UNITID,
+      </if>
+      <if test="record.isDelete != null" >
+        IS_DELETE,
+      </if>
+      <if test="record.createUser != null" >
+        CREATE_USER,
+      </if>
+      <if test="record.createTime != null" >
+        CREATE_TIME,
+      </if>
+      <if test="record.updateUser != null" >
+        UPDATE_USER,
+      </if>
+      <if test="record.updateTime != null" >
+        UPDATE_TIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="record.uuid != null" >
+        #{record.uuid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.registrant != null" >
+        #{record.registrant,jdbcType=VARCHAR},
+      </if>
+      <if test="record.applicantperson != null" >
+        #{record.applicantperson,jdbcType=VARCHAR},
+      </if>
+      <if test="record.applicanttime != null" >
+        #{record.applicanttime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.reservationnum != null" >
+        #{record.reservationnum,jdbcType=DECIMAL},
+      </if>
+      <if test="record.contact != null" >
+        #{record.contact,jdbcType=VARCHAR},
+      </if>
+      <if test="record.starttime != null" >
+        #{record.starttime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.endtime != null" >
+        #{record.endtime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.deptname != null" >
+        #{record.deptname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.meetingroomId != null" >
+        #{record.meetingroomId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.meetingroomName != null" >
+        #{record.meetingroomName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.meetingtitle != null" >
+        #{record.meetingtitle,jdbcType=VARCHAR},
+      </if>
+      <if test="record.meetingdemand != null" >
+        #{record.meetingdemand,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.specialrequire != null" >
+        #{record.specialrequire,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.remark != null" >
+        #{record.remark,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.status != null" >
+        #{record.status,jdbcType=VARCHAR},
+      </if>
+      <if test="record.expandXml != null" >
+        #{record.expandXml,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.unitid != null" >
+        #{record.unitid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isDelete != null" >
+        #{record.isDelete,jdbcType=DECIMAL},
+      </if>
+      <if test="record.createUser != null" >
+        #{record.createUser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null" >
+        #{record.createTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateUser != null" >
+        #{record.updateUser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateTime != null" >
+        #{record.updateTime,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.jw.magicbpm.model.publicinformation.B_T_Flow_MeetingserviceExample" resultType="java.lang.Integer" >
+    select count(*) from B_T_FLOW_MEETINGSERVICE
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update B_T_FLOW_MEETINGSERVICE
+    <set >
+      <if test="record.uuid != null" >
+        UUID = #{record.uuid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.registrant != null" >
+        REGISTRANT = #{record.registrant,jdbcType=VARCHAR},
+      </if>
+      <if test="record.applicantperson != null" >
+        APPLICANTPERSON = #{record.applicantperson,jdbcType=VARCHAR},
+      </if>
+      <if test="record.applicanttime != null" >
+        APPLICANTTIME = #{record.applicanttime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.reservationnum != null" >
+        RESERVATIONNUM = #{record.reservationnum,jdbcType=DECIMAL},
+      </if>
+      <if test="record.contact != null" >
+        CONTACT = #{record.contact,jdbcType=VARCHAR},
+      </if>
+      <if test="record.starttime != null" >
+        STARTTIME = #{record.starttime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.endtime != null" >
+        ENDTIME = #{record.endtime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.deptname != null" >
+        DEPTNAME = #{record.deptname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.meetingroomId != null" >
+        MEETINGROOM_ID = #{record.meetingroomId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.meetingroomName != null" >
+        MEETINGROOM_NAME = #{record.meetingroomName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.meetingtitle != null" >
+        MEETINGTITLE = #{record.meetingtitle,jdbcType=VARCHAR},
+      </if>
+      <if test="record.meetingdemand != null" >
+        MEETINGDEMAND = #{record.meetingdemand,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.specialrequire != null" >
+        SPECIALREQUIRE = #{record.specialrequire,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.remark != null" >
+        REMARK = #{record.remark,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.status != null" >
+        STATUS = #{record.status,jdbcType=VARCHAR},
+      </if>
+      <if test="record.expandXml != null" >
+        EXPAND_XML = #{record.expandXml,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.unitid != null" >
+        UNITID = #{record.unitid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isDelete != null" >
+        IS_DELETE = #{record.isDelete,jdbcType=DECIMAL},
+      </if>
+      <if test="record.createUser != null" >
+        CREATE_USER = #{record.createUser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null" >
+        CREATE_TIME = #{record.createTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateUser != null" >
+        UPDATE_USER = #{record.updateUser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateTime != null" >
+        UPDATE_TIME = #{record.updateTime,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update B_T_FLOW_MEETINGSERVICE
+    set UUID = #{record.uuid,jdbcType=VARCHAR},
+      REGISTRANT = #{record.registrant,jdbcType=VARCHAR},
+      APPLICANTPERSON = #{record.applicantperson,jdbcType=VARCHAR},
+      APPLICANTTIME = #{record.applicanttime,jdbcType=VARCHAR},
+      RESERVATIONNUM = #{record.reservationnum,jdbcType=DECIMAL},
+      CONTACT = #{record.contact,jdbcType=VARCHAR},
+      STARTTIME = #{record.starttime,jdbcType=VARCHAR},
+      ENDTIME = #{record.endtime,jdbcType=VARCHAR},
+      DEPTNAME = #{record.deptname,jdbcType=VARCHAR},
+      MEETINGROOM_ID = #{record.meetingroomId,jdbcType=VARCHAR},
+      MEETINGROOM_NAME = #{record.meetingroomName,jdbcType=VARCHAR},
+      MEETINGTITLE = #{record.meetingtitle,jdbcType=VARCHAR},
+      MEETINGDEMAND = #{record.meetingdemand,jdbcType=NVARCHAR},
+      SPECIALREQUIRE = #{record.specialrequire,jdbcType=NVARCHAR},
+      REMARK = #{record.remark,jdbcType=NVARCHAR},
+      STATUS = #{record.status,jdbcType=VARCHAR},
+      EXPAND_XML = #{record.expandXml,jdbcType=NVARCHAR},
+      UNITID = #{record.unitid,jdbcType=VARCHAR},
+      IS_DELETE = #{record.isDelete,jdbcType=DECIMAL},
+      CREATE_USER = #{record.createUser,jdbcType=VARCHAR},
+      CREATE_TIME = #{record.createTime,jdbcType=VARCHAR},
+      UPDATE_USER = #{record.updateUser,jdbcType=VARCHAR},
+      UPDATE_TIME = #{record.updateTime,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jw.magicbpm.model.publicinformation.B_T_Flow_Meetingservice" >
+    update B_T_FLOW_MEETINGSERVICE
+    <set >
+      <if test="record.registrant != null" >
+        REGISTRANT = #{record.registrant,jdbcType=VARCHAR},
+      </if>
+      <if test="record.applicantperson != null" >
+        APPLICANTPERSON = #{record.applicantperson,jdbcType=VARCHAR},
+      </if>
+      <if test="record.applicanttime != null" >
+        APPLICANTTIME = #{record.applicanttime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.reservationnum != null" >
+        RESERVATIONNUM = #{record.reservationnum,jdbcType=DECIMAL},
+      </if>
+      <if test="record.contact != null" >
+        CONTACT = #{record.contact,jdbcType=VARCHAR},
+      </if>
+      <if test="record.starttime != null" >
+        STARTTIME = #{record.starttime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.endtime != null" >
+        ENDTIME = #{record.endtime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.deptname != null" >
+        DEPTNAME = #{record.deptname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.meetingroomId != null" >
+        MEETINGROOM_ID = #{record.meetingroomId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.meetingroomName != null" >
+        MEETINGROOM_NAME = #{record.meetingroomName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.meetingtitle != null" >
+        MEETINGTITLE = #{record.meetingtitle,jdbcType=VARCHAR},
+      </if>
+      <if test="record.meetingdemand != null" >
+        MEETINGDEMAND = #{record.meetingdemand,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.specialrequire != null" >
+        SPECIALREQUIRE = #{record.specialrequire,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.remark != null" >
+        REMARK = #{record.remark,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.status != null" >
+        STATUS = #{record.status,jdbcType=VARCHAR},
+      </if>
+      <if test="record.expandXml != null" >
+        EXPAND_XML = #{record.expandXml,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.unitid != null" >
+        UNITID = #{record.unitid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isDelete != null" >
+        IS_DELETE = #{record.isDelete,jdbcType=DECIMAL},
+      </if>
+      <if test="record.createUser != null" >
+        CREATE_USER = #{record.createUser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null" >
+        CREATE_TIME = #{record.createTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateUser != null" >
+        UPDATE_USER = #{record.updateUser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateTime != null" >
+        UPDATE_TIME = #{record.updateTime,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where UUID = #{record.uuid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jw.magicbpm.model.publicinformation.B_T_Flow_Meetingservice" >
+    update B_T_FLOW_MEETINGSERVICE
+    set REGISTRANT = #{record.registrant,jdbcType=VARCHAR},
+      APPLICANTPERSON = #{record.applicantperson,jdbcType=VARCHAR},
+      APPLICANTTIME = #{record.applicanttime,jdbcType=VARCHAR},
+      RESERVATIONNUM = #{record.reservationnum,jdbcType=DECIMAL},
+      CONTACT = #{record.contact,jdbcType=VARCHAR},
+      STARTTIME = #{record.starttime,jdbcType=VARCHAR},
+      ENDTIME = #{record.endtime,jdbcType=VARCHAR},
+      DEPTNAME = #{record.deptname,jdbcType=VARCHAR},
+      MEETINGROOM_ID = #{record.meetingroomId,jdbcType=VARCHAR},
+      MEETINGROOM_NAME = #{record.meetingroomName,jdbcType=VARCHAR},
+      MEETINGTITLE = #{record.meetingtitle,jdbcType=VARCHAR},
+      MEETINGDEMAND = #{record.meetingdemand,jdbcType=NVARCHAR},
+      SPECIALREQUIRE = #{record.specialrequire,jdbcType=NVARCHAR},
+      REMARK = #{record.remark,jdbcType=NVARCHAR},
+      STATUS = #{record.status,jdbcType=VARCHAR},
+      EXPAND_XML = #{record.expandXml,jdbcType=NVARCHAR},
+      UNITID = #{record.unitid,jdbcType=VARCHAR},
+      IS_DELETE = #{record.isDelete,jdbcType=DECIMAL},
+      CREATE_USER = #{record.createUser,jdbcType=VARCHAR},
+      CREATE_TIME = #{record.createTime,jdbcType=VARCHAR},
+      UPDATE_USER = #{record.updateUser,jdbcType=VARCHAR},
+      UPDATE_TIME = #{record.updateTime,jdbcType=VARCHAR}
+    where UUID = #{record.uuid,jdbcType=VARCHAR}
+  </update>
+</mapper>

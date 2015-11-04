@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jw.magicbpm.dao.publicinformation.B_V_Ufp_MaterialistMapper" >
+  <resultMap id="BaseResultMap" type="com.jw.magicbpm.model.publicinformation.B_V_Ufp_Materialist" >
+    <result column="UUID" property="uuid" jdbcType="VARCHAR" />
+    <result column="MATERIA_TITLE" property="materiaTitle" jdbcType="VARCHAR" />
+    <result column="FREQUENCY" property="frequency" jdbcType="DECIMAL" />
+  </resultMap>
+  <select id="selectByExample" parameterType="map" statementType="STATEMENT"
+    resultMap="BaseResultMap">
+    <![CDATA[SELECT UUID,MATERIA_TITLE,FREQUENCY FROM ${tableName}]]>
+    </select>
+</mapper>

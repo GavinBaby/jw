@@ -1,0 +1,109 @@
+@charset "utf-8";
+BODY {
+	MARGIN: 0px; BACKGROUND:#ecf4f8;
+}
+UL {
+	LIST-STYLE-TYPE: none
+}
+a{ text-decoration:none;}
+/* reset wysokości linii i fontu */
+h1, h2, ul, li, p { margin: 0; padding: 0; }
+.menu {width:179px; padding:4px;FONT-FAMILY: "微软雅黑", "宋体", Verdana, Helvetica, sans-serif}
+.menu ul li {
+	display:block;
+	width:170px;
+	margin-bottom:4px;
+	padding:0px;
+	background: url(../images/er_lmbg.gif) left top no-repeat;
+	list-style:none;
+	overflow:hidden;
+}
+.menu ul li a {
+	display:block;
+	height:32px;
+	margin:0px;
+	text-indent:35px;
+	line-height:32px;
+	font-size:14px;
+	font-weight:bold;
+	color:#ffffff;
+	outline:none;
+}
+.menu ul li .active {
+	background:url(../images/on.gif) top right no-repeat;
+}
+
+.menu ul li .inactive {
+	background:url(../images/off.gif) top right no-repeat;
+}
+.menu ul li ul {
+	display:none; 
+	margin-top:0px;
+	margin-bottom:0px;
+	padding:4px;
+	background:#fff;
+	border:#ccc 1px solid;
+	border-top:none;
+	
+}
+.menu ul li ul li {
+	display:block;
+	width:158px;
+	font-size:12px;
+	list-style:none;
+	color:#000000;
+	font-weight:normal;
+	text-indent:35px;
+	margin-bottom:4px;
+	margin-top:0px;
+	padding:0px;
+	background: url(../images/san_lmbg.gif) top left no-repeat;
+}
+.menu ul li ul li a {
+	background:none;
+	font-size:12px;
+	height:28px;
+	color:#000000;
+	font-weight:normal;
+	text-indent:35px;
+	padding-left:0px;
+	line-height:28px;
+}
+.menu ul li ul li .active {
+	background:url(../images/on2.gif) top right no-repeat;
+}
+
+.menu ul li ul li .inactive {
+	background:url(../images/off2.gif) top right no-repeat;
+}
+.menu ul li ul li ul {
+	margin-bottom:0px;
+	padding:0px;
+	border:none;
+	display:none;
+}
+.menu ul li ul li ul li{
+	display:block;
+	width:158px;
+	font-size:12px;
+	list-style:circle;
+	color:#000000;
+	font-weight:normal;
+	text-indent:50px;
+	margin-bottom:0px;
+	margin-top:0px;
+	padding:0px;
+	background: url(../images/si_lmbg.gif) #FFF;
+}
+.menu ul li ul li ul li a:hover{background: url(../images/si_lmbg.gif) #e5fcd4;}
+.menu ul li ul li ul li a {
+	background:none;
+	font-size:12px;
+	height:24px;
+	color:#000000;
+	font-weight:normal;
+	list-style:circle;
+	text-indent:50px;
+	padding-left:0px;
+	line-height:24px;
+}

@@ -1,0 +1,198 @@
+a:active {outline: none;star:expression(this.onFocus=this.blur());}
+body {
+	margin: 0px auto;
+	font-family: "宋体";
+	font-size: 12px;
+	background:#ffffff;
+	}
+.content {
+	font-family: "宋体";
+	font-size: 12px;
+	line-height: 150%;
+}
+A:link {color: #000000; text-decoration: none}
+A:visited {color: #000000; text-decoration: none}
+A:active {color: #ff6600; text-decoration: none}
+A:hover {color: #ff6600; text-decoration: none}
+a:-webkit-any-link {display:block;} /*针对谷歌浏览器中a:hover{}里面加入display:block之后，效果无法出现。*/
+form{padding:0px; margin:0px;}
+IMG {PADDING: 0px; MARGIN: 0px; BORDER: 0px;}
+
+
+.white_12,.white_12 A:link,.white_12 A:visited,.white_12 A:active,.white_12 A:hover {
+	font-size: 12px;
+	color: #FFFFFF;
+}
+.blue_12,.blue_12 A:link,.blue_12 A:visited,.blue_12 A:active,.blue_12 A:hover {
+	font-size: 12px;
+	color: #235c8d;
+}
+.gray_12,.gray_12 A:link,.gray_12 A:visited,.gray_12 A:active,.gray_12 A:hover  {
+	font-size: 12px;
+	color: #606060;
+}
+
+
+
+/*头部*/
+.top_bg{
+background:url(../images/top_bg.gif);
+}
+.top_left_bg{
+background:url(../images/top_left.gif) left no-repeat;
+}
+.top_right_bg{
+background:url(../images/top_right.gif) right no-repeat;
+}
+
+
+/*导航条背景*/
+.menu_bg {
+background:url(../images/dh_bg.gif) repeat-x;
+}
+/*导航条未选中情况*/
+.menu,.menu a:active {
+	background:url(../images/dh_bg_wxz.gif);
+	font:"微软雅黑";
+	font-size:14px;
+	color:#000000;
+}
+.menu a:hover,.dh{
+	background:url(../images/dh_bg_xz.gif);
+	line-height:36px;
+	display:block;
+	color:#000000;
+}
+/*导航条选中情况*/
+.menu_xz {
+	background:url(../images/dh_bg_xz.gif);
+	font:"微软雅黑";
+	font-size:14px;
+	color:#000000;
+}
+
+
+/*左边菜单背景*/
+.left_bg{
+background:url(../images/left_bg.gif) repeat-y;
+}
+/*左边菜单上面底部一条线*/
+.left_top {
+    border-bottom:#002949 1px solid;
+}
+/*左边菜单未选中情况*/
+.left_wxz,.left_wxz A:link,.left_wxz A:visited,.left_wxz A:active {
+    background:url(../images/l_bg_wxz.gif);
+	width:179px;
+	height:31px;
+	text-align:left;
+	font:"微软雅黑";
+	font-size:14px;
+	color:#FFFFFF;
+	letter-spacing:2px;
+	line-height:30px;
+	text-indent:40px;
+	display:block;
+}
+.left_wxz a:hover {
+    background:url(../images/l_bg_wxz_gg.gif);
+	display:block;
+	color:#FFFFFF;
+}
+/*左边菜单选中情况*/
+.left_xz,.left_xz A:link,.left_xz A:visited,.left_xz A:active,.left_xz A:hover {
+    background:url(../images/l_bg_xz.gif);
+	height:31px;
+	text-align:left;
+	font:"微软雅黑";
+	font-size:14px;
+	color:#FFFFFF;
+	letter-spacing:2px;
+	line-height:30px;
+	text-indent:40px;
+	display:block;
+}
+
+/*左边二级菜单背景*/
+.left_er_bg{
+background:url(../images/left_er_bg.gif);
+border-bottom:#002949 1px solid;
+}
+/*左边二级菜单未选中情况*/
+.left_erbg {
+    background:url(../images/l_erbg_wxz1.gif);
+	height:26px;
+	text-align:left;
+	text-indent:48px;
+}
+.left_erbg a:hover {
+    background:url(../images/l_erbg_wxz2.gif);
+	line-height:26px;
+	display:block;
+}
+/*左边二级菜单选中情况*/
+.left_erbg_xz {
+    background:url(../images/l_erbg_xz1.gif);
+	height:26px;
+	text-align:left;
+	text-indent:48px;
+}
+.left_erbg_xz a:hover {
+    background:url(../images/l_erbg_xz2.gif);
+	line-height:26px;
+	display:block;
+}
+
+/*左边三级菜单未选中情况*/
+.left_sanbg {
+	height:26px;
+	text-align:left;
+	text-indent:48px;
+}
+.left_sanbg a:hover {
+    background:url(../images/l_sanbg_xz.gif);
+	height:26px;
+	line-height:26px;
+	display:block;
+}
+/*左边三级菜单选中情况*/
+.left_sanbg_xz {
+	background:url(../images/l_sanbg_xz.gif);
+	height:26px;
+	text-align:left;
+	text-indent:48px;
+}
+
+/*中间向左右伸缩按钮背景图*/
+.mid{
+background:url(../images/bg.gif);}
+
+/*当前位置背景*/
+.dqwz_bg{
+background:url(../images/dqwz_bg.gif) repeat-x;
+}
+
+/*表单样式*/
+.biaodan {
+    border-top:#c8c9de 1px solid;
+	border-left:#c8c9de 1px solid;
+}
+.biaodan td{
+    border-bottom:#c8c9de 1px solid;
+	border-right:#c8c9de 1px solid;
+	padding:5px;
+	text-align:left;
+	font-size:13px;
+}
+.biaodan .ziduan {
+    background:#eff3fc;
+	text-align:right;
+	color:#235c8d;
+	font-weight:bold;
+}
+.biaodan .ziduan_center {
+    background:#eff3fc;
+	text-align:center;
+	color:#235c8d;
+	font-weight:bold;
+}

@@ -1,0 +1,369 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jw.magicbpm.dao.publicinformation.B_V_Ufp_MateriaMapper" >
+  <resultMap id="BaseResultMap" type="com.jw.magicbpm.model.publicinformation.B_V_Ufp_Materia" >
+    <result column="UUID" property="uuid" jdbcType="VARCHAR" />
+    <result column="MATERIA_TIME" property="materiaTime" jdbcType="VARCHAR" />
+    <result column="MATERIA_AUTHOR" property="materiaAuthor" jdbcType="VARCHAR" />
+    <result column="MATERIA_TITLE" property="materiaTitle" jdbcType="VARCHAR" />
+    <result column="MATERIA_CLASS" property="materiaClass" jdbcType="VARCHAR" />
+    <result column="MATERIA_ISCHECK" property="materiaIscheck" jdbcType="DECIMAL" />
+    <result column="UNITID" property="unitid" jdbcType="VARCHAR" />
+    <result column="IS_DELETE" property="isDelete" jdbcType="DECIMAL" />
+    <result column="CREATE_USER" property="createUser" jdbcType="VARCHAR" />
+    <result column="CREATE_TIME" property="createTime" jdbcType="VARCHAR" />
+    <result column="CLASSNAME" property="classname" jdbcType="VARCHAR" />
+    <result column="SORT" property="sort" jdbcType="DECIMAL" />
+    <result column="DOWNPERMIT" property="downpermit" jdbcType="VARCHAR" />
+    <result column="DOWNPERMITNAME" property="downpermitname" jdbcType="NVARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.jw.magicbpm.model.publicinformation.B_V_Ufp_MateriaWithBLOBs" extends="BaseResultMap" >
+    <result column="MATERIA_DOWNUSER" property="materiaDownuser" jdbcType="CLOB" />
+    <result column="MATERIA_DOWNNAME" property="materiaDownname" jdbcType="CLOB" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    UUID, MATERIA_TIME, MATERIA_AUTHOR, MATERIA_TITLE, MATERIA_CLASS, MATERIA_ISCHECK, 
+    UNITID, IS_DELETE, CREATE_USER, CREATE_TIME, CLASSNAME, SORT, DOWNPERMIT, DOWNPERMITNAME
+  </sql>
+  <sql id="Blob_Column_List" >
+    MATERIA_DOWNUSER, MATERIA_DOWNNAME
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.jw.magicbpm.model.publicinformation.B_V_Ufp_MateriaExample" >
+    select
+    <if test="example.distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from B_V_UFP_MATERIA
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="example.orderByClause != null" >
+      order by ${example.orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.jw.magicbpm.model.publicinformation.B_V_Ufp_MateriaExample" >
+    <foreach collection="example.oredCriteria" item="criteria" separator="or" />
+    <if test="criteria.valid" >
+      <foreach collection="criteria.criteria" item="criterion" >
+        <if test="criterion.limitValue" >
+          SELECT 
+          <include refid="Base_Column_List" />
+           FROM ( SELECT A.
+          <include refid="Base_Column_List" />
+           , ROWNUM AS con FROM ( 
+        </if>
+      </foreach>
+    </if>
+    select
+    <if test="example.distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from B_V_UFP_MATERIA
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="example.orderByClause != null" >
+      order by ${example.orderByClause}
+    </if>
+    <if test="criteria.valid" >
+      <foreach collection="criteria.criteria" item="criterion" >
+        <if test="criterion.limitValue" >
+           ) A  <![CDATA[WHERE ROWNUM <= ${criterion.secondValue}]]> ) B <![CDATA[WHERE B.con >= ${criterion.value} ]]>
+        </if>
+      </foreach>
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.jw.magicbpm.model.publicinformation.B_V_Ufp_MateriaExample" >
+    delete from B_V_UFP_MATERIA
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.jw.magicbpm.model.publicinformation.B_V_Ufp_MateriaWithBLOBs" >
+    insert into B_V_UFP_MATERIA (UUID, MATERIA_TIME, 
+      MATERIA_AUTHOR, MATERIA_TITLE, 
+      MATERIA_CLASS, MATERIA_ISCHECK, 
+      UNITID, IS_DELETE, CREATE_USER, 
+      CREATE_TIME, CLASSNAME, SORT, 
+      DOWNPERMIT, DOWNPERMITNAME, 
+      MATERIA_DOWNUSER, MATERIA_DOWNNAME
+      )
+    values (#{record.uuid,jdbcType=VARCHAR}, #{record.materiaTime,jdbcType=VARCHAR}, 
+      #{record.materiaAuthor,jdbcType=VARCHAR}, #{record.materiaTitle,jdbcType=VARCHAR}, 
+      #{record.materiaClass,jdbcType=VARCHAR}, #{record.materiaIscheck,jdbcType=DECIMAL}, 
+      #{record.unitid,jdbcType=VARCHAR}, #{record.isDelete,jdbcType=DECIMAL}, #{record.createUser,jdbcType=VARCHAR}, 
+      #{record.createTime,jdbcType=VARCHAR}, #{record.classname,jdbcType=VARCHAR}, #{record.sort,jdbcType=DECIMAL}, 
+      #{record.downpermit,jdbcType=VARCHAR}, #{record.downpermitname,jdbcType=NVARCHAR}, 
+      #{record.materiaDownuser,jdbcType=CLOB}, #{record.materiaDownname,jdbcType=CLOB}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.jw.magicbpm.model.publicinformation.B_V_Ufp_MateriaWithBLOBs" >
+    insert into B_V_UFP_MATERIA
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="record.uuid != null" >
+        UUID,
+      </if>
+      <if test="record.materiaTime != null" >
+        MATERIA_TIME,
+      </if>
+      <if test="record.materiaAuthor != null" >
+        MATERIA_AUTHOR,
+      </if>
+      <if test="record.materiaTitle != null" >
+        MATERIA_TITLE,
+      </if>
+      <if test="record.materiaClass != null" >
+        MATERIA_CLASS,
+      </if>
+      <if test="record.materiaIscheck != null" >
+        MATERIA_ISCHECK,
+      </if>
+      <if test="record.unitid != null" >
+        UNITID,
+      </if>
+      <if test="record.isDelete != null" >
+        IS_DELETE,
+      </if>
+      <if test="record.createUser != null" >
+        CREATE_USER,
+      </if>
+      <if test="record.createTime != null" >
+        CREATE_TIME,
+      </if>
+      <if test="record.classname != null" >
+        CLASSNAME,
+      </if>
+      <if test="record.sort != null" >
+        SORT,
+      </if>
+      <if test="record.downpermit != null" >
+        DOWNPERMIT,
+      </if>
+      <if test="record.downpermitname != null" >
+        DOWNPERMITNAME,
+      </if>
+      <if test="record.materiaDownuser != null" >
+        MATERIA_DOWNUSER,
+      </if>
+      <if test="record.materiaDownname != null" >
+        MATERIA_DOWNNAME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="record.uuid != null" >
+        #{record.uuid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.materiaTime != null" >
+        #{record.materiaTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.materiaAuthor != null" >
+        #{record.materiaAuthor,jdbcType=VARCHAR},
+      </if>
+      <if test="record.materiaTitle != null" >
+        #{record.materiaTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="record.materiaClass != null" >
+        #{record.materiaClass,jdbcType=VARCHAR},
+      </if>
+      <if test="record.materiaIscheck != null" >
+        #{record.materiaIscheck,jdbcType=DECIMAL},
+      </if>
+      <if test="record.unitid != null" >
+        #{record.unitid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isDelete != null" >
+        #{record.isDelete,jdbcType=DECIMAL},
+      </if>
+      <if test="record.createUser != null" >
+        #{record.createUser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null" >
+        #{record.createTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.classname != null" >
+        #{record.classname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sort != null" >
+        #{record.sort,jdbcType=DECIMAL},
+      </if>
+      <if test="record.downpermit != null" >
+        #{record.downpermit,jdbcType=VARCHAR},
+      </if>
+      <if test="record.downpermitname != null" >
+        #{record.downpermitname,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.materiaDownuser != null" >
+        #{record.materiaDownuser,jdbcType=CLOB},
+      </if>
+      <if test="record.materiaDownname != null" >
+        #{record.materiaDownname,jdbcType=CLOB},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.jw.magicbpm.model.publicinformation.B_V_Ufp_MateriaExample" resultType="java.lang.Integer" >
+    select count(*) from B_V_UFP_MATERIA
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update B_V_UFP_MATERIA
+    <set >
+      <if test="record.uuid != null" >
+        UUID = #{record.uuid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.materiaTime != null" >
+        MATERIA_TIME = #{record.materiaTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.materiaAuthor != null" >
+        MATERIA_AUTHOR = #{record.materiaAuthor,jdbcType=VARCHAR},
+      </if>
+      <if test="record.materiaTitle != null" >
+        MATERIA_TITLE = #{record.materiaTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="record.materiaClass != null" >
+        MATERIA_CLASS = #{record.materiaClass,jdbcType=VARCHAR},
+      </if>
+      <if test="record.materiaIscheck != null" >
+        MATERIA_ISCHECK = #{record.materiaIscheck,jdbcType=DECIMAL},
+      </if>
+      <if test="record.unitid != null" >
+        UNITID = #{record.unitid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isDelete != null" >
+        IS_DELETE = #{record.isDelete,jdbcType=DECIMAL},
+      </if>
+      <if test="record.createUser != null" >
+        CREATE_USER = #{record.createUser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null" >
+        CREATE_TIME = #{record.createTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.classname != null" >
+        CLASSNAME = #{record.classname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sort != null" >
+        SORT = #{record.sort,jdbcType=DECIMAL},
+      </if>
+      <if test="record.downpermit != null" >
+        DOWNPERMIT = #{record.downpermit,jdbcType=VARCHAR},
+      </if>
+      <if test="record.downpermitname != null" >
+        DOWNPERMITNAME = #{record.downpermitname,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.materiaDownuser != null" >
+        MATERIA_DOWNUSER = #{record.materiaDownuser,jdbcType=CLOB},
+      </if>
+      <if test="record.materiaDownname != null" >
+        MATERIA_DOWNNAME = #{record.materiaDownname,jdbcType=CLOB},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update B_V_UFP_MATERIA
+    set UUID = #{record.uuid,jdbcType=VARCHAR},
+      MATERIA_TIME = #{record.materiaTime,jdbcType=VARCHAR},
+      MATERIA_AUTHOR = #{record.materiaAuthor,jdbcType=VARCHAR},
+      MATERIA_TITLE = #{record.materiaTitle,jdbcType=VARCHAR},
+      MATERIA_CLASS = #{record.materiaClass,jdbcType=VARCHAR},
+      MATERIA_ISCHECK = #{record.materiaIscheck,jdbcType=DECIMAL},
+      UNITID = #{record.unitid,jdbcType=VARCHAR},
+      IS_DELETE = #{record.isDelete,jdbcType=DECIMAL},
+      CREATE_USER = #{record.createUser,jdbcType=VARCHAR},
+      CREATE_TIME = #{record.createTime,jdbcType=VARCHAR},
+      CLASSNAME = #{record.classname,jdbcType=VARCHAR},
+      SORT = #{record.sort,jdbcType=DECIMAL},
+      DOWNPERMIT = #{record.downpermit,jdbcType=VARCHAR},
+      DOWNPERMITNAME = #{record.downpermitname,jdbcType=NVARCHAR},
+      MATERIA_DOWNUSER = #{record.materiaDownuser,jdbcType=CLOB},
+      MATERIA_DOWNNAME = #{record.materiaDownname,jdbcType=CLOB}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update B_V_UFP_MATERIA
+    set UUID = #{record.uuid,jdbcType=VARCHAR},
+      MATERIA_TIME = #{record.materiaTime,jdbcType=VARCHAR},
+      MATERIA_AUTHOR = #{record.materiaAuthor,jdbcType=VARCHAR},
+      MATERIA_TITLE = #{record.materiaTitle,jdbcType=VARCHAR},
+      MATERIA_CLASS = #{record.materiaClass,jdbcType=VARCHAR},
+      MATERIA_ISCHECK = #{record.materiaIscheck,jdbcType=DECIMAL},
+      UNITID = #{record.unitid,jdbcType=VARCHAR},
+      IS_DELETE = #{record.isDelete,jdbcType=DECIMAL},
+      CREATE_USER = #{record.createUser,jdbcType=VARCHAR},
+      CREATE_TIME = #{record.createTime,jdbcType=VARCHAR},
+      CLASSNAME = #{record.classname,jdbcType=VARCHAR},
+      SORT = #{record.sort,jdbcType=DECIMAL},
+      DOWNPERMIT = #{record.downpermit,jdbcType=VARCHAR},
+      DOWNPERMITNAME = #{record.downpermitname,jdbcType=NVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

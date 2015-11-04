@@ -1,0 +1,437 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jw.baseframe.dao.C_T_Sys_MaintainMapper" >
+  <resultMap id="BaseResultMap" type="com.jw.baseframe.model.C_T_Sys_Maintain" >
+    <id column="UUID" property="uuid" jdbcType="VARCHAR" />
+    <result column="MAINTAIN_ID" property="maintainId" jdbcType="VARCHAR" />
+    <result column="MAINTAIN_NAME" property="maintainName" jdbcType="NVARCHAR" />
+    <result column="PAREN_MAINTAIN_ID" property="parenMaintainId" jdbcType="VARCHAR" />
+    <result column="MODULE_UUID" property="moduleUuid" jdbcType="VARCHAR" />
+    <result column="SORT" property="sort" jdbcType="DECIMAL" />
+    <result column="URL" property="url" jdbcType="VARCHAR" />
+    <result column="RELATE_ID" property="relateId" jdbcType="VARCHAR" />
+    <result column="IS_ASS_MODULE" property="isAssModule" jdbcType="DECIMAL" />
+    <result column="MTYPE" property="mtype" jdbcType="DECIMAL" />
+    <result column="MUSER" property="muser" jdbcType="VARCHAR" />
+    <result column="EXPAND_XML" property="expandXml" jdbcType="NVARCHAR" />
+    <result column="UNITID" property="unitid" jdbcType="VARCHAR" />
+    <result column="IS_DELETE" property="isDelete" jdbcType="DECIMAL" />
+    <result column="CREATE_USER" property="createUser" jdbcType="VARCHAR" />
+    <result column="CREATE_TIME" property="createTime" jdbcType="VARCHAR" />
+    <result column="UPDATE_USER" property="updateUser" jdbcType="VARCHAR" />
+    <result column="UPDATE_TIME" property="updateTime" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    UUID, MAINTAIN_ID, MAINTAIN_NAME, PAREN_MAINTAIN_ID, MODULE_UUID, SORT, URL, RELATE_ID, 
+    IS_ASS_MODULE, MTYPE, MUSER, EXPAND_XML, UNITID, IS_DELETE, CREATE_USER, CREATE_TIME, 
+    UPDATE_USER, UPDATE_TIME
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.jw.baseframe.model.C_T_Sys_MaintainExample" >
+    <foreach collection="example.oredCriteria" item="criteria" separator="or" />
+    <if test="criteria.valid" >
+      <foreach collection="criteria.criteria" item="criterion" >
+        <if test="criterion.limitValue" >
+          SELECT 
+          <include refid="Base_Column_List" />
+           FROM ( SELECT A.
+          <include refid="Base_Column_List" />
+           , ROWNUM AS con FROM ( 
+        </if>
+      </foreach>
+    </if>
+    select
+    <if test="example.distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from C_T_SYS_MAINTAIN
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="example.orderByClause != null" >
+      order by ${example.orderByClause}
+    </if>
+    <if test="criteria.valid" >
+      <foreach collection="criteria.criteria" item="criterion" >
+        <if test="criterion.limitValue" >
+           ) A  <![CDATA[WHERE ROWNUM <= ${criterion.secondValue}]]> ) B <![CDATA[WHERE B.con >= ${criterion.value} ]]>
+        </if>
+      </foreach>
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from C_T_SYS_MAINTAIN
+    where UUID = #{uuid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from C_T_SYS_MAINTAIN
+    where UUID = #{uuid,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.jw.baseframe.model.C_T_Sys_MaintainExample" >
+    delete from C_T_SYS_MAINTAIN
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.jw.baseframe.model.C_T_Sys_Maintain" >
+    insert into C_T_SYS_MAINTAIN (UUID, MAINTAIN_ID, MAINTAIN_NAME, 
+      PAREN_MAINTAIN_ID, MODULE_UUID, 
+      SORT, URL, RELATE_ID, 
+      IS_ASS_MODULE, MTYPE, MUSER, 
+      EXPAND_XML, UNITID, IS_DELETE, 
+      CREATE_USER, CREATE_TIME, UPDATE_USER, 
+      UPDATE_TIME)
+    values (#{record.uuid,jdbcType=VARCHAR}, #{record.maintainId,jdbcType=VARCHAR}, #{record.maintainName,jdbcType=NVARCHAR}, 
+      #{record.parenMaintainId,jdbcType=VARCHAR}, #{record.moduleUuid,jdbcType=VARCHAR}, 
+      #{record.sort,jdbcType=DECIMAL}, #{record.url,jdbcType=VARCHAR}, #{record.relateId,jdbcType=VARCHAR}, 
+      #{record.isAssModule,jdbcType=DECIMAL}, #{record.mtype,jdbcType=DECIMAL}, #{record.muser,jdbcType=VARCHAR}, 
+      #{record.expandXml,jdbcType=NVARCHAR}, #{record.unitid,jdbcType=VARCHAR}, #{record.isDelete,jdbcType=DECIMAL}, 
+      #{record.createUser,jdbcType=VARCHAR}, #{record.createTime,jdbcType=VARCHAR}, #{record.updateUser,jdbcType=VARCHAR}, 
+      #{record.updateTime,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.jw.baseframe.model.C_T_Sys_Maintain" >
+    insert into C_T_SYS_MAINTAIN
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="record.uuid != null" >
+        UUID,
+      </if>
+      <if test="record.maintainId != null" >
+        MAINTAIN_ID,
+      </if>
+      <if test="record.maintainName != null" >
+        MAINTAIN_NAME,
+      </if>
+      <if test="record.parenMaintainId != null" >
+        PAREN_MAINTAIN_ID,
+      </if>
+      <if test="record.moduleUuid != null" >
+        MODULE_UUID,
+      </if>
+      <if test="record.sort != null" >
+        SORT,
+      </if>
+      <if test="record.url != null" >
+        URL,
+      </if>
+      <if test="record.relateId != null" >
+        RELATE_ID,
+      </if>
+      <if test="record.isAssModule != null" >
+        IS_ASS_MODULE,
+      </if>
+      <if test="record.mtype != null" >
+        MTYPE,
+      </if>
+      <if test="record.muser != null" >
+        MUSER,
+      </if>
+      <if test="record.expandXml != null" >
+        EXPAND_XML,
+      </if>
+      <if test="record.unitid != null" >
+        UNITID,
+      </if>
+      <if test="record.isDelete != null" >
+        IS_DELETE,
+      </if>
+      <if test="record.createUser != null" >
+        CREATE_USER,
+      </if>
+      <if test="record.createTime != null" >
+        CREATE_TIME,
+      </if>
+      <if test="record.updateUser != null" >
+        UPDATE_USER,
+      </if>
+      <if test="record.updateTime != null" >
+        UPDATE_TIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="record.uuid != null" >
+        #{record.uuid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.maintainId != null" >
+        #{record.maintainId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.maintainName != null" >
+        #{record.maintainName,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.parenMaintainId != null" >
+        #{record.parenMaintainId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.moduleUuid != null" >
+        #{record.moduleUuid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sort != null" >
+        #{record.sort,jdbcType=DECIMAL},
+      </if>
+      <if test="record.url != null" >
+        #{record.url,jdbcType=VARCHAR},
+      </if>
+      <if test="record.relateId != null" >
+        #{record.relateId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isAssModule != null" >
+        #{record.isAssModule,jdbcType=DECIMAL},
+      </if>
+      <if test="record.mtype != null" >
+        #{record.mtype,jdbcType=DECIMAL},
+      </if>
+      <if test="record.muser != null" >
+        #{record.muser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.expandXml != null" >
+        #{record.expandXml,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.unitid != null" >
+        #{record.unitid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isDelete != null" >
+        #{record.isDelete,jdbcType=DECIMAL},
+      </if>
+      <if test="record.createUser != null" >
+        #{record.createUser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null" >
+        #{record.createTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateUser != null" >
+        #{record.updateUser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateTime != null" >
+        #{record.updateTime,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.jw.baseframe.model.C_T_Sys_MaintainExample" resultType="java.lang.Integer" >
+    select count(*) from C_T_SYS_MAINTAIN
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update C_T_SYS_MAINTAIN
+    <set >
+      <if test="record.uuid != null" >
+        UUID = #{record.uuid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.maintainId != null" >
+        MAINTAIN_ID = #{record.maintainId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.maintainName != null" >
+        MAINTAIN_NAME = #{record.maintainName,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.parenMaintainId != null" >
+        PAREN_MAINTAIN_ID = #{record.parenMaintainId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.moduleUuid != null" >
+        MODULE_UUID = #{record.moduleUuid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sort != null" >
+        SORT = #{record.sort,jdbcType=DECIMAL},
+      </if>
+      <if test="record.url != null" >
+        URL = #{record.url,jdbcType=VARCHAR},
+      </if>
+      <if test="record.relateId != null" >
+        RELATE_ID = #{record.relateId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isAssModule != null" >
+        IS_ASS_MODULE = #{record.isAssModule,jdbcType=DECIMAL},
+      </if>
+      <if test="record.mtype != null" >
+        MTYPE = #{record.mtype,jdbcType=DECIMAL},
+      </if>
+      <if test="record.muser != null" >
+        MUSER = #{record.muser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.expandXml != null" >
+        EXPAND_XML = #{record.expandXml,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.unitid != null" >
+        UNITID = #{record.unitid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isDelete != null" >
+        IS_DELETE = #{record.isDelete,jdbcType=DECIMAL},
+      </if>
+      <if test="record.createUser != null" >
+        CREATE_USER = #{record.createUser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null" >
+        CREATE_TIME = #{record.createTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateUser != null" >
+        UPDATE_USER = #{record.updateUser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateTime != null" >
+        UPDATE_TIME = #{record.updateTime,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update C_T_SYS_MAINTAIN
+    set UUID = #{record.uuid,jdbcType=VARCHAR},
+      MAINTAIN_ID = #{record.maintainId,jdbcType=VARCHAR},
+      MAINTAIN_NAME = #{record.maintainName,jdbcType=NVARCHAR},
+      PAREN_MAINTAIN_ID = #{record.parenMaintainId,jdbcType=VARCHAR},
+      MODULE_UUID = #{record.moduleUuid,jdbcType=VARCHAR},
+      SORT = #{record.sort,jdbcType=DECIMAL},
+      URL = #{record.url,jdbcType=VARCHAR},
+      RELATE_ID = #{record.relateId,jdbcType=VARCHAR},
+      IS_ASS_MODULE = #{record.isAssModule,jdbcType=DECIMAL},
+      MTYPE = #{record.mtype,jdbcType=DECIMAL},
+      MUSER = #{record.muser,jdbcType=VARCHAR},
+      EXPAND_XML = #{record.expandXml,jdbcType=NVARCHAR},
+      UNITID = #{record.unitid,jdbcType=VARCHAR},
+      IS_DELETE = #{record.isDelete,jdbcType=DECIMAL},
+      CREATE_USER = #{record.createUser,jdbcType=VARCHAR},
+      CREATE_TIME = #{record.createTime,jdbcType=VARCHAR},
+      UPDATE_USER = #{record.updateUser,jdbcType=VARCHAR},
+      UPDATE_TIME = #{record.updateTime,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jw.baseframe.model.C_T_Sys_Maintain" >
+    update C_T_SYS_MAINTAIN
+    <set >
+      <if test="record.maintainId != null" >
+        MAINTAIN_ID = #{record.maintainId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.maintainName != null" >
+        MAINTAIN_NAME = #{record.maintainName,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.parenMaintainId != null" >
+        PAREN_MAINTAIN_ID = #{record.parenMaintainId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.moduleUuid != null" >
+        MODULE_UUID = #{record.moduleUuid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sort != null" >
+        SORT = #{record.sort,jdbcType=DECIMAL},
+      </if>
+      <if test="record.url != null" >
+        URL = #{record.url,jdbcType=VARCHAR},
+      </if>
+      <if test="record.relateId != null" >
+        RELATE_ID = #{record.relateId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isAssModule != null" >
+        IS_ASS_MODULE = #{record.isAssModule,jdbcType=DECIMAL},
+      </if>
+      <if test="record.mtype != null" >
+        MTYPE = #{record.mtype,jdbcType=DECIMAL},
+      </if>
+      <if test="record.muser != null" >
+        MUSER = #{record.muser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.expandXml != null" >
+        EXPAND_XML = #{record.expandXml,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.unitid != null" >
+        UNITID = #{record.unitid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isDelete != null" >
+        IS_DELETE = #{record.isDelete,jdbcType=DECIMAL},
+      </if>
+      <if test="record.createUser != null" >
+        CREATE_USER = #{record.createUser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null" >
+        CREATE_TIME = #{record.createTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateUser != null" >
+        UPDATE_USER = #{record.updateUser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateTime != null" >
+        UPDATE_TIME = #{record.updateTime,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where UUID = #{record.uuid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jw.baseframe.model.C_T_Sys_Maintain" >
+    update C_T_SYS_MAINTAIN
+    set MAINTAIN_ID = #{record.maintainId,jdbcType=VARCHAR},
+      MAINTAIN_NAME = #{record.maintainName,jdbcType=NVARCHAR},
+      PAREN_MAINTAIN_ID = #{record.parenMaintainId,jdbcType=VARCHAR},
+      MODULE_UUID = #{record.moduleUuid,jdbcType=VARCHAR},
+      SORT = #{record.sort,jdbcType=DECIMAL},
+      URL = #{record.url,jdbcType=VARCHAR},
+      RELATE_ID = #{record.relateId,jdbcType=VARCHAR},
+      IS_ASS_MODULE = #{record.isAssModule,jdbcType=DECIMAL},
+      MTYPE = #{record.mtype,jdbcType=DECIMAL},
+      MUSER = #{record.muser,jdbcType=VARCHAR},
+      EXPAND_XML = #{record.expandXml,jdbcType=NVARCHAR},
+      UNITID = #{record.unitid,jdbcType=VARCHAR},
+      IS_DELETE = #{record.isDelete,jdbcType=DECIMAL},
+      CREATE_USER = #{record.createUser,jdbcType=VARCHAR},
+      CREATE_TIME = #{record.createTime,jdbcType=VARCHAR},
+      UPDATE_USER = #{record.updateUser,jdbcType=VARCHAR},
+      UPDATE_TIME = #{record.updateTime,jdbcType=VARCHAR}
+    where UUID = #{record.uuid,jdbcType=VARCHAR}
+  </update>
+</mapper>

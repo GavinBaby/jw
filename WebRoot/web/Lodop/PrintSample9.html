@@ -1,0 +1,161 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=GBK" />
+		<title>demo</title>
+		<script language="javascript" src="../../js/Lodop/LodopFuncs.js"></script>
+	</head>
+	<body>
+
+
+		<p>
+			<b>1、除顺风外模版</b>
+		</p>
+		<p>
+			进入以它为背景图的
+			<a href="javascript:myPrintSetup1()">打印维护</a>
+			<a href="javascript:myPreview1()">打印预览</a>
+			<a href="javascript:myPrint1()">打印</a>
+		</p>
+		<p>
+			<img border="0" src="http://127.0.0.1/magicbpmv2/images/Lodop/lr.jpg"
+				width="336" height="242">
+				&nbsp; 
+		</p>
+
+		<p>
+			<b>1、顺风模版</b>
+		</p>
+		<p>
+			进入以它为背景图的
+			<a href="javascript:myPrintSetup2()">打印维护</a>
+			<a href="javascript:myPreview2()">打印预览</a>
+			<a href="javascript:myPrint2()">打印</a>
+		</p>
+		<p>
+			<img border="0" src="http://127.0.0.1/magicbpmv2/images/Lodop/zy.jpg"
+				width="336" height="242">
+				&nbsp; 
+		</p>
+
+
+		<script language="javascript" type="text/javascript"> 
+        var LODOP; //声明为全局变量
+	function myPrintSetup1() {		
+		CreatePage1();
+		LODOP.ADD_PRINT_SETUP_BKIMG("<img border='0' src='http://127.0.0.1/magicbpmv2/images/Lodop/lr.jpg'>");
+		LODOP.PRINT_SETUP();		
+	};
+	function myPrintSetup2() {		
+		CreatePage2();
+		LODOP.ADD_PRINT_SETUP_BKIMG("<img border='0' src='http://127.0.0.1/magicbpmv2/images/Lodop/zy.jpg'>");
+		LODOP.PRINT_SETUP();		
+	};		
+	
+	function myPrintDesign3(){
+		CreatePage();
+		LODOP.ADD_PRINT_SETUP_BKIMG("<img border='0' src='http://127.0.0.1/magicbpmv2/images/Lodop/lr.jpg'>");
+		LODOP.SET_SHOW_MODE("BKIMG_LEFT",1);
+		LODOP.SET_SHOW_MODE("BKIMG_TOP",1);
+		LODOP.SET_SHOW_MODE("BKIMG_WIDTH","183mm");
+		//LODOP.SET_SHOW_MODE("BKIMG_HEIGHT","99mm"); //这句可不加，因宽高比例固定按原图的
+		LODOP.SET_SHOW_MODE("BKIMG_IN_PREVIEW",1);		
+		LODOP.PRINT_DESIGN();		
+	};	
+	function myPreview1(){
+		CreatePage1();
+		LODOP.ADD_PRINT_SETUP_BKIMG("<img border='0' src='http://127.0.0.1/magicbpmv2/images/Lodop/lr.jpg'>");
+		LODOP.SET_SHOW_MODE("BKIMG_PRINT",1);		
+		LODOP.PREVIEW();		
+	};	
+	function myPreview2(){
+		CreatePage2();
+		LODOP.ADD_PRINT_SETUP_BKIMG("<img border='0' src='http://127.0.0.1/magicbpmv2/images/Lodop/zy.jpg'>");
+		LODOP.SET_SHOW_MODE("BKIMG_PRINT",1);		
+		LODOP.PREVIEW();		
+	};
+	function myPrint1(){
+		CreatePage1();
+		if (LODOP.PRINTA()) 
+		   alert("已发出实际打印命令！"); 
+		else 
+		   alert("放弃打印！"); 
+	}
+	function myPrint2(){
+		CreatePage2();
+		if (LODOP.PRINTA()) 
+		   alert("已发出实际打印命令！"); 
+		else 
+		   alert("放弃打印！"); 
+	}
+	function CreatePage1() {
+		LODOP=getLodop();  
+		
+		LODOP.PRINT_INITA(0,0,784,420,"非顺风快递模版");
+		LODOP.ADD_PRINT_SETUP_BKIMG("<img border='0' src='http://127.0.0.1/magicbpmv2/images/Lodop/lr.jpg'>");
+		LODOP.ADD_PRINT_TEXT(106,72,75,20,"寄件人姓名");
+		LODOP.SET_PRINT_STYLEA(0,"FontSize",12);
+		LODOP.ADD_PRINT_TEXT(205,29,214,25,"寄件人的详细地址");
+		LODOP.SET_PRINT_STYLEA(0,"FontSize",12);
+		LODOP.ADD_PRINT_TEXT(104,447,75,20,"收件人姓名");
+		LODOP.SET_PRINT_STYLEA(0,"FontSize",12);
+		LODOP.SET_PRINT_STYLEA(0,"FontSize",12);
+		LODOP.ADD_PRINT_TEXT(207,387,244,25,"收件人详细地址");
+		LODOP.SET_PRINT_STYLEA(0,"FontSize",12);
+		LODOP.SET_PRINT_STYLEA(0,"FontSize",12);
+		LODOP.ADD_PRINT_TEXT(240,91,100,20,"寄件人电话");
+		LODOP.SET_PRINT_STYLEA(0,"FontSize",12);
+		LODOP.ADD_PRINT_TEXT(245,461,100,20,"收件人电话");
+		LODOP.SET_PRINT_STYLEA(0,"FontSize",12);
+		LODOP.ADD_PRINT_TEXT(169,71,60,20,"浙江");
+		LODOP.SET_PRINT_STYLEA(0,"FontSize",12);
+		LODOP.ADD_PRINT_TEXT(169,150,60,20,"宁波");
+		LODOP.SET_PRINT_STYLEA(0,"FontSize",12);
+		LODOP.ADD_PRINT_TEXT(169,230,60,20,"海曙");
+		LODOP.SET_PRINT_STYLEA(0,"FontSize",12);
+		LODOP.ADD_PRINT_TEXT(169,400,60,20,"浙江1");
+		LODOP.SET_PRINT_STYLEA(0,"FontSize",12);
+		LODOP.ADD_PRINT_TEXT(169,490,60,20,"宁波1");
+		LODOP.SET_PRINT_STYLEA(0,"FontSize",12);
+		LODOP.ADD_PRINT_TEXT(169,580,60,20,"海曙1");
+		LODOP.SET_PRINT_STYLEA(0,"FontSize",12);
+};
+			function CreatePage2() {
+		LODOP=getLodop();  
+		
+		LODOP.PRINT_INIT("顺风快递模版");
+		LODOP.ADD_PRINT_SETUP_BKIMG("<img border='0' src='http://127.0.0.1/magicbpmv2/images/Lodop/zy.jpg'>");
+		LODOP.SET_SHOW_MODE("BKIMG_WIDTH",782);
+		LODOP.SET_SHOW_MODE("BKIMG_HEIGHT",505);
+		LODOP.ADD_PRINT_TEXT(145,50,75,20,"寄件人姓名");
+		LODOP.SET_PRINT_STYLEA(0,"FontSize",12);
+		LODOP.ADD_PRINT_TEXT(200,50,214,25,"寄件人的详细地址");
+		LODOP.SET_PRINT_STYLEA(0,"FontSize",12);
+		LODOP.ADD_PRINT_TEXT(290,50,75,20,"收件人姓名");
+		LODOP.SET_PRINT_STYLEA(0,"FontSize",12);
+		LODOP.ADD_PRINT_TEXT(340,50,244,25,"收件人详细地址");
+		LODOP.SET_PRINT_STYLEA(0,"FontSize",12);
+		LODOP.ADD_PRINT_TEXT(225,115,100,20,"寄件人电话");
+		LODOP.SET_PRINT_STYLEA(0,"FontSize",12);
+		LODOP.ADD_PRINT_TEXT(375,115,100,20,"收件人电话");
+		LODOP.SET_PRINT_STYLEA(0,"FontSize",12);
+		LODOP.ADD_PRINT_TEXT(170,50,60,20,"浙江");
+		LODOP.SET_PRINT_STYLEA(0,"FontSize",12);
+		LODOP.ADD_PRINT_TEXT(170,120,60,20,"宁波");
+		LODOP.SET_PRINT_STYLEA(0,"FontSize",12);
+		LODOP.ADD_PRINT_TEXT(170,200,60,20,"海曙");
+		LODOP.SET_PRINT_STYLEA(0,"FontSize",12);
+		LODOP.ADD_PRINT_TEXT(315,50,60,20,"浙江1");
+		LODOP.SET_PRINT_STYLEA(0,"FontSize",12);
+		LODOP.ADD_PRINT_TEXT(315,120,60,20,"宁波1");
+		LODOP.SET_PRINT_STYLEA(0,"FontSize",12);
+		LODOP.ADD_PRINT_TEXT(315,200,60,20,"海曙1");
+		LODOP.SET_PRINT_STYLEA(0,"FontSize",12);
+
+
+};
+</script>
+
+
+	</body>
+</html>

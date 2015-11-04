@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<!DOCTYPE mapper      
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"      
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.jw.baseframe.dao.C_T_Sys_BaseFactoriesMapper">
+<resultMap id="BaseResultMap" type="com.jw.baseframe.model.C_T_Sys_BaseFactories" ></resultMap>
+
+	<select id="selectByExample" parameterType="map" statementType="STATEMENT"
+	resultMap="BaseResultMap">
+    <![CDATA[SELECT ${label} AS label,${value} AS value,${link} AS link FROM ${tableName} WHERE ${where} ]]>
+	</select>
+
+
+</mapper>

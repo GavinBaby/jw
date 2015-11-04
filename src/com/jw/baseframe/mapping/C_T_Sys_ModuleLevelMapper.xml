@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<!DOCTYPE mapper      
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"      
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.jw.baseframe.dao.C_T_Sys_ModuleLevelMapper">
+<resultMap id="BaseResultMap" type="com.jw.baseframe.model.C_T_Sys_ModuleLevel" >
+
+ <result column="MODULE_NAME" property="moduleName" jdbcType="NVARCHAR" />
+</resultMap>
+
+	<select id="selectByExample" parameterType="map" statementType="STATEMENT"
+	resultMap="BaseResultMap">
+    <![CDATA[SELECT MODULE_NAME FROM C_T_SYS_MODULE START WITH MODULE_ID='${moduleLevel}' CONNECT BY PRIOR  PAREN_MODULE = MODULE_ID ORDER BY LEVEL DESC]]>
+	</select>
+
+</mapper>

@@ -1,0 +1,330 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jw.baseframe.dao.C_V_Flow_RouteMapper" >
+  <resultMap id="BaseResultMap" type="com.jw.baseframe.model.C_V_Flow_Route" >
+    <result column="FLOW_ID" property="flowId" jdbcType="VARCHAR" />
+    <result column="CUR_TACHE_ID" property="curTacheId" jdbcType="VARCHAR" />
+    <result column="NEXT_TACHE_ID" property="nextTacheId" jdbcType="VARCHAR" />
+    <result column="TACHE_NAME" property="tacheName" jdbcType="VARCHAR" />
+    <result column="UNITID" property="unitid" jdbcType="VARCHAR" />
+    <result column="TACHE_IS_CONFIRMSUBMIT" property="tacheIsConfirmsubmit" jdbcType="DECIMAL" />
+    <result column="TACHE_IS_PERMITPASS" property="tacheIsPermitpass" jdbcType="DECIMAL" />
+    <result column="TACHE_DO_IS_SENT_SMS" property="tacheDoIsSentSms" jdbcType="DECIMAL" />
+    <result column="TACHE_PASS_IS_SENTSMS" property="tachePassIsSentsms" jdbcType="DECIMAL" />
+    <result column="TACHE_DO_IS_SENT_MSG" property="tacheDoIsSentMsg" jdbcType="DECIMAL" />
+    <result column="TACHE_PASS_IS_SENT_MSG" property="tachePassIsSentMsg" jdbcType="DECIMAL" />
+    <result column="TACHE_ONE_DIRECT_SUBMIT" property="tacheOneDirectSubmit" jdbcType="DECIMAL" />
+    <result column="TACHE_SHOW_MYDEP_PERSON" property="tacheShowMydepPerson" jdbcType="DECIMAL" />
+    <result column="TACHE_SHOW_ALL_PERSON" property="tacheShowAllPerson" jdbcType="DECIMAL" />
+    <result column="CHANGE_TACHE_ID" property="changeTacheId" jdbcType="VARCHAR" />
+    <result column="TRANSACTOR_TYPE" property="transactorType" jdbcType="DECIMAL" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    FLOW_ID, CUR_TACHE_ID, NEXT_TACHE_ID, TACHE_NAME, UNITID, TACHE_IS_CONFIRMSUBMIT, 
+    TACHE_IS_PERMITPASS, TACHE_DO_IS_SENT_SMS, TACHE_PASS_IS_SENTSMS, TACHE_DO_IS_SENT_MSG, 
+    TACHE_PASS_IS_SENT_MSG, TACHE_ONE_DIRECT_SUBMIT, TACHE_SHOW_MYDEP_PERSON, TACHE_SHOW_ALL_PERSON, 
+    CHANGE_TACHE_ID, TRANSACTOR_TYPE
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.jw.baseframe.model.C_V_Flow_RouteExample" >
+    <foreach collection="example.oredCriteria" item="criteria" separator="or" />
+    <if test="criteria.valid" >
+      <foreach collection="criteria.criteria" item="criterion" >
+        <if test="criterion.limitValue" >
+          SELECT 
+          <include refid="Base_Column_List" />
+           FROM ( SELECT A.
+          <include refid="Base_Column_List" />
+           , ROWNUM AS con FROM ( 
+        </if>
+      </foreach>
+    </if>
+    select
+    <if test="example.distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from C_V_FLOW_ROUTE
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="example.orderByClause != null" >
+      order by ${example.orderByClause}
+    </if>
+    <if test="criteria.valid" >
+      <foreach collection="criteria.criteria" item="criterion" >
+        <if test="criterion.limitValue" >
+           ) A  <![CDATA[WHERE ROWNUM <= ${criterion.secondValue}]]> ) B <![CDATA[WHERE B.con >= ${criterion.value} ]]>
+        </if>
+      </foreach>
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.jw.baseframe.model.C_V_Flow_RouteExample" >
+    delete from C_V_FLOW_ROUTE
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.jw.baseframe.model.C_V_Flow_Route" >
+    insert into C_V_FLOW_ROUTE (FLOW_ID, CUR_TACHE_ID, 
+      NEXT_TACHE_ID, TACHE_NAME, UNITID, 
+      TACHE_IS_CONFIRMSUBMIT, TACHE_IS_PERMITPASS, 
+      TACHE_DO_IS_SENT_SMS, TACHE_PASS_IS_SENTSMS, 
+      TACHE_DO_IS_SENT_MSG, TACHE_PASS_IS_SENT_MSG, 
+      TACHE_ONE_DIRECT_SUBMIT, TACHE_SHOW_MYDEP_PERSON, 
+      TACHE_SHOW_ALL_PERSON, CHANGE_TACHE_ID, 
+      TRANSACTOR_TYPE)
+    values (#{record.flowId,jdbcType=VARCHAR}, #{record.curTacheId,jdbcType=VARCHAR}, 
+      #{record.nextTacheId,jdbcType=VARCHAR}, #{record.tacheName,jdbcType=VARCHAR}, #{record.unitid,jdbcType=VARCHAR}, 
+      #{record.tacheIsConfirmsubmit,jdbcType=DECIMAL}, #{record.tacheIsPermitpass,jdbcType=DECIMAL}, 
+      #{record.tacheDoIsSentSms,jdbcType=DECIMAL}, #{record.tachePassIsSentsms,jdbcType=DECIMAL}, 
+      #{record.tacheDoIsSentMsg,jdbcType=DECIMAL}, #{record.tachePassIsSentMsg,jdbcType=DECIMAL}, 
+      #{record.tacheOneDirectSubmit,jdbcType=DECIMAL}, #{record.tacheShowMydepPerson,jdbcType=DECIMAL}, 
+      #{record.tacheShowAllPerson,jdbcType=DECIMAL}, #{record.changeTacheId,jdbcType=VARCHAR}, 
+      #{record.transactorType,jdbcType=DECIMAL})
+  </insert>
+  <insert id="insertSelective" parameterType="com.jw.baseframe.model.C_V_Flow_Route" >
+    insert into C_V_FLOW_ROUTE
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="record.flowId != null" >
+        FLOW_ID,
+      </if>
+      <if test="record.curTacheId != null" >
+        CUR_TACHE_ID,
+      </if>
+      <if test="record.nextTacheId != null" >
+        NEXT_TACHE_ID,
+      </if>
+      <if test="record.tacheName != null" >
+        TACHE_NAME,
+      </if>
+      <if test="record.unitid != null" >
+        UNITID,
+      </if>
+      <if test="record.tacheIsConfirmsubmit != null" >
+        TACHE_IS_CONFIRMSUBMIT,
+      </if>
+      <if test="record.tacheIsPermitpass != null" >
+        TACHE_IS_PERMITPASS,
+      </if>
+      <if test="record.tacheDoIsSentSms != null" >
+        TACHE_DO_IS_SENT_SMS,
+      </if>
+      <if test="record.tachePassIsSentsms != null" >
+        TACHE_PASS_IS_SENTSMS,
+      </if>
+      <if test="record.tacheDoIsSentMsg != null" >
+        TACHE_DO_IS_SENT_MSG,
+      </if>
+      <if test="record.tachePassIsSentMsg != null" >
+        TACHE_PASS_IS_SENT_MSG,
+      </if>
+      <if test="record.tacheOneDirectSubmit != null" >
+        TACHE_ONE_DIRECT_SUBMIT,
+      </if>
+      <if test="record.tacheShowMydepPerson != null" >
+        TACHE_SHOW_MYDEP_PERSON,
+      </if>
+      <if test="record.tacheShowAllPerson != null" >
+        TACHE_SHOW_ALL_PERSON,
+      </if>
+      <if test="record.changeTacheId != null" >
+        CHANGE_TACHE_ID,
+      </if>
+      <if test="record.transactorType != null" >
+        TRANSACTOR_TYPE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="record.flowId != null" >
+        #{record.flowId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.curTacheId != null" >
+        #{record.curTacheId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.nextTacheId != null" >
+        #{record.nextTacheId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tacheName != null" >
+        #{record.tacheName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.unitid != null" >
+        #{record.unitid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tacheIsConfirmsubmit != null" >
+        #{record.tacheIsConfirmsubmit,jdbcType=DECIMAL},
+      </if>
+      <if test="record.tacheIsPermitpass != null" >
+        #{record.tacheIsPermitpass,jdbcType=DECIMAL},
+      </if>
+      <if test="record.tacheDoIsSentSms != null" >
+        #{record.tacheDoIsSentSms,jdbcType=DECIMAL},
+      </if>
+      <if test="record.tachePassIsSentsms != null" >
+        #{record.tachePassIsSentsms,jdbcType=DECIMAL},
+      </if>
+      <if test="record.tacheDoIsSentMsg != null" >
+        #{record.tacheDoIsSentMsg,jdbcType=DECIMAL},
+      </if>
+      <if test="record.tachePassIsSentMsg != null" >
+        #{record.tachePassIsSentMsg,jdbcType=DECIMAL},
+      </if>
+      <if test="record.tacheOneDirectSubmit != null" >
+        #{record.tacheOneDirectSubmit,jdbcType=DECIMAL},
+      </if>
+      <if test="record.tacheShowMydepPerson != null" >
+        #{record.tacheShowMydepPerson,jdbcType=DECIMAL},
+      </if>
+      <if test="record.tacheShowAllPerson != null" >
+        #{record.tacheShowAllPerson,jdbcType=DECIMAL},
+      </if>
+      <if test="record.changeTacheId != null" >
+        #{record.changeTacheId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.transactorType != null" >
+        #{record.transactorType,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.jw.baseframe.model.C_V_Flow_RouteExample" resultType="java.lang.Integer" >
+    select count(*) from C_V_FLOW_ROUTE
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update C_V_FLOW_ROUTE
+    <set >
+      <if test="record.flowId != null" >
+        FLOW_ID = #{record.flowId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.curTacheId != null" >
+        CUR_TACHE_ID = #{record.curTacheId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.nextTacheId != null" >
+        NEXT_TACHE_ID = #{record.nextTacheId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tacheName != null" >
+        TACHE_NAME = #{record.tacheName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.unitid != null" >
+        UNITID = #{record.unitid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tacheIsConfirmsubmit != null" >
+        TACHE_IS_CONFIRMSUBMIT = #{record.tacheIsConfirmsubmit,jdbcType=DECIMAL},
+      </if>
+      <if test="record.tacheIsPermitpass != null" >
+        TACHE_IS_PERMITPASS = #{record.tacheIsPermitpass,jdbcType=DECIMAL},
+      </if>
+      <if test="record.tacheDoIsSentSms != null" >
+        TACHE_DO_IS_SENT_SMS = #{record.tacheDoIsSentSms,jdbcType=DECIMAL},
+      </if>
+      <if test="record.tachePassIsSentsms != null" >
+        TACHE_PASS_IS_SENTSMS = #{record.tachePassIsSentsms,jdbcType=DECIMAL},
+      </if>
+      <if test="record.tacheDoIsSentMsg != null" >
+        TACHE_DO_IS_SENT_MSG = #{record.tacheDoIsSentMsg,jdbcType=DECIMAL},
+      </if>
+      <if test="record.tachePassIsSentMsg != null" >
+        TACHE_PASS_IS_SENT_MSG = #{record.tachePassIsSentMsg,jdbcType=DECIMAL},
+      </if>
+      <if test="record.tacheOneDirectSubmit != null" >
+        TACHE_ONE_DIRECT_SUBMIT = #{record.tacheOneDirectSubmit,jdbcType=DECIMAL},
+      </if>
+      <if test="record.tacheShowMydepPerson != null" >
+        TACHE_SHOW_MYDEP_PERSON = #{record.tacheShowMydepPerson,jdbcType=DECIMAL},
+      </if>
+      <if test="record.tacheShowAllPerson != null" >
+        TACHE_SHOW_ALL_PERSON = #{record.tacheShowAllPerson,jdbcType=DECIMAL},
+      </if>
+      <if test="record.changeTacheId != null" >
+        CHANGE_TACHE_ID = #{record.changeTacheId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.transactorType != null" >
+        TRANSACTOR_TYPE = #{record.transactorType,jdbcType=DECIMAL},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update C_V_FLOW_ROUTE
+    set FLOW_ID = #{record.flowId,jdbcType=VARCHAR},
+      CUR_TACHE_ID = #{record.curTacheId,jdbcType=VARCHAR},
+      NEXT_TACHE_ID = #{record.nextTacheId,jdbcType=VARCHAR},
+      TACHE_NAME = #{record.tacheName,jdbcType=VARCHAR},
+      UNITID = #{record.unitid,jdbcType=VARCHAR},
+      TACHE_IS_CONFIRMSUBMIT = #{record.tacheIsConfirmsubmit,jdbcType=DECIMAL},
+      TACHE_IS_PERMITPASS = #{record.tacheIsPermitpass,jdbcType=DECIMAL},
+      TACHE_DO_IS_SENT_SMS = #{record.tacheDoIsSentSms,jdbcType=DECIMAL},
+      TACHE_PASS_IS_SENTSMS = #{record.tachePassIsSentsms,jdbcType=DECIMAL},
+      TACHE_DO_IS_SENT_MSG = #{record.tacheDoIsSentMsg,jdbcType=DECIMAL},
+      TACHE_PASS_IS_SENT_MSG = #{record.tachePassIsSentMsg,jdbcType=DECIMAL},
+      TACHE_ONE_DIRECT_SUBMIT = #{record.tacheOneDirectSubmit,jdbcType=DECIMAL},
+      TACHE_SHOW_MYDEP_PERSON = #{record.tacheShowMydepPerson,jdbcType=DECIMAL},
+      TACHE_SHOW_ALL_PERSON = #{record.tacheShowAllPerson,jdbcType=DECIMAL},
+      CHANGE_TACHE_ID = #{record.changeTacheId,jdbcType=VARCHAR},
+      TRANSACTOR_TYPE = #{record.transactorType,jdbcType=DECIMAL}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

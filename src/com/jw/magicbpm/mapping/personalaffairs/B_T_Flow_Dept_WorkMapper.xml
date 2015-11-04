@@ -1,0 +1,389 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jw.magicbpm.dao.personalaffairs.B_T_Flow_Dept_WorkMapper" >
+  <resultMap id="BaseResultMap" type="com.jw.magicbpm.model.personalaffairs.B_T_Flow_Dept_Work" >
+    <id column="UUID" property="uuid" jdbcType="VARCHAR" />
+    <result column="DEPT_ID" property="deptId" jdbcType="VARCHAR" />
+    <result column="PLAN" property="plan" jdbcType="NVARCHAR" />
+    <result column="ACTUAL" property="actual" jdbcType="NVARCHAR" />
+    <result column="YEAR" property="year" jdbcType="VARCHAR" />
+    <result column="USER_ID" property="userId" jdbcType="VARCHAR" />
+    <result column="UNITID" property="unitid" jdbcType="VARCHAR" />
+    <result column="MONTH" property="month" jdbcType="VARCHAR" />
+    <result column="FINISHQK" property="finishqk" jdbcType="NVARCHAR" />
+    <result column="EXPAND_XML" property="expandXml" jdbcType="NVARCHAR" />
+    <result column="IS_DELETE" property="isDelete" jdbcType="DECIMAL" />
+    <result column="CREATE_USER" property="createUser" jdbcType="VARCHAR" />
+    <result column="CREATE_TIME" property="createTime" jdbcType="VARCHAR" />
+    <result column="UPDATE_USER" property="updateUser" jdbcType="VARCHAR" />
+    <result column="UPDATE_TIME" property="updateTime" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    UUID, DEPT_ID, PLAN, ACTUAL, YEAR, USER_ID, UNITID, MONTH, FINISHQK, EXPAND_XML, 
+    IS_DELETE, CREATE_USER, CREATE_TIME, UPDATE_USER, UPDATE_TIME
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.jw.magicbpm.model.personalaffairs.B_T_Flow_Dept_WorkExample" >
+    <foreach collection="example.oredCriteria" item="criteria" separator="or" />
+    <if test="criteria.valid" >
+      <foreach collection="criteria.criteria" item="criterion" >
+        <if test="criterion.limitValue" >
+          SELECT 
+          <include refid="Base_Column_List" />
+           FROM ( SELECT A.
+          <include refid="Base_Column_List" />
+           , ROWNUM AS con FROM ( 
+        </if>
+      </foreach>
+    </if>
+    select
+    <if test="example.distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from B_T_FLOW_DEPT_WORK
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="example.orderByClause != null" >
+      order by ${example.orderByClause}
+    </if>
+    <if test="criteria.valid" >
+      <foreach collection="criteria.criteria" item="criterion" >
+        <if test="criterion.limitValue" >
+           ) A  <![CDATA[WHERE ROWNUM <= ${criterion.secondValue}]]> ) B <![CDATA[WHERE B.con >= ${criterion.value} ]]>
+        </if>
+      </foreach>
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from B_T_FLOW_DEPT_WORK
+    where UUID = #{uuid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from B_T_FLOW_DEPT_WORK
+    where UUID = #{uuid,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.jw.magicbpm.model.personalaffairs.B_T_Flow_Dept_WorkExample" >
+    delete from B_T_FLOW_DEPT_WORK
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.jw.magicbpm.model.personalaffairs.B_T_Flow_Dept_Work" >
+    insert into B_T_FLOW_DEPT_WORK (UUID, DEPT_ID, PLAN, 
+      ACTUAL, YEAR, USER_ID, 
+      UNITID, MONTH, FINISHQK, 
+      EXPAND_XML, IS_DELETE, CREATE_USER, 
+      CREATE_TIME, UPDATE_USER, UPDATE_TIME
+      )
+    values (#{record.uuid,jdbcType=VARCHAR}, #{record.deptId,jdbcType=VARCHAR}, #{record.plan,jdbcType=NVARCHAR}, 
+      #{record.actual,jdbcType=NVARCHAR}, #{record.year,jdbcType=VARCHAR}, #{record.userId,jdbcType=VARCHAR}, 
+      #{record.unitid,jdbcType=VARCHAR}, #{record.month,jdbcType=VARCHAR}, #{record.finishqk,jdbcType=NVARCHAR}, 
+      #{record.expandXml,jdbcType=NVARCHAR}, #{record.isDelete,jdbcType=DECIMAL}, #{record.createUser,jdbcType=VARCHAR}, 
+      #{record.createTime,jdbcType=VARCHAR}, #{record.updateUser,jdbcType=VARCHAR}, #{record.updateTime,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.jw.magicbpm.model.personalaffairs.B_T_Flow_Dept_Work" >
+    insert into B_T_FLOW_DEPT_WORK
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="record.uuid != null" >
+        UUID,
+      </if>
+      <if test="record.deptId != null" >
+        DEPT_ID,
+      </if>
+      <if test="record.plan != null" >
+        PLAN,
+      </if>
+      <if test="record.actual != null" >
+        ACTUAL,
+      </if>
+      <if test="record.year != null" >
+        YEAR,
+      </if>
+      <if test="record.userId != null" >
+        USER_ID,
+      </if>
+      <if test="record.unitid != null" >
+        UNITID,
+      </if>
+      <if test="record.month != null" >
+        MONTH,
+      </if>
+      <if test="record.finishqk != null" >
+        FINISHQK,
+      </if>
+      <if test="record.expandXml != null" >
+        EXPAND_XML,
+      </if>
+      <if test="record.isDelete != null" >
+        IS_DELETE,
+      </if>
+      <if test="record.createUser != null" >
+        CREATE_USER,
+      </if>
+      <if test="record.createTime != null" >
+        CREATE_TIME,
+      </if>
+      <if test="record.updateUser != null" >
+        UPDATE_USER,
+      </if>
+      <if test="record.updateTime != null" >
+        UPDATE_TIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="record.uuid != null" >
+        #{record.uuid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.deptId != null" >
+        #{record.deptId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.plan != null" >
+        #{record.plan,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.actual != null" >
+        #{record.actual,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.year != null" >
+        #{record.year,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userId != null" >
+        #{record.userId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.unitid != null" >
+        #{record.unitid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.month != null" >
+        #{record.month,jdbcType=VARCHAR},
+      </if>
+      <if test="record.finishqk != null" >
+        #{record.finishqk,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.expandXml != null" >
+        #{record.expandXml,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.isDelete != null" >
+        #{record.isDelete,jdbcType=DECIMAL},
+      </if>
+      <if test="record.createUser != null" >
+        #{record.createUser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null" >
+        #{record.createTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateUser != null" >
+        #{record.updateUser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateTime != null" >
+        #{record.updateTime,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.jw.magicbpm.model.personalaffairs.B_T_Flow_Dept_WorkExample" resultType="java.lang.Integer" >
+    select count(*) from B_T_FLOW_DEPT_WORK
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update B_T_FLOW_DEPT_WORK
+    <set >
+      <if test="record.uuid != null" >
+        UUID = #{record.uuid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.deptId != null" >
+        DEPT_ID = #{record.deptId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.plan != null" >
+        PLAN = #{record.plan,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.actual != null" >
+        ACTUAL = #{record.actual,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.year != null" >
+        YEAR = #{record.year,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userId != null" >
+        USER_ID = #{record.userId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.unitid != null" >
+        UNITID = #{record.unitid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.month != null" >
+        MONTH = #{record.month,jdbcType=VARCHAR},
+      </if>
+      <if test="record.finishqk != null" >
+        FINISHQK = #{record.finishqk,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.expandXml != null" >
+        EXPAND_XML = #{record.expandXml,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.isDelete != null" >
+        IS_DELETE = #{record.isDelete,jdbcType=DECIMAL},
+      </if>
+      <if test="record.createUser != null" >
+        CREATE_USER = #{record.createUser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null" >
+        CREATE_TIME = #{record.createTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateUser != null" >
+        UPDATE_USER = #{record.updateUser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateTime != null" >
+        UPDATE_TIME = #{record.updateTime,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update B_T_FLOW_DEPT_WORK
+    set UUID = #{record.uuid,jdbcType=VARCHAR},
+      DEPT_ID = #{record.deptId,jdbcType=VARCHAR},
+      PLAN = #{record.plan,jdbcType=NVARCHAR},
+      ACTUAL = #{record.actual,jdbcType=NVARCHAR},
+      YEAR = #{record.year,jdbcType=VARCHAR},
+      USER_ID = #{record.userId,jdbcType=VARCHAR},
+      UNITID = #{record.unitid,jdbcType=VARCHAR},
+      MONTH = #{record.month,jdbcType=VARCHAR},
+      FINISHQK = #{record.finishqk,jdbcType=NVARCHAR},
+      EXPAND_XML = #{record.expandXml,jdbcType=NVARCHAR},
+      IS_DELETE = #{record.isDelete,jdbcType=DECIMAL},
+      CREATE_USER = #{record.createUser,jdbcType=VARCHAR},
+      CREATE_TIME = #{record.createTime,jdbcType=VARCHAR},
+      UPDATE_USER = #{record.updateUser,jdbcType=VARCHAR},
+      UPDATE_TIME = #{record.updateTime,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jw.magicbpm.model.personalaffairs.B_T_Flow_Dept_Work" >
+    update B_T_FLOW_DEPT_WORK
+    <set >
+      <if test="record.deptId != null" >
+        DEPT_ID = #{record.deptId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.plan != null" >
+        PLAN = #{record.plan,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.actual != null" >
+        ACTUAL = #{record.actual,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.year != null" >
+        YEAR = #{record.year,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userId != null" >
+        USER_ID = #{record.userId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.unitid != null" >
+        UNITID = #{record.unitid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.month != null" >
+        MONTH = #{record.month,jdbcType=VARCHAR},
+      </if>
+      <if test="record.finishqk != null" >
+        FINISHQK = #{record.finishqk,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.expandXml != null" >
+        EXPAND_XML = #{record.expandXml,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.isDelete != null" >
+        IS_DELETE = #{record.isDelete,jdbcType=DECIMAL},
+      </if>
+      <if test="record.createUser != null" >
+        CREATE_USER = #{record.createUser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null" >
+        CREATE_TIME = #{record.createTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateUser != null" >
+        UPDATE_USER = #{record.updateUser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateTime != null" >
+        UPDATE_TIME = #{record.updateTime,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where UUID = #{record.uuid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jw.magicbpm.model.personalaffairs.B_T_Flow_Dept_Work" >
+    update B_T_FLOW_DEPT_WORK
+    set DEPT_ID = #{record.deptId,jdbcType=VARCHAR},
+      PLAN = #{record.plan,jdbcType=NVARCHAR},
+      ACTUAL = #{record.actual,jdbcType=NVARCHAR},
+      YEAR = #{record.year,jdbcType=VARCHAR},
+      USER_ID = #{record.userId,jdbcType=VARCHAR},
+      UNITID = #{record.unitid,jdbcType=VARCHAR},
+      MONTH = #{record.month,jdbcType=VARCHAR},
+      FINISHQK = #{record.finishqk,jdbcType=NVARCHAR},
+      EXPAND_XML = #{record.expandXml,jdbcType=NVARCHAR},
+      IS_DELETE = #{record.isDelete,jdbcType=DECIMAL},
+      CREATE_USER = #{record.createUser,jdbcType=VARCHAR},
+      CREATE_TIME = #{record.createTime,jdbcType=VARCHAR},
+      UPDATE_USER = #{record.updateUser,jdbcType=VARCHAR},
+      UPDATE_TIME = #{record.updateTime,jdbcType=VARCHAR}
+    where UUID = #{record.uuid,jdbcType=VARCHAR}
+  </update>
+</mapper>

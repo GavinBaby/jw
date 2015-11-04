@@ -1,0 +1,514 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jw.baseframe.dao.C_T_Sys_DonemattersMapper" >
+  <resultMap id="BaseResultMap" type="com.jw.baseframe.model.C_T_Sys_Donematters" >
+    <id column="UUID" property="uuid" jdbcType="VARCHAR" />
+    <result column="SENT_USER" property="sentUser" jdbcType="VARCHAR" />
+    <result column="RECEIVE_USER" property="receiveUser" jdbcType="VARCHAR" />
+    <result column="MAIN_URL" property="mainUrl" jdbcType="VARCHAR" />
+    <result column="DOC_URL" property="docUrl" jdbcType="VARCHAR" />
+    <result column="PROPERTY" property="property" jdbcType="NVARCHAR" />
+    <result column="MODULE_ID" property="moduleId" jdbcType="VARCHAR" />
+    <result column="TACHE_ID" property="tacheId" jdbcType="VARCHAR" />
+    <result column="MAINDOCID" property="maindocid" jdbcType="VARCHAR" />
+    <result column="IF_SEND_MSG" property="ifSendMsg" jdbcType="DECIMAL" />
+    <result column="TITLE_SUB" property="titleSub" jdbcType="NVARCHAR" />
+    <result column="TYPE" property="type" jdbcType="NVARCHAR" />
+    <result column="TITLE" property="title" jdbcType="NVARCHAR" />
+    <result column="IS_WT_DOC" property="isWtDoc" jdbcType="DECIMAL" />
+    <result column="PRIORITIES" property="priorities" jdbcType="NVARCHAR" />
+    <result column="IS_READ" property="isRead" jdbcType="DECIMAL" />
+    <result column="EXPAND_XML" property="expandXml" jdbcType="NVARCHAR" />
+    <result column="UNITID" property="unitid" jdbcType="VARCHAR" />
+    <result column="IS_DELETE" property="isDelete" jdbcType="DECIMAL" />
+    <result column="CREATE_USER" property="createUser" jdbcType="VARCHAR" />
+    <result column="CREATE_TIME" property="createTime" jdbcType="VARCHAR" />
+    <result column="UPDATE_USER" property="updateUser" jdbcType="VARCHAR" />
+    <result column="UPDATE_TIME" property="updateTime" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    UUID, SENT_USER, RECEIVE_USER, MAIN_URL, DOC_URL, PROPERTY, MODULE_ID, TACHE_ID, 
+    MAINDOCID, IF_SEND_MSG, TITLE_SUB, TYPE, TITLE, IS_WT_DOC, PRIORITIES, IS_READ, EXPAND_XML, 
+    UNITID, IS_DELETE, CREATE_USER, CREATE_TIME, UPDATE_USER, UPDATE_TIME
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.jw.baseframe.model.C_T_Sys_DonemattersExample" >
+    <foreach collection="example.oredCriteria" item="criteria" separator="or" />
+    <if test="criteria.valid" >
+      <foreach collection="criteria.criteria" item="criterion" >
+        <if test="criterion.limitValue" >
+          SELECT 
+          <include refid="Base_Column_List" />
+           FROM ( SELECT A.
+          <include refid="Base_Column_List" />
+           , ROWNUM AS con FROM ( 
+        </if>
+      </foreach>
+    </if>
+    select
+    <if test="example.distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from C_T_SYS_DONEMATTERS
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="example.orderByClause != null" >
+      order by ${example.orderByClause}
+    </if>
+    <if test="criteria.valid" >
+      <foreach collection="criteria.criteria" item="criterion" >
+        <if test="criterion.limitValue" >
+           ) A  <![CDATA[WHERE ROWNUM <= ${criterion.secondValue}]]> ) B <![CDATA[WHERE B.con >= ${criterion.value} ]]>
+        </if>
+      </foreach>
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from C_T_SYS_DONEMATTERS
+    where UUID = #{uuid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from C_T_SYS_DONEMATTERS
+    where UUID = #{uuid,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.jw.baseframe.model.C_T_Sys_DonemattersExample" >
+    delete from C_T_SYS_DONEMATTERS
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.jw.baseframe.model.C_T_Sys_Donematters" >
+    insert into C_T_SYS_DONEMATTERS (UUID, SENT_USER, RECEIVE_USER, 
+      MAIN_URL, DOC_URL, PROPERTY, 
+      MODULE_ID, TACHE_ID, MAINDOCID, 
+      IF_SEND_MSG, TITLE_SUB, TYPE, 
+      TITLE, IS_WT_DOC, PRIORITIES, 
+      IS_READ, EXPAND_XML, UNITID, 
+      IS_DELETE, CREATE_USER, CREATE_TIME, 
+      UPDATE_USER, UPDATE_TIME)
+    values (#{record.uuid,jdbcType=VARCHAR}, #{record.sentUser,jdbcType=VARCHAR}, #{record.receiveUser,jdbcType=VARCHAR}, 
+      #{record.mainUrl,jdbcType=VARCHAR}, #{record.docUrl,jdbcType=VARCHAR}, #{record.property,jdbcType=NVARCHAR}, 
+      #{record.moduleId,jdbcType=VARCHAR}, #{record.tacheId,jdbcType=VARCHAR}, #{record.maindocid,jdbcType=VARCHAR}, 
+      #{record.ifSendMsg,jdbcType=DECIMAL}, #{record.titleSub,jdbcType=NVARCHAR}, #{record.type,jdbcType=NVARCHAR}, 
+      #{record.title,jdbcType=NVARCHAR}, #{record.isWtDoc,jdbcType=DECIMAL}, #{record.priorities,jdbcType=NVARCHAR}, 
+      #{record.isRead,jdbcType=DECIMAL}, #{record.expandXml,jdbcType=NVARCHAR}, #{record.unitid,jdbcType=VARCHAR}, 
+      #{record.isDelete,jdbcType=DECIMAL}, #{record.createUser,jdbcType=VARCHAR}, #{record.createTime,jdbcType=VARCHAR}, 
+      #{record.updateUser,jdbcType=VARCHAR}, #{record.updateTime,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.jw.baseframe.model.C_T_Sys_Donematters" >
+    insert into C_T_SYS_DONEMATTERS
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="record.uuid != null" >
+        UUID,
+      </if>
+      <if test="record.sentUser != null" >
+        SENT_USER,
+      </if>
+      <if test="record.receiveUser != null" >
+        RECEIVE_USER,
+      </if>
+      <if test="record.mainUrl != null" >
+        MAIN_URL,
+      </if>
+      <if test="record.docUrl != null" >
+        DOC_URL,
+      </if>
+      <if test="record.property != null" >
+        PROPERTY,
+      </if>
+      <if test="record.moduleId != null" >
+        MODULE_ID,
+      </if>
+      <if test="record.tacheId != null" >
+        TACHE_ID,
+      </if>
+      <if test="record.maindocid != null" >
+        MAINDOCID,
+      </if>
+      <if test="record.ifSendMsg != null" >
+        IF_SEND_MSG,
+      </if>
+      <if test="record.titleSub != null" >
+        TITLE_SUB,
+      </if>
+      <if test="record.type != null" >
+        TYPE,
+      </if>
+      <if test="record.title != null" >
+        TITLE,
+      </if>
+      <if test="record.isWtDoc != null" >
+        IS_WT_DOC,
+      </if>
+      <if test="record.priorities != null" >
+        PRIORITIES,
+      </if>
+      <if test="record.isRead != null" >
+        IS_READ,
+      </if>
+      <if test="record.expandXml != null" >
+        EXPAND_XML,
+      </if>
+      <if test="record.unitid != null" >
+        UNITID,
+      </if>
+      <if test="record.isDelete != null" >
+        IS_DELETE,
+      </if>
+      <if test="record.createUser != null" >
+        CREATE_USER,
+      </if>
+      <if test="record.createTime != null" >
+        CREATE_TIME,
+      </if>
+      <if test="record.updateUser != null" >
+        UPDATE_USER,
+      </if>
+      <if test="record.updateTime != null" >
+        UPDATE_TIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="record.uuid != null" >
+        #{record.uuid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sentUser != null" >
+        #{record.sentUser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.receiveUser != null" >
+        #{record.receiveUser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mainUrl != null" >
+        #{record.mainUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.docUrl != null" >
+        #{record.docUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.property != null" >
+        #{record.property,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.moduleId != null" >
+        #{record.moduleId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tacheId != null" >
+        #{record.tacheId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.maindocid != null" >
+        #{record.maindocid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ifSendMsg != null" >
+        #{record.ifSendMsg,jdbcType=DECIMAL},
+      </if>
+      <if test="record.titleSub != null" >
+        #{record.titleSub,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.type != null" >
+        #{record.type,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.title != null" >
+        #{record.title,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.isWtDoc != null" >
+        #{record.isWtDoc,jdbcType=DECIMAL},
+      </if>
+      <if test="record.priorities != null" >
+        #{record.priorities,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.isRead != null" >
+        #{record.isRead,jdbcType=DECIMAL},
+      </if>
+      <if test="record.expandXml != null" >
+        #{record.expandXml,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.unitid != null" >
+        #{record.unitid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isDelete != null" >
+        #{record.isDelete,jdbcType=DECIMAL},
+      </if>
+      <if test="record.createUser != null" >
+        #{record.createUser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null" >
+        #{record.createTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateUser != null" >
+        #{record.updateUser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateTime != null" >
+        #{record.updateTime,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.jw.baseframe.model.C_T_Sys_DonemattersExample" resultType="java.lang.Integer" >
+    select count(*) from C_T_SYS_DONEMATTERS
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update C_T_SYS_DONEMATTERS
+    <set >
+      <if test="record.uuid != null" >
+        UUID = #{record.uuid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sentUser != null" >
+        SENT_USER = #{record.sentUser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.receiveUser != null" >
+        RECEIVE_USER = #{record.receiveUser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mainUrl != null" >
+        MAIN_URL = #{record.mainUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.docUrl != null" >
+        DOC_URL = #{record.docUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.property != null" >
+        PROPERTY = #{record.property,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.moduleId != null" >
+        MODULE_ID = #{record.moduleId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tacheId != null" >
+        TACHE_ID = #{record.tacheId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.maindocid != null" >
+        MAINDOCID = #{record.maindocid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ifSendMsg != null" >
+        IF_SEND_MSG = #{record.ifSendMsg,jdbcType=DECIMAL},
+      </if>
+      <if test="record.titleSub != null" >
+        TITLE_SUB = #{record.titleSub,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.type != null" >
+        TYPE = #{record.type,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.title != null" >
+        TITLE = #{record.title,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.isWtDoc != null" >
+        IS_WT_DOC = #{record.isWtDoc,jdbcType=DECIMAL},
+      </if>
+      <if test="record.priorities != null" >
+        PRIORITIES = #{record.priorities,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.isRead != null" >
+        IS_READ = #{record.isRead,jdbcType=DECIMAL},
+      </if>
+      <if test="record.expandXml != null" >
+        EXPAND_XML = #{record.expandXml,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.unitid != null" >
+        UNITID = #{record.unitid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isDelete != null" >
+        IS_DELETE = #{record.isDelete,jdbcType=DECIMAL},
+      </if>
+      <if test="record.createUser != null" >
+        CREATE_USER = #{record.createUser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null" >
+        CREATE_TIME = #{record.createTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateUser != null" >
+        UPDATE_USER = #{record.updateUser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateTime != null" >
+        UPDATE_TIME = #{record.updateTime,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update C_T_SYS_DONEMATTERS
+    set UUID = #{record.uuid,jdbcType=VARCHAR},
+      SENT_USER = #{record.sentUser,jdbcType=VARCHAR},
+      RECEIVE_USER = #{record.receiveUser,jdbcType=VARCHAR},
+      MAIN_URL = #{record.mainUrl,jdbcType=VARCHAR},
+      DOC_URL = #{record.docUrl,jdbcType=VARCHAR},
+      PROPERTY = #{record.property,jdbcType=NVARCHAR},
+      MODULE_ID = #{record.moduleId,jdbcType=VARCHAR},
+      TACHE_ID = #{record.tacheId,jdbcType=VARCHAR},
+      MAINDOCID = #{record.maindocid,jdbcType=VARCHAR},
+      IF_SEND_MSG = #{record.ifSendMsg,jdbcType=DECIMAL},
+      TITLE_SUB = #{record.titleSub,jdbcType=NVARCHAR},
+      TYPE = #{record.type,jdbcType=NVARCHAR},
+      TITLE = #{record.title,jdbcType=NVARCHAR},
+      IS_WT_DOC = #{record.isWtDoc,jdbcType=DECIMAL},
+      PRIORITIES = #{record.priorities,jdbcType=NVARCHAR},
+      IS_READ = #{record.isRead,jdbcType=DECIMAL},
+      EXPAND_XML = #{record.expandXml,jdbcType=NVARCHAR},
+      UNITID = #{record.unitid,jdbcType=VARCHAR},
+      IS_DELETE = #{record.isDelete,jdbcType=DECIMAL},
+      CREATE_USER = #{record.createUser,jdbcType=VARCHAR},
+      CREATE_TIME = #{record.createTime,jdbcType=VARCHAR},
+      UPDATE_USER = #{record.updateUser,jdbcType=VARCHAR},
+      UPDATE_TIME = #{record.updateTime,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jw.baseframe.model.C_T_Sys_Donematters" >
+    update C_T_SYS_DONEMATTERS
+    <set >
+      <if test="record.sentUser != null" >
+        SENT_USER = #{record.sentUser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.receiveUser != null" >
+        RECEIVE_USER = #{record.receiveUser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mainUrl != null" >
+        MAIN_URL = #{record.mainUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.docUrl != null" >
+        DOC_URL = #{record.docUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.property != null" >
+        PROPERTY = #{record.property,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.moduleId != null" >
+        MODULE_ID = #{record.moduleId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tacheId != null" >
+        TACHE_ID = #{record.tacheId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.maindocid != null" >
+        MAINDOCID = #{record.maindocid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ifSendMsg != null" >
+        IF_SEND_MSG = #{record.ifSendMsg,jdbcType=DECIMAL},
+      </if>
+      <if test="record.titleSub != null" >
+        TITLE_SUB = #{record.titleSub,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.type != null" >
+        TYPE = #{record.type,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.title != null" >
+        TITLE = #{record.title,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.isWtDoc != null" >
+        IS_WT_DOC = #{record.isWtDoc,jdbcType=DECIMAL},
+      </if>
+      <if test="record.priorities != null" >
+        PRIORITIES = #{record.priorities,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.isRead != null" >
+        IS_READ = #{record.isRead,jdbcType=DECIMAL},
+      </if>
+      <if test="record.expandXml != null" >
+        EXPAND_XML = #{record.expandXml,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.unitid != null" >
+        UNITID = #{record.unitid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isDelete != null" >
+        IS_DELETE = #{record.isDelete,jdbcType=DECIMAL},
+      </if>
+      <if test="record.createUser != null" >
+        CREATE_USER = #{record.createUser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null" >
+        CREATE_TIME = #{record.createTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateUser != null" >
+        UPDATE_USER = #{record.updateUser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateTime != null" >
+        UPDATE_TIME = #{record.updateTime,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where UUID = #{record.uuid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jw.baseframe.model.C_T_Sys_Donematters" >
+    update C_T_SYS_DONEMATTERS
+    set SENT_USER = #{record.sentUser,jdbcType=VARCHAR},
+      RECEIVE_USER = #{record.receiveUser,jdbcType=VARCHAR},
+      MAIN_URL = #{record.mainUrl,jdbcType=VARCHAR},
+      DOC_URL = #{record.docUrl,jdbcType=VARCHAR},
+      PROPERTY = #{record.property,jdbcType=NVARCHAR},
+      MODULE_ID = #{record.moduleId,jdbcType=VARCHAR},
+      TACHE_ID = #{record.tacheId,jdbcType=VARCHAR},
+      MAINDOCID = #{record.maindocid,jdbcType=VARCHAR},
+      IF_SEND_MSG = #{record.ifSendMsg,jdbcType=DECIMAL},
+      TITLE_SUB = #{record.titleSub,jdbcType=NVARCHAR},
+      TYPE = #{record.type,jdbcType=NVARCHAR},
+      TITLE = #{record.title,jdbcType=NVARCHAR},
+      IS_WT_DOC = #{record.isWtDoc,jdbcType=DECIMAL},
+      PRIORITIES = #{record.priorities,jdbcType=NVARCHAR},
+      IS_READ = #{record.isRead,jdbcType=DECIMAL},
+      EXPAND_XML = #{record.expandXml,jdbcType=NVARCHAR},
+      UNITID = #{record.unitid,jdbcType=VARCHAR},
+      IS_DELETE = #{record.isDelete,jdbcType=DECIMAL},
+      CREATE_USER = #{record.createUser,jdbcType=VARCHAR},
+      CREATE_TIME = #{record.createTime,jdbcType=VARCHAR},
+      UPDATE_USER = #{record.updateUser,jdbcType=VARCHAR},
+      UPDATE_TIME = #{record.updateTime,jdbcType=VARCHAR}
+    where UUID = #{record.uuid,jdbcType=VARCHAR}
+  </update>
+</mapper>

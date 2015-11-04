@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="GBK"?>
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+        "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+    <!-- 指定全局国际化资源文件base名 -->
+    <constant name="struts.custom.i18n.resources"
+        value="messageResource">
+    </constant>
+    <!-- 指定国际化编码所使用的字符集 -->
+    <constant name="struts.i18n.encoding" value="GBK"></constant>
+    <!--  上传路径 -->
+    <constant name="struts.multipart.saveDir" value="/tmp"></constant>
+    
+    <constant name="struts.objectFactory.spring.autoWire.alwaysRespect" value="true" /> 
+    
+    
+        <!-- 改变struts2默认为2M的上传文件大小限制 -->  
+    <constant name="struts.multipart.maxSize" value="1024000000"/>
+    
+    <!-- 共享拦截器 -->
+    	<package name="strutsaction" extends="struts-default">		
+		<interceptors>
+			<interceptor name="authority"
+				class="com.jw.baseframe.interceptor.SessionNullInterceptor" />
+			<interceptor name="logger"
+				class="com.opensymphony.xwork2.interceptor.LoggingInterceptor" />
+			<interceptor name="Timer"
+				class="com.opensymphony.xwork2.interceptor.TimerInterceptor" />
+			<interceptor-stack name="myDefaultStack">
+				<interceptor-ref name="authority" />
+				<interceptor-ref name="timer" />
+				<interceptor-ref name="logger" />
+				<interceptor-ref name="defaultStack" />
+			</interceptor-stack>
+		</interceptors>
+		<default-interceptor-ref name="myDefaultStack" />		
+		<!-- 全局error -->		
+		<global-results>			
+			<result name="error">/web/error.jsp</result>		 
+			<result name="login" type="redirect">/web/startpage.action</result>
+		</global-results>
+		<global-exception-mappings>
+			<exception-mapping result="error" exception="java.lang.Exception" />
+		</global-exception-mappings>
+	</package>
+	
+	<package name="strutsjson" extends="json-default">		
+		<interceptors>
+			<interceptor name="authority"
+				class="com.jw.baseframe.interceptor.SessionNullInterceptor" />
+			<interceptor name="logger"
+				class="com.opensymphony.xwork2.interceptor.LoggingInterceptor" />
+			<interceptor name="Timer"
+				class="com.opensymphony.xwork2.interceptor.TimerInterceptor" />
+			<interceptor-stack name="myDefaultStack">
+				<interceptor-ref name="authority" />
+				<interceptor-ref name="timer" />
+				<interceptor-ref name="logger" />
+				<interceptor-ref name="defaultStack" />
+			</interceptor-stack>
+		</interceptors>
+		<default-interceptor-ref name="myDefaultStack" />		
+		<!-- 全局error -->		
+		<global-results>			
+			<result name="error">/web/error.jsp</result>		 
+			<result name="login" type="redirect">/web/startpage.action</result>
+		</global-results>
+		<global-exception-mappings>
+			<exception-mapping result="error" exception="java.lang.Exception" />
+		</global-exception-mappings>
+	</package>
+	
+	<package name="upload" extends="json-default">  
+            <action name="uploadFile" class="com.jw.baseframe.action.common.UploadFileAction">  
+                <result type="json">
+					<param name="root">
+						retpath
+					</param>
+				</result> 
+            </action>
+            <action name="uploadImage" class="com.jw.baseframe.action.common.UploadFileAction" method="uploadImage">  
+                <result type="json">
+					<param name="root">
+						retpath
+					</param>
+				</result>  
+            </action>  
+           <action name="importFile" class="com.jw.baseframe.action.common.UploadFileAction" method="importFile">
+            <!--  导入路径  -->  
+            <param name="savePath">imp</param> 
+                <result type="json">
+					<param name="root">
+						retpath
+					</param>
+				</result>  
+            </action>  
+            <action name="downloadFile" class="com.jw.baseframe.action.common.DownloadFileAction">  
+            </action>
+             <action name="deleteUploadFile" class="com.jw.baseframe.action.common.DownloadFileAction"
+             method="deleteUploadFile">  
+                <result type="json">
+                </result> 
+            </action>    
+    </package> 
+	
+    <!-- 维护画面 -->
+    <include file="struts_Maintenance.xml"></include>
+
+     <!-- 登录画面 -->
+    <include file="struts_Login.xml"></include>
+    
+     <!-- 流程画面 -->
+    <include file="struts_WorkFlowEngine.xml"></include>
+    
+    <!-- 公共信息画面 -->
+    <include file="struts_Publicinformation.xml"></include>
+    
+     <!-- 公文管理画面 -->
+    <include file="struts_DocumentManagement.xml"></include>
+    
+     <!-- 行政办公画面 -->
+    <include file="struts_Personalaffairs.xml"></include>
+    
+    <!-- 通用画面 -->
+    <include file="struts_Common.xml"></include>
+    
+     <!-- 首页模块维护画面 -->
+    <include file="struts_MainPortlet.xml"></include>
+      <!-- 采购模块 -->
+    <include file="struts_purchase.xml"></include>
+    
+   
+    
+</struts>

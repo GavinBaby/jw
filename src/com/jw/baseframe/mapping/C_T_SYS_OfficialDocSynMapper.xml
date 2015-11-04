@@ -1,0 +1,484 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jw.baseframe.dao.C_T_SYS_OfficialDocSynMapper" >
+  <resultMap id="BaseResultMap" type="com.jw.baseframe.model.C_T_SYS_OfficialDocSyn" >
+    <id column="UUID" property="uuid" jdbcType="VARCHAR" />
+    <result column="PKID" property="pkid" jdbcType="NVARCHAR" />
+    <result column="DOCTYPE" property="doctype" jdbcType="NVARCHAR" />
+    <result column="DOCNUM" property="docnum" jdbcType="NVARCHAR" />
+    <result column="DOCTITLE" property="doctitle" jdbcType="NVARCHAR" />
+    <result column="REMARK" property="remark" jdbcType="NVARCHAR" />
+    <result column="SENDDEPID" property="senddepid" jdbcType="NVARCHAR" />
+    <result column="SENDUNIT" property="sendunit" jdbcType="NVARCHAR" />
+    <result column="RECIEVEUNIT" property="recieveunit" jdbcType="NVARCHAR" />
+    <result column="FILETYPE" property="filetype" jdbcType="NVARCHAR" />
+    <result column="KEYWORD" property="keyword" jdbcType="NVARCHAR" />
+    <result column="REGDATE" property="regdate" jdbcType="NVARCHAR" />
+    <result column="FILEID" property="fileid" jdbcType="NVARCHAR" />
+    <result column="ISINPUT" property="isinput" jdbcType="DECIMAL" />
+    <result column="EXPAND_XML" property="expandXml" jdbcType="NVARCHAR" />
+    <result column="UNITID" property="unitid" jdbcType="VARCHAR" />
+    <result column="IS_DELETE" property="isDelete" jdbcType="DECIMAL" />
+    <result column="CREATE_USER" property="createUser" jdbcType="VARCHAR" />
+    <result column="CREATE_TIME" property="createTime" jdbcType="VARCHAR" />
+    <result column="UPDATE_USER" property="updateUser" jdbcType="VARCHAR" />
+    <result column="UPDATE_TIME" property="updateTime" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    UUID, PKID, DOCTYPE, DOCNUM, DOCTITLE, REMARK, SENDDEPID, SENDUNIT, RECIEVEUNIT, 
+    FILETYPE, KEYWORD, REGDATE, FILEID, ISINPUT, EXPAND_XML, UNITID, IS_DELETE, CREATE_USER, 
+    CREATE_TIME, UPDATE_USER, UPDATE_TIME
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.jw.baseframe.model.C_T_SYS_OfficialDocSynExample" >
+    <foreach collection="example.oredCriteria" item="criteria" separator="or" />
+    <if test="criteria.valid" >
+      <foreach collection="criteria.criteria" item="criterion" >
+        <if test="criterion.limitValue" >
+          SELECT 
+          <include refid="Base_Column_List" />
+           FROM ( SELECT A.
+          <include refid="Base_Column_List" />
+           , ROWNUM AS con FROM ( 
+        </if>
+      </foreach>
+    </if>
+    select
+    <if test="example.distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from C_T_SYS_OFFICIALDOCSYN
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="example.orderByClause != null" >
+      order by ${example.orderByClause}
+    </if>
+    <if test="criteria.valid" >
+      <foreach collection="criteria.criteria" item="criterion" >
+        <if test="criterion.limitValue" >
+           ) A  <![CDATA[WHERE ROWNUM <= ${criterion.secondValue}]]> ) B <![CDATA[WHERE B.con >= ${criterion.value} ]]>
+        </if>
+      </foreach>
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from C_T_SYS_OFFICIALDOCSYN
+    where UUID = #{uuid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from C_T_SYS_OFFICIALDOCSYN
+    where UUID = #{uuid,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.jw.baseframe.model.C_T_SYS_OfficialDocSynExample" >
+    delete from C_T_SYS_OFFICIALDOCSYN
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.jw.baseframe.model.C_T_SYS_OfficialDocSyn" >
+    insert into C_T_SYS_OFFICIALDOCSYN (UUID, PKID, DOCTYPE, 
+      DOCNUM, DOCTITLE, REMARK, 
+      SENDDEPID, SENDUNIT, RECIEVEUNIT, 
+      FILETYPE, KEYWORD, REGDATE, 
+      FILEID, ISINPUT, EXPAND_XML, 
+      UNITID, IS_DELETE, CREATE_USER, 
+      CREATE_TIME, UPDATE_USER, UPDATE_TIME
+      )
+    values (#{record.uuid,jdbcType=VARCHAR}, #{record.pkid,jdbcType=NVARCHAR}, #{record.doctype,jdbcType=NVARCHAR}, 
+      #{record.docnum,jdbcType=NVARCHAR}, #{record.doctitle,jdbcType=NVARCHAR}, #{record.remark,jdbcType=NVARCHAR}, 
+      #{record.senddepid,jdbcType=NVARCHAR}, #{record.sendunit,jdbcType=NVARCHAR}, #{record.recieveunit,jdbcType=NVARCHAR}, 
+      #{record.filetype,jdbcType=NVARCHAR}, #{record.keyword,jdbcType=NVARCHAR}, #{record.regdate,jdbcType=NVARCHAR}, 
+      #{record.fileid,jdbcType=NVARCHAR}, #{record.isinput,jdbcType=DECIMAL}, #{record.expandXml,jdbcType=NVARCHAR}, 
+      #{record.unitid,jdbcType=VARCHAR}, #{record.isDelete,jdbcType=DECIMAL}, #{record.createUser,jdbcType=VARCHAR}, 
+      #{record.createTime,jdbcType=VARCHAR}, #{record.updateUser,jdbcType=VARCHAR}, #{record.updateTime,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.jw.baseframe.model.C_T_SYS_OfficialDocSyn" >
+    insert into C_T_SYS_OFFICIALDOCSYN
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="record.uuid != null" >
+        UUID,
+      </if>
+      <if test="record.pkid != null" >
+        PKID,
+      </if>
+      <if test="record.doctype != null" >
+        DOCTYPE,
+      </if>
+      <if test="record.docnum != null" >
+        DOCNUM,
+      </if>
+      <if test="record.doctitle != null" >
+        DOCTITLE,
+      </if>
+      <if test="record.remark != null" >
+        REMARK,
+      </if>
+      <if test="record.senddepid != null" >
+        SENDDEPID,
+      </if>
+      <if test="record.sendunit != null" >
+        SENDUNIT,
+      </if>
+      <if test="record.recieveunit != null" >
+        RECIEVEUNIT,
+      </if>
+      <if test="record.filetype != null" >
+        FILETYPE,
+      </if>
+      <if test="record.keyword != null" >
+        KEYWORD,
+      </if>
+      <if test="record.regdate != null" >
+        REGDATE,
+      </if>
+      <if test="record.fileid != null" >
+        FILEID,
+      </if>
+      <if test="record.isinput != null" >
+        ISINPUT,
+      </if>
+      <if test="record.expandXml != null" >
+        EXPAND_XML,
+      </if>
+      <if test="record.unitid != null" >
+        UNITID,
+      </if>
+      <if test="record.isDelete != null" >
+        IS_DELETE,
+      </if>
+      <if test="record.createUser != null" >
+        CREATE_USER,
+      </if>
+      <if test="record.createTime != null" >
+        CREATE_TIME,
+      </if>
+      <if test="record.updateUser != null" >
+        UPDATE_USER,
+      </if>
+      <if test="record.updateTime != null" >
+        UPDATE_TIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="record.uuid != null" >
+        #{record.uuid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pkid != null" >
+        #{record.pkid,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.doctype != null" >
+        #{record.doctype,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.docnum != null" >
+        #{record.docnum,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.doctitle != null" >
+        #{record.doctitle,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.remark != null" >
+        #{record.remark,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.senddepid != null" >
+        #{record.senddepid,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.sendunit != null" >
+        #{record.sendunit,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.recieveunit != null" >
+        #{record.recieveunit,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.filetype != null" >
+        #{record.filetype,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.keyword != null" >
+        #{record.keyword,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.regdate != null" >
+        #{record.regdate,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.fileid != null" >
+        #{record.fileid,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.isinput != null" >
+        #{record.isinput,jdbcType=DECIMAL},
+      </if>
+      <if test="record.expandXml != null" >
+        #{record.expandXml,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.unitid != null" >
+        #{record.unitid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isDelete != null" >
+        #{record.isDelete,jdbcType=DECIMAL},
+      </if>
+      <if test="record.createUser != null" >
+        #{record.createUser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null" >
+        #{record.createTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateUser != null" >
+        #{record.updateUser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateTime != null" >
+        #{record.updateTime,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.jw.baseframe.model.C_T_SYS_OfficialDocSynExample" resultType="java.lang.Integer" >
+    select count(*) from C_T_SYS_OFFICIALDOCSYN
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update C_T_SYS_OFFICIALDOCSYN
+    <set >
+      <if test="record.uuid != null" >
+        UUID = #{record.uuid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pkid != null" >
+        PKID = #{record.pkid,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.doctype != null" >
+        DOCTYPE = #{record.doctype,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.docnum != null" >
+        DOCNUM = #{record.docnum,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.doctitle != null" >
+        DOCTITLE = #{record.doctitle,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.remark != null" >
+        REMARK = #{record.remark,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.senddepid != null" >
+        SENDDEPID = #{record.senddepid,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.sendunit != null" >
+        SENDUNIT = #{record.sendunit,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.recieveunit != null" >
+        RECIEVEUNIT = #{record.recieveunit,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.filetype != null" >
+        FILETYPE = #{record.filetype,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.keyword != null" >
+        KEYWORD = #{record.keyword,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.regdate != null" >
+        REGDATE = #{record.regdate,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.fileid != null" >
+        FILEID = #{record.fileid,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.isinput != null" >
+        ISINPUT = #{record.isinput,jdbcType=DECIMAL},
+      </if>
+      <if test="record.expandXml != null" >
+        EXPAND_XML = #{record.expandXml,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.unitid != null" >
+        UNITID = #{record.unitid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isDelete != null" >
+        IS_DELETE = #{record.isDelete,jdbcType=DECIMAL},
+      </if>
+      <if test="record.createUser != null" >
+        CREATE_USER = #{record.createUser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null" >
+        CREATE_TIME = #{record.createTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateUser != null" >
+        UPDATE_USER = #{record.updateUser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateTime != null" >
+        UPDATE_TIME = #{record.updateTime,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update C_T_SYS_OFFICIALDOCSYN
+    set UUID = #{record.uuid,jdbcType=VARCHAR},
+      PKID = #{record.pkid,jdbcType=NVARCHAR},
+      DOCTYPE = #{record.doctype,jdbcType=NVARCHAR},
+      DOCNUM = #{record.docnum,jdbcType=NVARCHAR},
+      DOCTITLE = #{record.doctitle,jdbcType=NVARCHAR},
+      REMARK = #{record.remark,jdbcType=NVARCHAR},
+      SENDDEPID = #{record.senddepid,jdbcType=NVARCHAR},
+      SENDUNIT = #{record.sendunit,jdbcType=NVARCHAR},
+      RECIEVEUNIT = #{record.recieveunit,jdbcType=NVARCHAR},
+      FILETYPE = #{record.filetype,jdbcType=NVARCHAR},
+      KEYWORD = #{record.keyword,jdbcType=NVARCHAR},
+      REGDATE = #{record.regdate,jdbcType=NVARCHAR},
+      FILEID = #{record.fileid,jdbcType=NVARCHAR},
+      ISINPUT = #{record.isinput,jdbcType=DECIMAL},
+      EXPAND_XML = #{record.expandXml,jdbcType=NVARCHAR},
+      UNITID = #{record.unitid,jdbcType=VARCHAR},
+      IS_DELETE = #{record.isDelete,jdbcType=DECIMAL},
+      CREATE_USER = #{record.createUser,jdbcType=VARCHAR},
+      CREATE_TIME = #{record.createTime,jdbcType=VARCHAR},
+      UPDATE_USER = #{record.updateUser,jdbcType=VARCHAR},
+      UPDATE_TIME = #{record.updateTime,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jw.baseframe.model.C_T_SYS_OfficialDocSyn" >
+    update C_T_SYS_OFFICIALDOCSYN
+    <set >
+      <if test="record.pkid != null" >
+        PKID = #{record.pkid,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.doctype != null" >
+        DOCTYPE = #{record.doctype,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.docnum != null" >
+        DOCNUM = #{record.docnum,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.doctitle != null" >
+        DOCTITLE = #{record.doctitle,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.remark != null" >
+        REMARK = #{record.remark,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.senddepid != null" >
+        SENDDEPID = #{record.senddepid,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.sendunit != null" >
+        SENDUNIT = #{record.sendunit,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.recieveunit != null" >
+        RECIEVEUNIT = #{record.recieveunit,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.filetype != null" >
+        FILETYPE = #{record.filetype,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.keyword != null" >
+        KEYWORD = #{record.keyword,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.regdate != null" >
+        REGDATE = #{record.regdate,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.fileid != null" >
+        FILEID = #{record.fileid,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.isinput != null" >
+        ISINPUT = #{record.isinput,jdbcType=DECIMAL},
+      </if>
+      <if test="record.expandXml != null" >
+        EXPAND_XML = #{record.expandXml,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.unitid != null" >
+        UNITID = #{record.unitid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isDelete != null" >
+        IS_DELETE = #{record.isDelete,jdbcType=DECIMAL},
+      </if>
+      <if test="record.createUser != null" >
+        CREATE_USER = #{record.createUser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null" >
+        CREATE_TIME = #{record.createTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateUser != null" >
+        UPDATE_USER = #{record.updateUser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateTime != null" >
+        UPDATE_TIME = #{record.updateTime,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where UUID = #{record.uuid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jw.baseframe.model.C_T_SYS_OfficialDocSyn" >
+    update C_T_SYS_OFFICIALDOCSYN
+    set PKID = #{record.pkid,jdbcType=NVARCHAR},
+      DOCTYPE = #{record.doctype,jdbcType=NVARCHAR},
+      DOCNUM = #{record.docnum,jdbcType=NVARCHAR},
+      DOCTITLE = #{record.doctitle,jdbcType=NVARCHAR},
+      REMARK = #{record.remark,jdbcType=NVARCHAR},
+      SENDDEPID = #{record.senddepid,jdbcType=NVARCHAR},
+      SENDUNIT = #{record.sendunit,jdbcType=NVARCHAR},
+      RECIEVEUNIT = #{record.recieveunit,jdbcType=NVARCHAR},
+      FILETYPE = #{record.filetype,jdbcType=NVARCHAR},
+      KEYWORD = #{record.keyword,jdbcType=NVARCHAR},
+      REGDATE = #{record.regdate,jdbcType=NVARCHAR},
+      FILEID = #{record.fileid,jdbcType=NVARCHAR},
+      ISINPUT = #{record.isinput,jdbcType=DECIMAL},
+      EXPAND_XML = #{record.expandXml,jdbcType=NVARCHAR},
+      UNITID = #{record.unitid,jdbcType=VARCHAR},
+      IS_DELETE = #{record.isDelete,jdbcType=DECIMAL},
+      CREATE_USER = #{record.createUser,jdbcType=VARCHAR},
+      CREATE_TIME = #{record.createTime,jdbcType=VARCHAR},
+      UPDATE_USER = #{record.updateUser,jdbcType=VARCHAR},
+      UPDATE_TIME = #{record.updateTime,jdbcType=VARCHAR}
+    where UUID = #{record.uuid,jdbcType=VARCHAR}
+  </update>
+</mapper>

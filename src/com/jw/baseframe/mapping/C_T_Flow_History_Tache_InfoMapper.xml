@@ -1,0 +1,763 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jw.baseframe.dao.C_T_Flow_History_Tache_InfoMapper" >
+  <resultMap id="BaseResultMap" type="com.jw.baseframe.model.C_T_Flow_History_Tache_Info" >
+    <id column="UUID" property="uuid" jdbcType="VARCHAR" />
+    <result column="MODULE_ID" property="moduleId" jdbcType="VARCHAR" />
+    <result column="MAIN_DOC_ID" property="mainDocId" jdbcType="VARCHAR" />
+    <result column="FLOW_ID" property="flowId" jdbcType="VARCHAR" />
+    <result column="TACHE_TRANSACTOR_SYS" property="tacheTransactorSys" jdbcType="VARCHAR" />
+    <result column="TACHE_TRANSACTOR_NAME" property="tacheTransactorName" jdbcType="VARCHAR" />
+    <result column="CUR_TACHE_ID" property="curTacheId" jdbcType="VARCHAR" />
+    <result column="CUR_TACHE_NAME" property="curTacheName" jdbcType="NVARCHAR" />
+    <result column="HISTORY_TACHE_ID" property="historyTacheId" jdbcType="VARCHAR" />
+    <result column="HISTORY_TACHE_NAME" property="historyTacheName" jdbcType="NVARCHAR" />
+    <result column="HISTORY_TACHE_TIME" property="historyTacheTime" jdbcType="VARCHAR" />
+    <result column="TACHE_TRANSACTOR_BACKUP_SHOW" property="tacheTransactorBackupShow" jdbcType="NVARCHAR" />
+    <result column="TACHE_TRANSACTOR_BACKUP" property="tacheTransactorBackup" jdbcType="VARCHAR" />
+    <result column="IS_LAST_TACHE" property="isLastTache" jdbcType="DECIMAL" />
+    <result column="IS_FINISHED" property="isFinished" jdbcType="DECIMAL" />
+    <result column="FINISHED_TIME" property="finishedTime" jdbcType="VARCHAR" />
+    <result column="HISTORY_TACHE_STATE" property="historyTacheState" jdbcType="VARCHAR" />
+    <result column="OTHER_READER" property="otherReader" jdbcType="VARCHAR" />
+    <result column="EXPAND_XML" property="expandXml" jdbcType="NVARCHAR" />
+    <result column="UNITID" property="unitid" jdbcType="VARCHAR" />
+    <result column="IS_DELETE" property="isDelete" jdbcType="DECIMAL" />
+    <result column="CREATE_USER" property="createUser" jdbcType="VARCHAR" />
+    <result column="CREATE_TIME" property="createTime" jdbcType="VARCHAR" />
+    <result column="UPDATE_USER" property="updateUser" jdbcType="VARCHAR" />
+    <result column="UPDATE_TIME" property="updateTime" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.jw.baseframe.model.C_T_Flow_History_Tache_InfoWithBLOBs" extends="BaseResultMap" >
+    <result column="HISTORY_TACHE_TRANSACTOR" property="historyTacheTransactor" jdbcType="CLOB" />
+    <result column="HISTORY_TACHE_TRANSACTOR_SHOW" property="historyTacheTransactorShow" jdbcType="CLOB" />
+    <result column="HISTORY_TACHE_PASSER" property="historyTachePasser" jdbcType="CLOB" />
+    <result column="HISTORY_TACHE_PASSER_SHOW" property="historyTachePasserShow" jdbcType="CLOB" />
+    <result column="PASSER_READED" property="passerReaded" jdbcType="CLOB" />
+    <result column="PASSER_UNREAD" property="passerUnread" jdbcType="CLOB" />
+    <result column="PASSER_READED_CH" property="passerReadedCh" jdbcType="CLOB" />
+    <result column="PASSER_UNREAD_CH" property="passerUnreadCh" jdbcType="CLOB" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    UUID, MODULE_ID, MAIN_DOC_ID, FLOW_ID, TACHE_TRANSACTOR_SYS, TACHE_TRANSACTOR_NAME, 
+    CUR_TACHE_ID, CUR_TACHE_NAME, HISTORY_TACHE_ID, HISTORY_TACHE_NAME, HISTORY_TACHE_TIME, 
+    TACHE_TRANSACTOR_BACKUP_SHOW, TACHE_TRANSACTOR_BACKUP, IS_LAST_TACHE, IS_FINISHED, 
+    FINISHED_TIME, HISTORY_TACHE_STATE, OTHER_READER, EXPAND_XML, UNITID, IS_DELETE, 
+    CREATE_USER, CREATE_TIME, UPDATE_USER, UPDATE_TIME
+  </sql>
+  <sql id="Blob_Column_List" >
+    HISTORY_TACHE_TRANSACTOR, HISTORY_TACHE_TRANSACTOR_SHOW, HISTORY_TACHE_PASSER, HISTORY_TACHE_PASSER_SHOW, 
+    PASSER_READED, PASSER_UNREAD, PASSER_READED_CH, PASSER_UNREAD_CH
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.jw.baseframe.model.C_T_Flow_History_Tache_InfoExample" >
+    select
+    <if test="example.distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from C_T_FLOW_HISTORY_TACHE_INFO
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="example.orderByClause != null" >
+      order by ${example.orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.jw.baseframe.model.C_T_Flow_History_Tache_InfoExample" >
+    <foreach collection="example.oredCriteria" item="criteria" separator="or" />
+    <if test="criteria.valid" >
+      <foreach collection="criteria.criteria" item="criterion" >
+        <if test="criterion.limitValue" >
+          SELECT 
+          <include refid="Base_Column_List" />
+           FROM ( SELECT A.
+          <include refid="Base_Column_List" />
+           , ROWNUM AS con FROM ( 
+        </if>
+      </foreach>
+    </if>
+    select
+    <if test="example.distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from C_T_FLOW_HISTORY_TACHE_INFO
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="example.orderByClause != null" >
+      order by ${example.orderByClause}
+    </if>
+    <if test="criteria.valid" >
+      <foreach collection="criteria.criteria" item="criterion" >
+        <if test="criterion.limitValue" >
+           ) A  <![CDATA[WHERE ROWNUM <= ${criterion.secondValue}]]> ) B <![CDATA[WHERE B.con >= ${criterion.value} ]]>
+        </if>
+      </foreach>
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from C_T_FLOW_HISTORY_TACHE_INFO
+    where UUID = #{uuid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from C_T_FLOW_HISTORY_TACHE_INFO
+    where UUID = #{uuid,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.jw.baseframe.model.C_T_Flow_History_Tache_InfoExample" >
+    delete from C_T_FLOW_HISTORY_TACHE_INFO
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.jw.baseframe.model.C_T_Flow_History_Tache_InfoWithBLOBs" >
+    insert into C_T_FLOW_HISTORY_TACHE_INFO (UUID, MODULE_ID, MAIN_DOC_ID, 
+      FLOW_ID, TACHE_TRANSACTOR_SYS, 
+      TACHE_TRANSACTOR_NAME, CUR_TACHE_ID, 
+      CUR_TACHE_NAME, HISTORY_TACHE_ID, 
+      HISTORY_TACHE_NAME, HISTORY_TACHE_TIME, 
+      TACHE_TRANSACTOR_BACKUP_SHOW, TACHE_TRANSACTOR_BACKUP, 
+      IS_LAST_TACHE, IS_FINISHED, 
+      FINISHED_TIME, HISTORY_TACHE_STATE, 
+      OTHER_READER, EXPAND_XML, 
+      UNITID, IS_DELETE, CREATE_USER, 
+      CREATE_TIME, UPDATE_USER, UPDATE_TIME, 
+      HISTORY_TACHE_TRANSACTOR, HISTORY_TACHE_TRANSACTOR_SHOW, 
+      HISTORY_TACHE_PASSER, HISTORY_TACHE_PASSER_SHOW, 
+      PASSER_READED, PASSER_UNREAD, PASSER_READED_CH, 
+      PASSER_UNREAD_CH)
+    values (#{record.uuid,jdbcType=VARCHAR}, #{record.moduleId,jdbcType=VARCHAR}, #{record.mainDocId,jdbcType=VARCHAR}, 
+      #{record.flowId,jdbcType=VARCHAR}, #{record.tacheTransactorSys,jdbcType=VARCHAR}, 
+      #{record.tacheTransactorName,jdbcType=VARCHAR}, #{record.curTacheId,jdbcType=VARCHAR}, 
+      #{record.curTacheName,jdbcType=NVARCHAR}, #{record.historyTacheId,jdbcType=VARCHAR}, 
+      #{record.historyTacheName,jdbcType=NVARCHAR}, #{record.historyTacheTime,jdbcType=VARCHAR}, 
+      #{record.tacheTransactorBackupShow,jdbcType=NVARCHAR}, #{record.tacheTransactorBackup,jdbcType=VARCHAR}, 
+      #{record.isLastTache,jdbcType=DECIMAL}, #{record.isFinished,jdbcType=DECIMAL}, 
+      #{record.finishedTime,jdbcType=VARCHAR}, #{record.historyTacheState,jdbcType=VARCHAR}, 
+      #{record.otherReader,jdbcType=VARCHAR}, #{record.expandXml,jdbcType=NVARCHAR}, 
+      #{record.unitid,jdbcType=VARCHAR}, #{record.isDelete,jdbcType=DECIMAL}, #{record.createUser,jdbcType=VARCHAR}, 
+      #{record.createTime,jdbcType=VARCHAR}, #{record.updateUser,jdbcType=VARCHAR}, #{record.updateTime,jdbcType=VARCHAR}, 
+      #{record.historyTacheTransactor,jdbcType=CLOB}, #{record.historyTacheTransactorShow,jdbcType=CLOB}, 
+      #{record.historyTachePasser,jdbcType=CLOB}, #{record.historyTachePasserShow,jdbcType=CLOB}, 
+      #{record.passerReaded,jdbcType=CLOB}, #{record.passerUnread,jdbcType=CLOB}, #{record.passerReadedCh,jdbcType=CLOB}, 
+      #{record.passerUnreadCh,jdbcType=CLOB})
+  </insert>
+  <insert id="insertSelective" parameterType="com.jw.baseframe.model.C_T_Flow_History_Tache_InfoWithBLOBs" >
+    insert into C_T_FLOW_HISTORY_TACHE_INFO
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="record.uuid != null" >
+        UUID,
+      </if>
+      <if test="record.moduleId != null" >
+        MODULE_ID,
+      </if>
+      <if test="record.mainDocId != null" >
+        MAIN_DOC_ID,
+      </if>
+      <if test="record.flowId != null" >
+        FLOW_ID,
+      </if>
+      <if test="record.tacheTransactorSys != null" >
+        TACHE_TRANSACTOR_SYS,
+      </if>
+      <if test="record.tacheTransactorName != null" >
+        TACHE_TRANSACTOR_NAME,
+      </if>
+      <if test="record.curTacheId != null" >
+        CUR_TACHE_ID,
+      </if>
+      <if test="record.curTacheName != null" >
+        CUR_TACHE_NAME,
+      </if>
+      <if test="record.historyTacheId != null" >
+        HISTORY_TACHE_ID,
+      </if>
+      <if test="record.historyTacheName != null" >
+        HISTORY_TACHE_NAME,
+      </if>
+      <if test="record.historyTacheTime != null" >
+        HISTORY_TACHE_TIME,
+      </if>
+      <if test="record.tacheTransactorBackupShow != null" >
+        TACHE_TRANSACTOR_BACKUP_SHOW,
+      </if>
+      <if test="record.tacheTransactorBackup != null" >
+        TACHE_TRANSACTOR_BACKUP,
+      </if>
+      <if test="record.isLastTache != null" >
+        IS_LAST_TACHE,
+      </if>
+      <if test="record.isFinished != null" >
+        IS_FINISHED,
+      </if>
+      <if test="record.finishedTime != null" >
+        FINISHED_TIME,
+      </if>
+      <if test="record.historyTacheState != null" >
+        HISTORY_TACHE_STATE,
+      </if>
+      <if test="record.otherReader != null" >
+        OTHER_READER,
+      </if>
+      <if test="record.expandXml != null" >
+        EXPAND_XML,
+      </if>
+      <if test="record.unitid != null" >
+        UNITID,
+      </if>
+      <if test="record.isDelete != null" >
+        IS_DELETE,
+      </if>
+      <if test="record.createUser != null" >
+        CREATE_USER,
+      </if>
+      <if test="record.createTime != null" >
+        CREATE_TIME,
+      </if>
+      <if test="record.updateUser != null" >
+        UPDATE_USER,
+      </if>
+      <if test="record.updateTime != null" >
+        UPDATE_TIME,
+      </if>
+      <if test="record.historyTacheTransactor != null" >
+        HISTORY_TACHE_TRANSACTOR,
+      </if>
+      <if test="record.historyTacheTransactorShow != null" >
+        HISTORY_TACHE_TRANSACTOR_SHOW,
+      </if>
+      <if test="record.historyTachePasser != null" >
+        HISTORY_TACHE_PASSER,
+      </if>
+      <if test="record.historyTachePasserShow != null" >
+        HISTORY_TACHE_PASSER_SHOW,
+      </if>
+      <if test="record.passerReaded != null" >
+        PASSER_READED,
+      </if>
+      <if test="record.passerUnread != null" >
+        PASSER_UNREAD,
+      </if>
+      <if test="record.passerReadedCh != null" >
+        PASSER_READED_CH,
+      </if>
+      <if test="record.passerUnreadCh != null" >
+        PASSER_UNREAD_CH,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="record.uuid != null" >
+        #{record.uuid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.moduleId != null" >
+        #{record.moduleId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mainDocId != null" >
+        #{record.mainDocId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.flowId != null" >
+        #{record.flowId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tacheTransactorSys != null" >
+        #{record.tacheTransactorSys,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tacheTransactorName != null" >
+        #{record.tacheTransactorName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.curTacheId != null" >
+        #{record.curTacheId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.curTacheName != null" >
+        #{record.curTacheName,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.historyTacheId != null" >
+        #{record.historyTacheId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.historyTacheName != null" >
+        #{record.historyTacheName,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.historyTacheTime != null" >
+        #{record.historyTacheTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tacheTransactorBackupShow != null" >
+        #{record.tacheTransactorBackupShow,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.tacheTransactorBackup != null" >
+        #{record.tacheTransactorBackup,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isLastTache != null" >
+        #{record.isLastTache,jdbcType=DECIMAL},
+      </if>
+      <if test="record.isFinished != null" >
+        #{record.isFinished,jdbcType=DECIMAL},
+      </if>
+      <if test="record.finishedTime != null" >
+        #{record.finishedTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.historyTacheState != null" >
+        #{record.historyTacheState,jdbcType=VARCHAR},
+      </if>
+      <if test="record.otherReader != null" >
+        #{record.otherReader,jdbcType=VARCHAR},
+      </if>
+      <if test="record.expandXml != null" >
+        #{record.expandXml,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.unitid != null" >
+        #{record.unitid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isDelete != null" >
+        #{record.isDelete,jdbcType=DECIMAL},
+      </if>
+      <if test="record.createUser != null" >
+        #{record.createUser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null" >
+        #{record.createTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateUser != null" >
+        #{record.updateUser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateTime != null" >
+        #{record.updateTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.historyTacheTransactor != null" >
+        #{record.historyTacheTransactor,jdbcType=CLOB},
+      </if>
+      <if test="record.historyTacheTransactorShow != null" >
+        #{record.historyTacheTransactorShow,jdbcType=CLOB},
+      </if>
+      <if test="record.historyTachePasser != null" >
+        #{record.historyTachePasser,jdbcType=CLOB},
+      </if>
+      <if test="record.historyTachePasserShow != null" >
+        #{record.historyTachePasserShow,jdbcType=CLOB},
+      </if>
+      <if test="record.passerReaded != null" >
+        #{record.passerReaded,jdbcType=CLOB},
+      </if>
+      <if test="record.passerUnread != null" >
+        #{record.passerUnread,jdbcType=CLOB},
+      </if>
+      <if test="record.passerReadedCh != null" >
+        #{record.passerReadedCh,jdbcType=CLOB},
+      </if>
+      <if test="record.passerUnreadCh != null" >
+        #{record.passerUnreadCh,jdbcType=CLOB},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.jw.baseframe.model.C_T_Flow_History_Tache_InfoExample" resultType="java.lang.Integer" >
+    select count(*) from C_T_FLOW_HISTORY_TACHE_INFO
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update C_T_FLOW_HISTORY_TACHE_INFO
+    <set >
+      <if test="record.uuid != null" >
+        UUID = #{record.uuid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.moduleId != null" >
+        MODULE_ID = #{record.moduleId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mainDocId != null" >
+        MAIN_DOC_ID = #{record.mainDocId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.flowId != null" >
+        FLOW_ID = #{record.flowId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tacheTransactorSys != null" >
+        TACHE_TRANSACTOR_SYS = #{record.tacheTransactorSys,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tacheTransactorName != null" >
+        TACHE_TRANSACTOR_NAME = #{record.tacheTransactorName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.curTacheId != null" >
+        CUR_TACHE_ID = #{record.curTacheId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.curTacheName != null" >
+        CUR_TACHE_NAME = #{record.curTacheName,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.historyTacheId != null" >
+        HISTORY_TACHE_ID = #{record.historyTacheId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.historyTacheName != null" >
+        HISTORY_TACHE_NAME = #{record.historyTacheName,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.historyTacheTime != null" >
+        HISTORY_TACHE_TIME = #{record.historyTacheTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tacheTransactorBackupShow != null" >
+        TACHE_TRANSACTOR_BACKUP_SHOW = #{record.tacheTransactorBackupShow,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.tacheTransactorBackup != null" >
+        TACHE_TRANSACTOR_BACKUP = #{record.tacheTransactorBackup,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isLastTache != null" >
+        IS_LAST_TACHE = #{record.isLastTache,jdbcType=DECIMAL},
+      </if>
+      <if test="record.isFinished != null" >
+        IS_FINISHED = #{record.isFinished,jdbcType=DECIMAL},
+      </if>
+      <if test="record.finishedTime != null" >
+        FINISHED_TIME = #{record.finishedTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.historyTacheState != null" >
+        HISTORY_TACHE_STATE = #{record.historyTacheState,jdbcType=VARCHAR},
+      </if>
+      <if test="record.otherReader != null" >
+        OTHER_READER = #{record.otherReader,jdbcType=VARCHAR},
+      </if>
+      <if test="record.expandXml != null" >
+        EXPAND_XML = #{record.expandXml,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.unitid != null" >
+        UNITID = #{record.unitid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isDelete != null" >
+        IS_DELETE = #{record.isDelete,jdbcType=DECIMAL},
+      </if>
+      <if test="record.createUser != null" >
+        CREATE_USER = #{record.createUser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null" >
+        CREATE_TIME = #{record.createTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateUser != null" >
+        UPDATE_USER = #{record.updateUser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateTime != null" >
+        UPDATE_TIME = #{record.updateTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.historyTacheTransactor != null" >
+        HISTORY_TACHE_TRANSACTOR = #{record.historyTacheTransactor,jdbcType=CLOB},
+      </if>
+      <if test="record.historyTacheTransactorShow != null" >
+        HISTORY_TACHE_TRANSACTOR_SHOW = #{record.historyTacheTransactorShow,jdbcType=CLOB},
+      </if>
+      <if test="record.historyTachePasser != null" >
+        HISTORY_TACHE_PASSER = #{record.historyTachePasser,jdbcType=CLOB},
+      </if>
+      <if test="record.historyTachePasserShow != null" >
+        HISTORY_TACHE_PASSER_SHOW = #{record.historyTachePasserShow,jdbcType=CLOB},
+      </if>
+      <if test="record.passerReaded != null" >
+        PASSER_READED = #{record.passerReaded,jdbcType=CLOB},
+      </if>
+      <if test="record.passerUnread != null" >
+        PASSER_UNREAD = #{record.passerUnread,jdbcType=CLOB},
+      </if>
+      <if test="record.passerReadedCh != null" >
+        PASSER_READED_CH = #{record.passerReadedCh,jdbcType=CLOB},
+      </if>
+      <if test="record.passerUnreadCh != null" >
+        PASSER_UNREAD_CH = #{record.passerUnreadCh,jdbcType=CLOB},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update C_T_FLOW_HISTORY_TACHE_INFO
+    set UUID = #{record.uuid,jdbcType=VARCHAR},
+      MODULE_ID = #{record.moduleId,jdbcType=VARCHAR},
+      MAIN_DOC_ID = #{record.mainDocId,jdbcType=VARCHAR},
+      FLOW_ID = #{record.flowId,jdbcType=VARCHAR},
+      TACHE_TRANSACTOR_SYS = #{record.tacheTransactorSys,jdbcType=VARCHAR},
+      TACHE_TRANSACTOR_NAME = #{record.tacheTransactorName,jdbcType=VARCHAR},
+      CUR_TACHE_ID = #{record.curTacheId,jdbcType=VARCHAR},
+      CUR_TACHE_NAME = #{record.curTacheName,jdbcType=NVARCHAR},
+      HISTORY_TACHE_ID = #{record.historyTacheId,jdbcType=VARCHAR},
+      HISTORY_TACHE_NAME = #{record.historyTacheName,jdbcType=NVARCHAR},
+      HISTORY_TACHE_TIME = #{record.historyTacheTime,jdbcType=VARCHAR},
+      TACHE_TRANSACTOR_BACKUP_SHOW = #{record.tacheTransactorBackupShow,jdbcType=NVARCHAR},
+      TACHE_TRANSACTOR_BACKUP = #{record.tacheTransactorBackup,jdbcType=VARCHAR},
+      IS_LAST_TACHE = #{record.isLastTache,jdbcType=DECIMAL},
+      IS_FINISHED = #{record.isFinished,jdbcType=DECIMAL},
+      FINISHED_TIME = #{record.finishedTime,jdbcType=VARCHAR},
+      HISTORY_TACHE_STATE = #{record.historyTacheState,jdbcType=VARCHAR},
+      OTHER_READER = #{record.otherReader,jdbcType=VARCHAR},
+      EXPAND_XML = #{record.expandXml,jdbcType=NVARCHAR},
+      UNITID = #{record.unitid,jdbcType=VARCHAR},
+      IS_DELETE = #{record.isDelete,jdbcType=DECIMAL},
+      CREATE_USER = #{record.createUser,jdbcType=VARCHAR},
+      CREATE_TIME = #{record.createTime,jdbcType=VARCHAR},
+      UPDATE_USER = #{record.updateUser,jdbcType=VARCHAR},
+      UPDATE_TIME = #{record.updateTime,jdbcType=VARCHAR},
+      HISTORY_TACHE_TRANSACTOR = #{record.historyTacheTransactor,jdbcType=CLOB},
+      HISTORY_TACHE_TRANSACTOR_SHOW = #{record.historyTacheTransactorShow,jdbcType=CLOB},
+      HISTORY_TACHE_PASSER = #{record.historyTachePasser,jdbcType=CLOB},
+      HISTORY_TACHE_PASSER_SHOW = #{record.historyTachePasserShow,jdbcType=CLOB},
+      PASSER_READED = #{record.passerReaded,jdbcType=CLOB},
+      PASSER_UNREAD = #{record.passerUnread,jdbcType=CLOB},
+      PASSER_READED_CH = #{record.passerReadedCh,jdbcType=CLOB},
+      PASSER_UNREAD_CH = #{record.passerUnreadCh,jdbcType=CLOB}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update C_T_FLOW_HISTORY_TACHE_INFO
+    set UUID = #{record.uuid,jdbcType=VARCHAR},
+      MODULE_ID = #{record.moduleId,jdbcType=VARCHAR},
+      MAIN_DOC_ID = #{record.mainDocId,jdbcType=VARCHAR},
+      FLOW_ID = #{record.flowId,jdbcType=VARCHAR},
+      TACHE_TRANSACTOR_SYS = #{record.tacheTransactorSys,jdbcType=VARCHAR},
+      TACHE_TRANSACTOR_NAME = #{record.tacheTransactorName,jdbcType=VARCHAR},
+      CUR_TACHE_ID = #{record.curTacheId,jdbcType=VARCHAR},
+      CUR_TACHE_NAME = #{record.curTacheName,jdbcType=NVARCHAR},
+      HISTORY_TACHE_ID = #{record.historyTacheId,jdbcType=VARCHAR},
+      HISTORY_TACHE_NAME = #{record.historyTacheName,jdbcType=NVARCHAR},
+      HISTORY_TACHE_TIME = #{record.historyTacheTime,jdbcType=VARCHAR},
+      TACHE_TRANSACTOR_BACKUP_SHOW = #{record.tacheTransactorBackupShow,jdbcType=NVARCHAR},
+      TACHE_TRANSACTOR_BACKUP = #{record.tacheTransactorBackup,jdbcType=VARCHAR},
+      IS_LAST_TACHE = #{record.isLastTache,jdbcType=DECIMAL},
+      IS_FINISHED = #{record.isFinished,jdbcType=DECIMAL},
+      FINISHED_TIME = #{record.finishedTime,jdbcType=VARCHAR},
+      HISTORY_TACHE_STATE = #{record.historyTacheState,jdbcType=VARCHAR},
+      OTHER_READER = #{record.otherReader,jdbcType=VARCHAR},
+      EXPAND_XML = #{record.expandXml,jdbcType=NVARCHAR},
+      UNITID = #{record.unitid,jdbcType=VARCHAR},
+      IS_DELETE = #{record.isDelete,jdbcType=DECIMAL},
+      CREATE_USER = #{record.createUser,jdbcType=VARCHAR},
+      CREATE_TIME = #{record.createTime,jdbcType=VARCHAR},
+      UPDATE_USER = #{record.updateUser,jdbcType=VARCHAR},
+      UPDATE_TIME = #{record.updateTime,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jw.baseframe.model.C_T_Flow_History_Tache_InfoWithBLOBs" >
+    update C_T_FLOW_HISTORY_TACHE_INFO
+    <set >
+      <if test="record.moduleId != null" >
+        MODULE_ID = #{record.moduleId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mainDocId != null" >
+        MAIN_DOC_ID = #{record.mainDocId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.flowId != null" >
+        FLOW_ID = #{record.flowId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tacheTransactorSys != null" >
+        TACHE_TRANSACTOR_SYS = #{record.tacheTransactorSys,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tacheTransactorName != null" >
+        TACHE_TRANSACTOR_NAME = #{record.tacheTransactorName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.curTacheId != null" >
+        CUR_TACHE_ID = #{record.curTacheId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.curTacheName != null" >
+        CUR_TACHE_NAME = #{record.curTacheName,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.historyTacheId != null" >
+        HISTORY_TACHE_ID = #{record.historyTacheId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.historyTacheName != null" >
+        HISTORY_TACHE_NAME = #{record.historyTacheName,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.historyTacheTime != null" >
+        HISTORY_TACHE_TIME = #{record.historyTacheTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tacheTransactorBackupShow != null" >
+        TACHE_TRANSACTOR_BACKUP_SHOW = #{record.tacheTransactorBackupShow,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.tacheTransactorBackup != null" >
+        TACHE_TRANSACTOR_BACKUP = #{record.tacheTransactorBackup,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isLastTache != null" >
+        IS_LAST_TACHE = #{record.isLastTache,jdbcType=DECIMAL},
+      </if>
+      <if test="record.isFinished != null" >
+        IS_FINISHED = #{record.isFinished,jdbcType=DECIMAL},
+      </if>
+      <if test="record.finishedTime != null" >
+        FINISHED_TIME = #{record.finishedTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.historyTacheState != null" >
+        HISTORY_TACHE_STATE = #{record.historyTacheState,jdbcType=VARCHAR},
+      </if>
+      <if test="record.otherReader != null" >
+        OTHER_READER = #{record.otherReader,jdbcType=VARCHAR},
+      </if>
+      <if test="record.expandXml != null" >
+        EXPAND_XML = #{record.expandXml,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.unitid != null" >
+        UNITID = #{record.unitid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isDelete != null" >
+        IS_DELETE = #{record.isDelete,jdbcType=DECIMAL},
+      </if>
+      <if test="record.createUser != null" >
+        CREATE_USER = #{record.createUser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null" >
+        CREATE_TIME = #{record.createTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateUser != null" >
+        UPDATE_USER = #{record.updateUser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateTime != null" >
+        UPDATE_TIME = #{record.updateTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.historyTacheTransactor != null" >
+        HISTORY_TACHE_TRANSACTOR = #{record.historyTacheTransactor,jdbcType=CLOB},
+      </if>
+      <if test="record.historyTacheTransactorShow != null" >
+        HISTORY_TACHE_TRANSACTOR_SHOW = #{record.historyTacheTransactorShow,jdbcType=CLOB},
+      </if>
+      <if test="record.historyTachePasser != null" >
+        HISTORY_TACHE_PASSER = #{record.historyTachePasser,jdbcType=CLOB},
+      </if>
+      <if test="record.historyTachePasserShow != null" >
+        HISTORY_TACHE_PASSER_SHOW = #{record.historyTachePasserShow,jdbcType=CLOB},
+      </if>
+      <if test="record.passerReaded != null" >
+        PASSER_READED = #{record.passerReaded,jdbcType=CLOB},
+      </if>
+      <if test="record.passerUnread != null" >
+        PASSER_UNREAD = #{record.passerUnread,jdbcType=CLOB},
+      </if>
+      <if test="record.passerReadedCh != null" >
+        PASSER_READED_CH = #{record.passerReadedCh,jdbcType=CLOB},
+      </if>
+      <if test="record.passerUnreadCh != null" >
+        PASSER_UNREAD_CH = #{record.passerUnreadCh,jdbcType=CLOB},
+      </if>
+    </set>
+    where UUID = #{record.uuid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.jw.baseframe.model.C_T_Flow_History_Tache_InfoWithBLOBs" >
+    update C_T_FLOW_HISTORY_TACHE_INFO
+    set MODULE_ID = #{record.moduleId,jdbcType=VARCHAR},
+      MAIN_DOC_ID = #{record.mainDocId,jdbcType=VARCHAR},
+      FLOW_ID = #{record.flowId,jdbcType=VARCHAR},
+      TACHE_TRANSACTOR_SYS = #{record.tacheTransactorSys,jdbcType=VARCHAR},
+      TACHE_TRANSACTOR_NAME = #{record.tacheTransactorName,jdbcType=VARCHAR},
+      CUR_TACHE_ID = #{record.curTacheId,jdbcType=VARCHAR},
+      CUR_TACHE_NAME = #{record.curTacheName,jdbcType=NVARCHAR},
+      HISTORY_TACHE_ID = #{record.historyTacheId,jdbcType=VARCHAR},
+      HISTORY_TACHE_NAME = #{record.historyTacheName,jdbcType=NVARCHAR},
+      HISTORY_TACHE_TIME = #{record.historyTacheTime,jdbcType=VARCHAR},
+      TACHE_TRANSACTOR_BACKUP_SHOW = #{record.tacheTransactorBackupShow,jdbcType=NVARCHAR},
+      TACHE_TRANSACTOR_BACKUP = #{record.tacheTransactorBackup,jdbcType=VARCHAR},
+      IS_LAST_TACHE = #{record.isLastTache,jdbcType=DECIMAL},
+      IS_FINISHED = #{record.isFinished,jdbcType=DECIMAL},
+      FINISHED_TIME = #{record.finishedTime,jdbcType=VARCHAR},
+      HISTORY_TACHE_STATE = #{record.historyTacheState,jdbcType=VARCHAR},
+      OTHER_READER = #{record.otherReader,jdbcType=VARCHAR},
+      EXPAND_XML = #{record.expandXml,jdbcType=NVARCHAR},
+      UNITID = #{record.unitid,jdbcType=VARCHAR},
+      IS_DELETE = #{record.isDelete,jdbcType=DECIMAL},
+      CREATE_USER = #{record.createUser,jdbcType=VARCHAR},
+      CREATE_TIME = #{record.createTime,jdbcType=VARCHAR},
+      UPDATE_USER = #{record.updateUser,jdbcType=VARCHAR},
+      UPDATE_TIME = #{record.updateTime,jdbcType=VARCHAR},
+      HISTORY_TACHE_TRANSACTOR = #{record.historyTacheTransactor,jdbcType=CLOB},
+      HISTORY_TACHE_TRANSACTOR_SHOW = #{record.historyTacheTransactorShow,jdbcType=CLOB},
+      HISTORY_TACHE_PASSER = #{record.historyTachePasser,jdbcType=CLOB},
+      HISTORY_TACHE_PASSER_SHOW = #{record.historyTachePasserShow,jdbcType=CLOB},
+      PASSER_READED = #{record.passerReaded,jdbcType=CLOB},
+      PASSER_UNREAD = #{record.passerUnread,jdbcType=CLOB},
+      PASSER_READED_CH = #{record.passerReadedCh,jdbcType=CLOB},
+      PASSER_UNREAD_CH = #{record.passerUnreadCh,jdbcType=CLOB}
+    where UUID = #{record.uuid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jw.baseframe.model.C_T_Flow_History_Tache_Info" >
+    update C_T_FLOW_HISTORY_TACHE_INFO
+    set MODULE_ID = #{record.moduleId,jdbcType=VARCHAR},
+      MAIN_DOC_ID = #{record.mainDocId,jdbcType=VARCHAR},
+      FLOW_ID = #{record.flowId,jdbcType=VARCHAR},
+      TACHE_TRANSACTOR_SYS = #{record.tacheTransactorSys,jdbcType=VARCHAR},
+      TACHE_TRANSACTOR_NAME = #{record.tacheTransactorName,jdbcType=VARCHAR},
+      CUR_TACHE_ID = #{record.curTacheId,jdbcType=VARCHAR},
+      CUR_TACHE_NAME = #{record.curTacheName,jdbcType=NVARCHAR},
+      HISTORY_TACHE_ID = #{record.historyTacheId,jdbcType=VARCHAR},
+      HISTORY_TACHE_NAME = #{record.historyTacheName,jdbcType=NVARCHAR},
+      HISTORY_TACHE_TIME = #{record.historyTacheTime,jdbcType=VARCHAR},
+      TACHE_TRANSACTOR_BACKUP_SHOW = #{record.tacheTransactorBackupShow,jdbcType=NVARCHAR},
+      TACHE_TRANSACTOR_BACKUP = #{record.tacheTransactorBackup,jdbcType=VARCHAR},
+      IS_LAST_TACHE = #{record.isLastTache,jdbcType=DECIMAL},
+      IS_FINISHED = #{record.isFinished,jdbcType=DECIMAL},
+      FINISHED_TIME = #{record.finishedTime,jdbcType=VARCHAR},
+      HISTORY_TACHE_STATE = #{record.historyTacheState,jdbcType=VARCHAR},
+      OTHER_READER = #{record.otherReader,jdbcType=VARCHAR},
+      EXPAND_XML = #{record.expandXml,jdbcType=NVARCHAR},
+      UNITID = #{record.unitid,jdbcType=VARCHAR},
+      IS_DELETE = #{record.isDelete,jdbcType=DECIMAL},
+      CREATE_USER = #{record.createUser,jdbcType=VARCHAR},
+      CREATE_TIME = #{record.createTime,jdbcType=VARCHAR},
+      UPDATE_USER = #{record.updateUser,jdbcType=VARCHAR},
+      UPDATE_TIME = #{record.updateTime,jdbcType=VARCHAR}
+    where UUID = #{record.uuid,jdbcType=VARCHAR}
+  </update>
+</mapper>

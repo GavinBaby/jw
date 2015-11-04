@@ -1,0 +1,299 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jw.baseframe.dao.C_V_Sys_UsertreeMapper" >
+  <resultMap id="BaseResultMap" type="com.jw.baseframe.model.C_V_Sys_Usertree" >
+    <result column="UUID" property="uuid" jdbcType="VARCHAR" />
+    <result column="ID" property="id" jdbcType="VARCHAR" />
+    <result column="NAME" property="name" jdbcType="NVARCHAR" />
+    <result column="P_ID" property="pId" jdbcType="VARCHAR" />
+    <result column="DEPT_ID" property="deptId" jdbcType="VARCHAR" />
+    <result column="UNIT_ID" property="unitId" jdbcType="VARCHAR" />
+    <result column="FLA" property="fla" jdbcType="CHAR" />
+    <result column="IS_PARENT" property="isParent" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    UUID, ID, NAME, P_ID, DEPT_ID, UNIT_ID, FLA, IS_PARENT
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.jw.baseframe.model.C_V_Sys_UsertreeExample" >
+    <foreach collection="example.oredCriteria" item="criteria" separator="or" />
+    <if test="criteria.valid" >
+      <foreach collection="criteria.criteria" item="criterion" >
+        <if test="criterion.limitValue" >
+          SELECT 
+          <include refid="Base_Column_List" />
+           FROM ( SELECT A.
+          <include refid="Base_Column_List" />
+           , ROWNUM AS con FROM ( 
+        </if>
+      </foreach>
+    </if>
+    select
+    <if test="example.distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from C_V_SYS_USERTREE
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="example.orderByClause != null" >
+      order by ${example.orderByClause}
+    </if>
+    <if test="criteria.valid" >
+      <foreach collection="criteria.criteria" item="criterion" >
+        <if test="criterion.limitValue" >
+           ) A  <![CDATA[WHERE ROWNUM <= ${criterion.secondValue}]]> ) B <![CDATA[WHERE B.con >= ${criterion.value} ]]>
+        </if>
+      </foreach>
+    </if>
+  </select>
+  
+  	     <select id="selectGroupUserByMap" resultMap="BaseResultMap" parameterType="map" >
+
+    <![CDATA[select distinct UUID,ID,NAME,P_ID,DEPT_ID,UNIT_ID,FLA,ROWSORT,IS_PARENT
+			 from C_V_SYS_USERTREE
+             connect by prior P_ID=UUID
+             start with UUID in (select USER_SYS_NAME from C_T_SYS_GROUP_USER where GROUP_ID='${groupId}') ]]> 
+  </select>
+  
+   <select id="selectMailUserByMap" resultMap="BaseResultMap" parameterType="map" >
+    select distinct 
+    <include refid="Base_Column_List" />
+    <![CDATA[ from
+ (select UR.Unit_Id as uuid,UR.Unit_Id as id,UT.Unit_Name as name,UT.Paren_Unit_Id as p_id,null as dept_id,UT.Unit_Id,'1' as fla, 'true' as is_parent
+from C_T_SYS_USER UR
+inner join C_T_SYS_UNIT UT
+on UR.Unit_Id = UT.Uuid and UR.Is_Delete=0 and UR.State<>2 where UR.USER_SYS_NAME in ${userIds}
+union all 
+select distinct uuid,uuid as id,DEPT_NAME,UNIT_ID,uuid as dept_id1,UNIT_ID2,'2' as fla,'true' as IS_PARENT from 
+( select D1.uuid,D1.DEPT_NAME,D1.UNIT_ID,D1.UNIT_ID as UNIT_ID2
+from  C_T_SYS_USER US2
+inner join C_T_SYS_DEPARTMENT D1
+on D1.UUID = US2.DEPT_ID and US2.IS_DELETE = 0 and US2.STATE<>2 where US2.USER_SYS_NAME in ${userIds}
+order by D1.sort) bb 
+union all 
+select USER_SYS_NAME,USER_SYS_NAME1,USER_NAME2,DEPT_ID,DEPT_ID as DEPT_ID1,UNIT_ID,'3' as fla,'false' as IS_PARENT from 
+( select USER_SYS_NAME,USER_SYS_NAME1,USER_NAME2,DEPT_ID ,UNIT_ID,SORT from
+( select US.USER_SYS_NAME,US.USER_SYS_NAME as USER_SYS_NAME1 ,US.USER_NAME as USER_NAME2,US.DEPT_ID,US.UNIT_ID,US.SORT 
+from  C_T_SYS_USER US  where US.IS_DELETE = 0 and US.STATE<>2   and US.USER_SYS_NAME in ${userIds} ) cc order by sort))ee]]> 
+  </select>
+  
+  
+  	<select id="selectTacheUserByMap" resultMap="BaseResultMap" parameterType="map" >
+    select distinct
+    <include refid="Base_Column_List" />
+    <![CDATA[ from
+ ( select UT1.unit_id as uuid ,UT1.unit_id as id,UT1.unit_name as name,UT1.PAREN_UNIT_ID as p_Id,null as dept_id,UT1.unit_id,'1' as fla ,'true' as IS_PARENT
+from C_T_FLOW_TACHE_USER G1 
+left join C_T_SYS_USER US1 ON G1.TACHE_TRANSACTOR_SYS = US1.USER_SYS_NAME 
+inner join C_T_SYS_UNIT UT1
+on UT1.UUID = US1.UNIT_ID and US1.IS_DELETE = 0 and US1.STATE<>2 and G1.FLOW_ID='${flowId}' and G1.TACHE_ID='${tacheId}' and G1.UNITID = '${unitId}'
+order by UT1.sort
+) aa 
+union all 
+select distinct uuid,uuid as id,DEPT_NAME,UNIT_ID,uuid as dept_id1,UNIT_ID2,'2' as fla ,'true' as IS_PARENT from 
+( select D1.uuid,D1.DEPT_NAME,D1.UNIT_ID,D1.UNIT_ID as UNIT_ID2
+from C_T_FLOW_TACHE_USER G2 
+left join C_T_SYS_USER US2 ON G2.TACHE_TRANSACTOR_SYS = US2.USER_SYS_NAME 
+inner join C_T_SYS_DEPARTMENT D1
+on D1.UUID = US2.DEPT_ID and US2.IS_DELETE = 0 and US2.STATE<>2 and G2.FLOW_ID='${flowId}' and G2.TACHE_ID='${tacheId}' and G2.UNITID = '${unitId}'
+order by D1.sort) bb 
+union all 
+select TACHE_TRANSACTOR_SYS,USER_SYS_NAME1,USER_NAME2,DEPT_ID,DEPT_ID as DEPT_ID1,UNIT_ID,'3' as fla ,'false' as IS_PARENT from 
+( select TACHE_TRANSACTOR_SYS,USER_SYS_NAME1,USER_NAME2,DEPT_ID ,UNIT_ID,SORT from
+( select G.TACHE_TRANSACTOR_SYS,US.USER_SYS_NAME as USER_SYS_NAME1 ,US.USER_NAME as USER_NAME2,US.DEPT_ID,US.UNIT_ID,US.SORT 
+from C_T_FLOW_TACHE_USER G left join C_T_SYS_USER US ON G.TACHE_TRANSACTOR_SYS = US.USER_SYS_NAME where US.IS_DELETE = 0 and US.STATE<>2 and G.FLOW_ID='${flowId}' and G.TACHE_ID='${tacheId}') cc order by sort) ee where UNIT_ID = '${unitId}']]> 
+  </select>
+  
+  
+  	     <select id="selectRoleUserByMap" resultMap="BaseResultMap" parameterType="map" >
+  	    <![CDATA[ 
+  	     select distinct UUID,ID,NAME,P_ID,DEPT_ID,UNIT_ID,FLA,ROWSORT,IS_PARENT
+			 from C_V_SYS_USERTREE
+             connect by prior P_ID=UUID
+             start with UUID in (select USER_SYS_NAME from C_T_SYS_ROLE_USER where ROLE_ID='${roleId}')
+    ]]>
+  </select>
+  
+  
+  
+  <delete id="deleteByExample" parameterType="com.jw.baseframe.model.C_V_Sys_UsertreeExample" >
+    delete from C_V_SYS_USERTREE
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.jw.baseframe.model.C_V_Sys_Usertree" >
+    insert into C_V_SYS_USERTREE (UUID, ID, NAME, 
+      P_ID, DEPT_ID, UNIT_ID, 
+      FLA, IS_PARENT)
+    values (#{record.uuid,jdbcType=VARCHAR}, #{record.id,jdbcType=VARCHAR}, #{record.name,jdbcType=NVARCHAR}, 
+      #{record.pId,jdbcType=VARCHAR}, #{record.deptId,jdbcType=VARCHAR}, #{record.unitId,jdbcType=VARCHAR}, 
+      #{record.fla,jdbcType=CHAR}, #{record.isParent,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.jw.baseframe.model.C_V_Sys_Usertree" >
+    insert into C_V_SYS_USERTREE
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="record.uuid != null" >
+        UUID,
+      </if>
+      <if test="record.id != null" >
+        ID,
+      </if>
+      <if test="record.name != null" >
+        NAME,
+      </if>
+      <if test="record.pId != null" >
+        P_ID,
+      </if>
+      <if test="record.deptId != null" >
+        DEPT_ID,
+      </if>
+      <if test="record.unitId != null" >
+        UNIT_ID,
+      </if>
+      <if test="record.fla != null" >
+        FLA,
+      </if>
+      <if test="record.isParent != null" >
+        IS_PARENT,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="record.uuid != null" >
+        #{record.uuid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.id != null" >
+        #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.name != null" >
+        #{record.name,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.pId != null" >
+        #{record.pId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.deptId != null" >
+        #{record.deptId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.unitId != null" >
+        #{record.unitId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fla != null" >
+        #{record.fla,jdbcType=CHAR},
+      </if>
+      <if test="record.isParent != null" >
+        #{record.isParent,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.jw.baseframe.model.C_V_Sys_UsertreeExample" resultType="java.lang.Integer" >
+    select count(*) from C_V_SYS_USERTREE
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update C_V_SYS_USERTREE
+    <set >
+      <if test="record.uuid != null" >
+        UUID = #{record.uuid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.id != null" >
+        ID = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.name != null" >
+        NAME = #{record.name,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.pId != null" >
+        P_ID = #{record.pId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.deptId != null" >
+        DEPT_ID = #{record.deptId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.unitId != null" >
+        UNIT_ID = #{record.unitId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fla != null" >
+        FLA = #{record.fla,jdbcType=CHAR},
+      </if>
+      <if test="record.isParent != null" >
+        IS_PARENT = #{record.isParent,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update C_V_SYS_USERTREE
+    set UUID = #{record.uuid,jdbcType=VARCHAR},
+      ID = #{record.id,jdbcType=VARCHAR},
+      NAME = #{record.name,jdbcType=NVARCHAR},
+      P_ID = #{record.pId,jdbcType=VARCHAR},
+      DEPT_ID = #{record.deptId,jdbcType=VARCHAR},
+      UNIT_ID = #{record.unitId,jdbcType=VARCHAR},
+      FLA = #{record.fla,jdbcType=CHAR},
+      IS_PARENT = #{record.isParent,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

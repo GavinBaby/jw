@@ -1,0 +1,501 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jw.baseframe.dao.C_T_Sys_Errorlog_InforMapper" >
+  <resultMap id="BaseResultMap" type="com.jw.baseframe.model.C_T_Sys_Errorlog_Infor" >
+    <id column="UUID" property="uuid" jdbcType="VARCHAR" />
+    <result column="MODULE_ID" property="moduleId" jdbcType="VARCHAR" />
+    <result column="MAIN_DOC_ID" property="mainDocId" jdbcType="VARCHAR" />
+    <result column="ERROE_TYPE" property="erroeType" jdbcType="NVARCHAR" />
+    <result column="ERROR_ID" property="errorId" jdbcType="VARCHAR" />
+    <result column="EXCEPTIONNAME_EN" property="exceptionnameEn" jdbcType="VARCHAR" />
+    <result column="EXCEPTIONNAME_CN" property="exceptionnameCn" jdbcType="NVARCHAR" />
+    <result column="EXCEPTION_ACTION" property="exceptionAction" jdbcType="VARCHAR" />
+    <result column="ERROR_IP" property="errorIp" jdbcType="VARCHAR" />
+    <result column="EXPAND_XML" property="expandXml" jdbcType="NVARCHAR" />
+    <result column="UNITID" property="unitid" jdbcType="VARCHAR" />
+    <result column="IS_DELETE" property="isDelete" jdbcType="DECIMAL" />
+    <result column="CREATE_USER" property="createUser" jdbcType="VARCHAR" />
+    <result column="CREATE_TIME" property="createTime" jdbcType="VARCHAR" />
+    <result column="UPDATE_USER" property="updateUser" jdbcType="VARCHAR" />
+    <result column="UPDATE_TIME" property="updateTime" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.jw.baseframe.model.C_T_Sys_Errorlog_InforWithBLOBs" extends="BaseResultMap" >
+    <result column="ERROR_INFOR" property="errorInfor" jdbcType="CLOB" />
+    <result column="ERROR_STACKTRACE" property="errorStacktrace" jdbcType="CLOB" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    UUID, MODULE_ID, MAIN_DOC_ID, ERROE_TYPE, ERROR_ID, EXCEPTIONNAME_EN, EXCEPTIONNAME_CN, 
+    EXCEPTION_ACTION, ERROR_IP, EXPAND_XML, UNITID, IS_DELETE, CREATE_USER, CREATE_TIME, 
+    UPDATE_USER, UPDATE_TIME
+  </sql>
+  <sql id="Blob_Column_List" >
+    ERROR_INFOR, ERROR_STACKTRACE
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.jw.baseframe.model.C_T_Sys_Errorlog_InforExample" >
+    select
+    <if test="example.distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from C_T_SYS_ERRORLOG_INFOR
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="example.orderByClause != null" >
+      order by ${example.orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.jw.baseframe.model.C_T_Sys_Errorlog_InforExample" >
+    <foreach collection="example.oredCriteria" item="criteria" separator="or" />
+    <if test="criteria.valid" >
+      <foreach collection="criteria.criteria" item="criterion" >
+        <if test="criterion.limitValue" >
+          SELECT 
+          <include refid="Base_Column_List" />
+           FROM ( SELECT A.
+          <include refid="Base_Column_List" />
+           , ROWNUM AS con FROM ( 
+        </if>
+      </foreach>
+    </if>
+    select
+    <if test="example.distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from C_T_SYS_ERRORLOG_INFOR
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="example.orderByClause != null" >
+      order by ${example.orderByClause}
+    </if>
+    <if test="criteria.valid" >
+      <foreach collection="criteria.criteria" item="criterion" >
+        <if test="criterion.limitValue" >
+           ) A  <![CDATA[WHERE ROWNUM <= ${criterion.secondValue}]]> ) B <![CDATA[WHERE B.con >= ${criterion.value} ]]>
+        </if>
+      </foreach>
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from C_T_SYS_ERRORLOG_INFOR
+    where UUID = #{uuid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from C_T_SYS_ERRORLOG_INFOR
+    where UUID = #{uuid,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.jw.baseframe.model.C_T_Sys_Errorlog_InforExample" >
+    delete from C_T_SYS_ERRORLOG_INFOR
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.jw.baseframe.model.C_T_Sys_Errorlog_InforWithBLOBs" >
+    insert into C_T_SYS_ERRORLOG_INFOR (UUID, MODULE_ID, MAIN_DOC_ID, 
+      ERROE_TYPE, ERROR_ID, EXCEPTIONNAME_EN, 
+      EXCEPTIONNAME_CN, EXCEPTION_ACTION, 
+      ERROR_IP, EXPAND_XML, UNITID, 
+      IS_DELETE, CREATE_USER, CREATE_TIME, 
+      UPDATE_USER, UPDATE_TIME, ERROR_INFOR, 
+      ERROR_STACKTRACE)
+    values (#{record.uuid,jdbcType=VARCHAR}, #{record.moduleId,jdbcType=VARCHAR}, #{record.mainDocId,jdbcType=VARCHAR}, 
+      #{record.erroeType,jdbcType=NVARCHAR}, #{record.errorId,jdbcType=VARCHAR}, #{record.exceptionnameEn,jdbcType=VARCHAR}, 
+      #{record.exceptionnameCn,jdbcType=NVARCHAR}, #{record.exceptionAction,jdbcType=VARCHAR}, 
+      #{record.errorIp,jdbcType=VARCHAR}, #{record.expandXml,jdbcType=NVARCHAR}, #{record.unitid,jdbcType=VARCHAR}, 
+      #{record.isDelete,jdbcType=DECIMAL}, #{record.createUser,jdbcType=VARCHAR}, #{record.createTime,jdbcType=VARCHAR}, 
+      #{record.updateUser,jdbcType=VARCHAR}, #{record.updateTime,jdbcType=VARCHAR}, #{record.errorInfor,jdbcType=CLOB}, 
+      #{record.errorStacktrace,jdbcType=CLOB})
+  </insert>
+  <insert id="insertSelective" parameterType="com.jw.baseframe.model.C_T_Sys_Errorlog_InforWithBLOBs" >
+    insert into C_T_SYS_ERRORLOG_INFOR
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="record.uuid != null" >
+        UUID,
+      </if>
+      <if test="record.moduleId != null" >
+        MODULE_ID,
+      </if>
+      <if test="record.mainDocId != null" >
+        MAIN_DOC_ID,
+      </if>
+      <if test="record.erroeType != null" >
+        ERROE_TYPE,
+      </if>
+      <if test="record.errorId != null" >
+        ERROR_ID,
+      </if>
+      <if test="record.exceptionnameEn != null" >
+        EXCEPTIONNAME_EN,
+      </if>
+      <if test="record.exceptionnameCn != null" >
+        EXCEPTIONNAME_CN,
+      </if>
+      <if test="record.exceptionAction != null" >
+        EXCEPTION_ACTION,
+      </if>
+      <if test="record.errorIp != null" >
+        ERROR_IP,
+      </if>
+      <if test="record.expandXml != null" >
+        EXPAND_XML,
+      </if>
+      <if test="record.unitid != null" >
+        UNITID,
+      </if>
+      <if test="record.isDelete != null" >
+        IS_DELETE,
+      </if>
+      <if test="record.createUser != null" >
+        CREATE_USER,
+      </if>
+      <if test="record.createTime != null" >
+        CREATE_TIME,
+      </if>
+      <if test="record.updateUser != null" >
+        UPDATE_USER,
+      </if>
+      <if test="record.updateTime != null" >
+        UPDATE_TIME,
+      </if>
+      <if test="record.errorInfor != null" >
+        ERROR_INFOR,
+      </if>
+      <if test="record.errorStacktrace != null" >
+        ERROR_STACKTRACE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="record.uuid != null" >
+        #{record.uuid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.moduleId != null" >
+        #{record.moduleId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mainDocId != null" >
+        #{record.mainDocId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.erroeType != null" >
+        #{record.erroeType,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.errorId != null" >
+        #{record.errorId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.exceptionnameEn != null" >
+        #{record.exceptionnameEn,jdbcType=VARCHAR},
+      </if>
+      <if test="record.exceptionnameCn != null" >
+        #{record.exceptionnameCn,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.exceptionAction != null" >
+        #{record.exceptionAction,jdbcType=VARCHAR},
+      </if>
+      <if test="record.errorIp != null" >
+        #{record.errorIp,jdbcType=VARCHAR},
+      </if>
+      <if test="record.expandXml != null" >
+        #{record.expandXml,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.unitid != null" >
+        #{record.unitid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isDelete != null" >
+        #{record.isDelete,jdbcType=DECIMAL},
+      </if>
+      <if test="record.createUser != null" >
+        #{record.createUser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null" >
+        #{record.createTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateUser != null" >
+        #{record.updateUser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateTime != null" >
+        #{record.updateTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.errorInfor != null" >
+        #{record.errorInfor,jdbcType=CLOB},
+      </if>
+      <if test="record.errorStacktrace != null" >
+        #{record.errorStacktrace,jdbcType=CLOB},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.jw.baseframe.model.C_T_Sys_Errorlog_InforExample" resultType="java.lang.Integer" >
+    select count(*) from C_T_SYS_ERRORLOG_INFOR
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update C_T_SYS_ERRORLOG_INFOR
+    <set >
+      <if test="record.uuid != null" >
+        UUID = #{record.uuid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.moduleId != null" >
+        MODULE_ID = #{record.moduleId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mainDocId != null" >
+        MAIN_DOC_ID = #{record.mainDocId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.erroeType != null" >
+        ERROE_TYPE = #{record.erroeType,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.errorId != null" >
+        ERROR_ID = #{record.errorId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.exceptionnameEn != null" >
+        EXCEPTIONNAME_EN = #{record.exceptionnameEn,jdbcType=VARCHAR},
+      </if>
+      <if test="record.exceptionnameCn != null" >
+        EXCEPTIONNAME_CN = #{record.exceptionnameCn,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.exceptionAction != null" >
+        EXCEPTION_ACTION = #{record.exceptionAction,jdbcType=VARCHAR},
+      </if>
+      <if test="record.errorIp != null" >
+        ERROR_IP = #{record.errorIp,jdbcType=VARCHAR},
+      </if>
+      <if test="record.expandXml != null" >
+        EXPAND_XML = #{record.expandXml,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.unitid != null" >
+        UNITID = #{record.unitid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isDelete != null" >
+        IS_DELETE = #{record.isDelete,jdbcType=DECIMAL},
+      </if>
+      <if test="record.createUser != null" >
+        CREATE_USER = #{record.createUser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null" >
+        CREATE_TIME = #{record.createTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateUser != null" >
+        UPDATE_USER = #{record.updateUser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateTime != null" >
+        UPDATE_TIME = #{record.updateTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.errorInfor != null" >
+        ERROR_INFOR = #{record.errorInfor,jdbcType=CLOB},
+      </if>
+      <if test="record.errorStacktrace != null" >
+        ERROR_STACKTRACE = #{record.errorStacktrace,jdbcType=CLOB},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update C_T_SYS_ERRORLOG_INFOR
+    set UUID = #{record.uuid,jdbcType=VARCHAR},
+      MODULE_ID = #{record.moduleId,jdbcType=VARCHAR},
+      MAIN_DOC_ID = #{record.mainDocId,jdbcType=VARCHAR},
+      ERROE_TYPE = #{record.erroeType,jdbcType=NVARCHAR},
+      ERROR_ID = #{record.errorId,jdbcType=VARCHAR},
+      EXCEPTIONNAME_EN = #{record.exceptionnameEn,jdbcType=VARCHAR},
+      EXCEPTIONNAME_CN = #{record.exceptionnameCn,jdbcType=NVARCHAR},
+      EXCEPTION_ACTION = #{record.exceptionAction,jdbcType=VARCHAR},
+      ERROR_IP = #{record.errorIp,jdbcType=VARCHAR},
+      EXPAND_XML = #{record.expandXml,jdbcType=NVARCHAR},
+      UNITID = #{record.unitid,jdbcType=VARCHAR},
+      IS_DELETE = #{record.isDelete,jdbcType=DECIMAL},
+      CREATE_USER = #{record.createUser,jdbcType=VARCHAR},
+      CREATE_TIME = #{record.createTime,jdbcType=VARCHAR},
+      UPDATE_USER = #{record.updateUser,jdbcType=VARCHAR},
+      UPDATE_TIME = #{record.updateTime,jdbcType=VARCHAR},
+      ERROR_INFOR = #{record.errorInfor,jdbcType=CLOB},
+      ERROR_STACKTRACE = #{record.errorStacktrace,jdbcType=CLOB}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update C_T_SYS_ERRORLOG_INFOR
+    set UUID = #{record.uuid,jdbcType=VARCHAR},
+      MODULE_ID = #{record.moduleId,jdbcType=VARCHAR},
+      MAIN_DOC_ID = #{record.mainDocId,jdbcType=VARCHAR},
+      ERROE_TYPE = #{record.erroeType,jdbcType=NVARCHAR},
+      ERROR_ID = #{record.errorId,jdbcType=VARCHAR},
+      EXCEPTIONNAME_EN = #{record.exceptionnameEn,jdbcType=VARCHAR},
+      EXCEPTIONNAME_CN = #{record.exceptionnameCn,jdbcType=NVARCHAR},
+      EXCEPTION_ACTION = #{record.exceptionAction,jdbcType=VARCHAR},
+      ERROR_IP = #{record.errorIp,jdbcType=VARCHAR},
+      EXPAND_XML = #{record.expandXml,jdbcType=NVARCHAR},
+      UNITID = #{record.unitid,jdbcType=VARCHAR},
+      IS_DELETE = #{record.isDelete,jdbcType=DECIMAL},
+      CREATE_USER = #{record.createUser,jdbcType=VARCHAR},
+      CREATE_TIME = #{record.createTime,jdbcType=VARCHAR},
+      UPDATE_USER = #{record.updateUser,jdbcType=VARCHAR},
+      UPDATE_TIME = #{record.updateTime,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jw.baseframe.model.C_T_Sys_Errorlog_InforWithBLOBs" >
+    update C_T_SYS_ERRORLOG_INFOR
+    <set >
+      <if test="record.moduleId != null" >
+        MODULE_ID = #{record.moduleId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mainDocId != null" >
+        MAIN_DOC_ID = #{record.mainDocId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.erroeType != null" >
+        ERROE_TYPE = #{record.erroeType,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.errorId != null" >
+        ERROR_ID = #{record.errorId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.exceptionnameEn != null" >
+        EXCEPTIONNAME_EN = #{record.exceptionnameEn,jdbcType=VARCHAR},
+      </if>
+      <if test="record.exceptionnameCn != null" >
+        EXCEPTIONNAME_CN = #{record.exceptionnameCn,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.exceptionAction != null" >
+        EXCEPTION_ACTION = #{record.exceptionAction,jdbcType=VARCHAR},
+      </if>
+      <if test="record.errorIp != null" >
+        ERROR_IP = #{record.errorIp,jdbcType=VARCHAR},
+      </if>
+      <if test="record.expandXml != null" >
+        EXPAND_XML = #{record.expandXml,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.unitid != null" >
+        UNITID = #{record.unitid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isDelete != null" >
+        IS_DELETE = #{record.isDelete,jdbcType=DECIMAL},
+      </if>
+      <if test="record.createUser != null" >
+        CREATE_USER = #{record.createUser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null" >
+        CREATE_TIME = #{record.createTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateUser != null" >
+        UPDATE_USER = #{record.updateUser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateTime != null" >
+        UPDATE_TIME = #{record.updateTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.errorInfor != null" >
+        ERROR_INFOR = #{record.errorInfor,jdbcType=CLOB},
+      </if>
+      <if test="record.errorStacktrace != null" >
+        ERROR_STACKTRACE = #{record.errorStacktrace,jdbcType=CLOB},
+      </if>
+    </set>
+    where UUID = #{record.uuid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.jw.baseframe.model.C_T_Sys_Errorlog_InforWithBLOBs" >
+    update C_T_SYS_ERRORLOG_INFOR
+    set MODULE_ID = #{record.moduleId,jdbcType=VARCHAR},
+      MAIN_DOC_ID = #{record.mainDocId,jdbcType=VARCHAR},
+      ERROE_TYPE = #{record.erroeType,jdbcType=NVARCHAR},
+      ERROR_ID = #{record.errorId,jdbcType=VARCHAR},
+      EXCEPTIONNAME_EN = #{record.exceptionnameEn,jdbcType=VARCHAR},
+      EXCEPTIONNAME_CN = #{record.exceptionnameCn,jdbcType=NVARCHAR},
+      EXCEPTION_ACTION = #{record.exceptionAction,jdbcType=VARCHAR},
+      ERROR_IP = #{record.errorIp,jdbcType=VARCHAR},
+      EXPAND_XML = #{record.expandXml,jdbcType=NVARCHAR},
+      UNITID = #{record.unitid,jdbcType=VARCHAR},
+      IS_DELETE = #{record.isDelete,jdbcType=DECIMAL},
+      CREATE_USER = #{record.createUser,jdbcType=VARCHAR},
+      CREATE_TIME = #{record.createTime,jdbcType=VARCHAR},
+      UPDATE_USER = #{record.updateUser,jdbcType=VARCHAR},
+      UPDATE_TIME = #{record.updateTime,jdbcType=VARCHAR},
+      ERROR_INFOR = #{record.errorInfor,jdbcType=CLOB},
+      ERROR_STACKTRACE = #{record.errorStacktrace,jdbcType=CLOB}
+    where UUID = #{record.uuid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jw.baseframe.model.C_T_Sys_Errorlog_Infor" >
+    update C_T_SYS_ERRORLOG_INFOR
+    set MODULE_ID = #{record.moduleId,jdbcType=VARCHAR},
+      MAIN_DOC_ID = #{record.mainDocId,jdbcType=VARCHAR},
+      ERROE_TYPE = #{record.erroeType,jdbcType=NVARCHAR},
+      ERROR_ID = #{record.errorId,jdbcType=VARCHAR},
+      EXCEPTIONNAME_EN = #{record.exceptionnameEn,jdbcType=VARCHAR},
+      EXCEPTIONNAME_CN = #{record.exceptionnameCn,jdbcType=NVARCHAR},
+      EXCEPTION_ACTION = #{record.exceptionAction,jdbcType=VARCHAR},
+      ERROR_IP = #{record.errorIp,jdbcType=VARCHAR},
+      EXPAND_XML = #{record.expandXml,jdbcType=NVARCHAR},
+      UNITID = #{record.unitid,jdbcType=VARCHAR},
+      IS_DELETE = #{record.isDelete,jdbcType=DECIMAL},
+      CREATE_USER = #{record.createUser,jdbcType=VARCHAR},
+      CREATE_TIME = #{record.createTime,jdbcType=VARCHAR},
+      UPDATE_USER = #{record.updateUser,jdbcType=VARCHAR},
+      UPDATE_TIME = #{record.updateTime,jdbcType=VARCHAR}
+    where UUID = #{record.uuid,jdbcType=VARCHAR}
+  </update>
+</mapper>

@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jw.baseframe.dao.C_V_Sys_NavigationnotesMapper" >
+  <resultMap id="BaseResultMap" type="com.jw.baseframe.model.C_V_Sys_Navigationnotes" >
+    <result column="MODULE_ID" property="moduleId" jdbcType="VARCHAR" />
+    <result column="MODULE_NAME" property="moduleName" jdbcType="NVARCHAR" />
+    <result column="LINK_URL" property="linkUrl" jdbcType="VARCHAR" />
+    <result column="TARGET" property="target" jdbcType="VARCHAR" />
+    <result column="SORT" property="sort" jdbcType="DECIMAL" />
+    <result column="PAREN_MODULE" property="parenModule" jdbcType="VARCHAR" />
+    <result column="MODULE_DESCRIPTION" property="moduleDescription" jdbcType="NVARCHAR" />
+    <result column="PIC_URL" property="picUrl" jdbcType="VARCHAR" />
+    <result column="LEVELNO" property="levelno" jdbcType="DECIMAL" />
+    <result column="RCOUNT" property="rcount" jdbcType="DECIMAL" />
+    <result column="EXPAND_XML" property="expandXml" jdbcType="NVARCHAR" />
+    <result column="MUSER" property="muser" jdbcType="VARCHAR" />
+    <result column="UNITID" property="unitid" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    MODULE_ID, MODULE_NAME, LINK_URL, TARGET, SORT, PAREN_MODULE, MODULE_DESCRIPTION, 
+    PIC_URL, LEVELNO, RCOUNT, EXPAND_XML, MUSER, UNITID
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.jw.baseframe.model.C_V_Sys_NavigationnotesExample" >
+    <foreach collection="example.oredCriteria" item="criteria" separator="or" />
+    <if test="criteria.valid" >
+      <foreach collection="criteria.criteria" item="criterion" >
+        <if test="criterion.limitValue" >
+          SELECT 
+          <include refid="Base_Column_List" />
+           FROM ( SELECT A.
+          <include refid="Base_Column_List" />
+           , ROWNUM AS con FROM ( 
+        </if>
+      </foreach>
+    </if>
+    select
+    <if test="example.distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from C_V_SYS_NAVIGATIONNOTES
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="example.orderByClause != null" >
+      order by ${example.orderByClause}
+    </if>
+    <if test="criteria.valid" >
+      <foreach collection="criteria.criteria" item="criterion" >
+        <if test="criterion.limitValue" >
+           ) A  <![CDATA[WHERE ROWNUM <= ${criterion.secondValue}]]> ) B <![CDATA[WHERE B.con >= ${criterion.value} ]]>
+        </if>
+      </foreach>
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.jw.baseframe.model.C_V_Sys_NavigationnotesExample" >
+    delete from C_V_SYS_NAVIGATIONNOTES
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.jw.baseframe.model.C_V_Sys_Navigationnotes" >
+    insert into C_V_SYS_NAVIGATIONNOTES (MODULE_ID, MODULE_NAME, 
+      LINK_URL, TARGET, SORT, 
+      PAREN_MODULE, MODULE_DESCRIPTION, 
+      PIC_URL, LEVELNO, RCOUNT, 
+      EXPAND_XML, MUSER, UNITID
+      )
+    values (#{record.moduleId,jdbcType=VARCHAR}, #{record.moduleName,jdbcType=NVARCHAR}, 
+      #{record.linkUrl,jdbcType=VARCHAR}, #{record.target,jdbcType=VARCHAR}, #{record.sort,jdbcType=DECIMAL}, 
+      #{record.parenModule,jdbcType=VARCHAR}, #{record.moduleDescription,jdbcType=NVARCHAR}, 
+      #{record.picUrl,jdbcType=VARCHAR}, #{record.levelno,jdbcType=DECIMAL}, #{record.rcount,jdbcType=DECIMAL}, 
+      #{record.expandXml,jdbcType=NVARCHAR}, #{record.muser,jdbcType=VARCHAR}, #{record.unitid,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.jw.baseframe.model.C_V_Sys_Navigationnotes" >
+    insert into C_V_SYS_NAVIGATIONNOTES
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="record.moduleId != null" >
+        MODULE_ID,
+      </if>
+      <if test="record.moduleName != null" >
+        MODULE_NAME,
+      </if>
+      <if test="record.linkUrl != null" >
+        LINK_URL,
+      </if>
+      <if test="record.target != null" >
+        TARGET,
+      </if>
+      <if test="record.sort != null" >
+        SORT,
+      </if>
+      <if test="record.parenModule != null" >
+        PAREN_MODULE,
+      </if>
+      <if test="record.moduleDescription != null" >
+        MODULE_DESCRIPTION,
+      </if>
+      <if test="record.picUrl != null" >
+        PIC_URL,
+      </if>
+      <if test="record.levelno != null" >
+        LEVELNO,
+      </if>
+      <if test="record.rcount != null" >
+        RCOUNT,
+      </if>
+      <if test="record.expandXml != null" >
+        EXPAND_XML,
+      </if>
+      <if test="record.muser != null" >
+        MUSER,
+      </if>
+      <if test="record.unitid != null" >
+        UNITID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="record.moduleId != null" >
+        #{record.moduleId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.moduleName != null" >
+        #{record.moduleName,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.linkUrl != null" >
+        #{record.linkUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.target != null" >
+        #{record.target,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sort != null" >
+        #{record.sort,jdbcType=DECIMAL},
+      </if>
+      <if test="record.parenModule != null" >
+        #{record.parenModule,jdbcType=VARCHAR},
+      </if>
+      <if test="record.moduleDescription != null" >
+        #{record.moduleDescription,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.picUrl != null" >
+        #{record.picUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.levelno != null" >
+        #{record.levelno,jdbcType=DECIMAL},
+      </if>
+      <if test="record.rcount != null" >
+        #{record.rcount,jdbcType=DECIMAL},
+      </if>
+      <if test="record.expandXml != null" >
+        #{record.expandXml,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.muser != null" >
+        #{record.muser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.unitid != null" >
+        #{record.unitid,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.jw.baseframe.model.C_V_Sys_NavigationnotesExample" resultType="java.lang.Integer" >
+    select count(*) from C_V_SYS_NAVIGATIONNOTES
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update C_V_SYS_NAVIGATIONNOTES
+    <set >
+      <if test="record.moduleId != null" >
+        MODULE_ID = #{record.moduleId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.moduleName != null" >
+        MODULE_NAME = #{record.moduleName,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.linkUrl != null" >
+        LINK_URL = #{record.linkUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.target != null" >
+        TARGET = #{record.target,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sort != null" >
+        SORT = #{record.sort,jdbcType=DECIMAL},
+      </if>
+      <if test="record.parenModule != null" >
+        PAREN_MODULE = #{record.parenModule,jdbcType=VARCHAR},
+      </if>
+      <if test="record.moduleDescription != null" >
+        MODULE_DESCRIPTION = #{record.moduleDescription,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.picUrl != null" >
+        PIC_URL = #{record.picUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.levelno != null" >
+        LEVELNO = #{record.levelno,jdbcType=DECIMAL},
+      </if>
+      <if test="record.rcount != null" >
+        RCOUNT = #{record.rcount,jdbcType=DECIMAL},
+      </if>
+      <if test="record.expandXml != null" >
+        EXPAND_XML = #{record.expandXml,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.muser != null" >
+        MUSER = #{record.muser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.unitid != null" >
+        UNITID = #{record.unitid,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update C_V_SYS_NAVIGATIONNOTES
+    set MODULE_ID = #{record.moduleId,jdbcType=VARCHAR},
+      MODULE_NAME = #{record.moduleName,jdbcType=NVARCHAR},
+      LINK_URL = #{record.linkUrl,jdbcType=VARCHAR},
+      TARGET = #{record.target,jdbcType=VARCHAR},
+      SORT = #{record.sort,jdbcType=DECIMAL},
+      PAREN_MODULE = #{record.parenModule,jdbcType=VARCHAR},
+      MODULE_DESCRIPTION = #{record.moduleDescription,jdbcType=NVARCHAR},
+      PIC_URL = #{record.picUrl,jdbcType=VARCHAR},
+      LEVELNO = #{record.levelno,jdbcType=DECIMAL},
+      RCOUNT = #{record.rcount,jdbcType=DECIMAL},
+      EXPAND_XML = #{record.expandXml,jdbcType=NVARCHAR},
+      MUSER = #{record.muser,jdbcType=VARCHAR},
+      UNITID = #{record.unitid,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

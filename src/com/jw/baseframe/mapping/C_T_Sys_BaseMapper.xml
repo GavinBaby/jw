@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<!DOCTYPE mapper      
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"      
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
+   
+ <mapper namespace="com.jw.baseframe.dao.C_T_Sys_BaseMapper"> 
+  
+    <update id="isDeleteUpdate" parameterType="map" statementType="STATEMENT">
+    
+    <![CDATA[UPDATE ${tableName} SET IS_DELETE = 1 WHERE ${where}]]> 
+    
+    </update>
+    
+    <update id="factDelete" parameterType="map" statementType="STATEMENT">
+    
+    <![CDATA[DELETE FROM ${tableName} WHERE ${where}]]> 
+    
+    </update>
+
+   
+ </mapper>

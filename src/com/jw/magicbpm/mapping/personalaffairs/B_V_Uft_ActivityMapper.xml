@@ -1,0 +1,278 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jw.magicbpm.dao.personalaffairs.B_V_Uft_ActivityMapper" >
+  <resultMap id="BaseResultMap" type="com.jw.magicbpm.model.personalaffairs.B_V_Uft_Activity" >
+    <result column="USER_ID" property="userId" jdbcType="VARCHAR" />
+    <result column="STARTOFWEEK" property="startofweek" jdbcType="VARCHAR" />
+    <result column="ENDOFWEEK" property="endofweek" jdbcType="VARCHAR" />
+    <result column="SORT" property="sort" jdbcType="DECIMAL" />
+    <result column="USER_NAME" property="userName" jdbcType="NVARCHAR" />
+    <result column="SUNDAY" property="sunday" jdbcType="CHAR" />
+    <result column="MONDAY" property="monday" jdbcType="CHAR" />
+    <result column="TUESDAY" property="tuesday" jdbcType="CHAR" />
+    <result column="WEDNESDAY" property="wednesday" jdbcType="CHAR" />
+    <result column="THURSDAY" property="thursday" jdbcType="CHAR" />
+    <result column="FRIDAY" property="friday" jdbcType="CHAR" />
+    <result column="SATURDAY" property="saturday" jdbcType="CHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    USER_ID, STARTOFWEEK, ENDOFWEEK, SORT, USER_NAME, SUNDAY, MONDAY, TUESDAY, WEDNESDAY, 
+    THURSDAY, FRIDAY, SATURDAY
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.jw.magicbpm.model.personalaffairs.B_V_Uft_ActivityExample" >
+    <foreach collection="example.oredCriteria" item="criteria" separator="or" />
+    <if test="criteria.valid" >
+      <foreach collection="criteria.criteria" item="criterion" >
+        <if test="criterion.limitValue" >
+          SELECT 
+          <include refid="Base_Column_List" />
+           FROM ( SELECT A.
+          <include refid="Base_Column_List" />
+           , ROWNUM AS con FROM ( 
+        </if>
+      </foreach>
+    </if>
+    select
+    <if test="example.distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from B_V_UFT_ACTIVITY
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="example.orderByClause != null" >
+      order by ${example.orderByClause}
+    </if>
+    <if test="criteria.valid" >
+      <foreach collection="criteria.criteria" item="criterion" >
+        <if test="criterion.limitValue" >
+           ) A  <![CDATA[WHERE ROWNUM <= ${criterion.secondValue}]]> ) B <![CDATA[WHERE B.con >= ${criterion.value} ]]>
+        </if>
+      </foreach>
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.jw.magicbpm.model.personalaffairs.B_V_Uft_ActivityExample" >
+    delete from B_V_UFT_ACTIVITY
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.jw.magicbpm.model.personalaffairs.B_V_Uft_Activity" >
+    insert into B_V_UFT_ACTIVITY (USER_ID, STARTOFWEEK, 
+      ENDOFWEEK, SORT, USER_NAME, 
+      SUNDAY, MONDAY, TUESDAY, 
+      WEDNESDAY, THURSDAY, FRIDAY, 
+      SATURDAY)
+    values (#{record.userId,jdbcType=VARCHAR}, #{record.startofweek,jdbcType=VARCHAR}, 
+      #{record.endofweek,jdbcType=VARCHAR}, #{record.sort,jdbcType=DECIMAL}, #{record.userName,jdbcType=NVARCHAR}, 
+      #{record.sunday,jdbcType=CHAR}, #{record.monday,jdbcType=CHAR}, #{record.tuesday,jdbcType=CHAR}, 
+      #{record.wednesday,jdbcType=CHAR}, #{record.thursday,jdbcType=CHAR}, #{record.friday,jdbcType=CHAR}, 
+      #{record.saturday,jdbcType=CHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.jw.magicbpm.model.personalaffairs.B_V_Uft_Activity" >
+    insert into B_V_UFT_ACTIVITY
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="record.userId != null" >
+        USER_ID,
+      </if>
+      <if test="record.startofweek != null" >
+        STARTOFWEEK,
+      </if>
+      <if test="record.endofweek != null" >
+        ENDOFWEEK,
+      </if>
+      <if test="record.sort != null" >
+        SORT,
+      </if>
+      <if test="record.userName != null" >
+        USER_NAME,
+      </if>
+      <if test="record.sunday != null" >
+        SUNDAY,
+      </if>
+      <if test="record.monday != null" >
+        MONDAY,
+      </if>
+      <if test="record.tuesday != null" >
+        TUESDAY,
+      </if>
+      <if test="record.wednesday != null" >
+        WEDNESDAY,
+      </if>
+      <if test="record.thursday != null" >
+        THURSDAY,
+      </if>
+      <if test="record.friday != null" >
+        FRIDAY,
+      </if>
+      <if test="record.saturday != null" >
+        SATURDAY,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="record.userId != null" >
+        #{record.userId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.startofweek != null" >
+        #{record.startofweek,jdbcType=VARCHAR},
+      </if>
+      <if test="record.endofweek != null" >
+        #{record.endofweek,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sort != null" >
+        #{record.sort,jdbcType=DECIMAL},
+      </if>
+      <if test="record.userName != null" >
+        #{record.userName,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.sunday != null" >
+        #{record.sunday,jdbcType=CHAR},
+      </if>
+      <if test="record.monday != null" >
+        #{record.monday,jdbcType=CHAR},
+      </if>
+      <if test="record.tuesday != null" >
+        #{record.tuesday,jdbcType=CHAR},
+      </if>
+      <if test="record.wednesday != null" >
+        #{record.wednesday,jdbcType=CHAR},
+      </if>
+      <if test="record.thursday != null" >
+        #{record.thursday,jdbcType=CHAR},
+      </if>
+      <if test="record.friday != null" >
+        #{record.friday,jdbcType=CHAR},
+      </if>
+      <if test="record.saturday != null" >
+        #{record.saturday,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.jw.magicbpm.model.personalaffairs.B_V_Uft_ActivityExample" resultType="java.lang.Integer" >
+    select count(*) from B_V_UFT_ACTIVITY
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update B_V_UFT_ACTIVITY
+    <set >
+      <if test="record.userId != null" >
+        USER_ID = #{record.userId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.startofweek != null" >
+        STARTOFWEEK = #{record.startofweek,jdbcType=VARCHAR},
+      </if>
+      <if test="record.endofweek != null" >
+        ENDOFWEEK = #{record.endofweek,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sort != null" >
+        SORT = #{record.sort,jdbcType=DECIMAL},
+      </if>
+      <if test="record.userName != null" >
+        USER_NAME = #{record.userName,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.sunday != null" >
+        SUNDAY = #{record.sunday,jdbcType=CHAR},
+      </if>
+      <if test="record.monday != null" >
+        MONDAY = #{record.monday,jdbcType=CHAR},
+      </if>
+      <if test="record.tuesday != null" >
+        TUESDAY = #{record.tuesday,jdbcType=CHAR},
+      </if>
+      <if test="record.wednesday != null" >
+        WEDNESDAY = #{record.wednesday,jdbcType=CHAR},
+      </if>
+      <if test="record.thursday != null" >
+        THURSDAY = #{record.thursday,jdbcType=CHAR},
+      </if>
+      <if test="record.friday != null" >
+        FRIDAY = #{record.friday,jdbcType=CHAR},
+      </if>
+      <if test="record.saturday != null" >
+        SATURDAY = #{record.saturday,jdbcType=CHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update B_V_UFT_ACTIVITY
+    set USER_ID = #{record.userId,jdbcType=VARCHAR},
+      STARTOFWEEK = #{record.startofweek,jdbcType=VARCHAR},
+      ENDOFWEEK = #{record.endofweek,jdbcType=VARCHAR},
+      SORT = #{record.sort,jdbcType=DECIMAL},
+      USER_NAME = #{record.userName,jdbcType=NVARCHAR},
+      SUNDAY = #{record.sunday,jdbcType=CHAR},
+      MONDAY = #{record.monday,jdbcType=CHAR},
+      TUESDAY = #{record.tuesday,jdbcType=CHAR},
+      WEDNESDAY = #{record.wednesday,jdbcType=CHAR},
+      THURSDAY = #{record.thursday,jdbcType=CHAR},
+      FRIDAY = #{record.friday,jdbcType=CHAR},
+      SATURDAY = #{record.saturday,jdbcType=CHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

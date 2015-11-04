@@ -1,0 +1,611 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jw.magicbpm.dao.personalaffairs.B_T_Uft_ActivityMapper" >
+  <resultMap id="BaseResultMap" type="com.jw.magicbpm.model.personalaffairs.B_T_Uft_Activity" >
+    <id column="UUID" property="uuid" jdbcType="VARCHAR" />
+    <result column="ID" property="id" jdbcType="NVARCHAR" />
+    <result column="TITLE" property="title" jdbcType="NVARCHAR" />
+    <result column="PLANNIG" property="plannig" jdbcType="NVARCHAR" />
+    <result column="USER_ID" property="userId" jdbcType="VARCHAR" />
+    <result column="DEPT_ID" property="deptId" jdbcType="VARCHAR" />
+    <result column="ALLDAY" property="allday" jdbcType="NVARCHAR" />
+    <result column="YEARS" property="years" jdbcType="VARCHAR" />
+    <result column="WEEKOFYEAR" property="weekofyear" jdbcType="VARCHAR" />
+    <result column="DAYOFWEEK" property="dayofweek" jdbcType="VARCHAR" />
+    <result column="STARTOFWEEK" property="startofweek" jdbcType="VARCHAR" />
+    <result column="ENDOFWEEK" property="endofweek" jdbcType="VARCHAR" />
+    <result column="START_TIME" property="startTime" jdbcType="VARCHAR" />
+    <result column="END_TIME" property="endTime" jdbcType="VARCHAR" />
+    <result column="URL" property="url" jdbcType="NVARCHAR" />
+    <result column="CLASSNAME1" property="classname1" jdbcType="NVARCHAR" />
+    <result column="EDITABLE" property="editable" jdbcType="NVARCHAR" />
+    <result column="SOURCE" property="source" jdbcType="NVARCHAR" />
+    <result column="COLOR" property="color" jdbcType="NVARCHAR" />
+    <result column="BACKGROUNDCOLOR" property="backgroundcolor" jdbcType="NVARCHAR" />
+    <result column="BORDERCOLOR" property="bordercolor" jdbcType="NVARCHAR" />
+    <result column="TEXTCOLOR" property="textcolor" jdbcType="NVARCHAR" />
+    <result column="EXPAND_XML" property="expandXml" jdbcType="NVARCHAR" />
+    <result column="UNITID" property="unitid" jdbcType="VARCHAR" />
+    <result column="IS_DELETE" property="isDelete" jdbcType="DECIMAL" />
+    <result column="CREATE_USER" property="createUser" jdbcType="VARCHAR" />
+    <result column="CREATE_TIME" property="createTime" jdbcType="VARCHAR" />
+    <result column="UPDATE_USER" property="updateUser" jdbcType="VARCHAR" />
+    <result column="UPDATE_TIME" property="updateTime" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    UUID, ID, TITLE, PLANNIG, USER_ID, DEPT_ID, ALLDAY, YEARS, WEEKOFYEAR, DAYOFWEEK, 
+    STARTOFWEEK, ENDOFWEEK, START_TIME, END_TIME, URL, CLASSNAME1, EDITABLE, SOURCE, 
+    COLOR, BACKGROUNDCOLOR, BORDERCOLOR, TEXTCOLOR, EXPAND_XML, UNITID, IS_DELETE, CREATE_USER, 
+    CREATE_TIME, UPDATE_USER, UPDATE_TIME
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.jw.magicbpm.model.personalaffairs.B_T_Uft_ActivityExample" >
+    <foreach collection="example.oredCriteria" item="criteria" separator="or" />
+    <if test="criteria.valid" >
+      <foreach collection="criteria.criteria" item="criterion" >
+        <if test="criterion.limitValue" >
+          SELECT 
+          <include refid="Base_Column_List" />
+           FROM ( SELECT A.
+          <include refid="Base_Column_List" />
+           , ROWNUM AS con FROM ( 
+        </if>
+      </foreach>
+    </if>
+    select
+    <if test="example.distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from B_T_UFT_ACTIVITY
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="example.orderByClause != null" >
+      order by ${example.orderByClause}
+    </if>
+    <if test="criteria.valid" >
+      <foreach collection="criteria.criteria" item="criterion" >
+        <if test="criterion.limitValue" >
+           ) A  <![CDATA[WHERE ROWNUM <= ${criterion.secondValue}]]> ) B <![CDATA[WHERE B.con >= ${criterion.value} ]]>
+        </if>
+      </foreach>
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from B_T_UFT_ACTIVITY
+    where UUID = #{uuid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from B_T_UFT_ACTIVITY
+    where UUID = #{uuid,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.jw.magicbpm.model.personalaffairs.B_T_Uft_ActivityExample" >
+    delete from B_T_UFT_ACTIVITY
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.jw.magicbpm.model.personalaffairs.B_T_Uft_Activity" >
+    insert into B_T_UFT_ACTIVITY (UUID, ID, TITLE, 
+      PLANNIG, USER_ID, DEPT_ID, 
+      ALLDAY, YEARS, WEEKOFYEAR, 
+      DAYOFWEEK, STARTOFWEEK, ENDOFWEEK, 
+      START_TIME, END_TIME, URL, 
+      CLASSNAME1, EDITABLE, SOURCE, 
+      COLOR, BACKGROUNDCOLOR, 
+      BORDERCOLOR, TEXTCOLOR, 
+      EXPAND_XML, UNITID, IS_DELETE, 
+      CREATE_USER, CREATE_TIME, UPDATE_USER, 
+      UPDATE_TIME)
+    values (#{record.uuid,jdbcType=VARCHAR}, #{record.id,jdbcType=NVARCHAR}, #{record.title,jdbcType=NVARCHAR}, 
+      #{record.plannig,jdbcType=NVARCHAR}, #{record.userId,jdbcType=VARCHAR}, #{record.deptId,jdbcType=VARCHAR}, 
+      #{record.allday,jdbcType=NVARCHAR}, #{record.years,jdbcType=VARCHAR}, #{record.weekofyear,jdbcType=VARCHAR}, 
+      #{record.dayofweek,jdbcType=VARCHAR}, #{record.startofweek,jdbcType=VARCHAR}, #{record.endofweek,jdbcType=VARCHAR}, 
+      #{record.startTime,jdbcType=VARCHAR}, #{record.endTime,jdbcType=VARCHAR}, #{record.url,jdbcType=NVARCHAR}, 
+      #{record.classname1,jdbcType=NVARCHAR}, #{record.editable,jdbcType=NVARCHAR}, #{record.source,jdbcType=NVARCHAR}, 
+      #{record.color,jdbcType=NVARCHAR}, #{record.backgroundcolor,jdbcType=NVARCHAR}, 
+      #{record.bordercolor,jdbcType=NVARCHAR}, #{record.textcolor,jdbcType=NVARCHAR}, 
+      #{record.expandXml,jdbcType=NVARCHAR}, #{record.unitid,jdbcType=VARCHAR}, #{record.isDelete,jdbcType=DECIMAL}, 
+      #{record.createUser,jdbcType=VARCHAR}, #{record.createTime,jdbcType=VARCHAR}, #{record.updateUser,jdbcType=VARCHAR}, 
+      #{record.updateTime,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.jw.magicbpm.model.personalaffairs.B_T_Uft_Activity" >
+    insert into B_T_UFT_ACTIVITY
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="record.uuid != null" >
+        UUID,
+      </if>
+      <if test="record.id != null" >
+        ID,
+      </if>
+      <if test="record.title != null" >
+        TITLE,
+      </if>
+      <if test="record.plannig != null" >
+        PLANNIG,
+      </if>
+      <if test="record.userId != null" >
+        USER_ID,
+      </if>
+      <if test="record.deptId != null" >
+        DEPT_ID,
+      </if>
+      <if test="record.allday != null" >
+        ALLDAY,
+      </if>
+      <if test="record.years != null" >
+        YEARS,
+      </if>
+      <if test="record.weekofyear != null" >
+        WEEKOFYEAR,
+      </if>
+      <if test="record.dayofweek != null" >
+        DAYOFWEEK,
+      </if>
+      <if test="record.startofweek != null" >
+        STARTOFWEEK,
+      </if>
+      <if test="record.endofweek != null" >
+        ENDOFWEEK,
+      </if>
+      <if test="record.startTime != null" >
+        START_TIME,
+      </if>
+      <if test="record.endTime != null" >
+        END_TIME,
+      </if>
+      <if test="record.url != null" >
+        URL,
+      </if>
+      <if test="record.classname1 != null" >
+        CLASSNAME1,
+      </if>
+      <if test="record.editable != null" >
+        EDITABLE,
+      </if>
+      <if test="record.source != null" >
+        SOURCE,
+      </if>
+      <if test="record.color != null" >
+        COLOR,
+      </if>
+      <if test="record.backgroundcolor != null" >
+        BACKGROUNDCOLOR,
+      </if>
+      <if test="record.bordercolor != null" >
+        BORDERCOLOR,
+      </if>
+      <if test="record.textcolor != null" >
+        TEXTCOLOR,
+      </if>
+      <if test="record.expandXml != null" >
+        EXPAND_XML,
+      </if>
+      <if test="record.unitid != null" >
+        UNITID,
+      </if>
+      <if test="record.isDelete != null" >
+        IS_DELETE,
+      </if>
+      <if test="record.createUser != null" >
+        CREATE_USER,
+      </if>
+      <if test="record.createTime != null" >
+        CREATE_TIME,
+      </if>
+      <if test="record.updateUser != null" >
+        UPDATE_USER,
+      </if>
+      <if test="record.updateTime != null" >
+        UPDATE_TIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="record.uuid != null" >
+        #{record.uuid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.id != null" >
+        #{record.id,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.title != null" >
+        #{record.title,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.plannig != null" >
+        #{record.plannig,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.userId != null" >
+        #{record.userId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.deptId != null" >
+        #{record.deptId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.allday != null" >
+        #{record.allday,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.years != null" >
+        #{record.years,jdbcType=VARCHAR},
+      </if>
+      <if test="record.weekofyear != null" >
+        #{record.weekofyear,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dayofweek != null" >
+        #{record.dayofweek,jdbcType=VARCHAR},
+      </if>
+      <if test="record.startofweek != null" >
+        #{record.startofweek,jdbcType=VARCHAR},
+      </if>
+      <if test="record.endofweek != null" >
+        #{record.endofweek,jdbcType=VARCHAR},
+      </if>
+      <if test="record.startTime != null" >
+        #{record.startTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.endTime != null" >
+        #{record.endTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.url != null" >
+        #{record.url,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.classname1 != null" >
+        #{record.classname1,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.editable != null" >
+        #{record.editable,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.source != null" >
+        #{record.source,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.color != null" >
+        #{record.color,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.backgroundcolor != null" >
+        #{record.backgroundcolor,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.bordercolor != null" >
+        #{record.bordercolor,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.textcolor != null" >
+        #{record.textcolor,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.expandXml != null" >
+        #{record.expandXml,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.unitid != null" >
+        #{record.unitid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isDelete != null" >
+        #{record.isDelete,jdbcType=DECIMAL},
+      </if>
+      <if test="record.createUser != null" >
+        #{record.createUser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null" >
+        #{record.createTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateUser != null" >
+        #{record.updateUser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateTime != null" >
+        #{record.updateTime,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.jw.magicbpm.model.personalaffairs.B_T_Uft_ActivityExample" resultType="java.lang.Integer" >
+    select count(*) from B_T_UFT_ACTIVITY
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update B_T_UFT_ACTIVITY
+    <set >
+      <if test="record.uuid != null" >
+        UUID = #{record.uuid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.id != null" >
+        ID = #{record.id,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.title != null" >
+        TITLE = #{record.title,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.plannig != null" >
+        PLANNIG = #{record.plannig,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.userId != null" >
+        USER_ID = #{record.userId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.deptId != null" >
+        DEPT_ID = #{record.deptId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.allday != null" >
+        ALLDAY = #{record.allday,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.years != null" >
+        YEARS = #{record.years,jdbcType=VARCHAR},
+      </if>
+      <if test="record.weekofyear != null" >
+        WEEKOFYEAR = #{record.weekofyear,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dayofweek != null" >
+        DAYOFWEEK = #{record.dayofweek,jdbcType=VARCHAR},
+      </if>
+      <if test="record.startofweek != null" >
+        STARTOFWEEK = #{record.startofweek,jdbcType=VARCHAR},
+      </if>
+      <if test="record.endofweek != null" >
+        ENDOFWEEK = #{record.endofweek,jdbcType=VARCHAR},
+      </if>
+      <if test="record.startTime != null" >
+        START_TIME = #{record.startTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.endTime != null" >
+        END_TIME = #{record.endTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.url != null" >
+        URL = #{record.url,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.classname1 != null" >
+        CLASSNAME1 = #{record.classname1,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.editable != null" >
+        EDITABLE = #{record.editable,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.source != null" >
+        SOURCE = #{record.source,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.color != null" >
+        COLOR = #{record.color,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.backgroundcolor != null" >
+        BACKGROUNDCOLOR = #{record.backgroundcolor,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.bordercolor != null" >
+        BORDERCOLOR = #{record.bordercolor,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.textcolor != null" >
+        TEXTCOLOR = #{record.textcolor,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.expandXml != null" >
+        EXPAND_XML = #{record.expandXml,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.unitid != null" >
+        UNITID = #{record.unitid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isDelete != null" >
+        IS_DELETE = #{record.isDelete,jdbcType=DECIMAL},
+      </if>
+      <if test="record.createUser != null" >
+        CREATE_USER = #{record.createUser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null" >
+        CREATE_TIME = #{record.createTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateUser != null" >
+        UPDATE_USER = #{record.updateUser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateTime != null" >
+        UPDATE_TIME = #{record.updateTime,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update B_T_UFT_ACTIVITY
+    set UUID = #{record.uuid,jdbcType=VARCHAR},
+      ID = #{record.id,jdbcType=NVARCHAR},
+      TITLE = #{record.title,jdbcType=NVARCHAR},
+      PLANNIG = #{record.plannig,jdbcType=NVARCHAR},
+      USER_ID = #{record.userId,jdbcType=VARCHAR},
+      DEPT_ID = #{record.deptId,jdbcType=VARCHAR},
+      ALLDAY = #{record.allday,jdbcType=NVARCHAR},
+      YEARS = #{record.years,jdbcType=VARCHAR},
+      WEEKOFYEAR = #{record.weekofyear,jdbcType=VARCHAR},
+      DAYOFWEEK = #{record.dayofweek,jdbcType=VARCHAR},
+      STARTOFWEEK = #{record.startofweek,jdbcType=VARCHAR},
+      ENDOFWEEK = #{record.endofweek,jdbcType=VARCHAR},
+      START_TIME = #{record.startTime,jdbcType=VARCHAR},
+      END_TIME = #{record.endTime,jdbcType=VARCHAR},
+      URL = #{record.url,jdbcType=NVARCHAR},
+      CLASSNAME1 = #{record.classname1,jdbcType=NVARCHAR},
+      EDITABLE = #{record.editable,jdbcType=NVARCHAR},
+      SOURCE = #{record.source,jdbcType=NVARCHAR},
+      COLOR = #{record.color,jdbcType=NVARCHAR},
+      BACKGROUNDCOLOR = #{record.backgroundcolor,jdbcType=NVARCHAR},
+      BORDERCOLOR = #{record.bordercolor,jdbcType=NVARCHAR},
+      TEXTCOLOR = #{record.textcolor,jdbcType=NVARCHAR},
+      EXPAND_XML = #{record.expandXml,jdbcType=NVARCHAR},
+      UNITID = #{record.unitid,jdbcType=VARCHAR},
+      IS_DELETE = #{record.isDelete,jdbcType=DECIMAL},
+      CREATE_USER = #{record.createUser,jdbcType=VARCHAR},
+      CREATE_TIME = #{record.createTime,jdbcType=VARCHAR},
+      UPDATE_USER = #{record.updateUser,jdbcType=VARCHAR},
+      UPDATE_TIME = #{record.updateTime,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jw.magicbpm.model.personalaffairs.B_T_Uft_Activity" >
+    update B_T_UFT_ACTIVITY
+    <set >
+      <if test="record.id != null" >
+        ID = #{record.id,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.title != null" >
+        TITLE = #{record.title,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.plannig != null" >
+        PLANNIG = #{record.plannig,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.userId != null" >
+        USER_ID = #{record.userId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.deptId != null" >
+        DEPT_ID = #{record.deptId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.allday != null" >
+        ALLDAY = #{record.allday,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.years != null" >
+        YEARS = #{record.years,jdbcType=VARCHAR},
+      </if>
+      <if test="record.weekofyear != null" >
+        WEEKOFYEAR = #{record.weekofyear,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dayofweek != null" >
+        DAYOFWEEK = #{record.dayofweek,jdbcType=VARCHAR},
+      </if>
+      <if test="record.startofweek != null" >
+        STARTOFWEEK = #{record.startofweek,jdbcType=VARCHAR},
+      </if>
+      <if test="record.endofweek != null" >
+        ENDOFWEEK = #{record.endofweek,jdbcType=VARCHAR},
+      </if>
+      <if test="record.startTime != null" >
+        START_TIME = #{record.startTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.endTime != null" >
+        END_TIME = #{record.endTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.url != null" >
+        URL = #{record.url,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.classname1 != null" >
+        CLASSNAME1 = #{record.classname1,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.editable != null" >
+        EDITABLE = #{record.editable,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.source != null" >
+        SOURCE = #{record.source,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.color != null" >
+        COLOR = #{record.color,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.backgroundcolor != null" >
+        BACKGROUNDCOLOR = #{record.backgroundcolor,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.bordercolor != null" >
+        BORDERCOLOR = #{record.bordercolor,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.textcolor != null" >
+        TEXTCOLOR = #{record.textcolor,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.expandXml != null" >
+        EXPAND_XML = #{record.expandXml,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.unitid != null" >
+        UNITID = #{record.unitid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isDelete != null" >
+        IS_DELETE = #{record.isDelete,jdbcType=DECIMAL},
+      </if>
+      <if test="record.createUser != null" >
+        CREATE_USER = #{record.createUser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null" >
+        CREATE_TIME = #{record.createTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateUser != null" >
+        UPDATE_USER = #{record.updateUser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateTime != null" >
+        UPDATE_TIME = #{record.updateTime,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where UUID = #{record.uuid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jw.magicbpm.model.personalaffairs.B_T_Uft_Activity" >
+    update B_T_UFT_ACTIVITY
+    set ID = #{record.id,jdbcType=NVARCHAR},
+      TITLE = #{record.title,jdbcType=NVARCHAR},
+      PLANNIG = #{record.plannig,jdbcType=NVARCHAR},
+      USER_ID = #{record.userId,jdbcType=VARCHAR},
+      DEPT_ID = #{record.deptId,jdbcType=VARCHAR},
+      ALLDAY = #{record.allday,jdbcType=NVARCHAR},
+      YEARS = #{record.years,jdbcType=VARCHAR},
+      WEEKOFYEAR = #{record.weekofyear,jdbcType=VARCHAR},
+      DAYOFWEEK = #{record.dayofweek,jdbcType=VARCHAR},
+      STARTOFWEEK = #{record.startofweek,jdbcType=VARCHAR},
+      ENDOFWEEK = #{record.endofweek,jdbcType=VARCHAR},
+      START_TIME = #{record.startTime,jdbcType=VARCHAR},
+      END_TIME = #{record.endTime,jdbcType=VARCHAR},
+      URL = #{record.url,jdbcType=NVARCHAR},
+      CLASSNAME1 = #{record.classname1,jdbcType=NVARCHAR},
+      EDITABLE = #{record.editable,jdbcType=NVARCHAR},
+      SOURCE = #{record.source,jdbcType=NVARCHAR},
+      COLOR = #{record.color,jdbcType=NVARCHAR},
+      BACKGROUNDCOLOR = #{record.backgroundcolor,jdbcType=NVARCHAR},
+      BORDERCOLOR = #{record.bordercolor,jdbcType=NVARCHAR},
+      TEXTCOLOR = #{record.textcolor,jdbcType=NVARCHAR},
+      EXPAND_XML = #{record.expandXml,jdbcType=NVARCHAR},
+      UNITID = #{record.unitid,jdbcType=VARCHAR},
+      IS_DELETE = #{record.isDelete,jdbcType=DECIMAL},
+      CREATE_USER = #{record.createUser,jdbcType=VARCHAR},
+      CREATE_TIME = #{record.createTime,jdbcType=VARCHAR},
+      UPDATE_USER = #{record.updateUser,jdbcType=VARCHAR},
+      UPDATE_TIME = #{record.updateTime,jdbcType=VARCHAR}
+    where UUID = #{record.uuid,jdbcType=VARCHAR}
+  </update>
+</mapper>

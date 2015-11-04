@@ -1,0 +1,349 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jw.baseframe.dao.C_V_Sys_Unit_ModuleMapper" >
+  <resultMap id="BaseResultMap" type="com.jw.baseframe.model.C_V_Sys_Unit_Module" >
+    <result column="UUID" property="uuid" jdbcType="VARCHAR" />
+    <result column="MODULE_ID" property="moduleId" jdbcType="VARCHAR" />
+    <result column="MODULE_NAME" property="moduleName" jdbcType="NVARCHAR" />
+    <result column="MODULE_TYPE" property="moduleType" jdbcType="DECIMAL" />
+    <result column="SORT" property="sort" jdbcType="DECIMAL" />
+    <result column="LINK_URL" property="linkUrl" jdbcType="VARCHAR" />
+    <result column="TARGET" property="target" jdbcType="VARCHAR" />
+    <result column="PAREN_MODULE" property="parenModule" jdbcType="VARCHAR" />
+    <result column="MODULE_DESCRIPTION" property="moduleDescription" jdbcType="NVARCHAR" />
+    <result column="PIC_URL" property="picUrl" jdbcType="VARCHAR" />
+    <result column="TABLE_NAME" property="tableName" jdbcType="VARCHAR" />
+    <result column="IS_HAVE_SMS" property="isHaveSms" jdbcType="DECIMAL" />
+    <result column="IS_HAVE_MSG" property="isHaveMsg" jdbcType="DECIMAL" />
+    <result column="PK_ID" property="pkId" jdbcType="VARCHAR" />
+    <result column="TITLE_ID" property="titleId" jdbcType="VARCHAR" />
+    <result column="IS_LOGIC_DELETE" property="isLogicDelete" jdbcType="DECIMAL" />
+    <result column="EXPAND_XML" property="expandXml" jdbcType="NVARCHAR" />
+    <result column="UNITID" property="unitid" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    UUID, MODULE_ID, MODULE_NAME, MODULE_TYPE, SORT, LINK_URL, TARGET, PAREN_MODULE, 
+    MODULE_DESCRIPTION, PIC_URL, TABLE_NAME, IS_HAVE_SMS, IS_HAVE_MSG, PK_ID, TITLE_ID, 
+    IS_LOGIC_DELETE, EXPAND_XML, UNITID
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.jw.baseframe.model.C_V_Sys_Unit_ModuleExample" >
+    <foreach collection="example.oredCriteria" item="criteria" separator="or" />
+    <if test="criteria.valid" >
+      <foreach collection="criteria.criteria" item="criterion" >
+        <if test="criterion.limitValue" >
+          SELECT 
+          <include refid="Base_Column_List" />
+           FROM ( SELECT A.
+          <include refid="Base_Column_List" />
+           , ROWNUM AS con FROM ( 
+        </if>
+      </foreach>
+    </if>
+    select
+    <if test="example.distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from C_V_SYS_UNIT_MODULE
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="example.orderByClause != null" >
+      order by ${example.orderByClause}
+    </if>
+    <if test="criteria.valid" >
+      <foreach collection="criteria.criteria" item="criterion" >
+        <if test="criterion.limitValue" >
+           ) A  <![CDATA[WHERE ROWNUM <= ${criterion.secondValue}]]> ) B <![CDATA[WHERE B.con >= ${criterion.value} ]]>
+        </if>
+      </foreach>
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.jw.baseframe.model.C_V_Sys_Unit_ModuleExample" >
+    delete from C_V_SYS_UNIT_MODULE
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.jw.baseframe.model.C_V_Sys_Unit_Module" >
+    insert into C_V_SYS_UNIT_MODULE (UUID, MODULE_ID, MODULE_NAME, 
+      MODULE_TYPE, SORT, LINK_URL, 
+      TARGET, PAREN_MODULE, MODULE_DESCRIPTION, 
+      PIC_URL, TABLE_NAME, IS_HAVE_SMS, 
+      IS_HAVE_MSG, PK_ID, TITLE_ID, 
+      IS_LOGIC_DELETE, EXPAND_XML, 
+      UNITID)
+    values (#{record.uuid,jdbcType=VARCHAR}, #{record.moduleId,jdbcType=VARCHAR}, #{record.moduleName,jdbcType=NVARCHAR}, 
+      #{record.moduleType,jdbcType=DECIMAL}, #{record.sort,jdbcType=DECIMAL}, #{record.linkUrl,jdbcType=VARCHAR}, 
+      #{record.target,jdbcType=VARCHAR}, #{record.parenModule,jdbcType=VARCHAR}, #{record.moduleDescription,jdbcType=NVARCHAR}, 
+      #{record.picUrl,jdbcType=VARCHAR}, #{record.tableName,jdbcType=VARCHAR}, #{record.isHaveSms,jdbcType=DECIMAL}, 
+      #{record.isHaveMsg,jdbcType=DECIMAL}, #{record.pkId,jdbcType=VARCHAR}, #{record.titleId,jdbcType=VARCHAR}, 
+      #{record.isLogicDelete,jdbcType=DECIMAL}, #{record.expandXml,jdbcType=NVARCHAR}, 
+      #{record.unitid,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.jw.baseframe.model.C_V_Sys_Unit_Module" >
+    insert into C_V_SYS_UNIT_MODULE
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="record.uuid != null" >
+        UUID,
+      </if>
+      <if test="record.moduleId != null" >
+        MODULE_ID,
+      </if>
+      <if test="record.moduleName != null" >
+        MODULE_NAME,
+      </if>
+      <if test="record.moduleType != null" >
+        MODULE_TYPE,
+      </if>
+      <if test="record.sort != null" >
+        SORT,
+      </if>
+      <if test="record.linkUrl != null" >
+        LINK_URL,
+      </if>
+      <if test="record.target != null" >
+        TARGET,
+      </if>
+      <if test="record.parenModule != null" >
+        PAREN_MODULE,
+      </if>
+      <if test="record.moduleDescription != null" >
+        MODULE_DESCRIPTION,
+      </if>
+      <if test="record.picUrl != null" >
+        PIC_URL,
+      </if>
+      <if test="record.tableName != null" >
+        TABLE_NAME,
+      </if>
+      <if test="record.isHaveSms != null" >
+        IS_HAVE_SMS,
+      </if>
+      <if test="record.isHaveMsg != null" >
+        IS_HAVE_MSG,
+      </if>
+      <if test="record.pkId != null" >
+        PK_ID,
+      </if>
+      <if test="record.titleId != null" >
+        TITLE_ID,
+      </if>
+      <if test="record.isLogicDelete != null" >
+        IS_LOGIC_DELETE,
+      </if>
+      <if test="record.expandXml != null" >
+        EXPAND_XML,
+      </if>
+      <if test="record.unitid != null" >
+        UNITID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="record.uuid != null" >
+        #{record.uuid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.moduleId != null" >
+        #{record.moduleId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.moduleName != null" >
+        #{record.moduleName,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.moduleType != null" >
+        #{record.moduleType,jdbcType=DECIMAL},
+      </if>
+      <if test="record.sort != null" >
+        #{record.sort,jdbcType=DECIMAL},
+      </if>
+      <if test="record.linkUrl != null" >
+        #{record.linkUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.target != null" >
+        #{record.target,jdbcType=VARCHAR},
+      </if>
+      <if test="record.parenModule != null" >
+        #{record.parenModule,jdbcType=VARCHAR},
+      </if>
+      <if test="record.moduleDescription != null" >
+        #{record.moduleDescription,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.picUrl != null" >
+        #{record.picUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tableName != null" >
+        #{record.tableName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isHaveSms != null" >
+        #{record.isHaveSms,jdbcType=DECIMAL},
+      </if>
+      <if test="record.isHaveMsg != null" >
+        #{record.isHaveMsg,jdbcType=DECIMAL},
+      </if>
+      <if test="record.pkId != null" >
+        #{record.pkId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.titleId != null" >
+        #{record.titleId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isLogicDelete != null" >
+        #{record.isLogicDelete,jdbcType=DECIMAL},
+      </if>
+      <if test="record.expandXml != null" >
+        #{record.expandXml,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.unitid != null" >
+        #{record.unitid,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.jw.baseframe.model.C_V_Sys_Unit_ModuleExample" resultType="java.lang.Integer" >
+    select count(*) from C_V_SYS_UNIT_MODULE
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update C_V_SYS_UNIT_MODULE
+    <set >
+      <if test="record.uuid != null" >
+        UUID = #{record.uuid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.moduleId != null" >
+        MODULE_ID = #{record.moduleId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.moduleName != null" >
+        MODULE_NAME = #{record.moduleName,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.moduleType != null" >
+        MODULE_TYPE = #{record.moduleType,jdbcType=DECIMAL},
+      </if>
+      <if test="record.sort != null" >
+        SORT = #{record.sort,jdbcType=DECIMAL},
+      </if>
+      <if test="record.linkUrl != null" >
+        LINK_URL = #{record.linkUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.target != null" >
+        TARGET = #{record.target,jdbcType=VARCHAR},
+      </if>
+      <if test="record.parenModule != null" >
+        PAREN_MODULE = #{record.parenModule,jdbcType=VARCHAR},
+      </if>
+      <if test="record.moduleDescription != null" >
+        MODULE_DESCRIPTION = #{record.moduleDescription,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.picUrl != null" >
+        PIC_URL = #{record.picUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tableName != null" >
+        TABLE_NAME = #{record.tableName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isHaveSms != null" >
+        IS_HAVE_SMS = #{record.isHaveSms,jdbcType=DECIMAL},
+      </if>
+      <if test="record.isHaveMsg != null" >
+        IS_HAVE_MSG = #{record.isHaveMsg,jdbcType=DECIMAL},
+      </if>
+      <if test="record.pkId != null" >
+        PK_ID = #{record.pkId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.titleId != null" >
+        TITLE_ID = #{record.titleId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isLogicDelete != null" >
+        IS_LOGIC_DELETE = #{record.isLogicDelete,jdbcType=DECIMAL},
+      </if>
+      <if test="record.expandXml != null" >
+        EXPAND_XML = #{record.expandXml,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.unitid != null" >
+        UNITID = #{record.unitid,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update C_V_SYS_UNIT_MODULE
+    set UUID = #{record.uuid,jdbcType=VARCHAR},
+      MODULE_ID = #{record.moduleId,jdbcType=VARCHAR},
+      MODULE_NAME = #{record.moduleName,jdbcType=NVARCHAR},
+      MODULE_TYPE = #{record.moduleType,jdbcType=DECIMAL},
+      SORT = #{record.sort,jdbcType=DECIMAL},
+      LINK_URL = #{record.linkUrl,jdbcType=VARCHAR},
+      TARGET = #{record.target,jdbcType=VARCHAR},
+      PAREN_MODULE = #{record.parenModule,jdbcType=VARCHAR},
+      MODULE_DESCRIPTION = #{record.moduleDescription,jdbcType=NVARCHAR},
+      PIC_URL = #{record.picUrl,jdbcType=VARCHAR},
+      TABLE_NAME = #{record.tableName,jdbcType=VARCHAR},
+      IS_HAVE_SMS = #{record.isHaveSms,jdbcType=DECIMAL},
+      IS_HAVE_MSG = #{record.isHaveMsg,jdbcType=DECIMAL},
+      PK_ID = #{record.pkId,jdbcType=VARCHAR},
+      TITLE_ID = #{record.titleId,jdbcType=VARCHAR},
+      IS_LOGIC_DELETE = #{record.isLogicDelete,jdbcType=DECIMAL},
+      EXPAND_XML = #{record.expandXml,jdbcType=NVARCHAR},
+      UNITID = #{record.unitid,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

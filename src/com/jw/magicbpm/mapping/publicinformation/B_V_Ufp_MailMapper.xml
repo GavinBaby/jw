@@ -1,0 +1,445 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jw.magicbpm.dao.publicinformation.B_V_Ufp_MailMapper" >
+  <resultMap id="BaseResultMap" type="com.jw.magicbpm.model.publicinformation.B_V_Ufp_Mail" >
+    <result column="UUID" property="uuid" jdbcType="VARCHAR" />
+    <result column="IS_NEW" property="isNew" jdbcType="DECIMAL" />
+    <result column="SEND_USER" property="sendUser" jdbcType="NVARCHAR" />
+    <result column="SEND_SYS_USER" property="sendSysUser" jdbcType="VARCHAR" />
+    <result column="TITLE" property="title" jdbcType="NVARCHAR" />
+    <result column="SEND_TIME" property="sendTime" jdbcType="VARCHAR" />
+    <result column="RECEIVER_SYS_USER" property="receiverSysUser" jdbcType="VARCHAR" />
+    <result column="RECEIVER_USER" property="receiverUser" jdbcType="NVARCHAR" />
+    <result column="RECEIVER_TIME" property="receiverTime" jdbcType="VARCHAR" />
+    <result column="MAIL_TYPE" property="mailType" jdbcType="DECIMAL" />
+    <result column="IS_DELETE" property="isDelete" jdbcType="DECIMAL" />
+    <result column="CANSEEUSER" property="canseeuser" jdbcType="VARCHAR" />
+    <result column="REPLY_FLAG" property="replyFlag" jdbcType="DECIMAL" />
+    <result column="IS_FILE" property="isFile" jdbcType="DECIMAL" />
+    <result column="PRIORITY_LEVE" property="priorityLeve" jdbcType="VARCHAR" />
+    <result column="IMPORTANT_LEVE" property="importantLeve" jdbcType="VARCHAR" />
+    <result column="IS_RECEIPT" property="isReceipt" jdbcType="DECIMAL" />
+    <result column="COPY_USER" property="copyUser" jdbcType="NVARCHAR" />
+    <result column="DARK_USER" property="darkUser" jdbcType="NVARCHAR" />
+    <result column="SPECIFIC_RECSYS_USER" property="specificRecsysUser" jdbcType="VARCHAR" />
+    <result column="TIP_DARK_INFO" property="tipDarkInfo" jdbcType="NVARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.jw.magicbpm.model.publicinformation.B_V_Ufp_Mail" extends="BaseResultMap" >
+    <result column="CONTENT" property="content" jdbcType="CLOB" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    UUID, IS_NEW, SEND_USER, SEND_SYS_USER, TITLE, SEND_TIME, RECEIVER_SYS_USER, RECEIVER_USER, 
+    RECEIVER_TIME, MAIL_TYPE, IS_DELETE, CANSEEUSER, REPLY_FLAG, IS_FILE, PRIORITY_LEVE, 
+    IMPORTANT_LEVE, IS_RECEIPT, COPY_USER, DARK_USER, SPECIFIC_RECSYS_USER, TIP_DARK_INFO
+  </sql>
+  <sql id="Blob_Column_List" >
+    CONTENT
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.jw.magicbpm.model.publicinformation.B_V_Ufp_MailExample" >
+    select
+    <if test="example.distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from B_V_UFP_MAIL
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="example.orderByClause != null" >
+      order by ${example.orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.jw.magicbpm.model.publicinformation.B_V_Ufp_MailExample" >
+    <foreach collection="example.oredCriteria" item="criteria" separator="or" />
+    <if test="criteria.valid" >
+      <foreach collection="criteria.criteria" item="criterion" >
+        <if test="criterion.limitValue" >
+          SELECT 
+          <include refid="Base_Column_List" />
+           FROM ( SELECT A.
+          <include refid="Base_Column_List" />
+           , ROWNUM AS con FROM ( 
+        </if>
+      </foreach>
+    </if>
+    select
+    <if test="example.distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from B_V_UFP_MAIL
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="example.orderByClause != null" >
+      order by ${example.orderByClause}
+    </if>
+    <if test="criteria.valid" >
+      <foreach collection="criteria.criteria" item="criterion" >
+        <if test="criterion.limitValue" >
+           ) A  <![CDATA[WHERE ROWNUM <= ${criterion.secondValue}]]> ) B <![CDATA[WHERE B.con >= ${criterion.value} ]]>
+        </if>
+      </foreach>
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.jw.magicbpm.model.publicinformation.B_V_Ufp_MailExample" >
+    delete from B_V_UFP_MAIL
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.jw.magicbpm.model.publicinformation.B_V_Ufp_Mail" >
+    insert into B_V_UFP_MAIL (UUID, IS_NEW, SEND_USER, 
+      SEND_SYS_USER, TITLE, SEND_TIME, 
+      RECEIVER_SYS_USER, RECEIVER_USER, 
+      RECEIVER_TIME, MAIL_TYPE, IS_DELETE, 
+      CANSEEUSER, REPLY_FLAG, IS_FILE, 
+      PRIORITY_LEVE, IMPORTANT_LEVE, 
+      IS_RECEIPT, COPY_USER, DARK_USER, 
+      SPECIFIC_RECSYS_USER, TIP_DARK_INFO, 
+      CONTENT)
+    values (#{record.uuid,jdbcType=VARCHAR}, #{record.isNew,jdbcType=DECIMAL}, #{record.sendUser,jdbcType=NVARCHAR}, 
+      #{record.sendSysUser,jdbcType=VARCHAR}, #{record.title,jdbcType=NVARCHAR}, #{record.sendTime,jdbcType=VARCHAR}, 
+      #{record.receiverSysUser,jdbcType=VARCHAR}, #{record.receiverUser,jdbcType=NVARCHAR}, 
+      #{record.receiverTime,jdbcType=VARCHAR}, #{record.mailType,jdbcType=DECIMAL}, #{record.isDelete,jdbcType=DECIMAL}, 
+      #{record.canseeuser,jdbcType=VARCHAR}, #{record.replyFlag,jdbcType=DECIMAL}, #{record.isFile,jdbcType=DECIMAL}, 
+      #{record.priorityLeve,jdbcType=VARCHAR}, #{record.importantLeve,jdbcType=VARCHAR}, 
+      #{record.isReceipt,jdbcType=DECIMAL}, #{record.copyUser,jdbcType=NVARCHAR}, #{record.darkUser,jdbcType=NVARCHAR}, 
+      #{record.specificRecsysUser,jdbcType=VARCHAR}, #{record.tipDarkInfo,jdbcType=NVARCHAR}, 
+      #{record.content,jdbcType=CLOB})
+  </insert>
+  <insert id="insertSelective" parameterType="com.jw.magicbpm.model.publicinformation.B_V_Ufp_Mail" >
+    insert into B_V_UFP_MAIL
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="record.uuid != null" >
+        UUID,
+      </if>
+      <if test="record.isNew != null" >
+        IS_NEW,
+      </if>
+      <if test="record.sendUser != null" >
+        SEND_USER,
+      </if>
+      <if test="record.sendSysUser != null" >
+        SEND_SYS_USER,
+      </if>
+      <if test="record.title != null" >
+        TITLE,
+      </if>
+      <if test="record.sendTime != null" >
+        SEND_TIME,
+      </if>
+      <if test="record.receiverSysUser != null" >
+        RECEIVER_SYS_USER,
+      </if>
+      <if test="record.receiverUser != null" >
+        RECEIVER_USER,
+      </if>
+      <if test="record.receiverTime != null" >
+        RECEIVER_TIME,
+      </if>
+      <if test="record.mailType != null" >
+        MAIL_TYPE,
+      </if>
+      <if test="record.isDelete != null" >
+        IS_DELETE,
+      </if>
+      <if test="record.canseeuser != null" >
+        CANSEEUSER,
+      </if>
+      <if test="record.replyFlag != null" >
+        REPLY_FLAG,
+      </if>
+      <if test="record.isFile != null" >
+        IS_FILE,
+      </if>
+      <if test="record.priorityLeve != null" >
+        PRIORITY_LEVE,
+      </if>
+      <if test="record.importantLeve != null" >
+        IMPORTANT_LEVE,
+      </if>
+      <if test="record.isReceipt != null" >
+        IS_RECEIPT,
+      </if>
+      <if test="record.copyUser != null" >
+        COPY_USER,
+      </if>
+      <if test="record.darkUser != null" >
+        DARK_USER,
+      </if>
+      <if test="record.specificRecsysUser != null" >
+        SPECIFIC_RECSYS_USER,
+      </if>
+      <if test="record.tipDarkInfo != null" >
+        TIP_DARK_INFO,
+      </if>
+      <if test="record.content != null" >
+        CONTENT,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="record.uuid != null" >
+        #{record.uuid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isNew != null" >
+        #{record.isNew,jdbcType=DECIMAL},
+      </if>
+      <if test="record.sendUser != null" >
+        #{record.sendUser,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.sendSysUser != null" >
+        #{record.sendSysUser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.title != null" >
+        #{record.title,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.sendTime != null" >
+        #{record.sendTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.receiverSysUser != null" >
+        #{record.receiverSysUser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.receiverUser != null" >
+        #{record.receiverUser,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.receiverTime != null" >
+        #{record.receiverTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mailType != null" >
+        #{record.mailType,jdbcType=DECIMAL},
+      </if>
+      <if test="record.isDelete != null" >
+        #{record.isDelete,jdbcType=DECIMAL},
+      </if>
+      <if test="record.canseeuser != null" >
+        #{record.canseeuser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.replyFlag != null" >
+        #{record.replyFlag,jdbcType=DECIMAL},
+      </if>
+      <if test="record.isFile != null" >
+        #{record.isFile,jdbcType=DECIMAL},
+      </if>
+      <if test="record.priorityLeve != null" >
+        #{record.priorityLeve,jdbcType=VARCHAR},
+      </if>
+      <if test="record.importantLeve != null" >
+        #{record.importantLeve,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isReceipt != null" >
+        #{record.isReceipt,jdbcType=DECIMAL},
+      </if>
+      <if test="record.copyUser != null" >
+        #{record.copyUser,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.darkUser != null" >
+        #{record.darkUser,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.specificRecsysUser != null" >
+        #{record.specificRecsysUser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tipDarkInfo != null" >
+        #{record.tipDarkInfo,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.content != null" >
+        #{record.content,jdbcType=CLOB},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.jw.magicbpm.model.publicinformation.B_V_Ufp_MailExample" resultType="java.lang.Integer" >
+    select count(*) from B_V_UFP_MAIL
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update B_V_UFP_MAIL
+    <set >
+      <if test="record.uuid != null" >
+        UUID = #{record.uuid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isNew != null" >
+        IS_NEW = #{record.isNew,jdbcType=DECIMAL},
+      </if>
+      <if test="record.sendUser != null" >
+        SEND_USER = #{record.sendUser,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.sendSysUser != null" >
+        SEND_SYS_USER = #{record.sendSysUser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.title != null" >
+        TITLE = #{record.title,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.sendTime != null" >
+        SEND_TIME = #{record.sendTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.receiverSysUser != null" >
+        RECEIVER_SYS_USER = #{record.receiverSysUser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.receiverUser != null" >
+        RECEIVER_USER = #{record.receiverUser,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.receiverTime != null" >
+        RECEIVER_TIME = #{record.receiverTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mailType != null" >
+        MAIL_TYPE = #{record.mailType,jdbcType=DECIMAL},
+      </if>
+      <if test="record.isDelete != null" >
+        IS_DELETE = #{record.isDelete,jdbcType=DECIMAL},
+      </if>
+      <if test="record.canseeuser != null" >
+        CANSEEUSER = #{record.canseeuser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.replyFlag != null" >
+        REPLY_FLAG = #{record.replyFlag,jdbcType=DECIMAL},
+      </if>
+      <if test="record.isFile != null" >
+        IS_FILE = #{record.isFile,jdbcType=DECIMAL},
+      </if>
+      <if test="record.priorityLeve != null" >
+        PRIORITY_LEVE = #{record.priorityLeve,jdbcType=VARCHAR},
+      </if>
+      <if test="record.importantLeve != null" >
+        IMPORTANT_LEVE = #{record.importantLeve,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isReceipt != null" >
+        IS_RECEIPT = #{record.isReceipt,jdbcType=DECIMAL},
+      </if>
+      <if test="record.copyUser != null" >
+        COPY_USER = #{record.copyUser,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.darkUser != null" >
+        DARK_USER = #{record.darkUser,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.specificRecsysUser != null" >
+        SPECIFIC_RECSYS_USER = #{record.specificRecsysUser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tipDarkInfo != null" >
+        TIP_DARK_INFO = #{record.tipDarkInfo,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.content != null" >
+        CONTENT = #{record.content,jdbcType=CLOB},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update B_V_UFP_MAIL
+    set UUID = #{record.uuid,jdbcType=VARCHAR},
+      IS_NEW = #{record.isNew,jdbcType=DECIMAL},
+      SEND_USER = #{record.sendUser,jdbcType=NVARCHAR},
+      SEND_SYS_USER = #{record.sendSysUser,jdbcType=VARCHAR},
+      TITLE = #{record.title,jdbcType=NVARCHAR},
+      SEND_TIME = #{record.sendTime,jdbcType=VARCHAR},
+      RECEIVER_SYS_USER = #{record.receiverSysUser,jdbcType=VARCHAR},
+      RECEIVER_USER = #{record.receiverUser,jdbcType=NVARCHAR},
+      RECEIVER_TIME = #{record.receiverTime,jdbcType=VARCHAR},
+      MAIL_TYPE = #{record.mailType,jdbcType=DECIMAL},
+      IS_DELETE = #{record.isDelete,jdbcType=DECIMAL},
+      CANSEEUSER = #{record.canseeuser,jdbcType=VARCHAR},
+      REPLY_FLAG = #{record.replyFlag,jdbcType=DECIMAL},
+      IS_FILE = #{record.isFile,jdbcType=DECIMAL},
+      PRIORITY_LEVE = #{record.priorityLeve,jdbcType=VARCHAR},
+      IMPORTANT_LEVE = #{record.importantLeve,jdbcType=VARCHAR},
+      IS_RECEIPT = #{record.isReceipt,jdbcType=DECIMAL},
+      COPY_USER = #{record.copyUser,jdbcType=NVARCHAR},
+      DARK_USER = #{record.darkUser,jdbcType=NVARCHAR},
+      SPECIFIC_RECSYS_USER = #{record.specificRecsysUser,jdbcType=VARCHAR},
+      TIP_DARK_INFO = #{record.tipDarkInfo,jdbcType=NVARCHAR},
+      CONTENT = #{record.content,jdbcType=CLOB}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update B_V_UFP_MAIL
+    set UUID = #{record.uuid,jdbcType=VARCHAR},
+      IS_NEW = #{record.isNew,jdbcType=DECIMAL},
+      SEND_USER = #{record.sendUser,jdbcType=NVARCHAR},
+      SEND_SYS_USER = #{record.sendSysUser,jdbcType=VARCHAR},
+      TITLE = #{record.title,jdbcType=NVARCHAR},
+      SEND_TIME = #{record.sendTime,jdbcType=VARCHAR},
+      RECEIVER_SYS_USER = #{record.receiverSysUser,jdbcType=VARCHAR},
+      RECEIVER_USER = #{record.receiverUser,jdbcType=NVARCHAR},
+      RECEIVER_TIME = #{record.receiverTime,jdbcType=VARCHAR},
+      MAIL_TYPE = #{record.mailType,jdbcType=DECIMAL},
+      IS_DELETE = #{record.isDelete,jdbcType=DECIMAL},
+      CANSEEUSER = #{record.canseeuser,jdbcType=VARCHAR},
+      REPLY_FLAG = #{record.replyFlag,jdbcType=DECIMAL},
+      IS_FILE = #{record.isFile,jdbcType=DECIMAL},
+      PRIORITY_LEVE = #{record.priorityLeve,jdbcType=VARCHAR},
+      IMPORTANT_LEVE = #{record.importantLeve,jdbcType=VARCHAR},
+      IS_RECEIPT = #{record.isReceipt,jdbcType=DECIMAL},
+      COPY_USER = #{record.copyUser,jdbcType=NVARCHAR},
+      DARK_USER = #{record.darkUser,jdbcType=NVARCHAR},
+      SPECIFIC_RECSYS_USER = #{record.specificRecsysUser,jdbcType=VARCHAR},
+      TIP_DARK_INFO = #{record.tipDarkInfo,jdbcType=NVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

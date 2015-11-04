@@ -1,0 +1,329 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jw.magicbpm.dao.documentmanagement.B_V_Ufp_FavoritesMapper" >
+  <resultMap id="BaseResultMap" type="com.jw.magicbpm.model.documentmanagement.B_V_Ufp_Favorites" >
+    <result column="UUID" property="uuid" jdbcType="VARCHAR" />
+    <result column="FAVORITES_USERID" property="favoritesUserid" jdbcType="VARCHAR" />
+    <result column="FAVORITES_USERNM" property="favoritesUsernm" jdbcType="NVARCHAR" />
+    <result column="FAVORITES_TYPEID" property="favoritesTypeid" jdbcType="VARCHAR" />
+    <result column="FAVORITES_TYPENAME" property="favoritesTypename" jdbcType="NVARCHAR" />
+    <result column="FAVORITES_URL" property="favoritesUrl" jdbcType="VARCHAR" />
+    <result column="MAINDOC_ID" property="maindocId" jdbcType="VARCHAR" />
+    <result column="FAVORITES_MARK" property="favoritesMark" jdbcType="NVARCHAR" />
+    <result column="FAVORITES_TITLE" property="favoritesTitle" jdbcType="NVARCHAR" />
+    <result column="EXPAND_XML" property="expandXml" jdbcType="NVARCHAR" />
+    <result column="UNITID" property="unitid" jdbcType="VARCHAR" />
+    <result column="IS_DELETE" property="isDelete" jdbcType="DECIMAL" />
+    <result column="CREATE_TIME" property="createTime" jdbcType="VARCHAR" />
+    <result column="UPDATE_TIME" property="updateTime" jdbcType="VARCHAR" />
+    <result column="FAVORITES_WENHAO" property="favoritesWenhao" jdbcType="NVARCHAR" />
+    <result column="FAVORITES_TIME" property="favoritesTime" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    UUID, FAVORITES_USERID, FAVORITES_USERNM, FAVORITES_TYPEID, FAVORITES_TYPENAME, FAVORITES_URL, 
+    MAINDOC_ID, FAVORITES_MARK, FAVORITES_TITLE, EXPAND_XML, UNITID, IS_DELETE, CREATE_TIME, 
+    UPDATE_TIME, FAVORITES_WENHAO, FAVORITES_TIME
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.jw.magicbpm.model.documentmanagement.B_V_Ufp_FavoritesExample" >
+    <foreach collection="example.oredCriteria" item="criteria" separator="or" />
+    <if test="criteria.valid" >
+      <foreach collection="criteria.criteria" item="criterion" >
+        <if test="criterion.limitValue" >
+          SELECT 
+          <include refid="Base_Column_List" />
+           FROM ( SELECT A.
+          <include refid="Base_Column_List" />
+           , ROWNUM AS con FROM ( 
+        </if>
+      </foreach>
+    </if>
+    select
+    <if test="example.distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from B_V_UFP_FAVORITES
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="example.orderByClause != null" >
+      order by ${example.orderByClause}
+    </if>
+    <if test="criteria.valid" >
+      <foreach collection="criteria.criteria" item="criterion" >
+        <if test="criterion.limitValue" >
+           ) A  <![CDATA[WHERE ROWNUM <= ${criterion.secondValue}]]> ) B <![CDATA[WHERE B.con >= ${criterion.value} ]]>
+        </if>
+      </foreach>
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.jw.magicbpm.model.documentmanagement.B_V_Ufp_FavoritesExample" >
+    delete from B_V_UFP_FAVORITES
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.jw.magicbpm.model.documentmanagement.B_V_Ufp_Favorites" >
+    insert into B_V_UFP_FAVORITES (UUID, FAVORITES_USERID, 
+      FAVORITES_USERNM, FAVORITES_TYPEID, 
+      FAVORITES_TYPENAME, FAVORITES_URL, 
+      MAINDOC_ID, FAVORITES_MARK, 
+      FAVORITES_TITLE, EXPAND_XML, 
+      UNITID, IS_DELETE, CREATE_TIME, 
+      UPDATE_TIME, FAVORITES_WENHAO, 
+      FAVORITES_TIME)
+    values (#{record.uuid,jdbcType=VARCHAR}, #{record.favoritesUserid,jdbcType=VARCHAR}, 
+      #{record.favoritesUsernm,jdbcType=NVARCHAR}, #{record.favoritesTypeid,jdbcType=VARCHAR}, 
+      #{record.favoritesTypename,jdbcType=NVARCHAR}, #{record.favoritesUrl,jdbcType=VARCHAR}, 
+      #{record.maindocId,jdbcType=VARCHAR}, #{record.favoritesMark,jdbcType=NVARCHAR}, 
+      #{record.favoritesTitle,jdbcType=NVARCHAR}, #{record.expandXml,jdbcType=NVARCHAR}, 
+      #{record.unitid,jdbcType=VARCHAR}, #{record.isDelete,jdbcType=DECIMAL}, #{record.createTime,jdbcType=VARCHAR}, 
+      #{record.updateTime,jdbcType=VARCHAR}, #{record.favoritesWenhao,jdbcType=NVARCHAR}, 
+      #{record.favoritesTime,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.jw.magicbpm.model.documentmanagement.B_V_Ufp_Favorites" >
+    insert into B_V_UFP_FAVORITES
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="record.uuid != null" >
+        UUID,
+      </if>
+      <if test="record.favoritesUserid != null" >
+        FAVORITES_USERID,
+      </if>
+      <if test="record.favoritesUsernm != null" >
+        FAVORITES_USERNM,
+      </if>
+      <if test="record.favoritesTypeid != null" >
+        FAVORITES_TYPEID,
+      </if>
+      <if test="record.favoritesTypename != null" >
+        FAVORITES_TYPENAME,
+      </if>
+      <if test="record.favoritesUrl != null" >
+        FAVORITES_URL,
+      </if>
+      <if test="record.maindocId != null" >
+        MAINDOC_ID,
+      </if>
+      <if test="record.favoritesMark != null" >
+        FAVORITES_MARK,
+      </if>
+      <if test="record.favoritesTitle != null" >
+        FAVORITES_TITLE,
+      </if>
+      <if test="record.expandXml != null" >
+        EXPAND_XML,
+      </if>
+      <if test="record.unitid != null" >
+        UNITID,
+      </if>
+      <if test="record.isDelete != null" >
+        IS_DELETE,
+      </if>
+      <if test="record.createTime != null" >
+        CREATE_TIME,
+      </if>
+      <if test="record.updateTime != null" >
+        UPDATE_TIME,
+      </if>
+      <if test="record.favoritesWenhao != null" >
+        FAVORITES_WENHAO,
+      </if>
+      <if test="record.favoritesTime != null" >
+        FAVORITES_TIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="record.uuid != null" >
+        #{record.uuid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.favoritesUserid != null" >
+        #{record.favoritesUserid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.favoritesUsernm != null" >
+        #{record.favoritesUsernm,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.favoritesTypeid != null" >
+        #{record.favoritesTypeid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.favoritesTypename != null" >
+        #{record.favoritesTypename,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.favoritesUrl != null" >
+        #{record.favoritesUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.maindocId != null" >
+        #{record.maindocId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.favoritesMark != null" >
+        #{record.favoritesMark,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.favoritesTitle != null" >
+        #{record.favoritesTitle,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.expandXml != null" >
+        #{record.expandXml,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.unitid != null" >
+        #{record.unitid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isDelete != null" >
+        #{record.isDelete,jdbcType=DECIMAL},
+      </if>
+      <if test="record.createTime != null" >
+        #{record.createTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateTime != null" >
+        #{record.updateTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.favoritesWenhao != null" >
+        #{record.favoritesWenhao,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.favoritesTime != null" >
+        #{record.favoritesTime,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.jw.magicbpm.model.documentmanagement.B_V_Ufp_FavoritesExample" resultType="java.lang.Integer" >
+    select count(*) from B_V_UFP_FAVORITES
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update B_V_UFP_FAVORITES
+    <set >
+      <if test="record.uuid != null" >
+        UUID = #{record.uuid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.favoritesUserid != null" >
+        FAVORITES_USERID = #{record.favoritesUserid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.favoritesUsernm != null" >
+        FAVORITES_USERNM = #{record.favoritesUsernm,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.favoritesTypeid != null" >
+        FAVORITES_TYPEID = #{record.favoritesTypeid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.favoritesTypename != null" >
+        FAVORITES_TYPENAME = #{record.favoritesTypename,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.favoritesUrl != null" >
+        FAVORITES_URL = #{record.favoritesUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.maindocId != null" >
+        MAINDOC_ID = #{record.maindocId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.favoritesMark != null" >
+        FAVORITES_MARK = #{record.favoritesMark,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.favoritesTitle != null" >
+        FAVORITES_TITLE = #{record.favoritesTitle,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.expandXml != null" >
+        EXPAND_XML = #{record.expandXml,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.unitid != null" >
+        UNITID = #{record.unitid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isDelete != null" >
+        IS_DELETE = #{record.isDelete,jdbcType=DECIMAL},
+      </if>
+      <if test="record.createTime != null" >
+        CREATE_TIME = #{record.createTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateTime != null" >
+        UPDATE_TIME = #{record.updateTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.favoritesWenhao != null" >
+        FAVORITES_WENHAO = #{record.favoritesWenhao,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.favoritesTime != null" >
+        FAVORITES_TIME = #{record.favoritesTime,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update B_V_UFP_FAVORITES
+    set UUID = #{record.uuid,jdbcType=VARCHAR},
+      FAVORITES_USERID = #{record.favoritesUserid,jdbcType=VARCHAR},
+      FAVORITES_USERNM = #{record.favoritesUsernm,jdbcType=NVARCHAR},
+      FAVORITES_TYPEID = #{record.favoritesTypeid,jdbcType=VARCHAR},
+      FAVORITES_TYPENAME = #{record.favoritesTypename,jdbcType=NVARCHAR},
+      FAVORITES_URL = #{record.favoritesUrl,jdbcType=VARCHAR},
+      MAINDOC_ID = #{record.maindocId,jdbcType=VARCHAR},
+      FAVORITES_MARK = #{record.favoritesMark,jdbcType=NVARCHAR},
+      FAVORITES_TITLE = #{record.favoritesTitle,jdbcType=NVARCHAR},
+      EXPAND_XML = #{record.expandXml,jdbcType=NVARCHAR},
+      UNITID = #{record.unitid,jdbcType=VARCHAR},
+      IS_DELETE = #{record.isDelete,jdbcType=DECIMAL},
+      CREATE_TIME = #{record.createTime,jdbcType=VARCHAR},
+      UPDATE_TIME = #{record.updateTime,jdbcType=VARCHAR},
+      FAVORITES_WENHAO = #{record.favoritesWenhao,jdbcType=NVARCHAR},
+      FAVORITES_TIME = #{record.favoritesTime,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

@@ -1,0 +1,393 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jw.magicbpm.dao.documentmanagement.B_V_Flow_FileInMapper" >
+  <resultMap id="BaseResultMap" type="com.jw.magicbpm.model.documentmanagement.B_V_Flow_FileIn" >
+    <result column="UUID" property="uuid" jdbcType="VARCHAR" />
+    <result column="REGISTERED_TIME" property="registeredTime" jdbcType="VARCHAR" />
+    <result column="URGENCY" property="urgency" jdbcType="VARCHAR" />
+    <result column="FILEIN_TITLE" property="fileinTitle" jdbcType="NVARCHAR" />
+    <result column="FILEIN_TYPEID" property="fileinTypeid" jdbcType="VARCHAR" />
+    <result column="FILEIN_TYPENAME" property="fileinTypename" jdbcType="NVARCHAR" />
+    <result column="FILEIN_YEAR" property="fileinYear" jdbcType="VARCHAR" />
+    <result column="FILEIN_SERIAL" property="fileinSerial" jdbcType="VARCHAR" />
+    <result column="CUR_TACHE_NAME" property="curTacheName" jdbcType="NVARCHAR" />
+    <result column="TACHE_TRANSACTOR_BACKUP_SHOW" property="tacheTransactorBackupShow" jdbcType="NVARCHAR" />
+    <result column="TACHE_TRANSACTOR_BACKUP" property="tacheTransactorBackup" jdbcType="VARCHAR" />
+    <result column="IS_FINISHED" property="isFinished" jdbcType="DECIMAL" />
+    <result column="MODULE_ID" property="moduleId" jdbcType="VARCHAR" />
+    <result column="CREATE_TIME" property="createTime" jdbcType="VARCHAR" />
+    <result column="UNITID" property="unitid" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.jw.magicbpm.model.documentmanagement.B_V_Flow_FileInWithBLOBs" extends="BaseResultMap" >
+    <result column="PASSER_READED" property="passerReaded" jdbcType="CLOB" />
+    <result column="PASSER_UNREAD" property="passerUnread" jdbcType="CLOB" />
+    <result column="TACHEUSER" property="tacheuser" jdbcType="CLOB" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    UUID, REGISTERED_TIME, URGENCY, FILEIN_TITLE, FILEIN_TYPEID, FILEIN_TYPENAME, FILEIN_YEAR, 
+    FILEIN_SERIAL, CUR_TACHE_NAME, TACHE_TRANSACTOR_BACKUP_SHOW, TACHE_TRANSACTOR_BACKUP, 
+    IS_FINISHED, MODULE_ID, CREATE_TIME, UNITID
+  </sql>
+  <sql id="Blob_Column_List" >
+    PASSER_READED, PASSER_UNREAD, TACHEUSER
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.jw.magicbpm.model.documentmanagement.B_V_Flow_FileInExample" >
+    select
+    <if test="example.distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from B_V_FLOW_FILEIN
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="example.orderByClause != null" >
+      order by ${example.orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.jw.magicbpm.model.documentmanagement.B_V_Flow_FileInExample" >
+    <foreach collection="example.oredCriteria" item="criteria" separator="or" />
+    <if test="criteria.valid" >
+      <foreach collection="criteria.criteria" item="criterion" >
+        <if test="criterion.limitValue" >
+          SELECT 
+          <include refid="Base_Column_List" />
+           FROM ( SELECT A.
+          <include refid="Base_Column_List" />
+           , ROWNUM AS con FROM ( 
+        </if>
+      </foreach>
+    </if>
+    select
+    <if test="example.distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from B_V_FLOW_FILEIN
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="example.orderByClause != null" >
+      order by ${example.orderByClause}
+    </if>
+    <if test="criteria.valid" >
+      <foreach collection="criteria.criteria" item="criterion" >
+        <if test="criterion.limitValue" >
+           ) A  <![CDATA[WHERE ROWNUM <= ${criterion.secondValue}]]> ) B <![CDATA[WHERE B.con >= ${criterion.value} ]]>
+        </if>
+      </foreach>
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.jw.magicbpm.model.documentmanagement.B_V_Flow_FileInExample" >
+    delete from B_V_FLOW_FILEIN
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.jw.magicbpm.model.documentmanagement.B_V_Flow_FileInWithBLOBs" >
+    insert into B_V_FLOW_FILEIN (UUID, REGISTERED_TIME, 
+      URGENCY, FILEIN_TITLE, FILEIN_TYPEID, 
+      FILEIN_TYPENAME, FILEIN_YEAR, 
+      FILEIN_SERIAL, CUR_TACHE_NAME, 
+      TACHE_TRANSACTOR_BACKUP_SHOW, TACHE_TRANSACTOR_BACKUP, 
+      IS_FINISHED, MODULE_ID, CREATE_TIME, 
+      UNITID, PASSER_READED, PASSER_UNREAD, 
+      TACHEUSER)
+    values (#{record.uuid,jdbcType=VARCHAR}, #{record.registeredTime,jdbcType=VARCHAR}, 
+      #{record.urgency,jdbcType=VARCHAR}, #{record.fileinTitle,jdbcType=NVARCHAR}, #{record.fileinTypeid,jdbcType=VARCHAR}, 
+      #{record.fileinTypename,jdbcType=NVARCHAR}, #{record.fileinYear,jdbcType=VARCHAR}, 
+      #{record.fileinSerial,jdbcType=VARCHAR}, #{record.curTacheName,jdbcType=NVARCHAR}, 
+      #{record.tacheTransactorBackupShow,jdbcType=NVARCHAR}, #{record.tacheTransactorBackup,jdbcType=VARCHAR}, 
+      #{record.isFinished,jdbcType=DECIMAL}, #{record.moduleId,jdbcType=VARCHAR}, #{record.createTime,jdbcType=VARCHAR}, 
+      #{record.unitid,jdbcType=VARCHAR}, #{record.passerReaded,jdbcType=CLOB}, #{record.passerUnread,jdbcType=CLOB}, 
+      #{record.tacheuser,jdbcType=CLOB})
+  </insert>
+  <insert id="insertSelective" parameterType="com.jw.magicbpm.model.documentmanagement.B_V_Flow_FileInWithBLOBs" >
+    insert into B_V_FLOW_FILEIN
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="record.uuid != null" >
+        UUID,
+      </if>
+      <if test="record.registeredTime != null" >
+        REGISTERED_TIME,
+      </if>
+      <if test="record.urgency != null" >
+        URGENCY,
+      </if>
+      <if test="record.fileinTitle != null" >
+        FILEIN_TITLE,
+      </if>
+      <if test="record.fileinTypeid != null" >
+        FILEIN_TYPEID,
+      </if>
+      <if test="record.fileinTypename != null" >
+        FILEIN_TYPENAME,
+      </if>
+      <if test="record.fileinYear != null" >
+        FILEIN_YEAR,
+      </if>
+      <if test="record.fileinSerial != null" >
+        FILEIN_SERIAL,
+      </if>
+      <if test="record.curTacheName != null" >
+        CUR_TACHE_NAME,
+      </if>
+      <if test="record.tacheTransactorBackupShow != null" >
+        TACHE_TRANSACTOR_BACKUP_SHOW,
+      </if>
+      <if test="record.tacheTransactorBackup != null" >
+        TACHE_TRANSACTOR_BACKUP,
+      </if>
+      <if test="record.isFinished != null" >
+        IS_FINISHED,
+      </if>
+      <if test="record.moduleId != null" >
+        MODULE_ID,
+      </if>
+      <if test="record.createTime != null" >
+        CREATE_TIME,
+      </if>
+      <if test="record.unitid != null" >
+        UNITID,
+      </if>
+      <if test="record.passerReaded != null" >
+        PASSER_READED,
+      </if>
+      <if test="record.passerUnread != null" >
+        PASSER_UNREAD,
+      </if>
+      <if test="record.tacheuser != null" >
+        TACHEUSER,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="record.uuid != null" >
+        #{record.uuid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.registeredTime != null" >
+        #{record.registeredTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.urgency != null" >
+        #{record.urgency,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fileinTitle != null" >
+        #{record.fileinTitle,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.fileinTypeid != null" >
+        #{record.fileinTypeid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fileinTypename != null" >
+        #{record.fileinTypename,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.fileinYear != null" >
+        #{record.fileinYear,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fileinSerial != null" >
+        #{record.fileinSerial,jdbcType=VARCHAR},
+      </if>
+      <if test="record.curTacheName != null" >
+        #{record.curTacheName,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.tacheTransactorBackupShow != null" >
+        #{record.tacheTransactorBackupShow,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.tacheTransactorBackup != null" >
+        #{record.tacheTransactorBackup,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isFinished != null" >
+        #{record.isFinished,jdbcType=DECIMAL},
+      </if>
+      <if test="record.moduleId != null" >
+        #{record.moduleId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null" >
+        #{record.createTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.unitid != null" >
+        #{record.unitid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.passerReaded != null" >
+        #{record.passerReaded,jdbcType=CLOB},
+      </if>
+      <if test="record.passerUnread != null" >
+        #{record.passerUnread,jdbcType=CLOB},
+      </if>
+      <if test="record.tacheuser != null" >
+        #{record.tacheuser,jdbcType=CLOB},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.jw.magicbpm.model.documentmanagement.B_V_Flow_FileInExample" resultType="java.lang.Integer" >
+    select count(*) from B_V_FLOW_FILEIN
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update B_V_FLOW_FILEIN
+    <set >
+      <if test="record.uuid != null" >
+        UUID = #{record.uuid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.registeredTime != null" >
+        REGISTERED_TIME = #{record.registeredTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.urgency != null" >
+        URGENCY = #{record.urgency,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fileinTitle != null" >
+        FILEIN_TITLE = #{record.fileinTitle,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.fileinTypeid != null" >
+        FILEIN_TYPEID = #{record.fileinTypeid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fileinTypename != null" >
+        FILEIN_TYPENAME = #{record.fileinTypename,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.fileinYear != null" >
+        FILEIN_YEAR = #{record.fileinYear,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fileinSerial != null" >
+        FILEIN_SERIAL = #{record.fileinSerial,jdbcType=VARCHAR},
+      </if>
+      <if test="record.curTacheName != null" >
+        CUR_TACHE_NAME = #{record.curTacheName,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.tacheTransactorBackupShow != null" >
+        TACHE_TRANSACTOR_BACKUP_SHOW = #{record.tacheTransactorBackupShow,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.tacheTransactorBackup != null" >
+        TACHE_TRANSACTOR_BACKUP = #{record.tacheTransactorBackup,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isFinished != null" >
+        IS_FINISHED = #{record.isFinished,jdbcType=DECIMAL},
+      </if>
+      <if test="record.moduleId != null" >
+        MODULE_ID = #{record.moduleId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null" >
+        CREATE_TIME = #{record.createTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.unitid != null" >
+        UNITID = #{record.unitid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.passerReaded != null" >
+        PASSER_READED = #{record.passerReaded,jdbcType=CLOB},
+      </if>
+      <if test="record.passerUnread != null" >
+        PASSER_UNREAD = #{record.passerUnread,jdbcType=CLOB},
+      </if>
+      <if test="record.tacheuser != null" >
+        TACHEUSER = #{record.tacheuser,jdbcType=CLOB},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update B_V_FLOW_FILEIN
+    set UUID = #{record.uuid,jdbcType=VARCHAR},
+      REGISTERED_TIME = #{record.registeredTime,jdbcType=VARCHAR},
+      URGENCY = #{record.urgency,jdbcType=VARCHAR},
+      FILEIN_TITLE = #{record.fileinTitle,jdbcType=NVARCHAR},
+      FILEIN_TYPEID = #{record.fileinTypeid,jdbcType=VARCHAR},
+      FILEIN_TYPENAME = #{record.fileinTypename,jdbcType=NVARCHAR},
+      FILEIN_YEAR = #{record.fileinYear,jdbcType=VARCHAR},
+      FILEIN_SERIAL = #{record.fileinSerial,jdbcType=VARCHAR},
+      CUR_TACHE_NAME = #{record.curTacheName,jdbcType=NVARCHAR},
+      TACHE_TRANSACTOR_BACKUP_SHOW = #{record.tacheTransactorBackupShow,jdbcType=NVARCHAR},
+      TACHE_TRANSACTOR_BACKUP = #{record.tacheTransactorBackup,jdbcType=VARCHAR},
+      IS_FINISHED = #{record.isFinished,jdbcType=DECIMAL},
+      MODULE_ID = #{record.moduleId,jdbcType=VARCHAR},
+      CREATE_TIME = #{record.createTime,jdbcType=VARCHAR},
+      UNITID = #{record.unitid,jdbcType=VARCHAR},
+      PASSER_READED = #{record.passerReaded,jdbcType=CLOB},
+      PASSER_UNREAD = #{record.passerUnread,jdbcType=CLOB},
+      TACHEUSER = #{record.tacheuser,jdbcType=CLOB}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update B_V_FLOW_FILEIN
+    set UUID = #{record.uuid,jdbcType=VARCHAR},
+      REGISTERED_TIME = #{record.registeredTime,jdbcType=VARCHAR},
+      URGENCY = #{record.urgency,jdbcType=VARCHAR},
+      FILEIN_TITLE = #{record.fileinTitle,jdbcType=NVARCHAR},
+      FILEIN_TYPEID = #{record.fileinTypeid,jdbcType=VARCHAR},
+      FILEIN_TYPENAME = #{record.fileinTypename,jdbcType=NVARCHAR},
+      FILEIN_YEAR = #{record.fileinYear,jdbcType=VARCHAR},
+      FILEIN_SERIAL = #{record.fileinSerial,jdbcType=VARCHAR},
+      CUR_TACHE_NAME = #{record.curTacheName,jdbcType=NVARCHAR},
+      TACHE_TRANSACTOR_BACKUP_SHOW = #{record.tacheTransactorBackupShow,jdbcType=NVARCHAR},
+      TACHE_TRANSACTOR_BACKUP = #{record.tacheTransactorBackup,jdbcType=VARCHAR},
+      IS_FINISHED = #{record.isFinished,jdbcType=DECIMAL},
+      MODULE_ID = #{record.moduleId,jdbcType=VARCHAR},
+      CREATE_TIME = #{record.createTime,jdbcType=VARCHAR},
+      UNITID = #{record.unitid,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>
